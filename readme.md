@@ -1,7 +1,6 @@
-// pqAhkLayouts project 
-// Copyright 2018 Philippe Quesnel 
-// Licensed under the Academic Free License version 3.0 
-
+// pqAhkLayouts project  
+// Copyright 2018 Philippe Quesnel  
+// Licensed under the Academic Free License version 3.0  
 
 AutoHotkey scripts to help do keyboard layouts / mappings. 
 For a straightforward Colemak layout to a more complex layout with letters on Capslock etc. 
