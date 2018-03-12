@@ -1,0 +1,30 @@
+- do need to track all keys for dual mode
+  - after dual key down, must check next key
+
+- track / handle 100% modifiers
+  - so define hotkeys for l/r shift/ctrl/alt
+
+- everything is on own layer
+  - shifted layer is separate, w. Shift as access
+  - extend
+  
+- detect chord on key down
+  - layer select
+  ? own hotkeys (to solve prob of hotkeys defined in AHK not working, eg ^+0
+  
+- dual mode modifiers
+  ? applies / generalized to dual mode o other keys, like Space to access layer ?
+  
+- key def
+  - scancode
+  ? key name
+  - output code scan
+  - is modifier
+  - is layer access key
+  ? dual mode output
+  
+- track
+  - layer
+  - modifiers down
+  - chord keys down
+  - dual mode key d own

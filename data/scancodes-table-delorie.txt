@@ -1,0 +1,51 @@
+http://www.delorie.com/djgpp/doc/rbinter/it/06/0.html
+tabs = 8
+
+ 01h	Esc		 31h	N
+ 02h	1 !		 32h	M
+ 03h	2 @		 33h	, <		 63h	F16
+ 04h	3 #		 34h	. >		 64h	F17
+ 05h	4 $		 35h	/ ?		 65h	F18
+ 06h	5 %		 36h	Right Shift	 66h	F19
+ 07h	6 ^		 37h	Grey*		 67h	F20
+ 08h	7 &		 38h	Alt		 68h	F21 (Fn) [*]
+ 09h	8 *		 39h	SpaceBar	 69h	F22
+ 0Ah	9 (		 3Ah	CapsLock	 6Ah	F23
+ 0Bh	0 )		 3Bh	F1		 6Bh	F24
+ 0Ch	- _		 3Ch	F2		 6Ch	--
+ 0Dh	= +		 3Dh	F3		 6Dh	EraseEOF
+ 0Eh	Backspace	 3Eh	F4
+ 0Fh	Tab		 3Fh	F5		 6Fh	Copy/Play
+ 10h	Q		 40h	F6
+ 11h	W		 41h	F7
+ 12h	E		 42h	F8		 72h	CrSel
+ 13h	R		 43h	F9		 73h	<delta> [*]
+ 14h	T		 44h	F10		 74h	ExSel
+ 15h	Y		 45h	NumLock		 75h	--
+ 16h	U		 46h	ScrollLock	 76h	Clear
+ 17h	I		 47h	Home		 77h	[Note2] Joyst But1
+ 18h	O		 48h	UpArrow		 78h	[Note2] Joyst But2
+ 19h	P		 49h	PgUp		 79h	[Note2] Joyst Right
+ 1Ah	[ {		 4Ah	Grey-		 7Ah	[Note2] Joyst Left
+ 1Bh	] }		 4Bh	LeftArrow	 7Bh	[Note2] Joyst Up
+ 1Ch	Enter		 4Ch	Keypad 5	 7Ch	[Note2] Joyst Down
+ 1Dh	Ctrl		 4Dh	RightArrow	 7Dh	[Note2] right mouse
+ 1Eh	A		 4Eh	Grey+		 7Eh	[Note2] left mouse
+ 1Fh	S		 4Fh	End
+ 20h	D		 50h	DownArrow
+ 21h	F		 51h	PgDn
+ 22h	G		 52h	Ins
+ 23h	H		 53h	Del
+ 24h	J		 54h	SysReq		---non-key codes---
+ 25h	K		 55h	[Note1] F11	 00h	kbd buffer full
+ 26h	L		 56h	left \| (102-key)
+ 27h	; :		 57h	F11		 AAh	self-test complete
+ 28h	' "		 58h	F12		 E0h	prefix code
+ 29h	` ~		 59h	[Note1] F15	 E1h	prefix code
+ 2Ah	Left Shift	 5Ah	PA1		 EEh	ECHO
+ 2Bh	\ |		 5Bh	F13 (LWin)	 F0h	prefix code (key break)
+ 2Ch	Z		 5Ch	F14 (RWin)	 FAh	ACK
+ 2Dh	X		 5Dh	F15 (Menu)	 FCh	diag failure (MF-kbd)
+ 2Eh	C					 FDh	diag failure (AT-kbd)
+ 2Fh	V					 FEh	RESEND
+ 30h	B					 FFh	kbd error/buffer full

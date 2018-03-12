@@ -1,0 +1,37 @@
+VK  SC		Key                 VK  SC		Key                 VK  SC		Key
+
+70  03B		F1                  1B  001		Escape              A2  01D		LControl
+71  03C		F2                  C0  029		`                   5B  15B		LWin
+72  03D		F3                  31  002		1                   A4  038		LAlt
+73  03E		F4                  32  003		2                   20  039		Space
+74  03F		F5                  33  004		3                   A5  138		RAlt  
+75  040		F6                  34  005		4                       15C		RWin 
+76  041		F7                  35  006		5                   5D  15D		AppsKey
+77  042		F8                  36  007		6                   A3  11D		RControl
+78  043		F9                  37  008		7                   25  14B		Left
+79  044		F10                 38  009		8                   28  150		Down
+7A  057		F11                 39  00A		9                   27  14D		Right
+7B  058		F12                 30  00B		0                   26  148		Up
+2C  137		PrintScreen         BD  00C		-                   2D  152		Insert
+91  046		ScrollLock          BB  00D		=                   2E  153		Delete
+13  045		Pause               08  00E		Backspace           24  147		Home
+                                                                23  14F		End
+                                                                21  149		PgUp
+                                                                22  151		PgDn
+            
+09  00F		Tab                 14  03A		CapsLock            A0  02A		LShift    
+51  010		q                   41  01E		a                   5A  02C		z
+57  011		w                   53  01F		s                   58  02D		x
+45  012		e                   44  020		d                   43  02E		c
+52  013		r                   46  021		f                   56  02F		v
+54  014		t                   47  022		g                   42  030		b
+59  015		y                   48  023		h                   4E  031		n
+55  016		u                   4A  024		j                   4D  032		m
+49  017		i                   4B  025		k                   BC  033		,
+4F  018		o                   4C  026		l                   BE  034		.
+50  019		p                   BA  027		;                   BF  035		/
+DB  01A		[                   DE  028		'                   A1  136		RShift
+DD  01B		]                   0D  01C		Enter                   04A     Numpad - (?)
+DC  02B		\                                                       04C		Numpad 5 (?)
+                                                                    04E		Numpad + (?)
+

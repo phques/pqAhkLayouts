@@ -1,0 +1,103 @@
+01h     Esc
+02h     1 !
+03h     2 @
+04h     3 #
+05h     4 $
+06h     5 %
+07h     6 ^
+08h     7 &
+09h     8 *
+0Ah     9 (
+0Bh     0 )
+0Ch     - _
+0Dh     = +
+0Eh     Backspace
+0Fh     Tab
+10h     Q
+11h     W
+12h     E
+13h     R
+14h     T
+15h     Y
+16h     U
+17h     I
+18h     O
+19h     P
+1Ah     [ {
+1Bh     ] }
+1Ch     Enter
+1Dh     Ctrl
+1Eh     A
+1Fh     S
+20h     D
+21h     F
+22h     G
+23h     H
+24h     J
+25h     K
+26h     L
+27h     ; :
+28h     ' "
+29h     ` ~
+2Ah     Left Shift
+2Bh     \ |
+2Ch     Z
+2Dh     X
+2Eh     C
+2Fh     V
+30h     B
+31h     N
+32h     M
+33h     , <
+34h     . >
+35h     / ?
+36h     Right Shift
+37h     Grey*
+38h     Alt
+39h     SpaceBar
+3Ah     CapsLock
+3Bh     F1
+3Ch     F2
+3Dh     F3
+3Eh     F4
+3Fh     F5
+40h     F6
+41h     F7
+42h     F8
+43h     F9
+44h     F10
+45h     NumLock
+46h     ScrollLock
+47h     Home
+48h     UpArrow
+49h     PgUp
+4Ah     Grey-
+4Bh     LeftArrow
+4Ch     Keypad 5
+4Dh     RightArrow
+4Eh     Grey+
+4Fh     End
+50h     DownArrow
+51h     PgDn
+52h     Ins
+53h     Del
+54h     SysReq
+55h     [Note1] F11
+56h     left \| (102-key
+57h     F11
+58h     F12
+59h     [Note1] F15
+5Ah     PA1
+5Bh     F13 (LWin)
+5Ch     F14 (RWin)
+5Dh     F15 (Menu)
+
+63h     F16
+64h     F17
+65h     F18
+66h     F19
+67h     F20
+68h     F21 (Fn) [*]
+69h     F22
+6Ah     F23
+6Bh     F24
