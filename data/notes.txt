@@ -23,8 +23,12 @@
   - is layer access key
   ? dual mode output
   
-- track
+- ?track?
   - layer
   - modifiers down
   - chord keys down
-  - dual mode key d own
+  - last key
+  
+-? dualMode modifiers, needs to be defined as such on each layer (?)
+  data integrity difficulty.. 
+  ->? keep layer mappings on each key iso keys inside layers
