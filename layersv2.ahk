@@ -106,26 +106,26 @@ CreateHotkeysForUsKbd()
 
 CreateHotkeysForUsKbd()
 
-; define modifier keys
-DefineShiftKey('LShift')
-DefineShiftKey('RShift')
+;;-- test
+mods := new Modifiers
 
-DefineControlKey('LCtrl')
-DefineControlKey('RCtrl')
-
-DefineAltKey('LAlt')
-DefineAltKey('RAlt')
-
-mod := FindModifier('LCtrl')
+mod := mods.CreateShiftMod('sc123')
 outputdebug('s ' mod.KeyScan)
 outputdebug('n ' mod.KeyName)
 outputdebug(mod.IsShift)
 outputdebug(mod.IsAlt)
 outputdebug(mod.IsControl)
 
-return
+; define modifier keys
+mods.CreateShiftMod('LShift')
+mods.CreateShiftMod('RShift')
 
-;-----
+mods.CreateControlMod('LCtrl')
+mods.CreateControlMod('RCtrl')
+
+mods.CreateAltMod('LAlt')
+mods.CreateAltMod('RAlt')
+
 
 ; temp dbg, ctrl-q to exit
 ^q::

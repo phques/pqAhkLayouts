@@ -4,3 +4,4 @@ FormatAsScancode(key)
 {
 	return Format("sc{:03x}", GetKeySC(key))
 }
+

@@ -1,20 +1,16 @@
 #include util.ahk
 
-; modifierKeys['sc999']
-global modifierKeys := {}
-
 class Modifier
 {
-    _keyScan := '' ; 'sc000'
+    _keyScan := ''  ; 'sc000'
     _keyName := ''
-    _isShift := 0
-    _isAlt := 0
-    _isControl := 0
+    _type := 0      ; one of !^+ (alt,control,shift)
 
-    __New(keyScan_) 
+    __New(key_, type_) 
     {
-        this.KeyScan := keyScan_
-        this.KeyName := GetKeyName(keyScan_)
+        this.KeyScan := FormatAsScancode(key_)
+        this.KeyName := GetKeyName(key_)
+        this._type := type_
     }
     
     KeyScan
@@ -32,83 +28,63 @@ class Modifier
     IsShift 
     { 
         get {
-            return this._isShift
+            return this._type == '+'
         }
     }
     
     IsAlt 
     { 
         get {
-            return this._isAlt
+            return this._type == '!'
         }
     }
 
     IsControl 
     { 
         get {
-            return this._isControl
+            return this._type == '^'
         }
     }
-
 }
 
 
-FindModifier(key)
+class Modifiers
 {
-    sc := FormatAsScancode(key)
-    if (sc == 'sc000')
+    ; defined modifier keys, key saved as 'sc000'
+    _modifiers := {}
+
+    ; finds or create a Modifier object
+    ; key = 'sc000'
+    ; typeToCreate = one of !^+ (alt,control,shift)
+    FindModifier(key, typeToCreate)
     {
-        msgBox('DefineShiftKey, unkown key ' key)
-        return 0
+        sc := FormatAsScancode(key)
+        if (sc == 'sc000')
+        {
+            outputDebug('FindModifier, unknown key ' key)
+            return 0
+        }
+
+        mod := this._modifierKeys[sc]
+        if (!mod)
+            mod := this._modifierKeys[sc] := new Modifier(sc, typeToCreate)
+        
+        return mod
     }
 
-    mod := modifierKeys[sc]
-    if (!mod)
-        mod := modifierKeys[sc] := new Modifier(sc)
-    
-    return mod
+    CreateShiftMod(key)
+    {
+        return this.FindModifier(key, '+')
+    }
+
+    CreateControlMod(key)
+    {
+        return this.FindModifier(key, '^')
+    }
+
+    CreateAltMod(key)
+    {
+        return this.FindModifier(key, '!')
+    }
 }
-
-DefineShiftKey(key)
-{
-    mod := FindModifier(key)
-    if (mod)
-        mod.IsShift := 1
-}
-
-DefineControlKey(key)
-{
-    mod := FindModifier(key)
-    if (mod)
-        mod.IsControl := 1
-}
-
-DefineAltKey(key)
-{
-    mod := FindModifier(key)
-    if (mod)
-        mod.IsAlt := 1
-}
-
-
-_CreateControl(keyScan_)
-{
-    mod := new Modifier(keyScan_)
-    mod._isControl := 1
-    return mod
-}
-
-Modifier.CreateControl := Func('_CreateControl')
-
-;mod := Modifier.CreateControl('sc123')
-fn := Func('_CreateControl')
-outputdebug('fn ' fn)
-
-; mod := fn('sc123')
-; outputdebug('s ' mod.KeyScan)
-; outputdebug('n ' mod.KeyName)
-; outputdebug(mod.IsShift)
-; outputdebug(mod.IsAlt)
-; outputdebug(mod.IsControl)
-
 
