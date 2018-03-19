@@ -1,30 +1,55 @@
+#include util.ahk
 
 ; modifierKeys['sc999']
 global modifierKeys := {}
 
 class Modifier
 {
+    _keyScan := '' ; 'sc000'
+    _keyName := ''
     _isShift := 0
     _isAlt := 0
     _isControl := 0
+
+    __New(keyScan_) 
+    {
+        this.KeyScan := keyScan_
+        this.KeyName := GetKeyName(keyScan_)
+    }
     
+    KeyScan
+    {
+        get {
+            return _keyScan
+        }
+    }
+    KeyName
+    {
+        get {
+            return _keyName
+        }
+    }
     IsShift 
     { 
-        set {
-            return this._isShift := 1 
-        }
         get {
             return this._isShift
         }
     }
-    SetIsControl() 
+    
+    IsAlt 
     { 
-        this.isControl := 1 
+        get {
+            return this._isAlt
+        }
     }
-    SetIsAlt() 
+
+    IsControl 
     { 
-        this.isAlt := 1 
+        get {
+            return this._isControl
+        }
     }
+
 }
 
 
@@ -39,7 +64,7 @@ FindModifier(key)
 
     mod := modifierKeys[sc]
     if (!mod)
-        mod := modifierKeys[sc] := new Modifier
+        mod := modifierKeys[sc] := new Modifier(sc)
     
     return mod
 }
@@ -55,13 +80,35 @@ DefineControlKey(key)
 {
     mod := FindModifier(key)
     if (mod)
-        mod.SetIsControl()
+        mod.IsControl := 1
 }
 
 DefineAltKey(key)
 {
     mod := FindModifier(key)
     if (mod)
-        mod.SetIsAlt()
+        mod.IsAlt := 1
 }
+
+
+_CreateControl(keyScan_)
+{
+    mod := new Modifier(keyScan_)
+    mod._isControl := 1
+    return mod
+}
+
+Modifier.CreateControl := Func('_CreateControl')
+
+;mod := Modifier.CreateControl('sc123')
+fn := Func('_CreateControl')
+outputdebug('fn ' fn)
+
+; mod := fn('sc123')
+; outputdebug('s ' mod.KeyScan)
+; outputdebug('n ' mod.KeyName)
+; outputdebug(mod.IsShift)
+; outputdebug(mod.IsAlt)
+; outputdebug(mod.IsControl)
+
 

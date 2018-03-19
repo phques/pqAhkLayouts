@@ -1,5 +1,8 @@
 #InstallKeybdHook
 
+#include util.ahk
+
+
 #include scancodes.ahk
 #include modifiers.ahk
 
@@ -79,12 +82,6 @@ CheckDualModeKeyEvt(key, upDown)
 }
 
 
-; key => 'sc000'
-FormatAsScancode(key)
-{
-	return Format("sc{:03x}", GetKeySC(key))
-}
-
 ; keyScancode = 'sc000'
 CreateHotkey(keyScancode)
 {
@@ -101,9 +98,8 @@ CreateHotkey(keyScancode)
 ; create a hotkey foreach key scancode of US kbd
 CreateHotkeysForUsKbd()
 {
-    for idx, scanCode in usKbdScanCodes {
+    for idx, scanCode in usKbdScanCodes 
         CreateHotKey('sc' scanCode)
-    }
 }
 
 ;---------------------
@@ -119,6 +115,13 @@ DefineControlKey('RCtrl')
 
 DefineAltKey('LAlt')
 DefineAltKey('RAlt')
+
+mod := FindModifier('LCtrl')
+outputdebug('s ' mod.KeyScan)
+outputdebug('n ' mod.KeyName)
+outputdebug(mod.IsShift)
+outputdebug(mod.IsAlt)
+outputdebug(mod.IsControl)
 
 return
 
