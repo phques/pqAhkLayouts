@@ -1,6 +1,7 @@
 #InstallKeybdHook
 
 #include scancodes.ahk
+#include modifiers.ahk
 
 global Mappings := {}
 
@@ -8,7 +9,7 @@ global Mappings := {}
 ; all our mapping logic goes here
 onKeyEvt(scancode, upDown)
 {
-;outputdebug scancode ' ' upDown
+; outputdebug scancode ' ' upDown
         
     ; get key def
     key := {}
@@ -105,6 +106,25 @@ CreateHotkeysForUsKbd()
     }
 }
 
+;---------------------
 
 CreateHotkeysForUsKbd()
+
+; define modifier keys
+DefineShiftKey('LShift')
+DefineShiftKey('RShift')
+
+DefineControlKey('LCtrl')
+DefineControlKey('RCtrl')
+
+DefineAltKey('LAlt')
+DefineAltKey('RAlt')
+
 return
+
+;-----
+
+; temp dbg, ctrl-q to exit
+^q::
+  msgbox 'exiting'
+  ExitApp()
