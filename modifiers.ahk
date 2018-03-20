@@ -1,50 +1,29 @@
+
 #include util.ahk
 
 class Modifier
 {
-    _keyScan := ''  ; 'sc000'
-    _keyName := ''
-    _type := 0      ; one of !^+ (alt,control,shift)
+    KeyScan := ''  ; 'sc000'
+    KeyName := ''
+    ; IsShift | IsControl | IsAlt set in __New : 
 
-    __New(key_, type_) 
+    ; type is one of +^! which will set IsShift | IsControl | IsAlt
+    ; or returns 0
+    __New(key, type) 
     {
-        this.KeyScan := FormatAsScancode(key_)
-        this.KeyName := GetKeyName(key_)
-        this._type := type_
+        this.KeyScan := FormatAsScancode(key)
+        this.KeyName := GetKeyName(key)
+
+        if (type == '+')
+            this.IsShift := 1
+        else if (type == '!')
+            this.IsAlt := 1
+        else if (type == '^')
+            this.IsControl := 1
+        else
+            return 0        
     }
     
-    KeyScan
-    {
-        get {
-            return _keyScan
-        }
-    }
-    KeyName
-    {
-        get {
-            return _keyName
-        }
-    }
-    IsShift 
-    { 
-        get {
-            return this._type == '+'
-        }
-    }
-    
-    IsAlt 
-    { 
-        get {
-            return this._type == '!'
-        }
-    }
-
-    IsControl 
-    { 
-        get {
-            return this._type == '^'
-        }
-    }
 }
 
 
@@ -56,12 +35,12 @@ class Modifiers
     ; finds or create a Modifier object
     ; key = 'sc000'
     ; typeToCreate = one of !^+ (alt,control,shift)
-    FindModifier(key, typeToCreate)
+    Find(key, typeToCreate := 0)
     {
         sc := FormatAsScancode(key)
         if (sc == 'sc000')
         {
-            outputDebug('FindModifier, unknown key ' key)
+            outputDebug('Find, unknown key ' key)
             return 0
         }
 
@@ -74,17 +53,17 @@ class Modifiers
 
     CreateShiftMod(key)
     {
-        return this.FindModifier(key, '+')
+        return this.Find(key, '+')
     }
 
     CreateControlMod(key)
     {
-        return this.FindModifier(key, '^')
+        return this.Find(key, '^')
     }
 
     CreateAltMod(key)
     {
-        return this.FindModifier(key, '!')
+        return this.Find(key, '!')
     }
 }
 

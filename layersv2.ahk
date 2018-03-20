@@ -1,8 +1,6 @@
 #InstallKeybdHook
 
 #include util.ahk
-
-
 #include scancodes.ahk
 #include modifiers.ahk
 
@@ -109,13 +107,6 @@ CreateHotkeysForUsKbd()
 ;;-- test
 mods := new Modifiers
 
-mod := mods.CreateShiftMod('sc123')
-outputdebug('s ' mod.KeyScan)
-outputdebug('n ' mod.KeyName)
-outputdebug(mod.IsShift)
-outputdebug(mod.IsAlt)
-outputdebug(mod.IsControl)
-
 ; define modifier keys
 mods.CreateShiftMod('LShift')
 mods.CreateShiftMod('RShift')
@@ -127,7 +118,26 @@ mods.CreateAltMod('LAlt')
 mods.CreateAltMod('RAlt')
 
 
+show(mod)
+{
+    outputdebug('scan ' mod.KeyScan)
+    outputdebug('name ' mod.KeyName)
+    if (mod.IsShift)
+        outputdebug('IsShift ')
+    if (mod.IsAlt)
+        outputdebug('IsAlt ')
+    if (mod.IsControl)
+        outputdebug('IsControl ' )
+}
+
+
+mod := mods.CreateShiftMod('H')
+show(mod)
+mod := mods.Find('raLT')
+show(mod)
+
+
 ; temp dbg, ctrl-q to exit
 ^q::
-  msgbox 'exiting'
+  ; msgbox 'exiting'
   ExitApp()
