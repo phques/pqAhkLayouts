@@ -15,6 +15,7 @@ onKeyEvt(scancode, upDown)
 ; outputdebug scancode ' ' upDown
         
     ; get key def
+    ; key := mappings[key]
     key := {}
     
     ; check dual mode modifiers
@@ -79,6 +80,60 @@ CheckDualModeKeyEvt(key, upDown)
     }
 */
     return 0
+}
+
+
+;;; key evt processing for dead keys
+;; simplified mode:
+; 
+; MUST press / release the dead key 1ST,
+; then a second key
+; Will not support more complex cases, like Windows does.
+; And only registered compose outputs will work, others will be skipped
+;
+; returns true if we processed the key and caller must ignore it.
+CheckDeadKeyKeyEvt(recvd, upDown)
+{
+    /*
+    key := recvd.key
+    
+    ; no waiting deadkey
+    if (waitingDkUp == 0)
+    {
+        if (recvd.deadKey)
+        {
+            ; ignore key up (?) of deadkey here
+            ; got deadkey 1st down evt, chg state & skip
+            if (upDown == 'd')
+                waitingDkUp := recvd
+                
+            return 1
+        }
+        else 
+        {
+            ; normal processing
+            return 0
+        }
+    }
+
+    ; waiting for deadkey up
+    if (waitingDkUp.key != key)
+    {
+        ; not key dn / up of deadkey, ignore
+        waitingDkUp := 0
+        return 1;
+    }
+
+    ; skip successive deadkey down
+    if (upDown == 'd')
+        return 1
+        
+    ; got deadkey up evt, goto wait for 2nd compoe key state & skip
+    waitingCompose2ndKey := recvd.output
+    waitingDkUp := 0
+    return 1
+    
+    */
 }
 
 
