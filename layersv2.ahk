@@ -134,9 +134,18 @@ CheckDeadKeyKeyEvt(recvd, upDown)
     */
 }
 
+GetComposed(k1, k2)
+{
+    out := 0
+    if (composeKeys[k1])
+        out := composeKeys[k1][k2]
+        
+    return out
+}
 
 CheckComposeKeyEvt(recvd, upDown)
 {
+    ; no pending compose key, normal processing
     if (!waitingCompose2ndKey)
         return 0
         
@@ -147,7 +156,14 @@ CheckComposeKeyEvt(recvd, upDown)
         return 1
     }
 
-    toOutput := GetComposed()
+    ; recvd a key down with a pending compose
+    ; get the composed result and output if ok
+    toOutput := GetComposed(waitingCompose2ndKey, recvd.output)
+    if (toOutput)
+        doSend(toOutput)
+
+    ; no more processing
+    return 1
 }
 
 
@@ -176,36 +192,23 @@ CreateHotkeysForUsKbd()
 CreateHotkeysForUsKbd()
 
 ;;-- test
-mods := new Modifiers
+; mods := new Modifiers
 
 ; define modifier keys
-mods.CreateShiftMod('LShift')
-mods.CreateShiftMod('RShift')
+; mods.CreateShiftMod('LShift')
+; mods.CreateShiftMod('RShift')
 
-mods.CreateControlMod('LCtrl')
-mods.CreateControlMod('RCtrl')
+; mods.CreateControlMod('LCtrl')
+; mods.CreateControlMod('RCtrl')
 
-mods.CreateAltMod('LAlt')
-mods.CreateAltMod('RAlt')
+; mods.CreateAltMod('LAlt')
+; mods.CreateAltMod('RAlt')
 
-
-show(mod)
-{
-    outputdebug('scan ' mod.KeyScan)
-    outputdebug('name ' mod.KeyName)
-    if (mod.IsShift)
-        outputdebug('IsShift ')
-    if (mod.IsAlt)
-        outputdebug('IsAlt ')
-    if (mod.IsControl)
-        outputdebug('IsControl ' )
-}
+composeKeys := {}
+composeKeys['`'] := {}
+composeKeys['a'] := 'à'
 
 
-mod := mods.CreateShiftMod('H')
-show(mod)
-mod := mods.Find('raLT')
-show(mod)
 
 
 ; temp dbg, ctrl-q to exit
