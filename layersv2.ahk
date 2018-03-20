@@ -135,6 +135,22 @@ CheckDeadKeyKeyEvt(recvd, upDown)
 }
 
 
+CheckComposeKeyEvt(recvd, upDown)
+{
+    if (!waitingCompose2ndKey)
+        return 0
+        
+    if (upDown == 'u')
+    {
+        ; not expecting up here, skip
+        waitingCompose2ndKey := 0
+        return 1
+    }
+
+    toOutput := GetComposed()
+}
+
+
 ; keyScancode = 'sc000'
 CreateHotkey(keyScancode)
 {
