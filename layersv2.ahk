@@ -6,24 +6,26 @@
 #include modifiers.ahk
 
 ; key, output
-keydefs := {}
+global keydefs := {}
 
-composeKey := 0
-composeKeyPairs := {}
-waitingCompose2ndKey := 0
+global composeKey := 0
+global composeKeyPairs := {}
+global waitingCompose2ndKey := 0
 
-waitingForKeyUp := 0
+global waitingForKeyUp := 0
 
 ; called on key press / release
 ; all our mapping logic goes here
 ;   scancode 'sc000'
 ;   upDown 'u' / 'd'
+
 onKeyEvt(scancode, upDown)
 {
 ; outputdebug scancode ' ' upDown 
+
         
     ; get key def
-    keykef := keydefs[scancode]
+    keydef := keydefs[scancode]
     
     ; safe guard
     if (!keydef)
@@ -41,8 +43,9 @@ onKeyEvt(scancode, upDown)
                 return ;; skip successive key downs
             
             ; key up, process this case
-            if (waitingForKeyUp.fn.Call(keydef, upDown))
-                return
+            waitingForKeyUp.fn.Call(keydef, upDown)
+            waitingForKeyUp := 0
+            return
         }
         
         ; didnt get down/up of this key, reset & eat 2nd key
@@ -56,8 +59,8 @@ onKeyEvt(scancode, upDown)
             if (keydef.key == composeKey)
             {
                 waitingForKeyUp := {}
-                waitingForKeyUp.key = keydef.key
-                waitingForKeyUp.fn = Func('onComposeKeyUp')
+                waitingForKeyUp.key := keydef.key
+                waitingForKeyUp.fn := Func('onComposeKeyUp')
             }
         }
     }
@@ -71,9 +74,9 @@ onKeyEvt(scancode, upDown)
 
 ; temp .. just output the input
     if (upDown == 'd')
-        Send '{' scancode ' Down}'
+        Send '{blind}{' scancode ' Down}'
     else
-        Send '{' scancode ' Up}'
+        Send '{blind}{' scancode ' Up}'
 }
 
 
@@ -87,7 +90,7 @@ doSend(scKey)
 onComposeKeyUp(keydef, upDown)
 {
 msgbox(keydef.key ' ' upDown)
-    ; waitingForComposeKey
+    return 1
 }
 
 
@@ -217,7 +220,7 @@ CheckComposeKeyEvt(keyDef, upDown)
         {
             ; got a compose initiating key, save and skip
             waitingCompose2ndKey := keyDef.key
-            return 1;
+            return 1
         }
         
         ; continue normal processing
@@ -275,7 +278,7 @@ SetComposeKey(key)
 ; '`', [['a', 'à'], ['e', 'è']..]
 AddComposeKeyPairs(initialKey, composePairs*)
 {
-    sc1 := GetKeySC(initialKey)
+    sc1 := FormatAsScancode(initialKey)
     
     pairs := composeKeyPairs[sc1]
     if (!pairs)
@@ -308,18 +311,20 @@ CreateHotkeysForUsKbd()
 
 ; test create some keydefs / keydefs
 m := {}
-m.key := GetKeySC('``')
+m.key := FormatAsScancode('``')
 m.output := m.key
 keydefs[m.key] := m
 
 m := {}
-m.key := GetKeySC('^')
+m.key := FormatAsScancode('^')
 m.output := m.key
 keydefs[m.key] := m
 
+composeKey := m.key
+
 ; create a compose key
 ; m := {}
-; m.key := GetKeySC('^')
+; m.key := FormatAsScancode('^')
 ; m.output := m.key
 ; keydefs[m.key] := m
 
