@@ -1,24 +1,73 @@
 #InstallKeybdHook
+#Warn All, MsgBox
 
 #include util.ahk
 #include scancodes.ahk
 #include modifiers.ahk
 
-global Mappings := {}
+; key, output
+keydefs := {}
+
+composeKey := 0
+composeKeyPairs := {}
+waitingCompose2ndKey := 0
+
+waitingForKeyUp := 0
 
 ; called on key press / release
 ; all our mapping logic goes here
+;   scancode 'sc000'
+;   upDown 'u' / 'd'
 onKeyEvt(scancode, upDown)
 {
-; outputdebug scancode ' ' upDown
+; outputdebug scancode ' ' upDown 
         
     ; get key def
-    ; key := mappings[key]
-    key := {}
+    keykef := keydefs[scancode]
     
-    ; check dual mode modifiers
-    if (CheckDualModeKeyEvt(key, upDown))
+    ; safe guard
+    if (!keydef)
+        keydef := {}
+    
+    ; 1st if modifier, mark up/down
+    ; 2nd check for chord
+    ;   on down, if part of possible chord
+    
+    if (waitingForKeyUp)
+    {
+        if (waitingForKeyUp.key == keydef.key)
+        {
+            if (upDown == 'd')
+                return ;; skip successive key downs
+            
+            ; key up, process this case
+            if (waitingForKeyUp.fn.Call(keydef, upDown))
+                return
+        }
+        
+        ; didnt get down/up of this key, reset & eat 2nd key
+        waitingForKeyUp := 0
         return
+    }
+    else 
+    {
+        if (upDown == 'd')
+        {
+            if (keydef.key == composeKey)
+            {
+                waitingForKeyUp := {}
+                waitingForKeyUp.key = keydef.key
+                waitingForKeyUp.fn = Func('onComposeKeyUp')
+            }
+        }
+    }
+    
+    ; if CheckComposeKeyEvt(keydef, upDown)
+        ; return
+
+    ; check dual mode modifiers
+    ; if (CheckDualModeKeyEvt(keydef, upDown))
+        ; return
 
 ; temp .. just output the input
     if (upDown == 'd')
@@ -28,9 +77,23 @@ onKeyEvt(scancode, upDown)
 }
 
 
+; 'sc000'
+doSend(scKey)
+{
+    Send '{' scKey ' Down}'
+    Send '{' scKey ' Up}'
+}
+
+onComposeKeyUp(keydef, upDown)
+{
+msgbox(keydef.key ' ' upDown)
+    ; waitingForComposeKey
+}
+
+
 ;;; dual mode modifiers key evt processing
 ; returns true if we processed the key and caller must ignore it.
-CheckDualModeKeyEvt(key, upDown)
+CheckDualModeKeyEvt(keyDef, upDown)
 {
     ;
     ; - how does 'dual mode' layer access key fits in this !?
@@ -38,12 +101,12 @@ CheckDualModeKeyEvt(key, upDown)
     ; last key evt was dualMode mod initial key down
     if last.firstDualModeDown {
         ; skip multi key downs of dualMode modifier
-        if last = key && 'd' {
+        if last.key == keyDef.key && 'd' {
             return 
         }
         
         ; press/release of dualMode
-        if last = key && 'u' {
+        if last.key == keyDef.key && 'u' {
             output dwn/up mapping
             last.firstDualModeDown := 0
             return
@@ -62,7 +125,7 @@ CheckDualModeKeyEvt(key, upDown)
         ;   - keyX dwn
         ;   - oops wanted keyX dual on main, so altGr up <===
         ;   - keyX up
-        if last != key {
+        if last.key != keyDef.key {
             ; last (dual mode) is being used as modifier
             last.firstDualModeDown := 0
             process last as modifier
@@ -71,8 +134,8 @@ CheckDualModeKeyEvt(key, upDown)
     }
     else {
         ; detect initial dual mode modifier dwn
-        if key.isDual {
-            key.firstDualModeDown := 1
+        if keyDef.isDual {
+            keyDef.firstDualModeDown := 1
             return
         }
     }
@@ -134,36 +197,52 @@ CheckDeadKeyKeyEvt(recvd, upDown)
     */
 }
 
-GetComposed(k1, k2)
+; 'sc000'
+GetComposed(sc1, sc2)
 {
     out := 0
-    if (composeKeys[k1])
-        out := composeKeys[k1][k2]
+    if (composeKeyPairs[sc1])
+        out := composeKeyPairs[sc1][sc2]
         
     return out
 }
 
-CheckComposeKeyEvt(recvd, upDown)
+CheckComposeKeyEvt(keyDef, upDown)
 {
     ; no pending compose key, normal processing
     if (!waitingCompose2ndKey)
-        return 0
-        
-    if (upDown == 'u')
     {
-        ; not expecting up here, skip
-        waitingCompose2ndKey := 0
-        return 1
+        ; is this a compose key
+        if (composeKey == keyDef.key)
+        {
+            ; got a compose initiating key, save and skip
+            waitingCompose2ndKey := keyDef.key
+            return 1;
+        }
+        
+        ; continue normal processing
+        return 0
     }
+    else ; have a pending compose key
+    {
+        if (upDown == 'u')
+        {
+            ; not expecting up here, reset & skip
+            waitingCompose2ndKey := 0
+            return 1
+        }
+        else
+        {
+            ; recvd a key down with a pending compose
+            ; get the composed result and output if ok
+            toOutput := GetComposed(waitingCompose2ndKey, keyDef.output)
+            if (toOutput)
+                doSend(toOutput)
 
-    ; recvd a key down with a pending compose
-    ; get the composed result and output if ok
-    toOutput := GetComposed(waitingCompose2ndKey, recvd.output)
-    if (toOutput)
-        doSend(toOutput)
-
-    ; no more processing
-    return 1
+            ; no more processing
+            return 1
+        }
+    }
 }
 
 
@@ -187,6 +266,29 @@ CreateHotkeysForUsKbd()
         CreateHotKey('sc' scanCode)
 }
 
+
+SetComposeKey(key)
+{
+    composeKey := FormatAsScancode(key)
+}
+
+; '`', [['a', 'à'], ['e', 'è']..]
+AddComposeKeyPairs(initialKey, composePairs*)
+{
+    sc1 := GetKeySC(initialKey)
+    
+    pairs := composeKeyPairs[sc1]
+    if (!pairs)
+        composeKeyPairs[sc1] := pairs := {} 
+
+    for idx, pair in composePairs
+    {
+        ; pairs['a'] := 'à'
+        ; but in sc000 format
+        pairs[FormatAsScancode(pair[1])] := FormatAsScancode(pair[2])
+    }
+}
+
 ;---------------------
 
 CreateHotkeysForUsKbd()
@@ -204,9 +306,25 @@ CreateHotkeysForUsKbd()
 ; mods.CreateAltMod('LAlt')
 ; mods.CreateAltMod('RAlt')
 
-composeKeys := {}
-composeKeys['`'] := {}
-composeKeys['a'] := 'à'
+; test create some keydefs / keydefs
+m := {}
+m.key := GetKeySC('``')
+m.output := m.key
+keydefs[m.key] := m
+
+m := {}
+m.key := GetKeySC('^')
+m.output := m.key
+keydefs[m.key] := m
+
+; create a compose key
+; m := {}
+; m.key := GetKeySC('^')
+; m.output := m.key
+; keydefs[m.key] := m
+
+AddComposeKeyPairs('``', ['a', 'à'], ['e', 'è'])
+AddComposeKeyPairs('^', ['a', 'â'], ['e', 'ê'])
 
 
 
