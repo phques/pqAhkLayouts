@@ -18,20 +18,63 @@ global waitingCompose2ndKey := 0
 
 global waitingForKeyUp := 0
 
+
+
+; to handle deadkeys, compose, dual mode modifier
+; we must get uninterrupted dn/up of same key (1 or multiple *)
+class CExpectUpDown
+{
+    class Result
+    {
+        __New(eat, cancel)
+        {
+            this.eat := eat
+            this.cancel := cancel
+        }
+    }
+    
+    waitingFor := ''
+    upDown := ''      ; 'u' 'd'    
+    completed := []
+    nbrRequired := 0
+    
+    OnDown(keydef, upDown)
+    {
+        if (this.waitingFor != keydef.key)
+        {
+            ; didnt get needed key, eat & cancel
+            res := new CExpectUpDown.Result(1,1)
+            return res
+        }
+    }
+}
+
+toto()
+{
+ex := new CExpectUpDown()
+ex.waitingFor := 'sc000'
+ex.upDown := 'u'
+
+kd := {}
+kd.key := 'sc999'
+res := ex.OnDown(kd, 'd')
+msgbox('eat ' res.eat ' cancel ' res.cancel)
+}
+
+toto()
+exitapp
+
 ; called on key press / release
 ; all our mapping logic goes here
 ;   scancode 'sc000'
 ;   upDown 'u' / 'd'
-
 onKeyEvt(scancode, upDown)
 {
 ; outputdebug scancode ' ' upDown 
-
         
     ; get key def
     keydef := keydefs[scancode]
-    
-    ; safe guard
+    ; debug
     if (!keydef)
         keydef := {}
     
@@ -338,7 +381,7 @@ AddComposeKeyPairs('^', ['a', 'â'], ['e', 'ê'])
 
 
 
-; temp dbg, ctrl-q to exit
-^q::
+; temp dbg, ctrl-win-q to exit
+#^x::
   ; msgbox 'exiting'
   ExitApp()
