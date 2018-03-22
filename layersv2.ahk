@@ -8,6 +8,7 @@
 #include util.ahk
 #include scancodes.ahk
 #include modifiers.ahk
+#include CExpectUpDownBase.ahk
 
 ; key, output
 global keydefs := {}
@@ -16,53 +17,9 @@ global composeKey := 0
 global composeKeyPairs := {}
 global waitingCompose2ndKey := 0
 
-global waitingForKeyUp := 0
+global expectUpDown := 0
 
 
-
-; to handle deadkeys, compose, dual mode modifier
-; we must get uninterrupted dn/up of same key (1 or multiple *)
-class CExpectUpDown
-{
-    class Result
-    {
-        __New(eat, cancel)
-        {
-            this.eat := eat
-            this.cancel := cancel
-        }
-    }
-    
-    waitingFor := ''
-    upDown := ''      ; 'u' 'd'    
-    completed := []
-    nbrRequired := 0
-    
-    OnDown(keydef, upDown)
-    {
-        if (this.waitingFor != keydef.key)
-        {
-            ; didnt get needed key, eat & cancel
-            res := new CExpectUpDown.Result(1,1)
-            return res
-        }
-    }
-}
-
-toto()
-{
-ex := new CExpectUpDown()
-ex.waitingFor := 'sc000'
-ex.upDown := 'u'
-
-kd := {}
-kd.key := 'sc999'
-res := ex.OnDown(kd, 'd')
-msgbox('eat ' res.eat ' cancel ' res.cancel)
-}
-
-toto()
-exitapp
 
 ; called on key press / release
 ; all our mapping logic goes here
@@ -74,44 +31,32 @@ onKeyEvt(scancode, upDown)
         
     ; get key def
     keydef := keydefs[scancode]
-    ; debug
     if (!keydef)
-        keydef := {}
+        return
+
+    if (!expectUpDown)
+    {
+        if (keydef.key == composeKey && upDown == 'd')
+        {
+            outputdebug('onKeyEvt create expectupdn for compose ' keydef.key)
+            expectUpDown := new CExpectUpDownBase(keydef.key, 'u', 1)
+            return
+        }
+    }
+    else
+    {
+        ret := expectUpDown.OnKey(keydef, upDown)
+        if (ret.cancel)
+            expectUpDown := 0
+        if (ret.eatKey)
+            return
+    }
     
     ; 1st if modifier, mark up/down
     ; 2nd check for chord
     ;   on down, if part of possible chord
     
-    if (waitingForKeyUp)
-    {
-        if (waitingForKeyUp.key == keydef.key)
-        {
-            if (upDown == 'd')
-                return ;; skip successive key downs
-            
-            ; key up, process this case
-            waitingForKeyUp.fn.Call(keydef, upDown)
-            waitingForKeyUp := 0
-            return
-        }
-        
-        ; didnt get down/up of this key, reset & eat 2nd key
-        waitingForKeyUp := 0
-        return
-    }
-    else 
-    {
-        if (upDown == 'd')
-        {
-            if (keydef.key == composeKey)
-            {
-                waitingForKeyUp := {}
-                waitingForKeyUp.key := keydef.key
-                waitingForKeyUp.fn := Func('onComposeKeyUp')
-            }
-        }
-    }
-    
+   
     ; if CheckComposeKeyEvt(keydef, upDown)
         ; return
 
@@ -357,29 +302,29 @@ CreateHotkeysForUsKbd()
 ; mods.CreateAltMod('RAlt')
 
 ; test create some keydefs / keydefs
-m := {}
-m.key := FormatAsScancode('``')
-m.output := m.key
-keydefs[m.key] := m
+createkey(k)
+{
+    m := {}
+    m.key := FormatAsScancode(k)
+    m.output := m.key
+    keydefs[m.key] := m
+}
 
-m := {}
-m.key := FormatAsScancode('^')
-m.output := m.key
-keydefs[m.key] := m
+createKey('``')
+createKey('^')
+createKey('a')
+createKey('b')
+createKey('c')
+createKey('d')
+createKey('.')
 
-composeKey := m.key
-
-; create a compose key
-; m := {}
-; m.key := FormatAsScancode('^')
-; m.output := m.key
-; keydefs[m.key] := m
+SetComposeKey('.')
 
 AddComposeKeyPairs('``', ['a', 'à'], ['e', 'è'])
 AddComposeKeyPairs('^', ['a', 'â'], ['e', 'ê'])
 
 
-
+return
 
 ; temp dbg, ctrl-win-q to exit
 #^x::
