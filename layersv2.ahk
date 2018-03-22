@@ -39,15 +39,19 @@ onKeyEvt(scancode, upDown)
         if (keydef.key == composeKey && upDown == 'd')
         {
             outputdebug('onKeyEvt create expectupdn for compose ' keydef.key)
-            expectUpDown := new CExpectUpDownBase(keydef.key, 'u', 1)
+            expectUpDown := new CExpectCompose(keydef.key)
             return
         }
     }
     else
     {
         ret := expectUpDown.OnKey(keydef, upDown)
-        if (ret.cancel)
+        if (ret.cancel || ret.completed)
+        {
+            outputdebug('remove ' expectUpDown.__class)
             expectUpDown := 0
+        }
+        
         if (ret.eatKey)
             return
     }

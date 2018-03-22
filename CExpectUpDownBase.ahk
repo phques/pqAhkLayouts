@@ -17,66 +17,98 @@ class CExpectUpDownBase
     }
     
     ;--------
+    
     waitingFor := ''
-    upDown := ''      ; waiting for 'u' 'd'    
+    waitingUpDown := ''      ; waiting for 'u' 'd'    
     nbrRequired := 0
-    completed := []
+    completedKeys := []
+    completed := 0
     
     ;-----
     
     __New(waitingFor, upDown, nbrRequired)
     {
+        this._init(waitingFor, upDown, nbrRequired)
+    }
+    
+    _init(waitingFor, upDown, nbrRequired)
+    {
         this.waitingFor := waitingFor
-        this.upDown := upDown
+        this.waitingUpDown := upDown
         this.nbrRequired := nbrRequired
+        this.completedKeys := []
+        this.completed := 0
     }
 
     ; base methods
     OnKey(keydef, upDown)
     {
-        outputdebug('expect updn OnKey ' keydef.key ' ' upDown)
+        ; outputdebug('OnKey ' keydef.key ' ' upDown)
         
-        ; didn't get expected key, eat & cancel
-        if (this.waitingFor != keydef.key)
+        if (this.waitingUpDown == 'u')
         {
-            res := new CExpectUpDownBase.Result(1,1)
-            return this.OnCancel(keydef, upDown, res)
-        }
-        
-        ; same key, skip succesive key down
-        if (this.upDown == 'u' && upDown == 'd')
-        {
-            outputdebug('CExpectUpDn OnKey skip extra dn ' keydef.key)
-            res := new CExpectUpDownBase.Result(1,0)
-            return res
-        }
-        
-        ; same key,got key up, complete !
-        if (this.upDown == 'u' && upDown == 'u')
-        {
-            this.completed.push(keydef)
-            res := new CExpectUpDownBase.Result(1,0)
-            res := this.OnCompleteKey(keydef, upDown, res)
-            if (res.cancel)
-                return res
-
-            ; check for completed sequence
-            if (this.completed.Length() == this.nbrRequired)
+            ; correct key?
+            if (this.waitingFor != keydef.key)
             {
-                res.cancel := 1 ; we are done, stop this one
-                return this.OnCompleteSequence(keydef, res)
+                ; didn't get expected key, eat & cancel 
+                res := new CExpectUpDownBase.Result(1,1)
+                res := this.OnCancel(keydef, upDown, res)
+            }
+            else
+            {
+                ; got expected key up or down, process further
+                
+                ; res := this.onExpectKeyUp(keydef, upDown)
+                
+                ; correct key, down
+                if (upDown == 'd')
+                {
+                    ; eat successive key down
+                    res := new CExpectUpDownBase.Result(1,0)
+                }
+                else ; recvd key up
+                {
+                    ; same key, got key up, complete !
+                    this.completedKeys.push(keydef)
+                    res := new CExpectUpDownBase.Result(1,0)
+                    
+                    ; call OnCompleteKey
+                    res := this.OnCompleteKey(keydef, upDown, res)
+                    if (!res.cancel)
+                    {
+                        ; check for completed sequence
+                        if (this.completedKeys.Length() == this.nbrRequired)
+                        {
+                            res.completed := 1 ; we are done, stop this one
+                            res := this.OnCompleteSequence(keydef, res)
+                        }
+                    }
+                }                
+            }
+        }
+        else ; expect key down 
+        {
+            if (upDown == 'u' || (this.waitingFor != 'any' && this.waitingFor != keydef.key))
+            {
+                ; didn't get expected key evt, eat & cancel 
+                res := this.OnCancel(keydef, upDown, res)
+                res := new CExpectUpDownBase.Result(1,1)
+            }
+            else
+            {
+                ; got expected key down, now expect key up of same key
+                outputdebug('got down ' keydef.key ', wait for up')
+                this.waitingFor := keydef.key
+                this.waitingUpDown := 'u'
+                res := new CExpectUpDownBase.Result(0,0)
             }
         }
         
-        ;;pq todo expect 'd' ! (on following compose / deadkey keys
-        
-        ;;pq debug
-        outputdebug('expect onkey fall through')
-            res := new CExpectUpDownBase.Result(1,1)
-            return res
+        return res
     }
+
     
-    ;-- user, overridables--
+    ;-- user, overridables, default does nothing--
     OnCompleteKey(keydef, upDown, result)
     {
         outputdebug('OnCompleteKey ' keydef.key)
@@ -102,3 +134,33 @@ class CExpectUpDownBase
     }
     
 }
+
+
+class CExpectCompose extends CExpectUpDownBase
+{
+    __New(waitingFor)
+    {
+        ;;?? how to call base's new ??
+        ; wait for compose key up, 2 keys dn/up
+        this._init(waitingFor, 'u', 3)
+    }
+
+    OnCompleteKey(keydef, upDown, result)
+    {
+        outputdebug('Compose OnCompleteKey ' keydef.key)
+        ; got a complete dn/up,
+        ; wait for any key down, will wait for the same key up after
+        ;##pq todo: on 1st complete, check for valid 1st compose key, cancel if !valid
+        this.waitingFor := 'any'
+        this.waitingUpDown := 'd'
+        return result
+    }
+    
+    OnCompleteSequence(keydef, result)
+    {
+        ;##pq todo: check for valid compose keys, cancel if !valid
+        outputdebug('compose complete ' this.completedKeys[2].key ' + ' this.completedKeys[3].key)
+        return result
+    }
+}
+
