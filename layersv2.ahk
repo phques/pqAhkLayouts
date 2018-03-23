@@ -1,4 +1,4 @@
-; pqAhkLayouts project
+﻿; pqAhkLayouts project
 ; Copyright 2018 Philippe Quesnel
 ; Licensed under the Academic Free License version 3.0
 
@@ -8,7 +8,7 @@
 #include util.ahk
 #include scancodes.ahk
 #include modifiers.ahk
-#include CExpectUpDownBase.ahk
+#include CComposer.ahk
 
 ; key, output
 global keydefs := {}
