@@ -109,118 +109,7 @@ doSend(scKey)
     Send '{' scKey ' Up}'
 }
 
-onComposeKeyUp(keydef, upDown)
-{
-msgbox(keydef.key ' ' upDown)
-    return 1
-}
-
-
-;;; dual mode modifiers key evt processing
-; returns true if we processed the key and caller must ignore it.
-CheckDualModeKeyEvt(keyDef, upDown)
-{
-    ;
-    ; - how does 'dual mode' layer access key fits in this !?
-/*
-    ; last key evt was dualMode mod initial key down
-    if last.firstDualModeDown {
-        ; skip multi key downs of dualMode modifier
-        if last.key == keyDef.key && 'd' {
-            return 
-        }
-        
-        ; press/release of dualMode
-        if last.key == keyDef.key && 'u' {
-            output dwn/up mapping
-            last.firstDualModeDown := 0
-            return
-        }
-        
-        ; initial dualMode keyDwn followed by other key
-        ; for now only support immediate dwn/up, 
-        ; but could be scenarios w. intermediate keys that make sense.
-        ; eg: we want keyX dualMode dwn/up on altGr layer
-        ;   - keyX  dwn
-        ;   - oops, wanted AltGr .. so AltGr dwn <===
-        ;   - keyX up
-        ; eg: vice versa, was on altGr, want main layer
-        ;   - altGr dwn
-        ;   - keyA dwn/up
-        ;   - keyX dwn
-        ;   - oops wanted keyX dual on main, so altGr up <===
-        ;   - keyX up
-        if last.key != keyDef.key {
-            ; last (dual mode) is being used as modifier
-            last.firstDualModeDown := 0
-            process last as modifier
-            'goto' process key normally
-        }
-    }
-    else {
-        ; detect initial dual mode modifier dwn
-        if keyDef.isDual {
-            keyDef.firstDualModeDown := 1
-            return
-        }
-    }
-*/
-    return 0
-}
-
-
-;;; key evt processing for dead keys
-;; simplified mode:
-; 
-; MUST press / release the dead key 1ST,
-; then a second key
-; Will not support more complex cases, like Windows does.
-; And only registered compose outputs will work, others will be skipped
-;
-; returns true if we processed the key and caller must ignore it.
-CheckDeadKeyKeyEvt(recvd, upDown)
-{
-    /*
-    key := recvd.key
-    
-    ; no waiting deadkey
-    if (waitingDkUp == 0)
-    {
-        if (recvd.deadKey)
-        {
-            ; ignore key up (?) of deadkey here
-            ; got deadkey 1st down evt, chg state & skip
-            if (upDown == 'd')
-                waitingDkUp := recvd
-                
-            return 1
-        }
-        else 
-        {
-            ; normal processing
-            return 0
-        }
-    }
-
-    ; waiting for deadkey up
-    if (waitingDkUp.key != key)
-    {
-        ; not key dn / up of deadkey, ignore
-        waitingDkUp := 0
-        return 1;
-    }
-
-    ; skip successive deadkey down
-    if (upDown == 'd')
-        return 1
-        
-    ; got deadkey up evt, goto wait for 2nd compoe key state & skip
-    waitingCompose2ndKey := recvd.output
-    waitingDkUp := 0
-    return 1
-    
-    */
-}
+;--------
 
 ; keyScancode = 'sc000'
 CreateHotkey(keyScancode)
@@ -300,9 +189,10 @@ keydefs[m.key] := m
 SetComposeKey('.')
 
 composer := new CComposer()
-composer.AddComposePairs('``', ['a', 'à'], ['e', 'è'])
-composer.AddComposePairs('^', ['a', 'â'], ['e', 'ê'])
-
+; composer.AddComposePairsList('``', ['a', 'à'], ['e', 'è'])
+; composer.AddComposePairsList('^', ['a', 'â'], ['e', 'ê'])
+composer.AddComposePairs('``', 'aà eè')
+composer.AddComposePairs('^', 'aâ eê iî')
 
 return
 

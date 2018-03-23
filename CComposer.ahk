@@ -27,7 +27,7 @@ class CComposer extends CExpectUpDownBase
     
 
     ; '`', [['a', 'à'], ['e', 'è']..]
-    AddComposePairs(initialKey, newComposePairs*)
+    AddComposePairsList(initialKey, newComposePairs*)
     {
         pairs := this.composePairs[initialKey]
         if (!pairs)
@@ -40,6 +40,22 @@ class CComposer extends CExpectUpDownBase
         }
     }
     
+    ; AddComposePairs('^', 'aâ eê iî')
+    AddComposePairs(initialKey, pairsStr)
+    {
+        pairs := this.composePairs[initialKey]
+        if (!pairs)
+            this.composePairs[initialKey] := pairs := {} 
+
+        Loop Parse pairsStr, ' '
+        {
+            from := SubStr(A_LoopField,1,1)
+            to   := SubStr(A_LoopField,2,1)
+            
+            ; pairs['a'] := 'à'
+            pairs[from] := to
+        }
+    }
     
     ;--- internal methods
 
