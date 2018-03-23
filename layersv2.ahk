@@ -31,33 +31,41 @@ onKeyEvt(scancode, upDown)
     ; get key def
     keydef := keydefs[scancode]
     if (!keydef)
+    {
+        ;debug
+        if (scancode == FormatAsScancode('Escape'))
+            exitapp
+            
         return
-
-    if (!composer.IsWaiting)
+    }
+    
+    if (!expectUpDown)
     {
         if (keydef.key == composeKey && upDown == 'd')
         {
             outputdebug('onKeyEvt create ccomposer ' keydef.key)
-            composer.StartNew(keydef.key)
+            expectUpDown := composer
+            expectUpDown.StartNew(keydef.key)
             return
         }
         if (keydef.isDeadKey && upDown == 'd')
         {
             outputdebug('onKeyEvt create ccomposer for deadkey ' keydef.key)
-            composer.StartNew(keydef.key, 1)
+            expectUpDown := composer
+            expectUpDown.StartNew(keydef.key, 1)
             return
         }
-        ; if (keydef.isDualModeMod && upDown == 'd')
-        ; {
-            ; outputdebug('onKeyEvt create CWaitDualModeMod ' keydef.key)
-            ; composer.StartNew(keydef.key, 1)
-            ; return
-        ; }
+        if (keydef.isDualModeMod && upDown == 'd')
+        {
+            outputdebug('onKeyEvt create CDualModer ' keydef.key)
+            expectUpDown := new CDualModer(keydef.key)
+            ; DONT eat modifier down
+        }
         
     }
     else
     {
-        ret := composer.OnKey(keydef, upDown)
+        ret := expectUpDown.OnKey(keydef, upDown)
         if (ret.cancel || ret.completed)
         {
             if (ret.completed && ret.outputOnComplete)
@@ -65,8 +73,9 @@ onKeyEvt(scancode, upDown)
                 doSend(ret.outputOnComplete)
             }
             
-            outputdebug('reset composer')
-            composer.Reset()
+            outputdebug('reset expectUpDown')
+            expectUpDown.Reset()
+            expectUpDown := 0
         }
         
         if (ret.eatKey)
