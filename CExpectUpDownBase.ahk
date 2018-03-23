@@ -36,6 +36,13 @@ class CExpectUpDownBase
     
     ; base methods
 
+    StartNewDualModeMod(waitingFor)
+    {
+        ; wait for up of same modifier, if not interrupted, output alternative char
+        ; else it will just be cancelled
+        this._init(waitingFor, 'u', 1)
+    }
+
     AddCompleteKey(keydef)
     {
         this.completedKeys.push(keydef)
@@ -157,6 +164,13 @@ class CExpectUpDownBase
     OnCompleteSequence(keydef, result)
     {
         outputdebug('OnCompleteSequence ' keydef.key)
+        
+        ; successfully recvd uninterrupted dn/up of this dual mode modifier
+        ; output its alternative char
+        result.outputOnComplete := keydef.char
+        return result
+
+        
         ; do any extra action on key complete
         ; ? possibly modify result
         return result

@@ -7,53 +7,49 @@
 ; and deakey + key2 => newout
 class CComposer extends CExpectUpDownBase
 {
-    composeKeyPairs := {}
+    composePairs := {}
 
+   
     ; called on key down of compose key or deadkey
     ; we will wait for key up and following dn/up keys
     
     StartNew(waitingFor, isDeadKey := 0)
     {
-        ; for a deadkey, the deajey itself is the compose key
-        this.isDeadKey := isDeadKey
-        
-        ; wait for compose key up, 2 keys dn/up
-        if (isDeadKey) ; dead key is its own 1st compose char
-            this._init(waitingFor, 'u', 2)
-        else
-            this._init(waitingFor, 'u', 3)
+        ; wait for compose key up  + 2 keys dn/up
+        ; (dead key is its own compose key, so still 3 keys)
+        this._init(waitingFor, 'u', 3)
 
         ; dead key is its own 1st compose char
         ; est of code can just work in 'compose mode' from here on 
         if (isDeadKey) 
             this.AddCompleteKey(waitingFor)
     }
+    
 
     ; '`', [['a', 'à'], ['e', 'è']..]
-    AddComposeKeyPairs(initialKey, composePairs*)
+    AddComposePairs(initialKey, newComposePairs*)
     {
-        sc1 := FormatAsScancode(initialKey)
-        
-        pairs := this.composeKeyPairs[sc1]
+        pairs := this.composePairs[initialKey]
         if (!pairs)
-            this.composeKeyPairs[sc1] := pairs := {} 
+            this.composePairs[initialKey] := pairs := {} 
 
-        for idx, pair in composePairs
+        for idx, pair in newComposePairs
         {
-            ; pairs[formatasscan 'a'] := 'à'
-            pairs[FormatAsScancode(pair[1])] := pair[2]
+            ; pairs['a'] := 'à'
+            pairs[pair[1]] := pair[2]
         }
     }
+    
+    
+    ;--- internal methods
 
-    GetComposedResult(sc1, sc2)
+    GetComposedResult(char1, char2)
     {
-        if (this.composeKeyPairs[sc1])
-            return this.composeKeyPairs[sc1][sc2]
+        if (this.composePairs[char1])
+            return this.composePairs[char1][char2]
         else
             return 0
     }
-    
-    ;--- internal methods
     
     OnCompleteKey(keydef, upDown, result)
     {
@@ -64,7 +60,7 @@ class CComposer extends CExpectUpDownBase
          if (this.completedKeys.Length() == 2) 
          {
             key1 := this.completedKeys[2]
-            if (!this.composeKeyPairs[key1.key])
+            if (!this.composePairs[key1.char])
             {
                 ; not a valid compose key pair 1st key
                 result.cancel := 1
@@ -86,16 +82,16 @@ class CComposer extends CExpectUpDownBase
         ; check for valid compose pair, cancel if !valid
         key1 := this.completedKeys[2]
         key2 := this.completedKeys[3]
-        out := this.GetComposedResult(key1.key, key2.key)
+        out := this.GetComposedResult(key1.char, key2.char)
         if (out)
         {
-            outputdebug('compose complete ' key1.key ' + ' key2.key ' => ' out)
+            outputdebug('compose complete ' key1.char ' + ' key2.char ' => ' out)
             result.outputOnComplete := out
         }
         else
         {
             ; not a valid compose keypair
-            outputdebug('compose cancelled, not valid pair ' key1.key ' + ' key2.key)
+            outputdebug('compose cancelled, not valid pair ' key1.char ' + ' key2.char)
             result.cancel := 1
             result := this.OnCancel(keydef, result)
         }
@@ -104,6 +100,5 @@ class CComposer extends CExpectUpDownBase
     }
     
 }
-
 
 

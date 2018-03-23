@@ -37,10 +37,23 @@ onKeyEvt(scancode, upDown)
     {
         if (keydef.key == composeKey && upDown == 'd')
         {
-            outputdebug('onKeyEvt create expectupdn for compose ' keydef.key)
+            outputdebug('onKeyEvt create ccomposer ' keydef.key)
             composer.StartNew(keydef.key)
             return
         }
+        if (keydef.isDeadKey && upDown == 'd')
+        {
+            outputdebug('onKeyEvt create ccomposer for deadkey ' keydef.key)
+            composer.StartNew(keydef.key, 1)
+            return
+        }
+        ; if (keydef.isDualModeMod && upDown == 'd')
+        ; {
+            ; outputdebug('onKeyEvt create CWaitDualModeMod ' keydef.key)
+            ; composer.StartNew(keydef.key, 1)
+            ; return
+        ; }
+        
     }
     else
     {
@@ -245,28 +258,41 @@ CreateHotkeysForUsKbd()
 ; mods.CreateAltMod('RAlt')
 
 ; test create some keydefs / keydefs
-createkey(k)
+createkey(ch)
 {
-    m := {}
-    m.key := FormatAsScancode(k)
+    local m := {}
+    m.char := ch
+    m.key := FormatAsScancode(ch)
     m.output := m.key
     keydefs[m.key] := m
+    return m
 }
 
-createKey('``')
-createKey('^')
 createKey('a')
 createKey('b')
 createKey('c')
 createKey('d')
+createKey('e')
 createKey('.')
+m := createKey('``')
+m.isDeadKey := 1
+m := createKey('^')
+m.isDeadKey := 1
 
+; test kindof dual mode modifier
+m := {}
+m.char := 'j'
+m.key := FormatAsScancode('LShift')
+m.output := m.key
+m.dualModeOutput := FormatAsScancode(m.char)
+m.isDualModeMod := 1
+keydefs[m.key] := m
 
 SetComposeKey('.')
 
 composer := new CComposer()
-composer.AddComposeKeyPairs('``', ['a', 'à'], ['e', 'è'])
-composer.AddComposeKeyPairs('^', ['a', 'â'], ['e', 'ê'])
+composer.AddComposePairs('``', ['a', 'à'], ['e', 'è'])
+composer.AddComposePairs('^', ['a', 'â'], ['e', 'ê'])
 
 
 return
