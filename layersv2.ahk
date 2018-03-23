@@ -14,8 +14,7 @@
 global keydefs := {}
 
 global composeKey := 0
-global composeKeyPairs := {}
-global waitingCompose2ndKey := 0
+global composer := 0
 
 global expectUpDown := 0
 
@@ -34,22 +33,27 @@ onKeyEvt(scancode, upDown)
     if (!keydef)
         return
 
-    if (!expectUpDown)
+    if (!composer.IsWaiting)
     {
         if (keydef.key == composeKey && upDown == 'd')
         {
             outputdebug('onKeyEvt create expectupdn for compose ' keydef.key)
-            expectUpDown := new CExpectCompose(keydef.key)
+            composer.StartNew(keydef.key)
             return
         }
     }
     else
     {
-        ret := expectUpDown.OnKey(keydef, upDown)
+        ret := composer.OnKey(keydef, upDown)
         if (ret.cancel || ret.completed)
         {
-            outputdebug('remove ' expectUpDown.__class)
-            expectUpDown := 0
+            if (ret.completed && ret.outputOnComplete)
+            {
+                doSend(ret.outputOnComplete)
+            }
+            
+            outputdebug('reset composer')
+            composer.Reset()
         }
         
         if (ret.eatKey)
@@ -196,55 +200,6 @@ CheckDeadKeyKeyEvt(recvd, upDown)
     */
 }
 
-; 'sc000'
-GetComposed(sc1, sc2)
-{
-    out := 0
-    if (composeKeyPairs[sc1])
-        out := composeKeyPairs[sc1][sc2]
-        
-    return out
-}
-
-CheckComposeKeyEvt(keyDef, upDown)
-{
-    ; no pending compose key, normal processing
-    if (!waitingCompose2ndKey)
-    {
-        ; is this a compose key
-        if (composeKey == keyDef.key)
-        {
-            ; got a compose initiating key, save and skip
-            waitingCompose2ndKey := keyDef.key
-            return 1
-        }
-        
-        ; continue normal processing
-        return 0
-    }
-    else ; have a pending compose key
-    {
-        if (upDown == 'u')
-        {
-            ; not expecting up here, reset & skip
-            waitingCompose2ndKey := 0
-            return 1
-        }
-        else
-        {
-            ; recvd a key down with a pending compose
-            ; get the composed result and output if ok
-            toOutput := GetComposed(waitingCompose2ndKey, keyDef.output)
-            if (toOutput)
-                doSend(toOutput)
-
-            ; no more processing
-            return 1
-        }
-    }
-}
-
-
 ; keyScancode = 'sc000'
 CreateHotkey(keyScancode)
 {
@@ -271,22 +226,6 @@ SetComposeKey(key)
     composeKey := FormatAsScancode(key)
 }
 
-; '`', [['a', 'à'], ['e', 'è']..]
-AddComposeKeyPairs(initialKey, composePairs*)
-{
-    sc1 := FormatAsScancode(initialKey)
-    
-    pairs := composeKeyPairs[sc1]
-    if (!pairs)
-        composeKeyPairs[sc1] := pairs := {} 
-
-    for idx, pair in composePairs
-    {
-        ; pairs['a'] := 'à'
-        ; but in sc000 format
-        pairs[FormatAsScancode(pair[1])] := FormatAsScancode(pair[2])
-    }
-}
 
 ;---------------------
 
@@ -322,10 +261,12 @@ createKey('c')
 createKey('d')
 createKey('.')
 
+
 SetComposeKey('.')
 
-AddComposeKeyPairs('``', ['a', 'à'], ['e', 'è'])
-AddComposeKeyPairs('^', ['a', 'â'], ['e', 'ê'])
+composer := new CComposer()
+composer.AddComposeKeyPairs('``', ['a', 'à'], ['e', 'è'])
+composer.AddComposeKeyPairs('^', ['a', 'â'], ['e', 'ê'])
 
 
 return
