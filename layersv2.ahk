@@ -2,6 +2,8 @@
 ; Copyright 2018 Philippe Quesnel
 ; Licensed under the Academic Free License version 3.0
 
+; doc says default=70
+#MaxHotkeysPerInterval 140
 #InstallKeybdHook
 #Warn All, MsgBox
 
@@ -10,15 +12,26 @@
 #include modifiers.ahk
 #include CComposer.ahk
 
-; key, output
 global keydefs := {}
+global modifiers := 0
 
 global composeKey := 0
 global composer := 0
-
 global expectUpDown := 0
 
 
+class CLayerDef
+{
+    static layerDefs := []
+    
+    __New(accessKey)
+    {
+        idx := CLayerDef.layerDefs.Length() + 1
+        this.Index := idx
+        this.AccessKey := AccessKey
+        CLayerDef.layerDefs[idx] := this
+    }
+}
 
 ; called on key press / release
 ; all our mapping logic goes here
@@ -41,27 +54,8 @@ onKeyEvt(scancode, upDown)
     
     if (!expectUpDown)
     {
-        if (keydef.key == composeKey && upDown == 'd')
-        {
-            outputdebug('onKeyEvt create ccomposer ' keydef.key)
-            expectUpDown := composer
-            expectUpDown.StartNew(keydef.key)
+        if (checkForNewExpectUpDown(scancode, upDown))
             return
-        }
-        if (keydef.isDeadKey && upDown == 'd')
-        {
-            outputdebug('onKeyEvt create ccomposer for deadkey ' keydef.key)
-            expectUpDown := composer
-            expectUpDown.StartNew(keydef.key, 1)
-            return
-        }
-        if (keydef.isDualModeMod && upDown == 'd')
-        {
-            outputdebug('onKeyEvt create CDualModer ' keydef.key)
-            expectUpDown := new CDualModer(keydef.key)
-            ; DONT eat modifier down
-        }
-        
     }
     else
     {
@@ -102,6 +96,37 @@ onKeyEvt(scancode, upDown)
 }
 
 
+; starts a new 'expectUpDown' if we got a compose/deadkey/dualMode key
+checkForNewExpectUpDown(scancode, upDown)
+{
+    if (upDown == 'd')
+    {
+        if (keydef.key == composeKey)
+        {
+            outputdebug('onKeyEvt create ccomposer ' keydef.key)
+            expectUpDown := composer
+            expectUpDown.StartNew(keydef.key)
+            return 1
+        }
+        if (keydef.isDeadKey)
+        {
+            outputdebug('onKeyEvt create ccomposer for deadkey ' keydef.key)
+            expectUpDown := composer
+            expectUpDown.StartNew(keydef.key, 1)
+            return 1
+        }
+        if (keydef.isDualModeMod)
+        {
+            outputdebug('onKeyEvt create CDualModer ' keydef.key)
+            expectUpDown := new CDualModer(keydef.key)
+            ; DONT eat modifier down
+            return 0
+        }
+    }
+    
+    return 0
+}
+
 ; 'sc000'
 doSend(scKey)
 {
@@ -112,23 +137,25 @@ doSend(scKey)
 ;--------
 
 ; keyScancode = 'sc000'
-CreateHotkey(keyScancode)
+createHotkey(keyScancode)
 {
     fnDn := Func("onKeyEvt").Bind(keyScancode, 'd')
     fnUp := Func("onKeyEvt").Bind(keyScancode, 'u')
 
     ; create hotKey for press and release of the key
-    ; add '*' to hotkeyname (hotkey will work even when other mods are pressed)
+    ; add '*' to hotkeyname (hotkey will work even when other modifiers are pressed)
     ; (this also makes this hotkey use the keyboard hook)
     HotKey '*' keyScancode, fnDn
     HotKey '*' keyScancode ' up', fnUp
 }
 
+;--------
+
 ; create a hotkey foreach key scancode of US kbd
 CreateHotkeysForUsKbd()
 {
     for idx, scanCode in usKbdScanCodes 
-        CreateHotKey('sc' scanCode)
+        createHotKey('sc' scanCode)
 }
 
 
@@ -141,19 +168,19 @@ SetComposeKey(key)
 ;---------------------
 
 CreateHotkeysForUsKbd()
+modifiers := new CModifiers
 
 ;;-- test
-; mods := new Modifiers
 
 ; define modifier keys
-; mods.CreateShiftMod('LShift')
-; mods.CreateShiftMod('RShift')
+; modifiers.CreateShiftMod('LShift')
+; modifiers.CreateShiftMod('RShift')
 
-; mods.CreateControlMod('LCtrl')
-; mods.CreateControlMod('RCtrl')
+; modifiers.CreateControlMod('LCtrl')
+; modifiers.CreateControlMod('RCtrl')
 
-; mods.CreateAltMod('LAlt')
-; mods.CreateAltMod('RAlt')
+; modifiers.CreateAltMod('LAlt')
+; modifiers.CreateAltMod('RAlt')
 
 ; test create some keydefs / keydefs
 createkey(ch)
@@ -191,12 +218,11 @@ SetComposeKey('.')
 composer := new CComposer()
 ; composer.AddComposePairsList('``', ['a', 'à'], ['e', 'è'])
 ; composer.AddComposePairsList('^', ['a', 'â'], ['e', 'ê'])
-composer.AddComposePairs('``', 'aà eè')
-composer.AddComposePairs('^', 'aâ eê iî')
+composer.AddComposePairs("``", "aà eè")
+composer.AddComposePairs("^", "aâ eê iî")
 
 return
 
 ; temp dbg, ctrl-win-q to exit
-#^x::
-  ; msgbox 'exiting'
-  ExitApp()
+; #^x::
+  ; ExitApp()

@@ -5,6 +5,10 @@
 ; key => 'sc000'
 FormatAsScancode(key)
 {
-	return Format("sc{:03x}", GetKeySC(key))
+    sc := GetKeySC(key)
+    if (!sc)
+        return 0
+        
+	return Format("sc{:03x}", sc)
 }
 

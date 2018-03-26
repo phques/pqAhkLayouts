@@ -20,7 +20,7 @@ class CComposer extends CExpectUpDownBase
         this._init(waitingFor, 'u', 3)
 
         ; dead key is its own 1st compose char
-        ; est of code can just work in 'compose mode' from here on 
+        ; rest of code can just work in 'compose mode' from here on 
         if (isDeadKey) 
             this.AddCompleteKey(waitingFor)
     }
@@ -69,8 +69,6 @@ class CComposer extends CExpectUpDownBase
     
     OnCompleteKey(keydef, upDown, result)
     {
-        outputdebug('Compose OnCompleteKey ' keydef.key)
-        
         ; got a complete dn/up,
         ; on 1st complete, check for valid 1st compose key, cancel if !valid
          if (this.completedKeys.Length() == 2) 
@@ -93,21 +91,17 @@ class CComposer extends CExpectUpDownBase
     
     OnCompleteSequence(keydef, result)
     {
-        outputdebug('Compose OnCompleteSequence ' keydef.key)
-       
         ; check for valid compose pair, cancel if !valid
         key1 := this.completedKeys[2]
         key2 := this.completedKeys[3]
         out := this.GetComposedResult(key1.char, key2.char)
         if (out)
         {
-            outputdebug('compose complete ' key1.char ' + ' key2.char ' => ' out)
             result.outputOnComplete := out
         }
         else
         {
             ; not a valid compose keypair
-            outputdebug('compose cancelled, not valid pair ' key1.char ' + ' key2.char)
             result.cancel := 1
             result := this.OnCancel(keydef, result)
         }
