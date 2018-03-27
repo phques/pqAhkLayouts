@@ -12,13 +12,45 @@
 #include modifiers.ahk
 #include CComposer.ahk
 
-global keydefs := {}
-global modifiers := 0
-
-global composeKey := 0
-global composer := 0
+global layout := 0
 global expectUpDown := 0
 
+class CLayout
+{
+    __New()
+    {
+        this.keydefs := {}
+        this.modifiers := new CModifiers
+        this.composer := new CComposer()
+        this.composeKey := 0
+    }
+
+    AddComposePairsList(initialKey, newComposePairs*)
+    {
+        this.composer.AddComposePairs(initialKey, newComposePairs*)
+    }
+    
+    AddComposePairs(initialKey, pairsStr)
+    {
+        this.composer.AddComposePairs(initialKey, pairsStr)
+    }
+    
+    SetComposeKey(key)
+    {
+        this.composeKey := FormatAsScancode(key)
+    }
+
+}
+
+class CKeydef
+{
+    __New(key)
+    {
+        this.char := GetKeyName(key)
+        this.key := FormatAsScancode(key)
+        this.output := [] ; indexed by layer
+    }
+}
 
 class CLayerDef
 {
@@ -42,7 +74,7 @@ onKeyEvt(scancode, upDown)
 ; outputdebug scancode ' ' upDown 
         
     ; get key def
-    keydef := keydefs[scancode]
+    keydef := layout.keydefs[scancode]
     if (!keydef)
     {
         ;debug
@@ -54,7 +86,7 @@ onKeyEvt(scancode, upDown)
     
     if (!expectUpDown)
     {
-        if (checkForNewExpectUpDown(scancode, upDown))
+        if (checkForNewExpectUpDown(keydef, upDown))
             return
     }
     else
@@ -81,13 +113,6 @@ onKeyEvt(scancode, upDown)
     ;   on down, if part of possible chord
     
    
-    ; if CheckComposeKeyEvt(keydef, upDown)
-        ; return
-
-    ; check dual mode modifiers
-    ; if (CheckDualModeKeyEvt(keydef, upDown))
-        ; return
-
 ; temp .. just output the input
     if (upDown == 'd')
         Send '{blind}{' scancode ' Down}'
@@ -97,21 +122,21 @@ onKeyEvt(scancode, upDown)
 
 
 ; starts a new 'expectUpDown' if we got a compose/deadkey/dualMode key
-checkForNewExpectUpDown(scancode, upDown)
+checkForNewExpectUpDown(keydef, upDown)
 {
     if (upDown == 'd')
     {
-        if (keydef.key == composeKey)
+        if (keydef.key == layout.composeKey)
         {
             outputdebug('onKeyEvt create ccomposer ' keydef.key)
-            expectUpDown := composer
+            expectUpDown := layout.composer
             expectUpDown.StartNew(keydef.key)
             return 1
         }
         if (keydef.isDeadKey)
         {
             outputdebug('onKeyEvt create ccomposer for deadkey ' keydef.key)
-            expectUpDown := composer
+            expectUpDown := layout.composer
             expectUpDown.StartNew(keydef.key, 1)
             return 1
         }
@@ -154,23 +179,33 @@ createHotkey(keyScancode)
 ; create a hotkey foreach key scancode of US kbd
 CreateHotkeysForUsKbd()
 {
-    for idx, scanCode in usKbdScanCodes 
-        createHotKey('sc' scanCode)
+    for idx, scanCode in usKbdScanCodes
+    {    
+        keysc := 'sc' scanCode
+        ; outputdebug(keysc ' name ' getkeyname(keysc))
+        createHotKey(keysc)
+    }
 }
 
-
-SetComposeKey(key)
-{
-    composeKey := FormatAsScancode(key)
-}
 
 
 ;---------------------
 
 CreateHotkeysForUsKbd()
-modifiers := new CModifiers
+layout := new CLayout()
 
 ;;-- test
+
+; test create some keydefs / keydefs
+createkey(ch)
+{
+    local m := {}
+    m.char := ch
+    m.key := FormatAsScancode(ch)
+    m.output := m.key
+    layout.keydefs[m.key] := m
+    return m
+}
 
 ; define modifier keys
 ; modifiers.CreateShiftMod('LShift')
@@ -182,16 +217,6 @@ modifiers := new CModifiers
 ; modifiers.CreateAltMod('LAlt')
 ; modifiers.CreateAltMod('RAlt')
 
-; test create some keydefs / keydefs
-createkey(ch)
-{
-    local m := {}
-    m.char := ch
-    m.key := FormatAsScancode(ch)
-    m.output := m.key
-    keydefs[m.key] := m
-    return m
-}
 
 createKey('a')
 createKey('b')
@@ -211,15 +236,14 @@ m.key := FormatAsScancode('LShift')
 m.output := m.key
 m.dualModeOutput := FormatAsScancode(m.char)
 m.isDualModeMod := 1
-keydefs[m.key] := m
+layout.keydefs[m.key] := m
 
-SetComposeKey('.')
+layout.SetComposeKey('.')
 
-composer := new CComposer()
-; composer.AddComposePairsList('``', ['a', 'à'], ['e', 'è'])
-; composer.AddComposePairsList('^', ['a', 'â'], ['e', 'ê'])
-composer.AddComposePairs("``", "aà eè")
-composer.AddComposePairs("^", "aâ eê iî")
+; layout.AddComposePairsList('``', ['a', 'à'], ['e', 'è'])
+; layout.AddComposePairsList('^', ['a', 'â'], ['e', 'ê'])
+layout.AddComposePairs("``", "aà eè")
+layout.AddComposePairs("^", "aâ eê iî")
 
 return
 
