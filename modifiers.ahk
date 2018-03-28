@@ -16,7 +16,7 @@ class CModifier
     ; or returns 0
     __New(key, type := '') 
     {
-        this.KeySC := KeySC(key)
+        this.KeySC := MakeKeySC(key)
         this.KeyName := GetKeyName(key)
 
         this.Type := type ; save type
@@ -46,8 +46,8 @@ class CModifiers
     ; key = 'sc000'
     Find(key)
     {
-        sc := KeySC(key)
-        mod := this._modifierKeys[sc]
+        sc := MakeKeySC(key)
+        mod := this._modifiers[sc]
         return mod
     }
 
@@ -56,11 +56,11 @@ class CModifiers
     ; typeToCreate = one of !^+ (alt,control,shift)
     Create(key, typeToCreate := '')
     {
-        sc := KeySC(key)
+        sc := MakeKeySC(key)
         if (!sc)
             return 0
 
-        mod := this._modifierKeys[sc] := new CModifier(sc, typeToCreate)
+        mod := this._modifiers[sc] := new CModifier(sc, typeToCreate)
         return mod
     }
 

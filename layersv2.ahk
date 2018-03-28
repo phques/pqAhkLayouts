@@ -32,6 +32,7 @@ class CLayout
     }
 
     ; create a hotkey foreach key scancode of US kbd
+    ; also creates the keydefs
     CreateHotkeysForUsKbd()
     {
         for idx, scanCode in usKbdScanCodes
@@ -43,6 +44,25 @@ class CLayout
             keydef := new CKeydef(keysc)
             this.AddKeydef(keydef)
         }
+    }
+    
+    CreateModifier(key)
+    {
+        m := this.modifiers.CreateShiftMod(key)
+        
+    }
+    
+    CreateModifiers()
+    {
+        m := this.modifiers.CreateShiftMod('LShift')
+        m := this.modifiers.CreateShiftMod('RShift')
+
+        m := this.modifiers.CreateControlMod('LCtrl')
+        m := this.modifiers.CreateControlMod('RCtrl')
+
+        m := this.modifiers.CreateAltMod('LAlt')
+        m := this.modifiers.CreateAltMod('RAlt')
+
     }
 
 
@@ -61,7 +81,7 @@ class CLayout
     
     GetKeydef(key)
     {
-        return layout.keydefs[KeySC(key)]
+        return layout.keydefs[MakeKeySC(key)]
     }
     
     AddComposePairsList(initialKey, newComposePairs*)
@@ -76,7 +96,7 @@ class CLayout
     
     SetComposeKey(key)
     {
-        this.composeKey := KeySC(key)
+        this.composeKey := MakeKeySC(key)
     }
 
 }
@@ -86,11 +106,16 @@ class CKeydef
     __New(key)
     {
         this.char := GetKeyName(key)
-        this.keysc := KeySC(key)
+        this.keysc := MakeKeySC(key)
         this.output := [] ; indexed by layer
         this.isDeadKey := 0
         this.isDualMode := 0
         this.modifier := 0  ; CModifier
+    }
+    
+    SetModifier(modifier)
+    {
+        this.modifier := modifier  ; CModifier
     }
     
     SetDeadKey(isDeadKey := 1)
@@ -139,7 +164,7 @@ onKeyEvt(scancode, upDown)
 ; outputdebug scancode ' ' upDown 
         
     ;debug
-    if (scancode == KeySC('Escape'))
+    if (scancode == MakeKeySC('Escape'))
     {
         outputdebug('Escape hit : exit app')
         exitapp
@@ -266,6 +291,9 @@ CreateHotkeysForUsKbd()
 layout := new CLayout()
 
 layout.CreateHotkeysForUsKbd()
+
+k := layout.GetKeydef("LShift")
+
 
 ;;-- test
 
