@@ -23,16 +23,17 @@ class CExpectUpDownBase
     waitingUpDown := ''      ; waiting for 'u' 'd'    
     nbrRequired := 0
     completedKeys := []
-    dualMode := 0
+    dualModeOutput := 0     ; when != 0, we are dealing w. a dualMode modifier
     
     ;-----
     
-    _init(waitingFor, upDown, nbrRequired)
+    _init(waitingFor, upDown, nbrRequired, dualModeOutput := 0)
     {
         this.waitingFor := waitingFor
         this.waitingUpDown := upDown
         this.nbrRequired := nbrRequired
         this.completedKeys := []
+        this.dualModeOutput := dualModeOutput
     }
     
     ; base methods
@@ -59,14 +60,14 @@ class CExpectUpDownBase
 
     OnKey(keydef, upDown)
     {
-        ; outputdebug('OnKey ' keydef.keysc ' ' upDown)
+        outputdebug('OnKey ' keydef.keysc ' ' upDown)
 
         if (this.waitingUpDown == 'u')
         {
             ; correct key?
             if (this.waitingFor != keydef.keysc)
             {
-                if (upDown == 'u' &&  this.dualMode)
+                if (upDown == 'u' &&  this.dualModeOutput)
                 {
                     ; ignore up keys, it happens when doing 'rolls'
                     ; and make it so that the dual mode dn/up fails
@@ -80,7 +81,7 @@ class CExpectUpDownBase
                     ; but ignore modifiers (##PQ what about dualMode mods !??)
                     if (!keydef.modifier)
                     {
-                        outputdebug("CExpectUpDownBase. OnKey didn't get expected key, eat & cancel")
+                        outputdebug(CExpectUpDownBase.__Class " OnKey didn't get expected key, eat & cancel")
                         res := new CExpectUpDownBase.Result(1,1)
                         res := this.OnCancel(keydef, upDown, res)
                         this.Reset()
@@ -186,16 +187,16 @@ class CDualModer extends CExpectUpDownBase
     ; called on key down of a dual mode modifier
     ; we will wait for key up 
    
-    __New(waitingFor)
+    __New(waitingFor, dualModeOutput)
     {
         ; wait for up of same modifier, if not interrupted, output alternative char
         ; else it will just be cancelled
-        this._init(waitingFor, 'u', 1)
+        this._init(waitingFor, 'u', 1, dualModeOutput)
     }
 
     OnCancel(keydef, upDown, result)
     {
-        ; outputdebug('oncancel ' keydef.keysc)
+        outputdebug('oncancel ' keydef.keysc)
         ; do any extra action on cancel
         ; ? possibly modify result
         result.eatKey := 0 ; DONT eat modifier up
@@ -204,11 +205,11 @@ class CDualModer extends CExpectUpDownBase
 
     OnCompleteSequence(keydef, result)
     {
-        ; outputdebug('CDualModer.OnCompleteSequence ' keydef.char)
+        outputdebug('CDualModer.OnCompleteSequence ' keydef.char ' out = ' this.dualModeOutput)
         
         ; successfully recvd uninterrupted dn/up of this dual mode modifier
         ; output its alternative char
-        result.outputOnComplete := keydef.char
+        result.outputOnComplete := this.dualModeOutput
         result.eatKey := 0 ; DONT eat modifier up
         return result
     }
