@@ -14,6 +14,8 @@
 
 global layout := 0
 global expectUpDown := 0
+global modifiersDown := {}
+
 
 class CLayout
 {
@@ -46,26 +48,26 @@ class CLayout
         }
     }
     
-    CreateModifier(key)
-    {
-        m := this.modifiers.CreateShiftMod(key)
-        
-    }
-    
     CreateModifiers()
     {
-        m := this.modifiers.CreateShiftMod('LShift')
-        m := this.modifiers.CreateShiftMod('RShift')
+        this.CreateModifier('LShift', '+')
+        this.CreateModifier('RShift', '+')
 
-        m := this.modifiers.CreateControlMod('LCtrl')
-        m := this.modifiers.CreateControlMod('RCtrl')
+        this.CreateModifier('LCtrl', '^')
+        this.CreateModifier('RCtrl', '^')
 
-        m := this.modifiers.CreateAltMod('LAlt')
-        m := this.modifiers.CreateAltMod('RAlt')
+        this.CreateModifier('LAlt', '!')
+        this.CreateModifier('RAlt', '!')
 
     }
 
-
+    CreateModifier(key, type)
+    {
+        mod := this.modifiers.Create(key, type)
+        keydef := this.GetKeydef(key)
+        keydef.SetModifier(mod)
+    }
+    
     CreateLayer(name, accessKey)
     {
         layerdef := new CLayerDef(name, accessKey)
@@ -271,29 +273,13 @@ createHotkey(keyScancode)
     HotKey '*' keyScancode ' up', fnUp
 }
 
-;--------
-
-; create a hotkey foreach key scancode of US kbd
-CreateHotkeysForUsKbd()
-{
-    for idx, scanCode in usKbdScanCodes
-    {    
-        keysc := 'sc' scanCode
-        createHotKey(keysc)
-        ; outputdebug(keysc ' name ' getkeyname(keysc))
-    }
-}
-
 
 
 ;---------------------
 
 layout := new CLayout()
-
 layout.CreateHotkeysForUsKbd()
-
-k := layout.GetKeydef("LShift")
-
+layout.CreateModifiers()
 
 ;;-- test
 
