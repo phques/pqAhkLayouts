@@ -60,7 +60,7 @@ class CExpectUpDownBase
 
     OnKey(keydef, upDown)
     {
-        outputdebug('OnKey ' keydef.keysc ' ' upDown)
+        outputdebug('OnKey ' keydef.keysc ' ' getkeyname(keydef.keysc) ' ' upDown)
 
         if (this.waitingUpDown == 'u')
         {

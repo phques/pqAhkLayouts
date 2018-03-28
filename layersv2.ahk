@@ -179,6 +179,7 @@ onKeyEvt(scancode, upDown)
         return
     }
     
+    eatKey := 0
     if (expectUpDown)
     {
         ret := expectUpDown.OnKey(keydef, upDown)
@@ -194,14 +195,23 @@ onKeyEvt(scancode, upDown)
             expectUpDown := 0
         }
         
-        if (ret.eatKey)
-            return
+        eatKey := ret.eatKey
+        ; if (ret.eatKey)
+            ; return
     }
-    else
+
+    ; recheck for expectUpDown, can be reset above and we might need to check for another 'waitFor' !
+    ; eg: deadkey '^' (shift-6), lshift=dualMode : 
+    ;  lshift dn -> start waitFor dualmode on lshift
+    ;  '6' dn  -> cancel lshift waitFor dualmode AND exit... need to check for dead key
+    if (!expectUpDown)
     {
         if (checkForNewExpectUpDown(keydef, upDown))
             return
     }
+    
+    if (eatKey)
+        return
     
     ; 1st if modifier, mark up/down
     ; 2nd check for chord
