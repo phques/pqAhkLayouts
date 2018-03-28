@@ -209,10 +209,18 @@ onKeyEvt(scancode, upDown)
     
    
 ; temp .. todo (we will handle modifiers ourselves)
-    output := scancode
-    if (keydef.output[layout.activeLayer.name])
-        output := keydef.output[layout.activeLayer.name]
-        
+    output := scancode ; debug, default to original key
+    
+    if (keydef.modifier)
+    {
+        output := keydef.modifier.KeySC
+    }
+    else
+    {
+        if (keydef.output[layout.activeLayer.name])
+            output := keydef.output[layout.activeLayer.name]
+    }
+     
     if (upDown == 'd')
         Send '{blind}{' output ' Down}'
     else
@@ -242,7 +250,7 @@ checkForNewExpectUpDown(keydef, upDown)
         if (keydef.isDualMode)
         {
             outputdebug('onKeyEvt create CDualModer ' keydef.keysc)
-            expectUpDown := new CDualModer(keydef.keysc)
+            expectUpDown := new CDualModer(keydef.keysc, keydef.output[layout.activeLayer.name])
             ; DONT eat modifier down
             return 0
         }
