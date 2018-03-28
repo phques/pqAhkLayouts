@@ -6,19 +6,18 @@
 
 class CModifier
 {
-    KeyScan := ''  ; 'sc000'
+    KeySC := ''  ; 'sc000'
     KeyName := ''
-    DualModeOut := ''    ; what this outputs when not a modifier
     ; IsShift | IsControl | IsAlt set in __New : 
     Type := '' ; cf new
+    IsDualMode := 0
 
     ; type is one of +^! which will set IsShift | IsControl | IsAlt
     ; or returns 0
-    __New(key, type, dualModeOut := '') 
+    __New(key, type := '') 
     {
-        this.KeyScan := FormatAsScancode(key)
+        this.KeySC := KeySC(key)
         this.KeyName := GetKeyName(key)
-        this.DualModeOut := dualModeOut
 
         this.Type := type ; save type
         if (type == '+')
@@ -31,6 +30,10 @@ class CModifier
             return 0        
     }
     
+    SetDualMode()
+    {
+        IsDualMode := 1
+    }
 }
 
 
@@ -43,7 +46,7 @@ class CModifiers
     ; key = 'sc000'
     Find(key)
     {
-        sc := FormatAsScancode(key)
+        sc := KeySC(key)
         mod := this._modifierKeys[sc]
         return mod
     }
@@ -51,29 +54,29 @@ class CModifiers
     ; create a CModifier object
     ; key = 'sc000'
     ; typeToCreate = one of !^+ (alt,control,shift)
-    Create(key, typeToCreate, dualModeOut := '')
+    Create(key, typeToCreate := '')
     {
-        sc := FormatAsScancode(key)
+        sc := KeySC(key)
         if (!sc)
             return 0
 
-        mod := this._modifierKeys[sc] := new CModifier(sc, typeToCreate, dualModeOut)
+        mod := this._modifierKeys[sc] := new CModifier(sc, typeToCreate)
         return mod
     }
 
-    CreateShiftMod(key, dualModeOut := 0)
+    CreateShiftMod(key)
     {
-        return this.Create(key, '+', dualModeOut)
+        return this.Create(key, '+')
     }
 
-    CreateControlMod(key, dualModeOut)
+    CreateControlMod(key)
     {
-        return this.Create(key, '^', dualModeOut)
+        return this.Create(key, '^')
     }
 
-    CreateAltMod(key, dualModeOut)
+    CreateAltMod(key)
     {
-        return this.Create(key, '!', dualModeOut)
+        return this.Create(key, '!')
     }
 }
 

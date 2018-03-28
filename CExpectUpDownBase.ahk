@@ -59,12 +59,12 @@ class CExpectUpDownBase
 
     OnKey(keydef, upDown)
     {
-        ; outputdebug('OnKey ' keydef.key ' ' upDown)
+        ; outputdebug('OnKey ' keydef.keysc ' ' upDown)
 
         if (this.waitingUpDown == 'u')
         {
             ; correct key?
-            if (this.waitingFor != keydef.key)
+            if (this.waitingFor != keydef.keysc)
             {
                 if (upDown == 'u' &&  this.dualMode)
                 {
@@ -120,7 +120,7 @@ class CExpectUpDownBase
         else ; expect key down 
         {
       
-            if (upDown == 'u' || (this.waitingFor != 'any' && this.waitingFor != keydef.key))
+            if (upDown == 'u' || (this.waitingFor != 'any' && this.waitingFor != keydef.keysc))
             {
                 ; didn't get expected key evt, eat & cancel 
                 res := new CExpectUpDownBase.Result(1,1)
@@ -130,7 +130,7 @@ class CExpectUpDownBase
             else
             {
                 ; got expected key down, now expect key up of same key
-                this.waitingFor := keydef.key
+                this.waitingFor := keydef.keysc
                 this.waitingUpDown := 'u'
                 res := new CExpectUpDownBase.Result(1, 0)
             }
@@ -150,7 +150,7 @@ class CExpectUpDownBase
 
     OnCompleteKey(keydef, upDown, result)
     {
-        ; outputdebug('OnCompleteKey ' keydef.key)
+        ; outputdebug('OnCompleteKey ' keydef.keysc)
         ; do any extra action on key complete
         ; ? possibly modify result
         return result
@@ -158,7 +158,7 @@ class CExpectUpDownBase
     
     OnCancel(keydef, upDown, result)
     {
-        ; outputdebug('oncancel ' keydef.key)
+        ; outputdebug('oncancel ' keydef.keysc)
         ; do any extra action on cancel
         ; ? possibly modify result
         return result
@@ -166,7 +166,7 @@ class CExpectUpDownBase
 
     OnCompleteSequence(keydef, result)
     {
-        ; outputdebug('OnCompleteSequence ' keydef.key)
+        ; outputdebug('OnCompleteSequence ' keydef.keysc)
         
         ; do any extra action on key complete
         ; ? possibly modify result
@@ -190,7 +190,7 @@ class CDualModer extends CExpectUpDownBase
 
     OnCancel(keydef, upDown, result)
     {
-        ; outputdebug('oncancel ' keydef.key)
+        ; outputdebug('oncancel ' keydef.keysc)
         ; do any extra action on cancel
         ; ? possibly modify result
         result.eatKey := 0 ; DONT eat modifier up

@@ -3,7 +3,7 @@
 ; Licensed under the Academic Free License version 3.0
 
 ; key => 'sc000'
-FormatAsScancode(key)
+KeySC(key)
 {
     sc := GetKeySC(key)
     if (!sc)
