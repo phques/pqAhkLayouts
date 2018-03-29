@@ -74,10 +74,15 @@ class CLayout
         keydef.SetModifier(mod)
     }
     
-    CreateLayer(name, accessKey)
+    CreateLayer(name, accessKeyName)
     {
-        layerdef := new CLayerDef(name, accessKey)
-        this.layerdef[name] := layerdef
+    outputdebug('createlayer, nae = ' accessKeyName)
+        if (accessKeyName)
+            keydef := this.GetKeydef(accessKeyName)
+        else
+            keydef := 0
+        layerdef := new CLayerDef(name, keydef)
+        this.layerdefs[name] := layerdef
         return layerdef
     }
     
@@ -105,6 +110,22 @@ class CLayout
     SetComposeKey(key)
     {
         this.composeKey := MakeKeySC(key)
+    }
+    
+    IsLayerAccessKey(keydef)
+    {
+        for idx, layerdef in this.layerdefs
+        {
+        outputdebug(idx ' ' layerdef)
+            if (layerdef.IsAccessKey(keydef))
+                return layerdef
+        }
+        return 0
+    }
+    
+    SetActiveLayer(layerdef)
+    {
+        this.activeLayer := layerdef
     }
 
 }
@@ -168,15 +189,30 @@ class CLayerDef
 {
     static layerDefs := []
     
-    __New(name, accessKey)
+    ; accessKeydef2 is used for example for shift : lshift & rshift
+    __New(name, accessKeydef1, accessKeydef2 := 0)
     {
         ; idx := CLayerDef.layerDefs.Length() + 1
         ; this.Index := idx
         ; CLayerDef.layerDefs[idx] := this
         CLayerDef.layerDefs[name] := this
         this.Name := name
-        this.AccessKey := AccessKey
+        this.accessKeydef1 := accessKeydef1
+        this.accessKeydef2 := accessKeydef2
     }
+    
+    IsAccessKey(keydef)
+    {
+        ; outputdebug(this.accessKeydef1.keysc ' ' keydef.keysc)
+        if (this.accessKeydef1 && this.accessKeydef1.keysc = keydef.keysc)
+            return 1
+
+        if (this.accessKeydef2 && this.accessKeydef2.keysc = keydef.keysc)
+            return 1
+            
+        return 0
+    }
+    
 }
 
 
@@ -234,14 +270,31 @@ onKeyEvt(scancode, upDown)
     ;  '6' dn  -> cancel lshift waitFor dualmode AND exit... need to check for dead key
     if (!expectUpDown)
     {
-        if (checkForNewExpectUpDown(keydef, upDown))
-            return
+        eatKey := checkForNewExpectUpDown(keydef, upDown)
     }
     
     if (eatKey)
         return
     
     ; 1st if modifier, mark up/down
+    if (keydef.modifier)
+    {
+        ; ##TODO keep track of pressed modifers
+        
+        ; is this key a modifier that accesses a layer?
+        layerdef := layout.IsLayerAccessKey(keydef)
+        if (layerdef)
+        {
+            ; set new active layer
+            this.SetActiveLayer(layerdef)
+            
+            ; save current output according to current layer in keydef
+            layerName := layerdef.name
+            keydef.SetCurrOutput(layerName)
+
+        }
+    }
+    
     ; 2nd check for chord
     ;   on down, if part of possible chord
     
@@ -333,7 +386,7 @@ layout.CreateModifiers()
 k := layout.GetKeydef("``")
 k.SetDeadKey()
 
-k := layout.GetKeydef("^")
+k := layout.GetKeydef("^")  ; actually 6
 k.SetDeadKey()
 
 ; test kindof dual mode modifier
@@ -346,6 +399,13 @@ layout.SetComposeKey('.')
 ; layout.AddComposePairsList('^', ['a', 'â'], ['e', 'ê'])
 layout.AddComposePairs("``", "aà eè")
 layout.AddComposePairs("^", "aâ eê iî")
+
+; this is a special case, it can be accessed by both l/rshift
+shftLayer :='shifted'
+layout.CreateLayer(shftLayer, 'lshift', 'rshift')
+
+k := layout.GetKeydef("a")
+k.SetOutput(shftLayer, '+')
 
 return
 
