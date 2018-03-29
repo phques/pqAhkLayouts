@@ -60,7 +60,7 @@ class CExpectUpDownBase
 
     OnKey(keydef, upDown)
     {
-        outputdebug('OnKey ' keydef.keysc ' ' getkeyname(keydef.keysc) ' ' upDown)
+        ; outputdebug('OnKey ' keydef.keysc ' ' getkeyname(keydef.keysc) ' ' upDown)
 
         if (this.waitingUpDown == 'u')
         {
@@ -196,7 +196,7 @@ class CDualModer extends CExpectUpDownBase
 
     OnCancel(keydef, upDown, result)
     {
-        outputdebug('oncancel ' keydef.keysc)
+        ; outputdebug('oncancel ' keydef.keysc)
         ; do any extra action on cancel
         ; ? possibly modify result
         result.eatKey := 0 ; DONT eat modifier up
@@ -205,7 +205,7 @@ class CDualModer extends CExpectUpDownBase
 
     OnCompleteSequence(keydef, result)
     {
-        outputdebug('CDualModer.OnCompleteSequence ' keydef.char ' out = ' this.dualModeOutput)
+        ; outputdebug('CDualModer.OnCompleteSequence ' keydef.char )
         
         ; successfully recvd uninterrupted dn/up of this dual mode modifier
         ; output its alternative char

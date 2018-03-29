@@ -34,17 +34,23 @@ class CLayout
     }
 
     ; create a hotkey foreach key scancode of US kbd
-    ; also creates the keydefs
-    CreateHotkeysForUsKbd()
+    ; also creates the keydefs w. output = keyname on main layer
+    CreateHotkeysForUsKbd(initializeKeydefs)
     {
         for idx, scanCode in usKbdScanCodes
         {    
             keysc := 'sc' scanCode
             createHotKey(keysc)
-            ; outputdebug(keysc ' name ' getkeyname(keysc))
             
-            keydef := new CKeydef(keysc)
-            this.AddKeydef(keydef)
+            if (initializeKeydefs)
+            {
+                ; create a keydef
+                keydef := new CKeydef(keysc)
+                this.AddKeydef(keydef)
+                
+                ; set output on main = keyname 
+                keydef.SetOutput('main', GetKeyName(keysc))
+            }
         }
     }
     
@@ -107,12 +113,30 @@ class CKeydef
 {
     __New(key)
     {
-        this.char := GetKeyName(key)
+        this.keyName := GetKeyName(key) ; note that this chgd '^' to '6' 
         this.keysc := MakeKeySC(key)
         this.output := [] ; indexed by layer
+        this.currOutput := 0    ; output as of current layer, set for access in other classes
         this.isDeadKey := 0
         this.isDualMode := 0
         this.modifier := 0  ; CModifier
+    }
+    
+    GetOutput(layer)
+    {
+        return this.output[layer]
+    }
+    
+    ; save the output for this keydef on layer
+    ; ie the 'mapping'
+    SetOutput(layer, output)
+    {
+        this.output[layer] := output
+    }    
+    
+    SetCurrOutput(layer)
+    {
+        this.currOutput := this.GetOutput(layer)
     }
     
     SetModifier(modifier)
@@ -125,7 +149,7 @@ class CKeydef
         this.isDeadKey := isDeadKey
     }    
     
-    SetDualMode(output, layer)
+    SetDualMode(layer, output)
     {
         if (!this.modifier)
         {
@@ -179,6 +203,10 @@ onKeyEvt(scancode, upDown)
         return
     }
     
+    ; save current output according to current layer in keydef
+    layerName := layout.activeLayer.name
+    keydef.SetCurrOutput(layerName)
+    
     eatKey := 0
     if (expectUpDown)
     {
@@ -227,8 +255,8 @@ onKeyEvt(scancode, upDown)
     }
     else
     {
-        if (keydef.output[layout.activeLayer.name])
-            output := keydef.output[layout.activeLayer.name]
+        if (keydef.currOutput)
+            output := keydef.currOutput
     }
      
     if (upDown == 'd')
@@ -295,23 +323,12 @@ createHotkey(keyScancode)
 
 ;---------------------
 
+; this is how to setup / startup the thing ;-)
 layout := new CLayout()
-layout.CreateHotkeysForUsKbd()
+layout.CreateHotkeysForUsKbd(1)
 layout.CreateModifiers()
 
 ;;-- test
-
-
-; define modifier keys
-; modifiers.CreateShiftMod('LShift')
-; modifiers.CreateShiftMod('RShift')
-
-; modifiers.CreateControlMod('LCtrl')
-; modifiers.CreateControlMod('RCtrl')
-
-; modifiers.CreateAltMod('LAlt')
-; modifiers.CreateAltMod('RAlt')
-
 
 k := layout.GetKeydef("``")
 k.SetDeadKey()
@@ -321,7 +338,7 @@ k.SetDeadKey()
 
 ; test kindof dual mode modifier
 k := layout.GetKeydef("LShift")
-k.SetDualMode('j', 'main')
+k.SetDualMode('main', 'j')
 
 layout.SetComposeKey('.')
 
@@ -332,6 +349,3 @@ layout.AddComposePairs("^", "aâ eê iî")
 
 return
 
-; temp dbg, ctrl-win-q to exit
-; #^x::
-  ; ExitApp()

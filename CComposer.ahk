@@ -74,9 +74,10 @@ class CComposer extends CExpectUpDownBase
          if (this.completedKeys.Length() == 2) 
          {
             key1 := this.completedKeys[2]
-            if (!this.composePairs[key1.char])
+            if (!this.composePairs[key1.currOutput])
             {
                 ; not a valid compose key pair 1st key
+                outputdebug(key1.currOutput ' not a valid compose key pair 1st key')
                 result.cancel := 1
                 return result
             }
@@ -94,7 +95,7 @@ class CComposer extends CExpectUpDownBase
         ; check for valid compose pair, cancel if !valid
         key1 := this.completedKeys[2]
         key2 := this.completedKeys[3]
-        out := this.GetComposedResult(key1.char, key2.char)
+        out := this.GetComposedResult(key1.currOutput, key2.currOutput)
         if (out)
         {
             result.outputOnComplete := out
