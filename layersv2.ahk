@@ -48,6 +48,8 @@ onKeyEvt(scancode, upDown)
     layerName := layout.activeLayer.name
     keydef.SetCurrOutput(layerName)
     
+    ; [-- processing for compose / deadkeys / dualmode
+    
     eatKey := 0
     if (expectUpDown)
     {
@@ -56,7 +58,8 @@ onKeyEvt(scancode, upDown)
         {
             if (ret.completed && ret.outputOnComplete)
             {
-                doSend(ret.outputOnComplete)
+                doSend(ret.outputOnComplete, 'd')
+                doSend(ret.outputOnComplete, 'u')
             }
             
             ; outputdebug('reset expectUpDown')
@@ -65,8 +68,6 @@ onKeyEvt(scancode, upDown)
         }
         
         eatKey := ret.eatKey
-        ; if (ret.eatKey)
-            ; return
     }
 
     ; recheck for expectUpDown, can be reset above and we might need to check for another 'waitFor' !
@@ -80,11 +81,14 @@ onKeyEvt(scancode, upDown)
     
     if (eatKey)
         return
+        
+    ; ... processing for compose / deadkeys / dualmode ---]
     
-    ; 1st if modifier, mark up/down
+    
+    ; check for modifiers / layer access
     if (keydef.modifier)
     {
-        ; ##TODO keep track of pressed modifers
+        mod := keydef.modifier
 
         if (upDown == 'd')
         {
@@ -98,17 +102,46 @@ onKeyEvt(scancode, upDown)
                 ; save current output according to current layer in keydef
                 layerName := layerdef.name
                 keydef.SetCurrOutput(layerName)
+
+                ; this modifier  is being used as layer access, 
+                ; dont consider it 'down'
+            }
+            else
+            {
+                if (!modifiersDown[mod.KeySC])
+                {
+                    modifiersDown[mod.KeySC] := 1
+                    modifiersDown[mod.Type]++
+                }
             }
         }
-        else ; up modifier, changing out of layer
+        else 
         {
-            ; re-select main layer
-            layerdef := layout.GetLayer('main')
-            layout.SetActiveLayer(layerdef)
-            
-            ; save current output according to current layer in keydef
-            layerName := layerdef.name
-            keydef.SetCurrOutput(layerName)
+            ; up modifier, changing out of layer?
+            ; is this key a modifier that accesses a layer?
+            layerdef := layout.IsLayerAccessKey(keydef)
+            if (layerdef && layout.IsActiveLayer(layerdef))
+            {
+                ; re-select main layer
+                layerdef := layout.GetLayer('main')
+                layout.SetActiveLayer(layerdef)
+                
+                ; save current output according to current layer in keydef
+                layerName := layerdef.name
+                keydef.SetCurrOutput(layerName)
+                
+                ; we did not mark this modifier sa down when used as layer access,
+                ; so dont try to remove it fro our mods down data
+            }
+            else
+            {
+                if (modifiersDown[mod.KeySC])
+                {
+                    ; track that modofier was released
+                    modifiersDown[mod.KeySC] := 0
+                    modifiersDown[mod.Type]--
+                }
+            }
         }
     }
     
@@ -128,11 +161,32 @@ onKeyEvt(scancode, upDown)
         if (keydef.currOutput)
             output := keydef.currOutput
     }
-     
+    
+    ; send the output
+    doSend(output, upDown)
+}
+
+
+; '
+doSend(output, upDown)
+{
+    modsToRelease := ''
+    if (modifiersDown['!'])
+        modsToRelease .= '!'
+        
+    if (modifiersDown['#'])
+        modsToRelease .= '#'
+        
+    if (modifiersDown['^'])
+        modsToRelease .= '^'
+        
+    if (modifiersDown['+'])
+        modsToRelease .= '+'
+        
     if (upDown == 'd')
-        Send '{blind}{' output ' Down}'
+        Send '{blind' modsToRelease '}{' output ' Down}'
     else
-        Send '{blind}{' output ' Up}'
+        Send '{blind' modsToRelease '}{' output ' Up}'
 }
 
 
@@ -167,12 +221,6 @@ checkForNewExpectUpDown(keydef, upDown)
     return 0
 }
 
-; 'sc000'
-doSend(scKey)
-{
-    Send '{' scKey ' Down}'
-    Send '{' scKey ' Up}'
-}
 
 ;--------
 
@@ -189,7 +237,13 @@ createHotkey(keyScancode)
     HotKey '*' keyScancode ' up', fnUp
 }
 
-
+InitModifiersDown()
+{
+    modifiersDown['!'] := 0
+    modifiersDown['^'] := 0
+    modifiersDown['+'] := 0
+    modifiersDown['#'] := 0
+}
 
 ;---------------------
 
@@ -197,6 +251,7 @@ createHotkey(keyScancode)
 layout := new CLayout()
 layout.CreateHotkeysForUsKbd(1)
 layout.CreateModifiers()
+InitModifiersDown()
 
 ;;-- test
 
@@ -218,11 +273,14 @@ layout.AddComposePairs("``", "aà eè")
 layout.AddComposePairs("^", "aâ eê iî")
 
 ; this is a special case, it can be accessed by both l/rshift
-shftLayer :='shifted'
-layout.CreateLayer(shftLayer, 'lshift', 'rshift')
+shftLayer :='main.shifted'
+layout.CreateLayer(shftLayer, 'shift')
 
 k := layout.GetKeydef("a")
 k.SetOutput(shftLayer, '+')
+
+k := layout.GetKeydef("e")
+k.SetOutput(shftLayer, 'E')
 
 return
 

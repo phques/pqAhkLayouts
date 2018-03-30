@@ -57,12 +57,14 @@ class CLayout
         keydef.SetModifier(mod)
     }
     
-    CreateLayer(name, accessKeyName1, accessKeyName2 := 0)
+    ; special case for 'Shift' : will match either lshift or rshift
+    CreateLayer(layerName, accessKeyName)
     {
-        keydef1 := this.GetKeydef(accessKeyName1)
-        keydef2 := this.GetKeydef(accessKeyName2)
-        layerdef := new CLayerDef(name, keydef1, keydef2)
-        this.layerdefs[name] := layerdef
+        keydef := this.GetKeydef(accessKeyName)
+        
+        layerdef := new CLayerDef(layerName, accessKeyName, keydef)
+        this.layerdefs[layerName] := layerdef
+        
         return layerdef
     }
     
