@@ -81,7 +81,7 @@ class CExpectUpDownBase
                     ; but ignore modifiers (##PQ what about dualMode mods !??)
                     if (!keydef.modifier)
                     {
-                        outputdebug(CExpectUpDownBase.__Class " OnKey didn't get expected key, eat & cancel")
+                        ; outputdebug(CExpectUpDownBase.__Class " OnKey didn't get expected key, eat & cancel")
                         res := new CExpectUpDownBase.Result(1,1)
                         res := this.OnCancel(keydef, upDown, res)
                         this.Reset()

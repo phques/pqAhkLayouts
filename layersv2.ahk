@@ -11,209 +11,14 @@
 #include scancodes.ahk
 #include modifiers.ahk
 #include CComposer.ahk
+#include CLayout.ahk
+#include CLayerDef.ahk
+#include CKeyDef.ahk
 
 global layout := 0
 global expectUpDown := 0
 global modifiersDown := {}
 
-
-class CLayout
-{
-    __New()
-    {
-        this.keydefs := {}  ; CKeydef
-        this.modifiers := new CModifiers
-        this.layerdefs := {} ; CLayerDef
-        this.composer := new CComposer()
-        this.composeKey := 0
-        this.activeLayer := 0
-        
-        ; create the main layer !
-        this.activeLayer := this.CreateLayer('main', 0)
-        
-    }
-
-    ; create a hotkey foreach key scancode of US kbd
-    ; also creates the keydefs w. output = keyname on main layer
-    CreateHotkeysForUsKbd(initializeKeydefs)
-    {
-        for idx, scanCode in usKbdScanCodes
-        {    
-            keysc := 'sc' scanCode
-            createHotKey(keysc)
-            
-            if (initializeKeydefs)
-            {
-                ; create a keydef
-                keydef := new CKeydef(keysc)
-                this.AddKeydef(keydef)
-                
-                ; set output on main = keyname 
-                keydef.SetOutput('main', GetKeyName(keysc))
-            }
-        }
-    }
-    
-    CreateModifiers()
-    {
-        this.CreateModifier('LShift', '+')
-        this.CreateModifier('RShift', '+')
-
-        this.CreateModifier('LCtrl', '^')
-        this.CreateModifier('RCtrl', '^')
-
-        this.CreateModifier('LAlt', '!')
-        this.CreateModifier('RAlt', '!')
-
-    }
-
-    CreateModifier(key, type)
-    {
-        mod := this.modifiers.Create(key, type)
-        keydef := this.GetKeydef(key)
-        keydef.SetModifier(mod)
-    }
-    
-    CreateLayer(name, accessKeyName)
-    {
-    outputdebug('createlayer, nae = ' accessKeyName)
-        if (accessKeyName)
-            keydef := this.GetKeydef(accessKeyName)
-        else
-            keydef := 0
-        layerdef := new CLayerDef(name, keydef)
-        this.layerdefs[name] := layerdef
-        return layerdef
-    }
-    
-    AddKeydef(keydef)
-    {
-        this.keydefs[keydef.keysc] := keydef
-        return keydef
-    }
-    
-    GetKeydef(key)
-    {
-        return layout.keydefs[MakeKeySC(key)]
-    }
-    
-    AddComposePairsList(initialKey, newComposePairs*)
-    {
-        this.composer.AddComposePairs(initialKey, newComposePairs*)
-    }
-    
-    AddComposePairs(initialKey, pairsStr)
-    {
-        this.composer.AddComposePairs(initialKey, pairsStr)
-    }
-    
-    SetComposeKey(key)
-    {
-        this.composeKey := MakeKeySC(key)
-    }
-    
-    IsLayerAccessKey(keydef)
-    {
-        for idx, layerdef in this.layerdefs
-        {
-        outputdebug(idx ' ' layerdef)
-            if (layerdef.IsAccessKey(keydef))
-                return layerdef
-        }
-        return 0
-    }
-    
-    SetActiveLayer(layerdef)
-    {
-        this.activeLayer := layerdef
-    }
-
-}
-
-class CKeydef
-{
-    __New(key)
-    {
-        this.keyName := GetKeyName(key) ; note that this chgd '^' to '6' 
-        this.keysc := MakeKeySC(key)
-        this.output := [] ; indexed by layer
-        this.currOutput := 0    ; output as of current layer, set for access in other classes
-        this.isDeadKey := 0
-        this.isDualMode := 0
-        this.modifier := 0  ; CModifier
-    }
-    
-    GetOutput(layer)
-    {
-        return this.output[layer]
-    }
-    
-    ; save the output for this keydef on layer
-    ; ie the 'mapping'
-    SetOutput(layer, output)
-    {
-        this.output[layer] := output
-    }    
-    
-    SetCurrOutput(layer)
-    {
-        this.currOutput := this.GetOutput(layer)
-    }
-    
-    SetModifier(modifier)
-    {
-        this.modifier := modifier  ; CModifier
-    }
-    
-    SetDeadKey(isDeadKey := 1)
-    {
-        this.isDeadKey := isDeadKey
-    }    
-    
-    SetDualMode(layer, output)
-    {
-        if (!this.modifier)
-        {
-            outputdebug('SetDualMode ' this.char ' is not a modifier')
-            return
-        }
-        
-        this.modifier.SetDualMode()
-        this.isDualMode := 1
-        this.output[layer] := output
-    }
-    
-}
-
-class CLayerDef
-{
-    static layerDefs := []
-    
-    ; accessKeydef2 is used for example for shift : lshift & rshift
-    __New(name, accessKeydef1, accessKeydef2 := 0)
-    {
-        ; idx := CLayerDef.layerDefs.Length() + 1
-        ; this.Index := idx
-        ; CLayerDef.layerDefs[idx] := this
-        CLayerDef.layerDefs[name] := this
-        this.Name := name
-        this.accessKeydef1 := accessKeydef1
-        this.accessKeydef2 := accessKeydef2
-    }
-    
-    IsAccessKey(keydef)
-    {
-        ; outputdebug(this.accessKeydef1.keysc ' ' keydef.keysc)
-        if (this.accessKeydef1 && this.accessKeydef1.keysc = keydef.keysc)
-            return 1
-
-        if (this.accessKeydef2 && this.accessKeydef2.keysc = keydef.keysc)
-            return 1
-            
-        return 0
-    }
-    
-}
 
 
 
@@ -254,7 +59,7 @@ onKeyEvt(scancode, upDown)
                 doSend(ret.outputOnComplete)
             }
             
-            outputdebug('reset expectUpDown')
+            ; outputdebug('reset expectUpDown')
             expectUpDown.Reset()
             expectUpDown := 0
         }
@@ -280,18 +85,30 @@ onKeyEvt(scancode, upDown)
     if (keydef.modifier)
     {
         ; ##TODO keep track of pressed modifers
-        
-        ; is this key a modifier that accesses a layer?
-        layerdef := layout.IsLayerAccessKey(keydef)
-        if (layerdef)
+
+        if (upDown == 'd')
         {
-            ; set new active layer
-            this.SetActiveLayer(layerdef)
+            ; is this key a modifier that accesses a layer?
+            layerdef := layout.IsLayerAccessKey(keydef)
+            if (layerdef && !layout.IsActiveLayer(layerdef))
+            {
+                ; set new active layer
+                layout.SetActiveLayer(layerdef)
+                
+                ; save current output according to current layer in keydef
+                layerName := layerdef.name
+                keydef.SetCurrOutput(layerName)
+            }
+        }
+        else ; up modifier, changing out of layer
+        {
+            ; re-select main layer
+            layerdef := layout.GetLayer('main')
+            layout.SetActiveLayer(layerdef)
             
             ; save current output according to current layer in keydef
             layerName := layerdef.name
             keydef.SetCurrOutput(layerName)
-
         }
     }
     
