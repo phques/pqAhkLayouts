@@ -105,8 +105,9 @@ onKeyEvt(scancode, upDown)
 
                 ; this modifier  is being used as layer access, 
                 ; dont consider it 'down'
+                ;## actually, we send it ! so DO consider it down
             }
-            else
+            ; else
             {
                 if (!modifiersDown[mod.KeySC])
                 {
@@ -132,8 +133,9 @@ onKeyEvt(scancode, upDown)
                 
                 ; we did not mark this modifier sa down when used as layer access,
                 ; so dont try to remove it fro our mods down data
+                ;## actually, we send it ! so DO consider it down
             }
-            else
+            ; else
             {
                 if (modifiersDown[mod.KeySC])
                 {
@@ -184,9 +186,11 @@ doSend(output, upDown)
         modsToRelease .= '+'
         
     if (upDown == 'd')
-        Send '{blind' modsToRelease '}{' output ' Down}'
+        toSend := '{blind' modsToRelease '}{' output ' Down}'
     else
-        Send '{blind' modsToRelease '}{' output ' Up}'
+        toSend := '{blind' modsToRelease '}{' output ' Up}'
+    OutputDebug('dosend ' toSend)
+    Send toSend
 }
 
 
@@ -255,32 +259,36 @@ InitModifiersDown()
 
 ;;-- test
 
+; 'shift' is a special case of layer access, it can be accessed by both l/rshift
+shiftLayer := 'main.shifted'
+layout.CreateLayer(shiftLayer, 'shift')
+
+; test dual mode modifier
+k := layout.GetKeydef("LShift")
+; k.SetDualMode('main', 'j')
+
+; dead keys / compose
 k := layout.GetKeydef("``")
 k.SetDeadKey()
 
 k := layout.GetKeydef("^")  ; actually 6
-k.SetDeadKey()
-
-; test kindof dual mode modifier
-k := layout.GetKeydef("LShift")
-k.SetDualMode('main', 'j')
+; k.SetDeadKey()
 
 layout.SetComposeKey('.')
 
 ; layout.AddComposePairsList('``', ['a', 'à'], ['e', 'è'])
 ; layout.AddComposePairsList('^', ['a', 'â'], ['e', 'ê'])
-layout.AddComposePairs("``", "aà eè")
+layout.AddComposePairs("``", "aà eè AÀ")
 layout.AddComposePairs("^", "aâ eê iî")
 
-; this is a special case, it can be accessed by both l/rshift
-shftLayer :='main.shifted'
-layout.CreateLayer(shftLayer, 'shift')
+k := layout.GetKeydef("^") ; 6 !
+k.SetOutput(shiftLayer, '^') 
 
 k := layout.GetKeydef("a")
-k.SetOutput(shftLayer, '+')
+k.SetOutput(shiftLayer, '=') ; note this is an unshifted char
 
 k := layout.GetKeydef("e")
-k.SetOutput(shftLayer, 'E')
+k.SetOutput(shiftLayer, 'E')
 
 return
 
