@@ -29,23 +29,27 @@ class CComposer extends CExpectUpDownBase
     ; '`', [['a', 'à'], ['e', 'è']..]
     AddComposePairsList(initialKey, newComposePairs*)
     {
-        pairs := this.composePairs[initialKey]
+        initKeyOrd := Ord(initialKey)
+        pairs := this.composePairs[initKeyOrd]
         if (!pairs)
-            this.composePairs[initialKey] := pairs := {} 
+            this.composePairs[initKeyOrd] := pairs := {} 
 
         for idx, pair in newComposePairs
         {
             ; pairs['a'] := 'à'
-            pairs[pair[1]] := pair[2]
+            ; indexing is NOT case sensitive, so a['b'] is same as a['B']
+            from := Ord(pair[1])
+            pairs[from] := pair[2]
         }
     }
     
     ; AddComposePairs('^', 'aâ eê iî')
     AddComposePairs(initialKey, pairsStr)
     {
-        pairs := this.composePairs[initialKey]
+        initKeyOrd := Ord(initialKey)
+        pairs := this.composePairs[initKeyOrd]
         if (!pairs)
-            this.composePairs[initialKey] := pairs := {} 
+            this.composePairs[initKeyOrd] := pairs := {} 
 
         Loop Parse pairsStr, ' '
         {
@@ -53,6 +57,8 @@ class CComposer extends CExpectUpDownBase
             to   := SubStr(A_LoopField,2,1)
             
             ; pairs['a'] := 'à'
+            ; indexing is NOT case sensitive, so a['b'] is same as a['B']
+            from := Ord(from)
             pairs[from] := to
         }
     }
@@ -61,8 +67,8 @@ class CComposer extends CExpectUpDownBase
 
     GetComposedResult(char1, char2)
     {
-        if (this.composePairs[char1])
-            return this.composePairs[char1][char2]
+        if (this.composePairs[Ord(char1)])
+            return this.composePairs[Ord(char1)][Ord(char2)]
         else
             return 0
     }
@@ -74,7 +80,7 @@ class CComposer extends CExpectUpDownBase
          if (this.completedKeys.Length() == 2) 
          {
             key1 := this.completedKeys[2]
-            if (!this.composePairs[key1.currOutput])
+            if (!this.composePairs[Ord(key1.currOutput)])
             {
                 ; not a valid compose key pair 1st key
                 outputdebug(key1.currOutput ' not a valid compose key pair 1st key')
@@ -103,8 +109,10 @@ class CComposer extends CExpectUpDownBase
         else
         {
             ; not a valid compose keypair
+            OutputDebug('ccomposer, not a valid keypair ' key1.keyName ' ' key2.keyName)
+            OutputDebug(key1.currOutput ' ' key2.currOutput)
             result.cancel := 1
-            result := this.OnCancel(keydef, result)
+            result := this.OnCancel(keydef, 'u', result)
         }
 
         return result
