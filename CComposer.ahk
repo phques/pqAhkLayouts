@@ -1,11 +1,14 @@
 ﻿; pqAhkLayouts project
 ; Copyright 2018 Philippe Quesnel
 ; Licensed under the Academic Free License version 3.0
-#include CExpectUpDownBase.ahk
+
+#include waitResult.ahk
+
+; todo, we don't use CExpectUpDownBase anymore
 
 ; processing of compose + key1 + key2 => newout
 ; and deakey + key2 => newout
-class CComposer extends CExpectUpDownBase
+class CComposer ; extends CExpectUpDownBase
 {
     composePairs := {}
 

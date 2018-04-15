@@ -10,15 +10,16 @@
 #include util.ahk
 #include scancodes.ahk
 #include modifiers.ahk
+#include CDualModer.ahk
 #include CComposer.ahk
 #include CLayout.ahk
 #include CLayerDef.ahk
 #include CKeyDef.ahk
 
 global layout := 0
-global expectUpDown := 0
+global expectUpDown := 0 ; phasing out ..
 global modifiersDown := {}
-
+global dualModer := 0
 
 
 
@@ -48,12 +49,13 @@ onKeyEvt(scancode, upDown)
     layerName := layout.activeLayer.name
     keydef.SetCurrOutput(layerName)
     
-    ; [-- processing for compose / deadkeys / dualmode
+    
+    ;[--- processing for compose / deadkeys / dualmode ...
     
     eatKey := 0
-    if (expectUpDown)
+    if (dualModer)
     {
-        ret := expectUpDown.OnKey(keydef, upDown)
+        ret := dualModer.OnKeyEvt(keydef, upDown)
         if (ret.cancel || ret.completed)
         {
             if (ret.completed && ret.outputOnComplete)
@@ -62,19 +64,15 @@ onKeyEvt(scancode, upDown)
                 doSend(ret.outputOnComplete, 'u')
             }
             
-            ; outputdebug('reset expectUpDown')
-            expectUpDown.Reset()
-            expectUpDown := 0
+            outputdebug('remove dmoder')
+            dualModer := 0
         }
         
         eatKey := ret.eatKey
     }
 
-    ; recheck for expectUpDown, can be reset above and we might need to check for another 'waitFor' !
-    ; eg: deadkey '^' (shift-6), lshift=dualMode : 
-    ;  lshift dn -> start waitFor dualmode on lshift
-    ;  '6' dn  -> cancel lshift waitFor dualmode AND exit... need to check for dead key
-    if (!expectUpDown)
+    ; recheck for dualModer, can be reset above and we might need to check for another 'waitFor' !
+    if (!dualModer)
     {
         eatKey := checkForNewExpectUpDown(keydef, upDown)
     }
@@ -153,10 +151,11 @@ onKeyEvt(scancode, upDown)
    
 ; temp .. todo (we will handle modifiers ourselves)
     output := scancode ; debug, default to original key
-    
+    isModifier := 0
     if (keydef.modifier)
     {
         output := keydef.modifier.KeySC
+        isModifier := 1
     }
     else
     {
@@ -165,30 +164,35 @@ onKeyEvt(scancode, upDown)
     }
     
     ; send the output
-    doSend(output, upDown)
+    doSend(output, upDown, isModifier)
 }
 
 
-; '
-doSend(output, upDown)
+; 
+doSend(output, upDown, isModifier := 0)
 {
     modsToRelease := ''
-    if (modifiersDown['!'])
-        modsToRelease .= '!'
-        
-    if (modifiersDown['#'])
-        modsToRelease .= '#'
-        
-    if (modifiersDown['^'])
-        modsToRelease .= '^'
-        
-    if (modifiersDown['+'])
-        modsToRelease .= '+'
-        
+    
+    if (!isModifier)
+    {
+        if (modifiersDown['!'])
+            modsToRelease .= '!'
+            
+        if (modifiersDown['#'])
+            modsToRelease .= '#'
+            
+        if (modifiersDown['^'])
+            modsToRelease .= '^'
+            
+        if (modifiersDown['+'])
+            modsToRelease .= '+'
+    }
+    
     if (upDown == 'd')
         toSend := '{blind' modsToRelease '}{' output ' Down}'
     else
         toSend := '{blind' modsToRelease '}{' output ' Up}'
+        
     OutputDebug('dosend ' toSend)
     Send toSend
 }
@@ -216,7 +220,8 @@ checkForNewExpectUpDown(keydef, upDown)
         if (keydef.isDualMode)
         {
             outputdebug('onKeyEvt create CDualModer ' keydef.keysc)
-            expectUpDown := new CDualModer(keydef.keysc, keydef.output[layout.activeLayer.name])
+            dualModer := new CDualModer(keydef.keysc, keydef.currOutput)
+            ; dualModer := new CDualModer(keydef.keysc, keydef.output[layout.activeLayer.name])
             ; DONT eat modifier down
             return 0
         }
@@ -260,18 +265,22 @@ InitModifiersDown()
 ;;-- test
 
 ; 'shift' is a special case of layer access, it can be accessed by both l/rshift
-shiftLayer := 'main.shifted'
-layout.CreateLayer(shiftLayer, 'shift')
+shiftLayerNm := 'main.shifted'
+layout.CreateLayer(shiftLayerNm, 'shift')
+
+altGrLayerNm := 'altGr'
+layout.CreateLayer(altGrLayerNm, 'RAlt')
 
 ; test dual mode modifier
 k := layout.GetKeydef("LShift")
-; k.SetDualMode('main', 'j')
+k.SetDualMode('main', 'j')
+k.SetDualMode(shiftLayerNm, 'J')
 
 ; dead keys / compose
-k := layout.GetKeydef("``")
-k.SetDeadKey()
+; k := layout.GetKeydef("``")
+; k.SetDeadKey()
 
-k := layout.GetKeydef("^")  ; actually 6
+; k := layout.GetKeydef("^")  ; actually 6
 ; k.SetDeadKey()
 
 layout.SetComposeKey('.')
@@ -282,13 +291,14 @@ layout.AddComposePairs("``", "aà eè AÀ")
 layout.AddComposePairs("^", "aâ eê iî")
 
 k := layout.GetKeydef("^") ; 6 !
-k.SetOutput(shiftLayer, '^') 
+k.SetOutput(shiftLayerNm, '^') 
 
 k := layout.GetKeydef("a")
-k.SetOutput(shiftLayer, '=') ; note this is an unshifted char
+k.SetOutput(shiftLayerNm, '=') ; note this is an unshifted char
+k.SetOutput(altGrLayerNm, '/')
 
 k := layout.GetKeydef("e")
-k.SetOutput(shiftLayer, 'E')
+k.SetOutput(shiftLayerNm, 'E')
 
 return
 

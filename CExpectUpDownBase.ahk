@@ -3,6 +3,9 @@
 ; Licensed under the Academic Free License version 3.0
 
 
+; PQ 2018-04 this was supposed to handle compose / dead keys / dualmode modifiers
+; but it turns out not be the correct solution for Compose so it will be dropped
+
 ; to handle deadkeys, compose, dual mode modifier
 ; we must get uninterrupted dn/up of same key (1 or multiple *)
 class CExpectUpDownBase
