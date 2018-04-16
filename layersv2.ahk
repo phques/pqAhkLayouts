@@ -18,7 +18,7 @@
 
 global layout := 0
 global expectUpDown := 0 ; phasing out ..
-global modifiersDown := {}
+global downAccessMods := {} ; layer access modifiers currently down
 global dualModer := 0
 
 
@@ -77,8 +77,11 @@ onKeyEvt(scancode, upDown)
         eatKey := checkForNewExpectUpDown(keydef, upDown)
     }
     
-    if (eatKey)
-        return
+    ; go through layer access processing before eating
+    ; this is touchy / tricky
+    
+    ; if (eatKey)
+        ; return
         
     ; ... processing for compose / deadkeys / dualmode ---]
     
@@ -92,26 +95,29 @@ onKeyEvt(scancode, upDown)
         {
             ; is this key a modifier that accesses a layer?
             layerdef := layout.IsLayerAccessKey(keydef)
-            if (layerdef && !layout.IsActiveLayer(layerdef))
+            if (layerdef)
             {
-                ; set new active layer
-                layout.SetActiveLayer(layerdef)
-                
-                ; save current output according to current layer in keydef
-                layerName := layerdef.name
-                keydef.SetCurrOutput(layerName)
-
-                ; this modifier  is being used as layer access, 
-                ; dont consider it 'down'
-                ;## actually, we send it ! so DO consider it down
-            }
-            ; else
-            {
-                if (!modifiersDown[mod.KeySC])
+                if (!layout.IsActiveLayer(layerdef))
                 {
-                    modifiersDown[mod.KeySC] := 1
-                    modifiersDown[mod.Type]++
+                    ; set new active layer
+                    outputdebug('changing to layer ' layerdef.name)
+                    layout.SetActiveLayer(layerdef)
+                    
+                    ; save current output according to current layer in keydef
+                    layerName := layerdef.name
+                    keydef.SetCurrOutput(layerName)
+
+                    ; this modifier  is being used as layer access, 
+                    ; dont consider it 'down'
+                    if (!downAccessMods[mod.KeySC])
+                    {
+                        downAccessMods[mod.KeySC] := 1
+                        downAccessMods[mod.Type]++
+                    }
                 }
+                
+                ; dont send the modifier
+                eatKey := 1
             }
         }
         else 
@@ -119,38 +125,43 @@ onKeyEvt(scancode, upDown)
             ; up modifier, changing out of layer?
             ; is this key a modifier that accesses a layer?
             layerdef := layout.IsLayerAccessKey(keydef)
-            if (layerdef && layout.IsActiveLayer(layerdef))
+            if (layerdef)
             {
-                ; re-select main layer
-                layerdef := layout.GetLayer('main')
-                layout.SetActiveLayer(layerdef)
-                
-                ; save current output according to current layer in keydef
-                layerName := layerdef.name
-                keydef.SetCurrOutput(layerName)
-                
-                ; we did not mark this modifier sa down when used as layer access,
-                ; so dont try to remove it fro our mods down data
-                ;## actually, we send it ! so DO consider it down
-            }
-            ; else
-            {
-                if (modifiersDown[mod.KeySC])
+                if (layout.IsActiveLayer(layerdef))
                 {
-                    ; track that modofier was released
-                    modifiersDown[mod.KeySC] := 0
-                    modifiersDown[mod.Type]--
+                    ; re-select main layer
+                    outputdebug('changing to layer main')
+                    layerdef := layout.GetLayer(CLayout.MainNm)
+                    layout.SetActiveLayer(layerdef)
+                    
+                    ; save current output according to current layer in keydef
+                    layerName := layerdef.name
+                    keydef.SetCurrOutput(layerName)
+                    
+                    ; this layer access modifier is not down anymore
+                    if (downAccessMods[mod.KeySC])
+                    {
+                        ; track that modofier was released
+                        downAccessMods[mod.KeySC] := 0
+                        downAccessMods[mod.Type]--
+                    }
                 }
+                
+                ; dont send the modifier
+                eatKey := 1
             }
         }
     }
     
-    ; 2nd check for chord
-    ;   on down, if part of possible chord
-    
    
-; temp .. todo (we will handle modifiers ourselves)
-    output := scancode ; debug, default to original key
+    ; output
+    if (eatKey)
+        return
+    
+    
+    output := ''
+    ; output := scancode ; debug, default to original key
+    
     isModifier := 0
     if (keydef.modifier)
     {
@@ -171,20 +182,23 @@ onKeyEvt(scancode, upDown)
 ; 
 doSend(output, upDown, isModifier := 0)
 {
+    if (output == '')
+        return
+    
     modsToRelease := ''
     
-    if (!isModifier)
+    if (!isModifier && 0)
     {
-        if (modifiersDown['!'])
+        if (downAccessMods['!'])
             modsToRelease .= '!'
             
-        if (modifiersDown['#'])
+        if (downAccessMods['#'])
             modsToRelease .= '#'
             
-        if (modifiersDown['^'])
+        if (downAccessMods['^'])
             modsToRelease .= '^'
             
-        if (modifiersDown['+'])
+        if (downAccessMods['+'])
             modsToRelease .= '+'
     }
     
@@ -199,6 +213,7 @@ doSend(output, upDown, isModifier := 0)
 
 
 ; starts a new 'expectUpDown' if we got a compose/deadkey/dualMode key
+; returns 1 to 'eat' the key (ie dont send it)
 checkForNewExpectUpDown(keydef, upDown)
 {
     if (upDown == 'd')
@@ -221,9 +236,7 @@ checkForNewExpectUpDown(keydef, upDown)
         {
             outputdebug('onKeyEvt create CDualModer ' keydef.keysc)
             dualModer := new CDualModer(keydef.keysc, keydef.currOutput)
-            ; dualModer := new CDualModer(keydef.keysc, keydef.output[layout.activeLayer.name])
-            ; DONT eat modifier down
-            return 0
+            return 1
         }
     }
     
@@ -246,35 +259,58 @@ createHotkey(keyScancode)
     HotKey '*' keyScancode ' up', fnUp
 }
 
-InitModifiersDown()
+InitdownAccessMods()
 {
-    modifiersDown['!'] := 0
-    modifiersDown['^'] := 0
-    modifiersDown['+'] := 0
-    modifiersDown['#'] := 0
+    downAccessMods['!'] := 0
+    downAccessMods['^'] := 0
+    downAccessMods['+'] := 0
+    downAccessMods['#'] := 0
 }
 
 ;---------------------
 
-; this is how to setup / startup the thing ;-)
-layout := new CLayout()
-layout.CreateHotkeysForUsKbd(1)
-layout.CreateModifiers()
-InitModifiersDown()
+InitdownAccessMods()
+
 
 ;;-- test
 
-; 'shift' is a special case of layer access, it can be accessed by both l/rshift
-shiftLayerNm := 'main.shifted'
-layout.CreateLayer(shiftLayerNm, 'shift')
+; this is how to setup / startup the thing ;-)
+layout := new CLayout()
+
+; debug
+assignKeydefOut()
+{
+    for idx, scanCode in usKbdScanCodes
+    {    
+        ; get keydef
+        keysc := 'sc' scanCode
+        keydef := layout.GetKeydef(keysc)
+        
+        ; set output on main = keyname 
+        keydef.SetOutput(CLayout.MainNm, GetKeyName(keysc))
+    }
+}
+
+; assignKeydefOut()
 
 altGrLayerNm := 'altGr'
 layout.CreateLayer(altGrLayerNm, 'RAlt')
 
+k := layout.GetKeydef("6") 
+k.SetOutput(CLayout.ShiftNm, '^') 
+
+k := layout.GetKeydef("a")
+k.SetOutput(CLayout.ShiftNm, '=') ; note this is an unshifted char
+k.SetOutput(altGrLayerNm, '/')
+
+k := layout.GetKeydef("e")
+k.SetOutput(CLayout.ShiftNm, 'E')
+k.SetOutput(altGrLayerNm, 'u')
+
 ; test dual mode modifier
 k := layout.GetKeydef("LShift")
-k.SetDualMode('main', 'j')
-k.SetDualMode(shiftLayerNm, 'J')
+k.SetDualMode(CLayout.MainNm, 'j')
+k.SetDualMode(CLayout.ShiftNm, 'J')
 
 ; dead keys / compose
 ; k := layout.GetKeydef("``")
@@ -290,15 +326,6 @@ layout.SetComposeKey('.')
 layout.AddComposePairs("``", "aà eè AÀ")
 layout.AddComposePairs("^", "aâ eê iî")
 
-k := layout.GetKeydef("^") ; 6 !
-k.SetOutput(shiftLayerNm, '^') 
-
-k := layout.GetKeydef("a")
-k.SetOutput(shiftLayerNm, '=') ; note this is an unshifted char
-k.SetOutput(altGrLayerNm, '/')
-
-k := layout.GetKeydef("e")
-k.SetOutput(shiftLayerNm, 'E')
 
 return
 

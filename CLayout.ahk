@@ -2,6 +2,10 @@
 
 class CLayout
 {
+    static MainNm := 'main'
+    static ShiftNm := 'main.shifted'
+
+    
     __New()
     {
         this.keydefs := {}  ; CKeydef
@@ -11,29 +15,32 @@ class CLayout
         this.composeKey := 0
         this.activeLayer := 0
         
-        ; create the main layer !
-        this.activeLayer := this.CreateLayer('main', 0)
+        ; keydefs need to exist before we create layerdefs !
+        this.CreateHotkeysForUsKbd()
+        this.CreateModifiers()
         
+        ; create the main layers
+        this.activeLayer := this.CreateLayer(CLayout.MainNm, 0)
+        
+        ; 'shift' is a special case of layer access, it can be accessed by both l/rshift
+        this.CreateLayer(CLayout.ShiftNm, 'shift')
+        
+
     }
 
     ; create a hotkey foreach key scancode of US kbd
-    ; also creates the keydefs w. output = keyname on main layer
-    CreateHotkeysForUsKbd(initializeKeydefs)
+    ; create keydef for each, no output
+    CreateHotkeysForUsKbd()
     {
         for idx, scanCode in usKbdScanCodes
         {    
+            ; create hotkey
             keysc := 'sc' scanCode
-            createHotKey(keysc)
+            CreateHotKey(keysc)
             
-            if (initializeKeydefs)
-            {
-                ; create a keydef
-                keydef := new CKeydef(keysc)
-                this.AddKeydef(keydef)
-                
-                ; set output on main = keyname 
-                keydef.SetOutput('main', GetKeyName(keysc))
-            }
+            ; create keydef
+            keydef := new CKeydef(keysc)
+            this.AddKeydef(keydef)
         }
     }
     
@@ -74,11 +81,13 @@ class CLayout
         return keydef
     }
     
+    ; works with both 'sc999' or 'a' '5'
     GetKeydef(key)
     {
-        if (!layout || !layout.keydefs)
+        if (!this.keydefs)
             return 0
-        return layout.keydefs[MakeKeySC(key)]
+            
+        return this.keydefs[MakeKeySC(key)]
     }
     
     AddComposePairsList(initialKey, newComposePairs*)
