@@ -131,7 +131,7 @@ onKeyEvt(scancode, upDown)
                 {
                     ; re-select main layer
                     outputdebug('changing to layer main')
-                    layerdef := layout.GetLayer(CLayout.MainNm)
+                    layerdef := layout.GetLayer(CLayerDef.MainNm)
                     layout.SetActiveLayer(layerdef)
                     
                     ; save current output according to current layer in keydef
@@ -269,6 +269,7 @@ InitdownAccessMods()
 
 ;---------------------
 
+; Auto init these
 InitdownAccessMods()
 
 
@@ -287,44 +288,49 @@ assignKeydefOut()
         keydef := layout.GetKeydef(keysc)
         
         ; set output on main = keyname 
-        keydef.SetOutput(CLayout.MainNm, GetKeyName(keysc))
+        keydef.SetOutput(CLayerDef.MainNm, GetKeyName(keysc))
     }
 }
 
+test()
+{
+    altGrLayerNm := 'altGr'
+    layout.CreateLayer(altGrLayerNm, 'RAlt')
+
+    k := layout.GetKeydef("6") 
+    k.SetOutputSh(CLayerDef.MainNm, '^') 
+
+    k := layout.GetKeydef("a")
+    k.SetOutputSh(CLayerDef.MainNm, '=') ; note this is an unshifted char
+    k.SetOutput(altGrLayerNm, '/')
+
+    k := layout.GetKeydef("e")
+    k.SetOutputSh(CLayerDef.MainNm, 'E')
+    k.SetOutput(altGrLayerNm, 'u')
+
+    ; test dual mode modifier
+    k := layout.GetKeydef("LShift")
+    k.SetDualMode(CLayerDef.MainNm, 'j')
+    k.SetDualModeSh(CLayerDef.MainNm, 'J')
+
+    ; dead keys / compose
+    ; k := layout.GetKeydef("``")
+    ; k.SetDeadKey()
+
+    ; k := layout.GetKeydef("^")  ; actually 6
+    ; k.SetDeadKey()
+
+    layout.SetComposeKey('.')
+
+    ; layout.AddComposePairsList('``', ['a', 'à'], ['e', 'è'])
+    ; layout.AddComposePairsList('^', ['a', 'â'], ['e', 'ê'])
+    layout.AddComposePairs("``", "aà eè AÀ")
+    layout.AddComposePairs("^", "aâ eê iî")
+}
+
+
 ; assignKeydefOut()
-
-altGrLayerNm := 'altGr'
-layout.CreateLayer(altGrLayerNm, 'RAlt')
-
-k := layout.GetKeydef("6") 
-k.SetOutput(CLayout.ShiftNm, '^') 
-
-k := layout.GetKeydef("a")
-k.SetOutput(CLayout.ShiftNm, '=') ; note this is an unshifted char
-k.SetOutput(altGrLayerNm, '/')
-
-k := layout.GetKeydef("e")
-k.SetOutput(CLayout.ShiftNm, 'E')
-k.SetOutput(altGrLayerNm, 'u')
-
-; test dual mode modifier
-k := layout.GetKeydef("LShift")
-k.SetDualMode(CLayout.MainNm, 'j')
-k.SetDualMode(CLayout.ShiftNm, 'J')
-
-; dead keys / compose
-; k := layout.GetKeydef("``")
-; k.SetDeadKey()
-
-; k := layout.GetKeydef("^")  ; actually 6
-; k.SetDeadKey()
-
-layout.SetComposeKey('.')
-
-; layout.AddComposePairsList('``', ['a', 'à'], ['e', 'è'])
-; layout.AddComposePairsList('^', ['a', 'â'], ['e', 'ê'])
-layout.AddComposePairs("``", "aà eè AÀ")
-layout.AddComposePairs("^", "aâ eê iî")
+test()
 
 
 return

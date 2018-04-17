@@ -2,15 +2,12 @@
 
 class CLayout
 {
-    static MainNm := 'main'
-    static ShiftNm := 'main.shifted'
-
     
     __New()
     {
         this.keydefs := {}  ; CKeydef
-        this.modifiers := new CModifiers
         this.layerdefs := {} ; CLayerDef
+        this.modifiers := new CModifiers
         this.composer := new CComposer()
         this.composeKey := 0
         this.activeLayer := 0
@@ -20,10 +17,10 @@ class CLayout
         this.CreateModifiers()
         
         ; create the main layers
-        this.activeLayer := this.CreateLayer(CLayout.MainNm, 0)
+        this.activeLayer := this.CreateLayer(CLayerDef.MainNm, 0)
         
         ; 'shift' is a special case of layer access, it can be accessed by both l/rshift
-        this.CreateLayer(CLayout.ShiftNm, 'shift')
+        this.CreateLayer(CLayerDef.MainNm . CLayerDef.ShiftNm, 'shift')
         
 
     }

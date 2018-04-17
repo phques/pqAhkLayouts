@@ -23,7 +23,13 @@ class CKeydef
     {
         this.output[layer] := output
     }    
-    
+
+    ; calls SetOutput for shifted version layer
+    SetOutputSh(layer, output)
+    {
+        this.SetOutput(layer . CLayerDef.ShiftSuffix, output )
+    }
+
     SetCurrOutput(layer)
     {
         this.currOutput := this.GetOutput(layer)
@@ -38,6 +44,11 @@ class CKeydef
     {
         this.isDeadKey := isDeadKey
     }    
+    
+    SetDualModeSh(layer, output)
+    {
+        this.SetDualMode(layer . CLayerDef.ShiftSuffix, output)
+    }
     
     SetDualMode(layer, output)
     {

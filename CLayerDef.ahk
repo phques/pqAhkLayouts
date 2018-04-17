@@ -2,6 +2,9 @@
 class CLayerDef
 {
     static nextIndex := 1
+    static MainNm := 'main'
+    static ShiftSuffix := '.shifted'
+
     
     ; special case for 'Shift' : will match either lshift or rshift
     __New(name, accessKeyName, accessKeydef)
