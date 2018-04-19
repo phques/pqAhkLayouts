@@ -133,5 +133,89 @@ class CLayout
         this.activeLayer := layerdef
     }
 
+    ; add new key mappings for a layer
+    ; when 'fromKey' is hit on this layer, will output 'toKey'
+    ; _from/_to are space separated
+    ; noKeyChar indicates an empty spot in 'to'
+    AddMappings(layerName, shiftedLayer, _from, _to, noKeyChar := '')
+    {
+        ; get layer def
+        layerDef := this.GetLayer(layerName)
+        if (!layerDef) {
+            MsgBox "AddMappings, layer " layerName " does not exist"
+            ExitApp
+        }
+
+        ; trim pre/post spaces and compress multi spaces into one
+        from := Trim(_from)
+        from := RegExReplace(from, "\s{2,}", " ")
+
+        to := Trim(_to)
+        to := RegExReplace(to, "\s{2,}", " ")
+
+        ; split from / to into into array (separ = space)
+        froms := StrSplit(from, A_Space)
+        tos := StrSplit(to, A_Space)
+
+        if (froms.Length() != tos.Length()) 
+        {
+            msg := Format("AddMappings, From/to not same length {} {}!`n{} `n{}"
+                            , froms.Length(), tos.Length()
+                            ; , _from, _to, )
+                            , SubStr(_from, 1, 16), SubStr(_to, 1, 16))
+            MsgBox(msg)
+            ExitApp
+        }
+
+        ; loop on froms / tos, create mappings in layer
+        Loop froms.Length()
+        {
+            f := froms[A_Index]
+            t := tos[A_Index]
+            
+            ; nothing to see here, move along
+            if (t == noKeyChar)
+                continue
+                
+            if (f == 'SP')
+                f := 'Space'
+            
+            if (t == 'SP')
+                t := 'Space'
+                
+           
+            ; leading @ indicates dual mode key (in 'from')
+            ; (single click generates 'to' key, held down is modifier)
+            isDualModeKey := 0
+            if (SubStr(f,1,1) == '@') {
+                f := SubStr(f,2) ; strip @
+                isDualModeKey := 1
+            }
+        
+            ; flag indicating if the char to output is shifted (ie ? is Shift-/)
+            isShifted := 0
+            shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            shiftedChars .='~!@#$`%^&*()_+{}|:"<>?'
+            if (InStr(shiftedChars, splitTo.key))
+                isShifted := 1
+                
+            keydef := GetKeydef(f)
+            if (!keydef)
+            {
+                OutputDebug('AddMappings cannot find key ' f)
+                continue
+            }
+            
+            actualLayerName := layeName
+            if (shiftedLayer)
+                actualLayerName .= CLayerDef.ShiftSuffix
+                
+            keydef.isDualMode := isDualModeKey
+            keydef.isShifted := isShifted
+            keydef.output[actualLayerName] := t
+            
+        }
+    }
+    
 }
 
