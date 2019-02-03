@@ -20,7 +20,7 @@ class CComposer ; extends CExpectUpDownBase
     {
         ; wait for compose key up  + 2 keys dn/up
         ; (dead key is its own compose key, so still 3 keys)
-        this._init(waitingFor, 'u', 3)
+        this.init(waitingFor, 'u', 3)
 
         ; dead key is its own 1st compose char
         ; rest of code can just work in 'compose mode' from here on 
@@ -28,6 +28,14 @@ class CComposer ; extends CExpectUpDownBase
             this.AddCompleteKey(waitingFor)
     }
     
+    init(waitingFor, upDown, nbrRequired, dualModeOutput := 0)
+    {
+        this.waitingFor := waitingFor
+        this.waitingUpDown := upDown
+        this.nbrRequired := nbrRequired
+        this.completedKeys := []
+        this.dualModeOutput := dualModeOutput
+    }
 
     ; '`', [['a', 'à'], ['e', 'è']..]
     AddComposePairsList(initialKey, newComposePairs*)

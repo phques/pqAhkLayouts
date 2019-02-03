@@ -13,6 +13,7 @@ class CLayout
         this.activeLayer := 0
         
         ; keydefs need to exist before we create layerdefs !
+        this.CreateKeydefsForUsKbd()
         this.CreateHotkeysForUsKbd()
         this.CreateModifiers()
         
@@ -20,13 +21,24 @@ class CLayout
         this.activeLayer := this.CreateLayer(CLayerDef.MainNm, 0)
         
         ; 'shift' is a special case of layer access, it can be accessed by both l/rshift
-        this.CreateLayer(CLayerDef.MainNm . CLayerDef.ShiftNm, 'shift')
+        this.CreateLayer(CLayerDef.MainNm . CLayerDef.ShiftSuffix, 'shift')
         
 
     }
 
+    ; create keydef for each key scancode of US kbd, no output
+    CreateKeydefsForUsKbd()
+    {
+        for idx, scanCode in usKbdScanCodes
+        {    
+            ; create keydef
+            keysc := 'sc' scanCode
+            keydef := new CKeydef(keysc)
+            this.AddKeydef(keydef)
+        }
+    }
+    
     ; create a hotkey foreach key scancode of US kbd
-    ; create keydef for each, no output
     CreateHotkeysForUsKbd()
     {
         for idx, scanCode in usKbdScanCodes
@@ -34,10 +46,6 @@ class CLayout
             ; create hotkey
             keysc := 'sc' scanCode
             CreateHotKey(keysc)
-            
-            ; create keydef
-            keydef := new CKeydef(keysc)
-            this.AddKeydef(keydef)
         }
     }
     
@@ -137,12 +145,16 @@ class CLayout
     ; when 'fromKey' is hit on this layer, will output 'toKey'
     ; _from/_to are space separated
     ; noKeyChar indicates an empty spot in 'to'
-    AddMappings(layerName, shiftedLayer, _from, _to, noKeyChar := '')
+    AddMappings(layerName, isShiftedLayer, _from, _to, noKeyChar := '')
     {
         ; get layer def
-        layerDef := this.GetLayer(layerName)
+        actualLayerName := layerName
+        if (isShiftedLayer)
+            actualLayerName .= CLayerDef.ShiftSuffix
+
+        layerDef := this.GetLayer(actualLayerName)
         if (!layerDef) {
-            MsgBox "AddMappings, layer " layerName " does not exist"
+            MsgBox "AddMappings, layer " actualLayerName " does not exist"
             ExitApp
         }
 
@@ -196,20 +208,16 @@ class CLayout
             isShifted := 0
             shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             shiftedChars .='~!@#$`%^&*()_+{}|:"<>?'
-            if (InStr(shiftedChars, splitTo.key))
+            if (InStr(shiftedChars, t)) ; splitTo.key
                 isShifted := 1
                 
-            keydef := GetKeydef(f)
+            keydef := this.GetKeydef(f)
             if (!keydef)
             {
                 OutputDebug('AddMappings cannot find key ' f)
                 continue
             }
             
-            actualLayerName := layeName
-            if (shiftedLayer)
-                actualLayerName .= CLayerDef.ShiftSuffix
-                
             keydef.isDualMode := isDualModeKey
             keydef.isShifted := isShifted
             keydef.output[actualLayerName] := t

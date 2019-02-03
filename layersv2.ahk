@@ -42,8 +42,10 @@ onKeyEvt(scancode, upDown)
     keydef := layout.keydefs[scancode]
     if (!keydef)
     {
+        outputdebug("!keydef")
         return
     }
+
     
     ; save current output according to current layer in keydef
     layerName := layout.activeLayer.name
@@ -155,8 +157,10 @@ onKeyEvt(scancode, upDown)
     
    
     ; output
-    if (eatKey)
-        return
+    if (eatKey) {
+        ;outputdebug("eatkey")
+        ;return
+    }
     
     
     output := ''
@@ -172,6 +176,17 @@ onKeyEvt(scancode, upDown)
     {
         if (keydef.currOutput)
             output := keydef.currOutput
+        else {
+            ; send original key (otherwise we have to handle *everything* manually)
+            if (upDown == 'd')
+                toSend := '{blind}{' keydef.keysc ' Down}'
+            else          
+                toSend := '{blind}{' keydef.keysc ' Up}'
+                
+            OutputDebug('pass thru ' toSend)
+            Send toSend
+
+        }
     }
     
     ; send the output
@@ -182,8 +197,11 @@ onKeyEvt(scancode, upDown)
 ; 
 doSend(output, upDown, isModifier := 0)
 {
-    if (output == '')
+
+    if (output == '') {
+outputdebug 'doSend, no output'
         return
+    }
     
     modsToRelease := ''
     
@@ -203,10 +221,13 @@ doSend(output, upDown, isModifier := 0)
     }
     
     if (upDown == 'd')
-        toSend := '{blind' modsToRelease '}{' output ' Down}'
+        toSend := '{' output ' Down}'
     else
-        toSend := '{blind' modsToRelease '}{' output ' Up}'
-        
+        toSend := '{' output ' Up}'        
+    if (upDown == 'd')
+        toSend := '{blind+' modsToRelease '}{' output ' Down}'
+    else
+        toSend := '{blind+' modsToRelease '}{' output ' Up}'
     OutputDebug('dosend ' toSend)
     Send toSend
 }
@@ -247,7 +268,7 @@ checkForNewExpectUpDown(keydef, upDown)
 ;--------
 
 ; keyScancode = 'sc000'
-createHotkey(keyScancode)
+CreateHotkey(keyScancode)
 {
     fnDn := Func("onKeyEvt").Bind(keyScancode, 'd')
     fnUp := Func("onKeyEvt").Bind(keyScancode, 'u')
@@ -330,8 +351,22 @@ test()
 
 
 ; assignKeydefOut()
-test()
+;test()
 
+testAddMapings()
+{
+    layout.AddMappings(CLayerDef.MainNm, 1, '       q w e r t  y u i o p    ',  ' Q H O U X  G C R F Z   ')
+    layout.AddMappings(CLayerDef.MainNm, 1, "       a s d f g  h j k l `; ' ",  ' Y I E A @  D S T N B _ ') 
+    layout.AddMappings(CLayerDef.MainNm, 1, ' @LShift z x c v  n m , . /    ',  ' J ! ? K `` W M L P V   ')
+
+    layout.AddMappings(CLayerDef.MainNm, 0, '       q w e r t  y u i o p    ',  ' q h o u x  g c r f z    ')
+    layout.AddMappings(CLayerDef.MainNm, 0, "       a s d f g  h j k l `; ' ",  ' y i e a .  d s t n b `; ') 
+    layout.AddMappings(CLayerDef.MainNm, 0, ' @LShift z x c v  n m , . /    ',  " j , / k '  w m l p v    ")
+}
+
+;assignKeydefOut()
+;testAddMapings()
+test()
 
 return
 

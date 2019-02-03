@@ -4,14 +4,17 @@ have to follow way system works
  or alt-shift-u
  in this case, come out of shifted layer and send all keys
 
+ need to figure out how to use or not use Send '{blind}' !!
+ and if to send or not the modifier keys.. (well, Shift actually !)
+ -=>
+all layer access mods are 'dont send', except shift
+need to check for unshifted chars being sent while shift is down
+ 
 ?go back to having shift be a sppecial version of a layer?
 vs an independent layer
 
-all layer access mods are 'dont send', except shift
-need to check for unshifted chars being sent while shift is down
+CapsLock does not shift !!
 
-
-- def startup does not have shift layer
 - does not curr support shift-altGr / multi key layer acces
 - deadkey 
    -  #redo, check output *chars* not keys
@@ -34,23 +37,3 @@ need to check for unshifted chars being sent while shift is down
     for layer access
 
 
-- does not curr support shift-altGr / multi key layer acces
-- deadkey 
-   -  #redo/rewrite, check output *chars* not keys
-   - ^ cancels on shift up ??
-   - right now it is per KEY ! ie '6' not '^', 
-     which means we can't have diff dk on main/shift/altgr
-     can't have a compose char on dual mode mod!
-- dual  mode locking layer chg! for extend
-- locking layer chg, ie 
-     numlock => numpad
-     ctrl-space => lock extend layer
- - dual mode modifiers : 
-    - in some layouts, we tend to do rolls w. two shift dualmods
-      which of course does not do what we expect !!
-    - altshft mouse! Shft-up outputs the alternate char out
-    - could have repeating by doing dn/up/dn,dn,dn..
-       can cause probs : rshift dn/up for V
- - chords (ctrl-x, alt-shift)
-    for hotkeys
-    for layer access
