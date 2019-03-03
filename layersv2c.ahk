@@ -18,25 +18,22 @@ class CKeyDef
         this.canRepeat := canRepeat
         this.isDual := isDual
         this.isDown := false
-        this.outTapValue := outTapValue
         this.outValue := outValue
+        this.outTapValue := outTapValue
     }
 
     ; overridables
-    onDn() { 
-    }
-    onUp() { 
-    }
-    onHoldDn() { 
-    }
-    onHoldUp() { 
-    }
-    onTap() { 
-    }
-    onCancelledTap() {
+    onHoldDn() { ; action when 1st pressed down / on repeat
     }
 
-    ; base key mechanics
+    onHoldUp() { ; action on release: cancel onHoldDn action
+    }
+
+    onTap() { ; action on press/release (dualMode keys only)
+    }
+
+    ; ---- base key mechanics ---
+
     OnKeyDn()
     {
         if (this.isDown && !this.canRepeat)
@@ -47,31 +44,28 @@ class CKeyDef
         ; wasDn := this.isDown
         this.isDown := true
 
-        if (this.isDual) {
+        if (this.isDual) 
             CKeyDef.waitingDual := this
-            this.onHoldDn()
-        }
-        else {
-            this.OnDn()
-        }
+
+        this.onHoldDn()
     }
 
     OnKeyUp()
     {
-        this.checkOnDualUp()
-
         if (this.isDual) {
-            waiting := CKeyDef.waitingDual
+            if (CKeyDef.waitingDual == this) {
+                ; cancel hold dn 1st
+                this.onHoldUp() 
 
-            if (waiting && waiting.sc == this.sc)
-                waiting.onTap()  ; nb waiting == this !
-            else
+                this.onTap()
+                CKeyDef.waitingDual := 0
+            }
+            else {
                 this.onHoldUp()
-
-            CKeyDef.waitingDual := 0
+            }
         }
         else {
-            this.onUp()
+            this.onHoldUp()
         }
 
         this.isDown := 0
@@ -84,14 +78,10 @@ class CKeyDef
         waiting := CKeyDef.waitingDual
 
         if (waiting && waiting.sc != this.sc) {
-            outputdebug "checkOnDualDn cancel waiting " waiting.keyNm
-            waiting.onCancelledTap(this)
+            ; waiting dual mode key, tap interrupted by other key,
+            ; goto hold dn / up mode (dn already sent)
             CKeyDef.waitingDual := 0
         }
-    }
-
-    checkOnDualUp()
-    {
     }
 }
 
@@ -100,16 +90,16 @@ class CKeyDef
 ; CKeyDef, idx = keyScancode
 global keydefs := {}
 
-onKeyDn(sc)
+onHotkeyDn(sc)
 {
-    OutputDebug "onKeyDn '" . sc . "' " . GetKeyName(sc)
+    ; OutputDebug "onHotkeyDn '" . sc . "' " . GetKeyName(sc)
     keydef := keydefs[sc]
     keydef.OnKeyDn()
 }
 
-onKeyUp(sc)
+onHotkeyUp(sc)
 {
-    OutputDebug "onKeyUp '" . sc . "' " . GetKeyName(sc)
+    ; OutputDebug "onHotkeyUp '" . sc . "' " . GetKeyName(sc)
     keydef := keydefs[sc]
     keydef.OnKeyUp()
 }
@@ -117,8 +107,8 @@ onKeyUp(sc)
 
 Hotkey2(sc)
 {
-    fnDn := Func("onKeyDn").Bind(sc)
-    fnUp := Func("onKeyUp").Bind(sc)
+    fnDn := Func("onHotkeyDn").Bind(sc)
+    fnUp := Func("onHotkeyUp").Bind(sc)
 
     ; create hotKey for press and release of the key
     ; add '*' to hotkeyname (hotkey will work even when other modifiers are pressed)
@@ -127,111 +117,155 @@ Hotkey2(sc)
     HotKey '*' sc ' up', fnUp
 }
 
-;--------
-
-class CStdKey extends CKeyDef
-{
-    ; overrides
-    onDn() { 
-        Send "{blind}{" . this.outValue . " Down}"
-    }
-    onUp() { 
-        Send "{blind}{" . this.outValue . " Up}"
-    }
-}
-
-;--------
-
-class CDualModeModifier extends CKeyDef
-{
-    ; overrides
-    onHoldDn() { 
-    }
-    onHoldUp() { 
-        Send "{blind}{" . this.outValue . " Up}"
-    }
-    onTap() { 
-        Send "{blind}{" . this.outTapValue . " Down}"
-        Send "{blind}{" . this.outTapValue . " Up}"
-    }
-    onCancelledTap() {
-        Send "{blind}{" . this.outValue . " Down}"
-    }
-}
-
 ;-------
 
-class CDualModeLayerAccess extends CKeyDef
-{
-    ; always isDual, ignored if no outTapValue
-    __New(keyNm, layerIdx, outTapValue)
-    {
-        base.__New(keyNm, false, true, 0, outTapValue)
-        this.layerIdx := layerIdx
-    }
+;; action funcs for keydefs
 
-    ; overrides
-    onHoldDn() { 
-        outputdebug "layer on : " this.layerIdx
-    }
-    onHoldUp() { 
-        outputdebug "layer off : " this.layerIdx
-    }
-    onTap() { 
-        if (this.outTapValue) {
-            Send "{blind}{" . this.outTapValue . " Down}"
-            Send "{blind}{" . this.outTapValue . " Up}"
-        }
-        this.onHoldUp()
+sendOutValueDn(keydef) 
+{ 
+    Send "{blind}{" . keydef.outValue . " Down}"
+}
+
+sendOutValueUp(keydef) 
+{ 
+    Send "{blind}{" . keydef.outValue . " Up}"
+}
+
+sendTap(keydef) 
+{
+    if (keydef.outTapValue) {
+        Send "{blind}{" . keydef.outTapValue . " Down}"
+        Send "{blind}{" . keydef.outTapValue . " Up}"
     }
 }
 
-;-------
+layerAccessDn(keydef) 
+{   ;TODO
+    ; outValue is layer idx
+    outputdebug "layer on : " keydef.outValue
+}
 
-AddStdKeydef(keyNm, canRepeat, outValue)
+layerAccessUp(keydef) 
+{   ;TODO
+    ; outValue is layer idx
+    outputdebug "layer off : " keydef.outValue
+}
+
+;--
+
+AddStdKeydef(keyNm, outValue)
 {
-    k1 := new CStdKey(keyNm, canRepeat, false, outValue, 0)
+    ; k1 := new CStdKey(keyNm, true, false, outValue, 0)
+    k1 := new CKeyDef(keyNm, true, false, outValue, 0)
+    k1.onHoldDn := Func("sendOutValueDn")
+    k1.onHoldUp := Func("sendOutValueUp")
+
     keydefs[k1.sc] := k1
     Hotkey2(k1.sc)
+    return k1
 }
 
 AddDualModifier(keyNm, outValue, outTapValue)
 {
-    k1 := new CDualModeModifier(keyNm, false, true, outValue, outTapValue)
+    ; k1 := new CDualModeModifier(keyNm, false, true, outValue, outTapValue)
+    k1 := new CKeyDef(keyNm, false, true, outValue, outTapValue)
+
+    k1.onHoldDn := Func("sendOutValueDn")
+    k1.onHoldUp := Func("sendOutValueUp")
+    k1.onTap := Func("sendTap")
+
     keydefs[k1.sc] := k1
     Hotkey2(k1.sc)
+    return k1
 }
 
 AddLayerAccess(keyNm, layerIdx, outTapValue)
 {
     ; always isDual, ignored if no outTapValue
-    k1 := new CDualModeLayerAccess(keyNm, layerIdx, outTapValue)
+    ; k1 := new CDualModeLayerAccess(keyNm, layerIdx, outTapValue)
+    ; save layerIdx in outValue
+    k1 := new CKeyDef(keyNm, false, true, layerIdx, outTapValue)
+
+    k1.onHoldDn := Func("layerAccessDn")
+    k1.onHoldUp := Func("layerAccessUp")
+    k1.onTap := Func("sendTap")
+
     keydefs[k1.sc] := k1
     Hotkey2(k1.sc)
+    return k1
 }
 
+;-------
 
 toto()
 {
-    AddStdKeydef('a', true, 'i')
-    AddStdKeydef('LCtrl', true, 'j')
+    AddStdKeydef('a', 'i')
+    AddStdKeydef('LCtrl', 'j')
 
     AddDualModifier('LShift', 'LShift', 'k')
     AddDualModifier('b', 'LShift', 'l')
-    AddDualModifier('v', 't', 'r') ;;hihi makes no sense
+    ; AddDualModifier('v', 't', 'r') ;;hihi makes no sense
 
-    AddLayerAccess("Space", 1, 0)
-    AddLayerAccess("RAlt", 1, 'q')
+    AddLayerAccess("RAlt", 2, 0)
+    AddLayerAccess("n", 3, 'q')
+    AddLayerAccess("Space", 4, "Space")
+
 }
 
-toto()
+Init(layers, mappings)
+{
+    ; create all hotkeys
+
+    ; create layers, 1st is main
+    for idx, val in layers {
+        outputdebug idx . ' ' . val.lid ' ' val.key ' ' val.tap
+    }
+
+    ;  create layer access keys (keydefs in main)
+    ; for idx, val in layers {
+    ; }
+
+    ; create mappings (keydefs in layers)
+    for idx, val in mappings {
+        outputdebug idx . ' ' . val.lid
+        outputdebug '   ' . val.map
+    }
+    for idx, val in mappings {
+        outputdebug idx . ' ' . val.lid 'Sh'
+        outputdebug '   ' val.mapSh
+    }
+
+}
+
+tata()
+{
+    layers := [
+        {lid: "main"},
+        {lid: "punx", key: "Space", tap: "Space"},
+        {lid: "edit", key: "LAlt"}
+    ]
+    mappings := [
+        {lid: "main", map: "a s d  i e a", mapSh: "a s d  I E A"},
+        {lid: "punx", map: "a s d  , `; ." },
+    ]
+
+    Init(layers, mappings)
+}
+
+tata()
+; toto()
 
 ; ---
 
+; debug, hit Esc to stop script
 Escape::exitapp
 
 /* todo
+- must register hotkey for all keys 
+  -> eg dualmode Shift : 
+     shift+F2, we won't see F2 press/rel and will sendTap for dual shift
 - need shifted outValue etc
+- output code (handle modifiers, ie shift ..)
 - 'add mappings' funcs
 - implement actual layers
   -> 1 layer = dictio of key 
@@ -239,11 +273,4 @@ Escape::exitapp
   ?-> could implement chording by assigning layerAccess on a layer !
       eg: space for punc layer, on punc layer, shift (or other key) accesses numpad
 
-- how to have different / new action on up/dn ?
-  -> action key, recv func in new
-     eg switch to numpad layer, 'macro': send text, etc
-  -> layerAccess w. action on Tap
-     eg hold for numpad, tap to switch to numpad
-  -> dualModeModifier w. action on Tap
-     eg hold for Ctrl, tap for macro/send text
 */
