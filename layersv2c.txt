@@ -1,0 +1,45 @@
+basic key mechanics
+
+*************
+
+keySC
+isDown true/false
+canRepeat true/false
+isDual true/false
+actions/methods: [onDn, onUp, onHoldDn, onHoldUp, onTap, onCancelledTap]
+
+
+onDn
+----
+if (isDown && !canRepeat)
+  ret
+chkDualDn
+wasDn := IsDown(1)
+if isDual
+  waitKey := key
+  key.onHoldDn()
+else
+  key.onDn()
+
+onUp
+----
+chkDualUp
+if isDual
+  if waitKey == key
+  	key.onTap()
+  else
+  	key.onHoldUp()
+  waitKey := 0
+else
+  key.onUp()
+IsDown(0)
+
+
+chkDualUp()
+  ret
+
+chkDualDn()
+  if waitKey
+    if waitKey != key
+      waitKey.onCancelledTap()
+      waitKey := 0
