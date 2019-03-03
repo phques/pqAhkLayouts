@@ -82,7 +82,6 @@ class CWaitingDualModeKey
         }
     }
 
-
     checkOnKeyDn(keySC) 
     {
         if (keySC != this.keySC) {
@@ -101,19 +100,17 @@ class CWaitingDualModeKey
 
     ;;--- called for dual keys
 
-    ;-- non static
-    onDualUpInst(keySC, p)
+    /*non static*/
+    handleDualTap(keySC)
     {
         ;-- dualMode code
-        if (keySC == this.keySC) {
-            nm := GetKeyName(this.keySC)
-            OutputDebug("output dualmode tap" . nm . " : " . this.tapValue)
+        nm := GetKeyName(this.keySC)
+        OutputDebug("output dualmode tap" . nm . " : " . this.tapValue)
 
-            Send "{blind}{" . this.tapValue . " Down}"
-            Send "{blind}{" . this.tapValue . " Up}"
+        Send "{blind}{" . this.tapValue . " Down}"
+        Send "{blind}{" . this.tapValue . " Up}"
 
-            CWaitingDualModeKey.waitingKey := 0
-        }
+        CWaitingDualModeKey.waitingKey := 0
     }
 
     /*static*/
@@ -125,8 +122,8 @@ class CWaitingDualModeKey
         ;-- then dualMode code
         if (!this.waitingKey) {
             outputdebug("create dualmode " . GetKeyName(KeySC) . " " . p)
-            newKey := new CWaitingDualModeKey(keySC, p, keySC)
-            this.waitingKey := newKey            
+            newWaiting := new CWaitingDualModeKey(keySC, p.tapValue, p.holdValue)
+            this.waitingKey := newWaiting            
         }
         ; else : might be repeating key, just skip
     }
@@ -138,11 +135,14 @@ class CWaitingDualModeKey
         this.CheckWaiting(keySC, "u")
 
         ;-- then dualMode code
-        if (this.waitingKey) {
-            this.waitingKey.onDualUpInst(keySC, p)
+        if (this.waitingKey && this.waitingKey.keySC == keySC) {
+            this.waitingKey.handleDualTap(keySC)
+        }
+        else  {
+            OutputDebug("output dualmode hold (up)" . GetKeyName(p.holdValue))
+            Send "{blind}{" . p.holdValue . " Up}"
         }
     }
-
 }
 
 
@@ -198,9 +198,10 @@ onEscapeExit(sc, p)
     exitapp
 }
 
-Hotkey2("a", "onKeyDown", "onKeyUp", 0)
-Hotkey2("LShift", "onDualKeyDown", "onDualKeyUp", "k")
 Hotkey2("Escape", "onEscapeExit", "onEscapeExit", 0)
+Hotkey2("a", "onKeyDown", "onKeyUp", 0)
+Hotkey2("LShift", "onDualKeyDown", "onDualKeyUp", {tapValue:"k", holdValue:"LShift"})
+Hotkey2("b", "onDualKeyDown", "onDualKeyUp", {tapValue:"k", holdValue:"LShift"})
 
 /*
 
