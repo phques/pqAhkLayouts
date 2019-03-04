@@ -22,7 +22,7 @@ class CLayer
             ; create keydef
             keysc := MakeKeySC("sc" . scanCode)
             ;#PQ debug, create real key
-            ; keydef := new CKeydef(keysc, true, false, keysc,0,0)
+            ; keydef := new CKeydef(keysc, true, false, 0,0, 0)
             keydef := CreateStdKeydef(keysc, keysc)
             this.AddKeyDef(keydef)
         }
@@ -54,21 +54,41 @@ class CLayer
             }
 
             ; process this Line
-            Loop nbrOfMappings
-            {
-                f := fromAndTo[A_Index]
-                t := fromAndTo[A_Index + nbrOfMappings]
+            this.AddMappingsOne(fromAndTo, isShiftedLayer)
 
-                ; get 'from' keydef that will contain the output
-                fromKeyDef := this.keyDefs[MakeKeySC(f)]
-                if (!fromKeyDef) {
-                    MsgBox "No keyDef for " f " / " GetKeyName(f)
-                    ExitApp
-                }
-
-                fromKeyDef.AddMapping(t, isShiftedLayer)
-            }
         }
-
     }
+
+    ; fromAndTo is a mapping: "a s d   y i e"
+    ;  a:y s:i e:d
+    AddMappingsOne(fromAndTo, isShiftedLayer)
+    {
+        nbrOfMappings := fromAndTo.Length() // 2
+
+        Loop nbrOfMappings
+        {
+            from := fromAndTo[A_Index]
+            to := fromAndTo[A_Index + nbrOfMappings]
+
+            ; TODO check for dual mode modifier prefix @
+            ; create new keydef for this !
+            
+            ; replace abbreviations with real value
+            if (keyAbbrevs[from])
+                from := keyAbbrevs[from]
+
+            ; get 'from' keydef that will contain the output
+            fromKeyDef := this.keyDefs[MakeKeySC(from)]
+
+            if (fromKeyDef) {
+                fromKeyDef.AddMapping(to, isShiftedLayer)
+            }
+            else {
+                MsgBox "No keyDef for " from " / " GetKeyName(from)
+                ExitApp
+            }
+
+        }
+    }            
+
 }

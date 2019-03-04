@@ -12,6 +12,10 @@
 global layerDefs := []
 global layerDefsById := {}
 global currentLayer
+
+; current layer != main, this is the key that accessed it
+; (it is still held down)
+global layerAccessKeyDn := 0    
 global escapeSc
 
 onHotkeyDn(sc)
@@ -25,7 +29,11 @@ onHotkeyDn(sc)
         ExitApp
     }
 
-    keydef := currentLayer.keyDefs[sc]
+    if (layerAccessKeyDn && layerAccessKeyDn.sc == sc)
+        keydef := layerAccessKeyDn
+    else 
+        keydef := currentLayer.keyDefs[sc]
+
     if (keydef)
         keydef.OnKeyDn()
     else
@@ -36,7 +44,11 @@ onHotkeyUp(sc)
 {
     OutputDebug "onHotkeyUp '" . sc . "' " . GetKeyName(sc)
     
-    keydef := currentLayer.keyDefs[sc]
+    if (layerAccessKeyDn && layerAccessKeyDn.sc == sc)
+        keydef := layerAccessKeyDn
+    else 
+        keydef := currentLayer.keyDefs[sc]
+
     if (keydef)
         keydef.OnKeyUp()
     else
@@ -86,14 +98,23 @@ sendTap(keydef)
 
 layerAccessDn(keydef) 
 {   ;TODO
-    ; outValue is layer idx
     outputdebug "layer on : " keydef.layerId
+    layer := layerDefsById[keydef.layerId]
+    if (layer) {
+        currentLayer := layer
+        layerAccessKeyDn := keydef
+    }
+    Else {
+        OutputDebug "layer !found: " keydef.layerId
+    }
 }
 
 layerAccessUp(keydef) 
 {   ;TODO
-    ; outValue is layer idx
+    ; return to main layer (1st entry)
     outputdebug "layer off : " keydef.layerId
+    currentLayer := layerDefs[1]
+    layerAccessKeyDn := 0
 }
 
 ;--
@@ -187,7 +208,7 @@ Init(layers, mappings)
     ; set main layer as current
     main := currentLayer := layerDefs[1]
 
-    ;  create layer access keys (keydefs in main)
+    ; create layer access keys, set on main layer
     for idx, val in layers {
         k := CreateLayerAccess(val.key, val.id, val.tap)
         main.AddKeyDef(k)

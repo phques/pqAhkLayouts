@@ -63,6 +63,7 @@ class CKeyDef
         this.outValueSh := outValueSh
         this.outTapValue := outTapValue
         this.isLayerAccess := false
+        this.isModifier := false
     }
 
     ; overridables
