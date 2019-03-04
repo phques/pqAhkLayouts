@@ -1,14 +1,61 @@
+;-- CKeyDef --
+
+#include util.ahk
+
+
+global keyAbbrevs := { "SP" : "Space", "CL" : "CapsLock", "LSh" : "LShift", "RSh" : "RShift" }
+
+class COutput
+{
+    ; outStr: 'a', '^c' (ctrl-c), "LShift", "CL"
+    ; can be one of abbrevs above
+    __New(outStr)
+    {
+        ; replace abbreviations with real value
+        if (keyAbbrevs[outStr])
+            outStr := keyAbbrevs[outStr]
+            
+        ; split modifiers / key
+        this.splitModsAndKey(outStr)
+
+        ; set flag indicating if the char to output is shifted (ie ! is Shift-1)
+        shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        shiftedChars .='~!@#$`%^&*()_+{}|:"<>?'
+        if (InStr(shiftedChars, this.key))
+            this.isShifted := 1
+        else
+            this.isShifted := 0
+    }
+
+    ; '^Z' => '^', 'Z'
+    splitModsAndKey(key)
+    {
+        this.mods := ""
+        this.key := key
+        foundPos := RegExMatch(key, "^([#!+^<>]+)(.{1,})", match)
+        if (foundPos) {
+            ; found prefix modifiers (shift: +,ctrl: ^ etc) in key
+            ; separate them
+            this.mods := match[1]
+            this.key := match[2]
+        }
+    }
+}
+
+
+;; ------------
 
 class CKeyDef
 {
     ;CKeyDef
     static waitingDual := 0
 
-    ; keyNm: 'a', "LShift", "Escape", "sc020" ..
-    __New(keyNm, canRepeat, isDual, outValue, outValueSh, outTapValue)
+    ; key: 'a', "LShift", "Escape", "sc020" ..
+    ; outXyz are COutput
+    __New(key, canRepeat, isDual, outValue, outValueSh, outTapValue)
     {
-        this.keyNm := GetKeyName(keyNm)
-        this.sc := MakeKeySC(keyNm)
+        this.name := GetKeyName(key)
+        this.sc := MakeKeySC(key)
         this.canRepeat := canRepeat
         this.isDual := isDual
         this.isDown := false
@@ -79,4 +126,17 @@ class CKeyDef
             CKeyDef.waitingDual := 0
         }
     }
+
+    ;;------ mappings ----
+
+    AddMapping(outStr, isShiftedLayer)
+    {
+        ; setup output object
+        if (isShiftedLayer)
+            this.outValueSh := new COutput(outStr)
+        else
+            this.outValue := new COutput(outStr)
+    }
 }
+
+

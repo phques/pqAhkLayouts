@@ -10,7 +10,7 @@
 
 ; CKeyDef, idx = keyScancode
 global layerDefs := []
-global layerDefsByNm := {}
+global layerDefsById := {}
 global currentLayer
 global escapeSc
 
@@ -62,12 +62,18 @@ Hotkey2(sc)
 
 sendOutValueDn(keydef) 
 { 
-    Send "{blind}{" . keydef.outValue . " Down}"
+    if (keydef && keydef.outValue && keydef.outValue.key)
+        Send "{blind}{" . keydef.outValue.key . " Down}"
+    else
+        outputdebug "sendOutValueDn no outValue, " keydef.name    
 }
 
 sendOutValueUp(keydef) 
 { 
-    Send "{blind}{" . keydef.outValue . " Up}"
+    if (keydef && keydef.outValue && keydef.outValue.key)
+        Send "{blind}{" . keydef.outValue.key . " Up}"
+    else
+        outputdebug "sendOutValueUp no outValue, " keydef.name    
 }
 
 sendTap(keydef) 
@@ -81,33 +87,32 @@ sendTap(keydef)
 layerAccessDn(keydef) 
 {   ;TODO
     ; outValue is layer idx
-    outputdebug "layer on : " keydef.outValue
+    outputdebug "layer on : " keydef.layerId
 }
 
 layerAccessUp(keydef) 
 {   ;TODO
     ; outValue is layer idx
-    outputdebug "layer off : " keydef.outValue
+    outputdebug "layer off : " keydef.layerId
 }
 
 ;--
 
-AddStdKeydef(keyNm, outValue)
+CreateStdKeydef(key, outStr)
 {
-    ; k1 := new CStdKey(keyNm, true, false, outValue, 0)
-    k1 := new CKeyDef(keyNm, true, false, outValue, 0, 0)
+    ; k1 := new CStdKey(key, true, false, outValue, 0)
+    outValue := new COutput(outStr)
+    k1 := new CKeyDef(key, true, false, outValue, 0, 0)
     k1.onHoldDn := Func("sendOutValueDn")
     k1.onHoldUp := Func("sendOutValueUp")
 
-    keydefs[k1.sc] := k1
-    ; Hotkey2(k1.sc)
     return k1
 }
 
-AddDualModifier(keyNm, outValue, outTapValue)
+AddDualModifier(key, outValue, outTapValue)
 {
-    ; k1 := new CDualModeModifier(keyNm, false, true, outValue, outTapValue)
-    k1 := new CKeyDef(keyNm, false, true, outValue, outTapValue)
+    ; k1 := new CDualModeModifier(key, false, true, outValue, outTapValue)
+    k1 := new CKeyDef(key, false, true, outValue, outTapValue)
 
     k1.onHoldDn := Func("sendOutValueDn")
     k1.onHoldUp := Func("sendOutValueUp")
@@ -118,12 +123,14 @@ AddDualModifier(keyNm, outValue, outTapValue)
     return k1
 }
 
-CreateLayerAccess(keyNm, layerId, outTapValue)
+CreateLayerAccess(key, layerId, outTapValue)
 {
     ; always isDual, ignored if no outTapValue
-    ; k1 := new CDualModeLayerAccess(keyNm, layerId, outTapValue)
-    ; save layerIdx in outValue
-    k1 := new CKeyDef(keyNm, false, true, layerId, 0, outTapValue)
+    ; k1 := new CDualModeLayerAccess(key, layerId, outTapValue)
+    k1 := new CKeyDef(key, false, true, 0, 0, outTapValue)
+    
+    ; save layerId !
+    k1.layerId := layerId
 
     k1.onHoldDn := Func("layerAccessDn")
     k1.onHoldUp := Func("layerAccessUp")
@@ -136,8 +143,8 @@ CreateLayerAccess(keyNm, layerId, outTapValue)
 
 toto()
 {
-    AddStdKeydef('a', 'i')
-    AddStdKeydef('LCtrl', 'j')
+    ; AddStdKeydef('a', 'i')
+    ; AddStdKeydef('LCtrl', 'j')
 
     AddDualModifier('LShift', 'LShift', 'k')
     AddDualModifier('b', 'LShift', 'l')
@@ -149,6 +156,7 @@ toto()
 
 }
 
+;;----------
 
 ; create a hotkey foreach key scancode of US kbd
 CreateHotkeysForUsKbd()
@@ -162,10 +170,8 @@ CreateHotkeysForUsKbd()
 }
 
 
-
 Init(layers, mappings)
 {
-    ;
     escapeSc := MakeKeySC('Escape')
 
     ; create layers, 1st is main
@@ -175,7 +181,7 @@ Init(layers, mappings)
         layer := new CLayer(val.id, val.key)
 
         layerDefs.Push(layer)
-        layerDefsByNm[val.id] := layer
+        layerDefsById[val.id] := layer
     }
 
     ; set main layer as current
@@ -193,6 +199,11 @@ Init(layers, mappings)
         outputdebug "   " val.map
         outputdebug val.id "Sh"
         outputdebug "   " val.mapSh
+        ; get layer
+        layer := layerDefsById[val.id]
+        
+        layer.AddMappings(val.map, false)
+        layer.AddMappings(val.mapSh, true)
     }
 
     ; create all hotkeys (do at end, needs data above)
@@ -207,7 +218,7 @@ tata()
         {id: "edit", key: "LAlt"}
     ]
     mappings := [
-        {id: "main", map: "a s d  i e a", mapSh: "a s d  I E A"},
+        {id: "main", map: "a s d f  i e a :", mapSh: "a s d f  I E A ["},
         {id: "punx", map: "a s d  , `; ." },
     ]
 
@@ -221,16 +232,8 @@ tata()
 
 
 /* todo
-- must register hotkey for all keys 
-  -> eg dualmode Shift : 
-     shift+F2, we won't see F2 press/rel and will sendTap for dual shift
-- need shifted outValue etc
-- output code (handle modifiers, ie shift ..)
-- 'add mappings' funcs
-- implement actual layers
-  -> 1 layer = dictio of key 
-  -> or have mappings in keydef, ie outValue[layerIdx]
-  ?-> could implement chording by assigning layerAccess on a layer !
-      eg: space for punc layer, on punc layer, shift (or other key) accesses numpad
-
+- output code (handle modifiers, ie shiftout, release shift etc ..)
+- @LSh = dualmode
+- layer access actual code !
+- outputValueTap COutput
 */
