@@ -31,8 +31,8 @@ class COutput
         this.isCtrlKey := (this.key ~= "i)ctrl|control")
         this.isAltKey := (this.key ~= "i)alt")
         this.isWinKey := (this.key ~= "i)win")
-        this isModifier := this.isShiftKey || this.isCtrlKey || 
-                           this.isAltKey ||this.isWinKey
+        this.isModifier := this.isShiftKey || this.isCtrlKey
+        this.isModifier |= this.isAltKey ||this.isWinKey
 
         ; set flag indicating if the char to output is shifted (ie ! is Shift-1)
         shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -63,25 +63,22 @@ class COutput
 
 class CKeyDef
 {
-    ;CKeyDef
-    static waitingDual := 0
+    static waitingDual := 0     ; CKeyDef
+    static downKeys := {}       ; [sc] = CKeyDef
 
     ; key: 'a', "LShift", "Escape", "sc020" ..
-    ; outXyz are COutput
-    __New(key, canRepeat, isDual, outValue, outValueSh, outTapValue)
+    ; outXyz are COutput[2], [2] for shifted value
+    __New(key, canRepeat, isDual, outValues, outTapValues)
     {
         this.name := GetKeyName(key)
         this.sc := MakeKeySC(key)
         this.canRepeat := canRepeat
         this.isDual := isDual
         this.isLayerAccess := false
-        ; this.isModifier := outValue.isShiftKey || outValue.isCtrlKey || 
-        ;                    outValue.isAltKey || outValue.isWinKey
         
         this.isDown := false
-        this.outValue := outValue
-        this.outValueSh := outValueSh
-        this.outTapValue := outTapValue
+        this.outValues := outValues
+        this.outTapValues := outTapValues
     }
 
     ; overridables
@@ -103,8 +100,9 @@ class CKeyDef
 
         this.checkOnDualDn()
 
-        ; wasDn := this.isDown
+        ; mark key as down, save in down keys 'list'
         this.isDown := true
+        CKeyDef.downKeys[this.sc] := this
 
         if (this.isDual) 
             CKeyDef.waitingDual := this
@@ -114,23 +112,21 @@ class CKeyDef
 
     OnKeyUp()
     {
-        if (this.isDual) {
-            if (CKeyDef.waitingDual == this) {
-                ; cancel hold dn 1st
-                this.onHoldUp() 
+        ; Always need to do this
+        ; For a waiting dualMode that will do a Tap also ! 
+        ;   (normally a modifier, so it's ok to send its Up key)
+        this.onHoldUp()
 
+        if (this.isDual) {
+            ; dualMode key 'tap', output its tap value
+            if (CKeyDef.waitingDual == this) {
                 this.onTap()
                 CKeyDef.waitingDual := 0
             }
-            else {
-                this.onHoldUp()
-            }
-        }
-        else {
-            this.onHoldUp()
         }
 
         this.isDown := 0
+        CKeyDef.downKeys.Delete(this.sc)
     }
 
     ;----
@@ -141,7 +137,7 @@ class CKeyDef
 
         if (waiting && waiting.sc != this.sc) {
             ; waiting dual mode key, tap interrupted by other key,
-            ; goto hold dn / up mode (dn already sent)
+            ; stay in 'hold dn' (dn already sent) / cancel Tap possiblity
             CKeyDef.waitingDual := 0
         }
     }
@@ -154,22 +150,38 @@ class CKeyDef
         outValue := new COutput(outStr)
             
         if (isShiftedLayer) 
-            this.outValueSh := outValue
+            this.outValues[2] := outValue
         else 
-            this.outValue := outValue
+            this.outValues[1] := outValue
     }
 
-    ;---
+    ;----
 
-    ; IsShiftModifier()
-    ; {
-    ;     return (this.isModifier && this.outValue.isShiftKey 
-    ; }
+    ; returns proper outValue (shift/non-shift/tap/normal) according to current key downs etc
+    GetValues(isTap)
+    {
+        out := 0
 
+        values := (isTap ? this.outTapValues : this.outValues)
+        if (values) {
+            idx := CKeyDef.IsShiftDown() ? 2 : 1
+            out := values[idx]
+        }
+        Else {
+            OutputDebug "keydef getValues, no values"
+        }
+
+
+        return out
+    }
+
+    ; -------
+
+    /*static*/
     CreateStdKeydef(key, outStr)
     {
         outValue := new COutput(outStr)
-        k1 := new CKeyDef(key, true, false, outValue, 0, 0)
+        k1 := new CKeyDef(key, true, false, [outValue,outValue], 0)
         k1.onHoldDn := Func("sendOutValueDn")
         k1.onHoldUp := Func("sendOutValueUp")
 
@@ -180,11 +192,11 @@ class CKeyDef
     /*static*/
     CreateDualModifier(key, outStr, outTapStr)
     {
+        k1 := CKeyDef.CreateEmptyDualModifier(key)
         outValue := new COutput(outStr)
         outTapValue := new COutput(outTapStr)
-        k1 := CreateEmptyDualModifier(key)
-        k1.outValue := outValue
-        k1.outTapValue := outTapValue
+        k1.outValues := [outValue,outValue]
+        k1.outTapValues := [outTapValue, outTapValue]
 
         return k1
     }
@@ -192,13 +204,54 @@ class CKeyDef
     /*static*/
     CreateEmptyDualModifier(key)
     {
-        k1 := new CKeyDef(key, false, true, outValue, outTapValue)
+        k1 := new CKeyDef(key, false, true, 0, 0)
         k1.onHoldDn := Func("sendOutValueDn")
         k1.onHoldUp := Func("sendOutValueUp")
         k1.onTap := Func("sendTap")
         k1.isModifier := true
 
         return k1
+    }
+
+    /*static*/
+    CreateLayerAccess(key, layerId, outTapStr)
+    {
+        ; always isDual, ignored if no outTapValue
+        outTapValue := (outTapStr ? new COutput(outTapStr) : 0)
+        k1 := new CKeyDef(key, false, true, 0, 0, [outTapValue,outTapValue])
+        
+        ; save layerId !
+        k1.layerId := layerId
+
+        k1.onHoldDn := Func("layerAccessDn")
+        k1.onHoldUp := Func("layerAccessUp")
+        k1.onTap := Func("sendTap")
+
+        return k1
+    }
+
+    ;---
+
+    /*static*/
+    IsShiftDown()
+    {
+        ; is any of the currently 'down' keys a shift key ?
+        For keysc, keydef in CKeyDef.downKeys {
+            OutputDebug "is shftdn " . keydef.name . " dn"
+
+            if (keydef.outValues[1] ) {
+                if (keydef.outValues[1].isShift) {
+                    OutputDebug "found shift dn " . keydef.name
+                    Return True
+                }
+            }
+            else {
+                OutputDebug "no outval[1] " . keydef.name
+            }
+        }
+
+        ; non found
+        return False
     }
 }
 

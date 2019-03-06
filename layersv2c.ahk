@@ -79,30 +79,35 @@ Hotkey2(sc)
 
 sendOutValueDn(keydef) 
 { 
-    if (keydef && keydef.outValue && keydef.outValue.key)
-        Send "{blind}{" . keydef.outValue.key . " Down}"
-    else
+    out := keydef.GetValues(false)
+    if (out)
+        Send "{blind}{" . out.key . " Down}"
+    else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
 }
 
 sendOutValueUp(keydef) 
 { 
-    if (keydef && keydef.outValue && keydef.outValue.key)
-        Send "{blind}{" . keydef.outValue.key . " Up}"
+    out := keydef.GetValues(false)
+    if (out)
+        Send "{blind}{" . out.key . " Up}"
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
 }
 
 sendTap(keydef) 
 {
-    if (keydef.outTapValue) {
+    out := keydef.GetValues(true)
+    if (out) {
         Send "{blind}{" . keydef.outTapValue . " Down}"
         Send "{blind}{" . keydef.outTapValue . " Up}"
     }
+    else
+        outputdebug "sendTap no outTapValue, " keydef.name    
 }
 
 layerAccessDn(keydef) 
-{   ;TODO
+{
     outputdebug "layer on : " keydef.layerId
     layer := layerDefsById[keydef.layerId]
     if (layer) {
@@ -115,7 +120,7 @@ layerAccessDn(keydef)
 }
 
 layerAccessUp(keydef) 
-{   ;TODO
+{
     ; return to main layer (1st entry)
     outputdebug "layer off : " keydef.layerId
     currentLayer := layerDefs[1]
@@ -124,46 +129,21 @@ layerAccessUp(keydef)
 
 ;--
 
-; CreateStdKeydef(key, outStr)
+; CreateLayerAccess(key, layerId, outTapValue)
 ; {
-;     ; k1 := new CStdKey(key, true, false, outValue, 0)
-;     outValue := new COutput(outStr)
-;     k1 := new CKeyDef(key, true, false, outValue, 0, 0)
-;     k1.onHoldDn := Func("sendOutValueDn")
-;     k1.onHoldUp := Func("sendOutValueUp")
+;     ; always isDual, ignored if no outTapValue
+;     ; k1 := new CDualModeLayerAccess(key, layerId, outTapValue)
+;     k1 := new CKeyDef(key, false, true, 0, 0, outTapValue)
+    
+;     ; save layerId !
+;     k1.layerId := layerId
 
-;     return k1
-; }
-
-; AddDualModifier(key, outValue, outTapValue)
-; {
-;     ; k1 := new CDualModeModifier(key, false, true, outValue, outTapValue)
-;     k1 := new CKeyDef(key, false, true, outValue, outTapValue)
-
-;     k1.onHoldDn := Func("sendOutValueDn")
-;     k1.onHoldUp := Func("sendOutValueUp")
+;     k1.onHoldDn := Func("layerAccessDn")
+;     k1.onHoldUp := Func("layerAccessUp")
 ;     k1.onTap := Func("sendTap")
 
-;     keydefs[k1.sc] := k1
-;     ; Hotkey2(k1.sc)
 ;     return k1
 ; }
-
-CreateLayerAccess(key, layerId, outTapValue)
-{
-    ; always isDual, ignored if no outTapValue
-    ; k1 := new CDualModeLayerAccess(key, layerId, outTapValue)
-    k1 := new CKeyDef(key, false, true, 0, 0, outTapValue)
-    
-    ; save layerId !
-    k1.layerId := layerId
-
-    k1.onHoldDn := Func("layerAccessDn")
-    k1.onHoldUp := Func("layerAccessUp")
-    k1.onTap := Func("sendTap")
-
-    return k1
-}
 
 ;-------
 
@@ -215,7 +195,7 @@ Init(layers, mappings)
 
     ; create layer access keys, set on main layer
     for idx, val in layers {
-        k := CreateLayerAccess(val.key, val.id, val.tap)
+        k := CKeyDef.CreateLayerAccess(val.key, val.id, val.tap)
         main.AddKeyDef(k)
     }
 
