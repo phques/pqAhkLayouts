@@ -72,6 +72,12 @@ Hotkey2(sc)
 
 ;; action funcs for keydefs
 
+isShiftDown()
+{
+    return (GetKeyState("LShift") || GetKeyState("RShift"))
+
+}
+
 sendOutValueDn(keydef) 
 { 
     if (keydef && keydef.outValue && keydef.outValue.key)
