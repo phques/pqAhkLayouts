@@ -119,30 +119,30 @@ layerAccessUp(keydef)
 
 ;--
 
-CreateStdKeydef(key, outStr)
-{
-    ; k1 := new CStdKey(key, true, false, outValue, 0)
-    outValue := new COutput(outStr)
-    k1 := new CKeyDef(key, true, false, outValue, 0, 0)
-    k1.onHoldDn := Func("sendOutValueDn")
-    k1.onHoldUp := Func("sendOutValueUp")
+; CreateStdKeydef(key, outStr)
+; {
+;     ; k1 := new CStdKey(key, true, false, outValue, 0)
+;     outValue := new COutput(outStr)
+;     k1 := new CKeyDef(key, true, false, outValue, 0, 0)
+;     k1.onHoldDn := Func("sendOutValueDn")
+;     k1.onHoldUp := Func("sendOutValueUp")
 
-    return k1
-}
+;     return k1
+; }
 
-AddDualModifier(key, outValue, outTapValue)
-{
-    ; k1 := new CDualModeModifier(key, false, true, outValue, outTapValue)
-    k1 := new CKeyDef(key, false, true, outValue, outTapValue)
+; AddDualModifier(key, outValue, outTapValue)
+; {
+;     ; k1 := new CDualModeModifier(key, false, true, outValue, outTapValue)
+;     k1 := new CKeyDef(key, false, true, outValue, outTapValue)
 
-    k1.onHoldDn := Func("sendOutValueDn")
-    k1.onHoldUp := Func("sendOutValueUp")
-    k1.onTap := Func("sendTap")
+;     k1.onHoldDn := Func("sendOutValueDn")
+;     k1.onHoldUp := Func("sendOutValueUp")
+;     k1.onTap := Func("sendTap")
 
-    keydefs[k1.sc] := k1
-    ; Hotkey2(k1.sc)
-    return k1
-}
+;     keydefs[k1.sc] := k1
+;     ; Hotkey2(k1.sc)
+;     return k1
+; }
 
 CreateLayerAccess(key, layerId, outTapValue)
 {
@@ -167,8 +167,8 @@ toto()
     ; AddStdKeydef('a', 'i')
     ; AddStdKeydef('LCtrl', 'j')
 
-    AddDualModifier('LShift', 'LShift', 'k')
-    AddDualModifier('b', 'LShift', 'l')
+    ; AddDualModifier('LShift', 'LShift', 'k')
+    ; AddDualModifier('b', 'LShift', 'l')
     ; AddDualModifier('v', 't', 'r') ;;hihi makes no sense
 
     ; AddLayerAccess('RAlt', 2, 0)

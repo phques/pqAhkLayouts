@@ -21,9 +21,9 @@ class CLayer
         {    
             ; create keydef
             keysc := MakeKeySC("sc" . scanCode)
-            ;#PQ debug, create real key
+            ;# PQ debug, create real key
             ; keydef := new CKeydef(keysc, true, false, 0,0, 0)
-            keydef := CreateStdKeydef(keysc, keysc)
+            keydef := CKeydef.CreateStdKeydef(keysc, keysc)
             this.AddKeyDef(keydef)
         }
     }
@@ -73,13 +73,28 @@ class CLayer
             ; TODO check for dual mode modifier prefix @
             ; create new keydef for this !
             
+            ; leading @ indicates dual mode key (in 'from')
+            ; (single click generates 'to' key, held down is modifier)
+            isDualModeKey := 0
+            if (SubStr(from,1,1) == '@') {
+                from := SubStr(from,2) ; strip @
+                isDualModeKey := 1
+            }
+
             ; replace abbreviations with real value
             if (keyAbbrevs[from])
                 from := keyAbbrevs[from]
 
             ; get 'from' keydef that will contain the output
-            fromKeyDef := this.keyDefs[MakeKeySC(from)]
+            keysc := MakeKeySC(from)
 
+            ; create new dualMode modifier keydef if required
+            if (isDualModeKey) {
+                this.keyDefs[keysc] := CKeyDef.CreateEmptyDualModifier(from)
+            }
+
+            ; add mapping
+            fromKeyDef := this.keyDefs[keysc]
             if (fromKeyDef) {
                 fromKeyDef.AddMapping(to, isShiftedLayer)
             }

@@ -11,21 +11,37 @@ class COutput
     ; can be one of abbrevs above
     __New(outStr)
     {
-        ; replace abbreviations with real value
-        if (keyAbbrevs[outStr])
-            outStr := keyAbbrevs[outStr]
-            
+        this.mods := ""
+        this.key := ""
+        this.isShifted := false  ;; see below
+        
+        this.isShiftKey := false
+        this.isCtrlKey := false
+        this.isAltKey := false
+        this.isWinKey := false
+
         ; split modifiers / key
         this.splitModsAndKey(outStr)
+
+        ; replace abbreviations with real value
+        if (keyAbbrevs[this.key])
+            this.key := keyAbbrevs[this.key]
+
+        this.isShiftKey := (this.key ~= "i)shift")
+        this.isCtrlKey := (this.key ~= "i)ctrl|control")
+        this.isAltKey := (this.key ~= "i)alt")
+        this.isWinKey := (this.key ~= "i)win")
+        this isModifier := this.isShiftKey || this.isCtrlKey || 
+                           this.isAltKey ||this.isWinKey
 
         ; set flag indicating if the char to output is shifted (ie ! is Shift-1)
         shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         shiftedChars .='~!@#$`%^&*()_+{}|:"<>?'
         if (InStr(shiftedChars, this.key))
-            this.isShifted := 1
-        else
-            this.isShifted := 0
+            this.isShifted := true
     }
+
+    ;-----
 
     ; '^Z' => '^', 'Z'
     splitModsAndKey(key)
@@ -58,12 +74,14 @@ class CKeyDef
         this.sc := MakeKeySC(key)
         this.canRepeat := canRepeat
         this.isDual := isDual
+        this.isLayerAccess := false
+        ; this.isModifier := outValue.isShiftKey || outValue.isCtrlKey || 
+        ;                    outValue.isAltKey || outValue.isWinKey
+        
         this.isDown := false
         this.outValue := outValue
         this.outValueSh := outValueSh
         this.outTapValue := outTapValue
-        this.isLayerAccess := false
-        this.isModifier := false
     }
 
     ; overridables
@@ -133,10 +151,54 @@ class CKeyDef
     AddMapping(outStr, isShiftedLayer)
     {
         ; setup output object
-        if (isShiftedLayer)
-            this.outValueSh := new COutput(outStr)
-        else
-            this.outValue := new COutput(outStr)
+        outValue := new COutput(outStr)
+            
+        if (isShiftedLayer) 
+            this.outValueSh := outValue
+        else 
+            this.outValue := outValue
+    }
+
+    ;---
+
+    ; IsShiftModifier()
+    ; {
+    ;     return (this.isModifier && this.outValue.isShiftKey 
+    ; }
+
+    CreateStdKeydef(key, outStr)
+    {
+        outValue := new COutput(outStr)
+        k1 := new CKeyDef(key, true, false, outValue, 0, 0)
+        k1.onHoldDn := Func("sendOutValueDn")
+        k1.onHoldUp := Func("sendOutValueUp")
+
+        return k1
+    }
+
+    ; outStr should be a modifier !! eg "LShift", "RAlt"
+    /*static*/
+    CreateDualModifier(key, outStr, outTapStr)
+    {
+        outValue := new COutput(outStr)
+        outTapValue := new COutput(outTapStr)
+        k1 := CreateEmptyDualModifier(key)
+        k1.outValue := outValue
+        k1.outTapValue := outTapValue
+
+        return k1
+    }
+
+    /*static*/
+    CreateEmptyDualModifier(key)
+    {
+        k1 := new CKeyDef(key, false, true, outValue, outTapValue)
+        k1.onHoldDn := Func("sendOutValueDn")
+        k1.onHoldUp := Func("sendOutValueUp")
+        k1.onTap := Func("sendTap")
+        k1.isModifier := true
+
+        return k1
     }
 }
 
