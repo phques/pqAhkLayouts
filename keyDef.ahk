@@ -27,10 +27,11 @@ class COutput
         if (keyAbbrevs[this.key])
             this.key := keyAbbrevs[this.key]
 
-        this.isShiftKey := (this.key ~= "i)shift")
-        this.isCtrlKey := (this.key ~= "i)ctrl|control")
-        this.isAltKey := (this.key ~= "i)alt")
-        this.isWinKey := (this.key ~= "i)win")
+        name := GetKeyName(this.key)
+        this.isShiftKey := (name ~= "i)shift")
+        this.isCtrlKey := (name ~= "i)ctrl|control")
+        this.isAltKey := (name ~= "i)alt")
+        this.isWinKey := (name ~= "i)win")
         this.isModifier := this.isShiftKey || this.isCtrlKey
         this.isModifier |= this.isAltKey ||this.isWinKey
 
@@ -144,15 +145,19 @@ class CKeyDef
 
     ;;------ mappings ----
 
-    AddMapping(outStr, isShiftedLayer)
+    AddMapping(outStr, isShiftedLayer, isTapValue)
     {
         ; setup output object
         outValue := new COutput(outStr)
-            
-        if (isShiftedLayer) 
-            this.outValues[2] := outValue
-        else 
-            this.outValues[1] := outValue
+    
+        if (isTapValue)
+            this.outTapValues := outValue
+        else {
+            if (isShiftedLayer) 
+                this.outValues[2] := outValue
+            else 
+                this.outValues[1] := outValue
+        }
     }
 
     ;----
@@ -237,10 +242,8 @@ class CKeyDef
     {
         ; is any of the currently 'down' keys a shift key ?
         For keysc, keydef in CKeyDef.downKeys {
-            OutputDebug "is shftdn " . keydef.name . " dn"
-
-            if (keydef.outValues[1] ) {
-                if (keydef.outValues[1].isShift) {
+            if (keydef.outValues[1] ) {                
+                if (keydef.outValues[1].isShiftKey) {
                     OutputDebug "found shift dn " . keydef.name
                     Return True
                 }

@@ -90,13 +90,13 @@ class CLayer
 
             ; create new dualMode modifier keydef if required
             if (isDualModeKey) {
-                this.keyDefs[keysc] := CKeyDef.CreateEmptyDualModifier(from)
+                this.keyDefs[keysc] := CKeyDef.CreateDualModifier(from, from, "")
             }
 
             ; add mapping
             fromKeyDef := this.keyDefs[keysc]
             if (fromKeyDef) {
-                fromKeyDef.AddMapping(to, isShiftedLayer)
+                fromKeyDef.AddMapping(to, isShiftedLayer, isDualModeKey)
             }
             else {
                 MsgBox "No keyDef for " from " / " GetKeyName(from)

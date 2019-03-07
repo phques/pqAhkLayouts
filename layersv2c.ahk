@@ -20,7 +20,7 @@ global escapeSc
 
 onHotkeyDn(sc)
 {
-    OutputDebug "onHotkeyDn '" . sc . "' " . GetKeyName(sc)
+    ; OutputDebug "onHotkeyDn '" . sc . "' " . GetKeyName(sc)
 
     ; debug, hit Esc to stop script
     if (sc == escapeSc)
@@ -42,7 +42,7 @@ onHotkeyDn(sc)
 
 onHotkeyUp(sc)
 {
-    OutputDebug "onHotkeyUp '" . sc . "' " . GetKeyName(sc)
+    ; OutputDebug "onHotkeyUp '" . sc . "' " . GetKeyName(sc)
     
     if (layerAccessKeyDn && layerAccessKeyDn.sc == sc)
         keydef := layerAccessKeyDn
@@ -224,11 +224,14 @@ tata()
         {id: "edit", key: "LAlt"}
     ]
     mappings := [
-        {id: "main", map: "a s d f  i e a :", mapSh: "a s d f  I E A ["},
+        {id: "main", map: "a s d f  i e a :", mapSh: "a s d f  I E Z ["},
         {id: "punx", map: "a s d  , `; ." },
     ]
 
     Init(layers, mappings)
+
+    main := layerDefsById["main"]
+    main.AddMappingsOne("@LSh k", false)
 }
 
 tata()
