@@ -48,7 +48,7 @@ class CLayer
 
             nbrOfMappings := fromAndTo.Length() // 2
             if (nbrOfMappings * 2 != fromAndTo.Length()) {
-                msg := Format("AddMappingsOne, From/to not same length !`n{}", line )
+                msg := Format("AddMappings, From/to not same length !`n{}", line )
                 MsgBox(msg)
                 ExitApp
             }
@@ -70,31 +70,38 @@ class CLayer
             from := fromAndTo[A_Index]
             to := fromAndTo[A_Index + nbrOfMappings]
 
-            ; TODO check for dual mode modifier prefix @
-            ; create new keydef for this !
-            
+            ; OutputDebug "AddMappingsOne " . from . " -> " . to
+
             ; leading @ indicates dual mode key (in 'from')
             ; (single click generates 'to' key, held down is modifier)
             isDualModeKey := 0
             if (SubStr(from,1,1) == '@') {
                 from := SubStr(from,2) ; strip @
                 isDualModeKey := 1
+                OutputDebug "AddMappingsOne dual " . from . " -> " . to
             }
 
             ; replace abbreviations with real value
             if (keyAbbrevs[from])
                 from := keyAbbrevs[from]
 
+            if (keyAbbrevs[to])
+                to := keyAbbrevs[to]
+
             ; get 'from' keydef that will contain the output
             keysc := MakeKeySC(from)
+            fromKeyDef := this.keyDefs[keysc]
 
             ; create new dualMode modifier keydef if required
-            if (isDualModeKey) {
-                this.keyDefs[keysc] := CKeyDef.CreateDualModifier(from, from, "")
+            ; note that if mappings had already been cerated for this keysc they will be lost here            
+            if (isDualModeKey && (!fromKeyDef || !fromKeyDef.isDual)) {
+                OutputDebug "creating dual modifier for " from
+                fromKeyDef := CKeyDef.CreateDualModifier(from, from, "")
+                this.keyDefs[keysc] := fromKeyDef
             }
 
+
             ; add mapping
-            fromKeyDef := this.keyDefs[keysc]
             if (fromKeyDef) {
                 fromKeyDef.AddMapping(to, isShiftedLayer, isDualModeKey)
             }
@@ -102,8 +109,6 @@ class CLayer
                 MsgBox "No keyDef for " from " / " GetKeyName(from)
                 ExitApp
             }
-
         }
     }            
-
 }

@@ -27,7 +27,14 @@ class COutput
         if (keyAbbrevs[this.key])
             this.key := keyAbbrevs[this.key]
 
+        sc := GetKeySC(this.key)
         name := GetKeyName(this.key)
+        if (!sc) {
+            msg := "Cannot find scancode for '" . this.key . "' outStr: <" . outStr . ">"
+            outputdebug(msg)
+            if (MsgBox(msg, "Error", "O/C") = "Cancel")
+                ExitApp
+        }
         this.isShiftKey := (name ~= "i)shift")
         this.isCtrlKey := (name ~= "i)ctrl|control")
         this.isAltKey := (name ~= "i)alt")
@@ -113,6 +120,10 @@ class CKeyDef
 
     OnKeyUp()
     {
+        ; do this 1st
+        this.isDown := 0
+        CKeyDef.downKeys.Delete(this.sc)
+
         ; Always need to do this
         ; For a waiting dualMode that will do a Tap also ! 
         ;   (normally a modifier, so it's ok to send its Up key)
@@ -126,8 +137,8 @@ class CKeyDef
             }
         }
 
-        this.isDown := 0
-        CKeyDef.downKeys.Delete(this.sc)
+        ; this.isDown := 0
+        ; CKeyDef.downKeys.Delete(this.sc)
     }
 
     ;----
@@ -150,8 +161,12 @@ class CKeyDef
         ; setup output object
         outValue := new COutput(outStr)
     
-        if (isTapValue)
-            this.outTapValues := outValue
+        if (isTapValue) {
+            if (isShiftedLayer) 
+                this.outTapValues[2] := outValue
+            else 
+                this.outTapValues[1] := outValue
+        }
         else {
             if (isShiftedLayer) 
                 this.outValues[2] := outValue
@@ -176,7 +191,6 @@ class CKeyDef
             OutputDebug "keydef getValues, no values"
         }
 
-
         return out
     }
 
@@ -186,7 +200,7 @@ class CKeyDef
     CreateStdKeydef(key, outStr)
     {
         outValue := new COutput(outStr)
-        k1 := new CKeyDef(key, true, false, [outValue,outValue], 0)
+        k1 := new CKeyDef(key, true, false, [outValue,outValue], [])
         k1.onHoldDn := Func("sendOutValueDn")
         k1.onHoldUp := Func("sendOutValueUp")
 
@@ -199,7 +213,7 @@ class CKeyDef
     {
         k1 := CKeyDef.CreateEmptyDualModifier(key)
         outValue := new COutput(outStr)
-        outTapValue := new COutput(outTapStr)
+        outTapValue := (!outTapStr ? 0 : new COutput(outTapStr))
         k1.outValues := [outValue,outValue]
         k1.outTapValues := [outTapValue, outTapValue]
 
@@ -209,7 +223,7 @@ class CKeyDef
     /*static*/
     CreateEmptyDualModifier(key)
     {
-        k1 := new CKeyDef(key, false, true, 0, 0)
+        k1 := new CKeyDef(key, false, true, [], [])
         k1.onHoldDn := Func("sendOutValueDn")
         k1.onHoldUp := Func("sendOutValueUp")
         k1.onTap := Func("sendTap")
@@ -223,7 +237,7 @@ class CKeyDef
     {
         ; always isDual, ignored if no outTapValue
         outTapValue := (outTapStr ? new COutput(outTapStr) : 0)
-        k1 := new CKeyDef(key, false, true, 0, 0, [outTapValue,outTapValue])
+        k1 := new CKeyDef(key, false, true, 0, [], [outTapValue,outTapValue])
         
         ; save layerId !
         k1.layerId := layerId
@@ -244,12 +258,12 @@ class CKeyDef
         For keysc, keydef in CKeyDef.downKeys {
             if (keydef.outValues[1] ) {                
                 if (keydef.outValues[1].isShiftKey) {
-                    OutputDebug "found shift dn " . keydef.name
+                    ; OutputDebug "found shift dn " . keydef.name
                     Return True
                 }
             }
             else {
-                OutputDebug "no outval[1] " . keydef.name
+                OutputDebug "IsShiftDown no outval[1] " . keydef.name
             }
         }
 

@@ -99,8 +99,8 @@ sendTap(keydef)
 {
     out := keydef.GetValues(true)
     if (out) {
-        Send "{blind}{" . keydef.outTapValue . " Down}"
-        Send "{blind}{" . keydef.outTapValue . " Up}"
+        Send "{blind}{" . out.key . " Down}"
+        Send "{blind}{" . out.key . " Up}"
     }
     else
         outputdebug "sendTap no outTapValue, " keydef.name    
@@ -127,41 +127,6 @@ layerAccessUp(keydef)
     layerAccessKeyDn := 0
 }
 
-;--
-
-; CreateLayerAccess(key, layerId, outTapValue)
-; {
-;     ; always isDual, ignored if no outTapValue
-;     ; k1 := new CDualModeLayerAccess(key, layerId, outTapValue)
-;     k1 := new CKeyDef(key, false, true, 0, 0, outTapValue)
-    
-;     ; save layerId !
-;     k1.layerId := layerId
-
-;     k1.onHoldDn := Func("layerAccessDn")
-;     k1.onHoldUp := Func("layerAccessUp")
-;     k1.onTap := Func("sendTap")
-
-;     return k1
-; }
-
-;-------
-
-toto()
-{
-    ; AddStdKeydef('a', 'i')
-    ; AddStdKeydef('LCtrl', 'j')
-
-    ; AddDualModifier('LShift', 'LShift', 'k')
-    ; AddDualModifier('b', 'LShift', 'l')
-    ; AddDualModifier('v', 't', 'r') ;;hihi makes no sense
-
-    ; AddLayerAccess('RAlt', 2, 0)
-    ; AddLayerAccess('n', 3, 'q')
-    ; AddLayerAccess('Space', 4, 'Space')
-
-}
-
 ;;----------
 
 ; create a hotkey foreach key scancode of US kbd
@@ -176,7 +141,7 @@ CreateHotkeysForUsKbd()
 }
 
 
-Init(layers, mappings)
+InitLayout(layers, mappings)
 {
     escapeSc := MakeKeySC('Escape')
 
@@ -228,21 +193,12 @@ tata()
         {id: "punx", map: "a s d  , `; ." },
     ]
 
-    Init(layers, mappings)
+    InitLayout(layers, mappings)
 
     main := layerDefsById["main"]
     main.AddMappingsOne("@LSh k", false)
 }
 
-tata()
+; tata()
 ; toto()
 
-; ---
-
-
-/* todo
-- output code (handle modifiers, ie shiftout, release shift etc ..)
-- @LSh = dualmode
-- layer access actual code !
-- outputValueTap COutput
-*/
