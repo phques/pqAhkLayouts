@@ -27,14 +27,16 @@ class COutput
         if (keyAbbrevs[this.key])
             this.key := keyAbbrevs[this.key]
 
+        ; check for invalid key
         sc := GetKeySC(this.key)
-        name := GetKeyName(this.key)
         if (!sc) {
             msg := "Cannot find scancode for '" . this.key . "' outStr: <" . outStr . ">"
             outputdebug(msg)
             if (MsgBox(msg, "Error", "O/C") = "Cancel")
                 ExitApp
         }
+
+        name := GetKeyName(this.key)
         this.isShiftKey := (name ~= "i)shift")
         this.isCtrlKey := (name ~= "i)ctrl|control")
         this.isAltKey := (name ~= "i)alt")

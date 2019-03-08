@@ -68,20 +68,44 @@ Hotkey2(sc)
     HotKey '*' sc " up", fnUp
 }
 
+
+; create a hotkey foreach key scancode of US kbd
+CreateHotkeysForUsKbd()
+{
+    for idx, scanCode in usKbdScanCodes
+    {    
+        ; create hotkey
+        keysc := 'sc' scanCode
+        Hotkey2(keysc)
+    }
+}
+
 ;-------
 
 ;; action funcs for keydefs
 
-; isShiftDown()
-; {
-;     return (GetKeyState("LShift") || GetKeyState("RShift"))
-; }
+
+prepBlind(keyDef, out)
+{
+    if (CKeyDef.IsShiftDown()) {
+        OutputDebug keydef.name " shift dn"
+        if (!out.isShifted && !InStr(out.mods, "+")) {
+            OutputDebug keydef.name " !out.isShifted"
+            return "{blind+}"            
+        }
+    }
+
+    return "{blind}"
+}
 
 sendOutValueDn(keydef) 
 { 
     out := keydef.GetValues(false)
-    if (out)
-        Send "{blind}{" . out.key . " Down}"
+
+    if (out) {
+        blindStr := prepBlind(keydef, out)
+        Send blindStr out.mods "{" out.key  " Down}"
+    }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
 }
@@ -89,8 +113,10 @@ sendOutValueDn(keydef)
 sendOutValueUp(keydef) 
 { 
     out := keydef.GetValues(false)
-    if (out)
-        Send "{blind}{" . out.key . " Up}"
+    if (out) {
+        blindStr := prepBlind(keydef, out)
+        Send blindStr out.mods "{" out.key " Up}"
+    }
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
 }
@@ -99,8 +125,9 @@ sendTap(keydef)
 {
     out := keydef.GetValues(true)
     if (out) {
-        Send "{blind}{" . out.key . " Down}"
-        Send "{blind}{" . out.key . " Up}"
+        blindStr := prepBlind(keydef, out)
+        Send blindStr out.mods "{" out.key " Down}"
+        Send blindStr out.mods "{" out.key " Up}"
     }
     else
         outputdebug "sendTap no outTapValue, " keydef.name    
@@ -128,17 +155,6 @@ layerAccessUp(keydef)
 }
 
 ;;----------
-
-; create a hotkey foreach key scancode of US kbd
-CreateHotkeysForUsKbd()
-{
-    for idx, scanCode in usKbdScanCodes
-    {    
-        ; create hotkey
-        keysc := 'sc' scanCode
-        Hotkey2(keysc)
-    }
-}
 
 
 InitLayout(layers, mappings)
@@ -178,8 +194,12 @@ InitLayout(layers, mappings)
     }
 
     ; create all hotkeys (do at end, needs data above)
+    ; we need to trap all key events for dualMode 
+    ; eg @Shift-F2, if no hotkey for F2 then we wont know a key was press and will output Tapval
     CreateHotkeysForUsKbd()
 }
+
+; ---------
 
 tata()
 {
@@ -189,16 +209,14 @@ tata()
         {id: "edit", key: "LAlt"}
     ]
     mappings := [
-        {id: "main", map: "a s d f  i e a :", mapSh: "a s d f  I E Z ["},
+        {id: "main", map: "a s d f  i e +a :", mapSh: "a s d f  I e +z ["},
         {id: "punx", map: "a s d  , `; ." },
     ]
 
     InitLayout(layers, mappings)
 
     main := layerDefsById["main"]
-    main.AddMappingsOne("@LSh k", false)
+    main.AddMappings("@LSh k", false)
 }
 
 ; tata()
-; toto()
-
