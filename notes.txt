@@ -1,0 +1,5 @@
+
+mappings on layer dont work !?
+tap of layer access key : no output val
+
+cannot define AHK hotkeys anymore !!

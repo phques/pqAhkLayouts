@@ -1,4 +1,5 @@
 #InstallKeybdHook
+#InstallMouseHook
 #Warn All, MsgBox
 
 #include util.ahk
@@ -16,14 +17,16 @@ global currentLayer
 ; current layer != main, this is the key that accessed it
 ; (it is still held down)
 global layerAccessKeyDn := 0    
-global escapeSc
+global StopOnEscape := false
+
+; ----
 
 onHotkeyDn(sc)
 {
     ; OutputDebug "onHotkeyDn '" . sc . "' " . GetKeyName(sc)
 
     ; debug, hit Esc to stop script
-    if (sc == escapeSc)
+    if (StopOnEscape && sc == MakeKeySC('Escape'))
     {
         OutputDebug "escape pressed, stopping script"
         ExitApp
@@ -56,7 +59,7 @@ onHotkeyUp(sc)
 }
 
 
-Hotkey2(sc)
+CreateHotkey(sc)
 {
     fnDn := Func("onHotkeyDn").Bind(sc)
     fnUp := Func("onHotkeyUp").Bind(sc)
@@ -76,21 +79,50 @@ CreateHotkeysForUsKbd()
     {    
         ; create hotkey
         keysc := 'sc' scanCode
-        Hotkey2(keysc)
+        CreateHotkey(keysc)
     }
+}
+
+;--
+
+onMouseDn()
+{
+    ; this is required so that Shift+LeftMouseButton does not output the tapval
+    ; for a dualMode LShift
+    CKeyDef.checkOnDualDn()
+}
+
+onMouseUp()
+{
+}
+
+hookMouse()
+{
+    fnDn := Func("onMouseDn")
+    fnUp := Func("onMouseUp")
+
+    ; '~' lets the button through, we only need to KNOW that it was presssed
+    HotKey '~LButton', fnDn
+    HotKey '~LButton up', fnUp
+
+    HotKey '~MButton', fnDn
+    HotKey '~MButton up', fnUp
+
+    HotKey '~RButton', fnDn
+    HotKey '~RButton up', fnUp
+
 }
 
 ;-------
 
-;; action funcs for keydefs
-
+;; action funcs for keydefs, called in CKeyDef.OnKeyDn/Up
 
 prepBlind(keyDef, out)
 {
+    ; use {blind+} if we need to output a non-shifted key while shift is down
+    ; eg Shift+q => [
     if (CKeyDef.IsShiftDown()) {
-        OutputDebug keydef.name " shift dn"
-        if (!out.isShifted && !InStr(out.mods, "+")) {
-            OutputDebug keydef.name " !out.isShifted"
+        if (!out.isShiftKey && !out.isShifted && !InStr(out.mods, "+")) {
             return "{blind+}"            
         }
     }
@@ -101,10 +133,10 @@ prepBlind(keyDef, out)
 sendOutValueDn(keydef) 
 { 
     out := keydef.GetValues(false)
-
     if (out) {
         blindStr := prepBlind(keydef, out)
         Send blindStr out.mods "{" out.key  " Down}"
+        ; outputdebug "Send " blindStr out.mods "{" out.key  " Down}"
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -157,10 +189,8 @@ layerAccessUp(keydef)
 ;;----------
 
 
-InitLayout(layers, mappings)
+InitLayout(layers)
 {
-    escapeSc := MakeKeySC('Escape')
-
     ; create layers, 1st is main
     for idx, val in layers {
         outputdebug "layer " idx  " " val.id " " val.key " " val.tap
@@ -176,18 +206,24 @@ InitLayout(layers, mappings)
 
     ; create layer access keys, set on main layer
     for idx, val in layers {
-        k := CKeyDef.CreateLayerAccess(val.key, val.id, val.tap)
-        main.AddKeyDef(k)
+        if (idx > 1  && val.Key) {
+            k := CKeyDef.CreateLayerAccess(val.key, val.id, val.tap)
+            main.AddKeyDef(k)
+        }
     }
 
     ; create mappings (keydefs in layers)
-    for idx, val in mappings {
+    for idx, val in layers {
         outputdebug val.id
         outputdebug "   " val.map
         outputdebug val.id "Sh"
         outputdebug "   " val.mapSh
         ; get layer
         layer := layerDefsById[val.id]
+        if (!layer) {
+            MsgBox("Unknown layer " val.id)
+            ExitApp
+        }
         
         layer.AddMappings(val.map, false)
         layer.AddMappings(val.mapSh, true)
@@ -197,26 +233,35 @@ InitLayout(layers, mappings)
     ; we need to trap all key events for dualMode 
     ; eg @Shift-F2, if no hotkey for F2 then we wont know a key was press and will output Tapval
     CreateHotkeysForUsKbd()
+
+    ; hook mouse buttons, to avoid out tapVal for dualMode modifier (eg. shift+click)
+    hookMouse()
 }
 
 ; ---------
 
+; test / debug
 tata()
 {
     layers := [
-        {id: "main"},
-        {id: "punx", key: "Space", tap: "Space"},
-        {id: "edit", key: "LAlt"}
+        {id: "main",
+             map: "a @/  s @>+q",  mapSh: "a @/ S @>+Q"
+        },
+        ; {id: "punx", key: "Space", tap: "Space"},
+        ; {id: "edit", key: "LAlt"}
     ]
     mappings := [
-        {id: "main", map: "a s d f  i e +a :", mapSh: "a s d f  I e +z ["},
-        {id: "punx", map: "a s d  , `; ." },
+        {id: "main", map: "a @/  s @>+q",  mapSh: "a @/ S @>+Q" },
+        ; {id: "main", map: "a s d f  i e +a :", mapSh: "a s d f  I e +z ["},
+        ; {id: "punx", map: "a s d  , `; ." },
     ]
 
-    InitLayout(layers, mappings)
+    InitLayout(layers)
 
     main := layerDefsById["main"]
-    main.AddMappings("@LSh k", false)
+    ; main.AddMappings("@LSh k", false)
+
+    StopOnEscape := true
 }
 
 ; tata()

@@ -59,7 +59,7 @@ class CLayer
         }
     }
 
-    ; fromAndTo is a mapping: "a s d   y i e"
+    ; fromAndTo is a mapping: ['a', 's', 'd',   'y', 'i', 'e'"]
     ;  a:y s:i e:d
     AddMappingsOne(fromAndTo, isShiftedLayer)
     {
@@ -74,41 +74,93 @@ class CLayer
 
             ; leading @ indicates dual mode key (in 'from')
             ; (single click generates 'to' key, held down is modifier)
-            isDualModeKey := 0
             if (SubStr(from,1,1) == '@') {
-                from := SubStr(from,2) ; strip @
-                isDualModeKey := 1
-                OutputDebug "AddMappingsOne dual " . from . " -> " . to
+                this.mapDual(from, to, isShiftedLayer)
+                continue
             }
 
             ; replace abbreviations with real value
-            if (keyAbbrevs[from])
-                from := keyAbbrevs[from]
-
-            if (keyAbbrevs[to])
-                to := keyAbbrevs[to]
+            from := ApplyAbbrev(from)
+            to := ApplyAbbrev(to)
 
             ; get 'from' keydef that will contain the output
-            keysc := MakeKeySC(from)
-            fromKeyDef := this.keyDefs[keysc]
-
-            ; create new dualMode modifier keydef if required
-            ; note that if mappings had already been cerated for this keysc they will be lost here            
-            if (isDualModeKey && (!fromKeyDef || !fromKeyDef.isDual)) {
-                OutputDebug "creating dual modifier for " from
-                fromKeyDef := CKeyDef.CreateDualModifier(from, from, "")
-                this.keyDefs[keysc] := fromKeyDef
-            }
-
+            fromKeyDef := this.GetKeydef(from)
 
             ; add mapping
             if (fromKeyDef) {
-                fromKeyDef.AddMapping(to, isShiftedLayer, isDualModeKey)
+                fromKeyDef.AddMapping(to, isShiftedLayer, false)
             }
             else {
                 MsgBox "No keyDef for " from " / " GetKeyName(from)
                 ExitApp
             }
         }
+    }
+
+    ; from begins with '@', indiciating a dualMode key
+    mapDual(from, to, isShiftedLayer)
+    {
+        OutputDebug "mapDual " from " " to
+
+        from := SubStr(from,2) ; strip leading @
+        from := ApplyAbbrev(from)
+        dualHold := from                    ; for now, assume from is modifier
+        dualTap := ApplyAbbrev(to)     ; and to is tap val
+
+        fromsc := MakeKeySC(from)
+        fromKeydef := this.keyDefs[fromsc]
+
+        toLen := StrLen(to)
+        toPrefix := SubStr(to, 1, 1)
+        if (toPrefix == "@" && toLen > 1) {
+            ; "@^v"  : hold is ctrl (^), tap is v
+            ; "@>+a" : hold is RShift, tap is a
+            if (toLen < 3) {
+                MsgBox("dual mode key " from ", 'to' is not valid (len < 3): " to)
+                ExitApp
+            }
+
+            ; tap val
+            dualTap := SubStr(to, toLen, 1)  ; last char is tap val 
+
+            ; hold val
+            dualHold := SubStr(to, 2, toLen-2) ; "<+"
+            side := ""
+            if (SubStr(dualHold, 1, 1) == "<") {
+                side := "L"
+                dualHold := SubStr(dualHold, 2)
+            }
+            if (SubStr(dualHold, 1, 1) == ">") {
+                side := "R"
+                dualHold := SubStr(dualHold, 2)
+            }
+
+            if (dualHold == "#")
+                dualHold := side "Win"
+            if (dualHold == "!")
+                dualHold := side "Alt"
+            if (dualHold == "^")
+                dualHold := side "Control"
+            if (dualHold == "+")
+                dualHold := side "Shift"
+        }
+
+        ; create new dualMode modifier keydef if required
+        ; note that if mappings had already been created for this keysc they will be lost here            
+        if (!fromKeyDef || !fromKeyDef.isDual) {
+            OutputDebug "creating dual modifier for " from
+            fromKeyDef := CKeyDef.CreateDualModifier(from, dualHold, dualTap)
+            this.keyDefs[fromsc] := fromKeyDef
+        }
+        else {
+            fromKeyDef.AddMapping(dualTap, isShiftedLayer, true)
+        }
+    }
+
+
+    GetKeydef(key)
+    {
+        keysc := MakeKeySC(key)
+        return this.keyDefs[keysc]
     }            
 }

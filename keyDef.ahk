@@ -3,8 +3,6 @@
 #include util.ahk
 
 
-global keyAbbrevs := { "SP" : "Space", "CL" : "CapsLock", "LSh" : "LShift", "RSh" : "RShift" }
-
 class COutput
 {
     ; outStr: 'a', '^c' (ctrl-c), "LShift", "CL"
@@ -24,8 +22,7 @@ class COutput
         this.splitModsAndKey(outStr)
 
         ; replace abbreviations with real value
-        if (keyAbbrevs[this.key])
-            this.key := keyAbbrevs[this.key]
+        this.key := ApplyAbbrev(this.key)
 
         ; check for invalid key
         sc := GetKeySC(this.key)
@@ -36,6 +33,7 @@ class COutput
                 ExitApp
         }
 
+        ; set modifier flags
         name := GetKeyName(this.key)
         this.isShiftKey := (name ~= "i)shift")
         this.isCtrlKey := (name ~= "i)ctrl|control")
@@ -44,16 +42,16 @@ class COutput
         this.isModifier := this.isShiftKey || this.isCtrlKey
         this.isModifier |= this.isAltKey ||this.isWinKey
 
-        ; set flag indicating if the char to output is shifted (ie ! is Shift-1)
+        ; set flag indicating if the char to output is shifted (ie '!' is Shift-1)
         shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         shiftedChars .='~!@#$`%^&*()_+{}|:"<>?'
-        if (InStr(shiftedChars, this.key))
+        if (InStr(shiftedChars, this.key, 1))
             this.isShifted := true
     }
 
     ;-----
 
-    ; '^Z' => '^', 'Z'
+    ; '^Z' => mods='^', key='Z'
     splitModsAndKey(key)
     {
         this.mods := ""
@@ -74,7 +72,7 @@ class COutput
 class CKeyDef
 {
     static waitingDual := 0     ; CKeyDef
-    static downKeys := {}       ; [sc] = CKeyDef
+    static downKeys := {}       ; CKeyDef[keysc]
 
     ; key: 'a', "LShift", "Escape", "sc020" ..
     ; outXyz are COutput[2], [2] for shifted value
@@ -108,7 +106,7 @@ class CKeyDef
         if (this.isDown && !this.canRepeat)
             return
 
-        this.checkOnDualDn()
+        CKeyDef.checkOnDualDn()
 
         ; mark key as down, save in down keys 'list'
         this.isDown := true
@@ -145,6 +143,7 @@ class CKeyDef
 
     ;----
 
+    /*static*/
     checkOnDualDn()
     {
         waiting := CKeyDef.waitingDual
@@ -202,7 +201,8 @@ class CKeyDef
     CreateStdKeydef(key, outStr)
     {
         outValue := new COutput(outStr)
-        k1 := new CKeyDef(key, true, false, [outValue,outValue], [])
+        outValueSh := new COutput("+" outStr)
+        k1 := new CKeyDef(key, true, false, [outValue,outValueSh], [])
         k1.onHoldDn := Func("sendOutValueDn")
         k1.onHoldUp := Func("sendOutValueUp")
 
@@ -215,7 +215,9 @@ class CKeyDef
     {
         k1 := CKeyDef.CreateEmptyDualModifier(key)
         outValue := new COutput(outStr)
+        outValueSh := new COutput("+" outStr)
         outTapValue := (!outTapStr ? 0 : new COutput(outTapStr))
+        outTapValueSh := (!outTapStr ? 0 : new COutput("+" outTapStr))
         k1.outValues := [outValue,outValue]
         k1.outTapValues := [outTapValue, outTapValue]
 
@@ -239,7 +241,8 @@ class CKeyDef
     {
         ; always isDual, ignored if no outTapValue
         outTapValue := (outTapStr ? new COutput(outTapStr) : 0)
-        k1 := new CKeyDef(key, false, true, 0, [], [outTapValue,outTapValue])
+        outTapValueSh := (outTapStr ? new COutput("+" outTapStr) : 0)
+        k1 := new CKeyDef(key, false, true, 0, [], [outTapValue,outTapValueSh])
         
         ; save layerId !
         k1.layerId := layerId
@@ -258,6 +261,10 @@ class CKeyDef
     {
         ; is any of the currently 'down' keys a shift key ?
         For keysc, keydef in CKeyDef.downKeys {
+            ; OutputDebug "+dn " keydef.name
+            ; OutputDebug " " keydef.outValues[1].key
+            ; OutputDebug " " GetKeyName(keydef.outValues[1].key)
+            ; OutputDebug " " keydef.outValues[1].isShiftKey
             if (keydef.outValues[1] ) {                
                 if (keydef.outValues[1].isShiftKey) {
                     ; OutputDebug "found shift dn " . keydef.name
