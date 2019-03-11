@@ -54,7 +54,7 @@ go()
 	    },
 
 	    {id: "edit", key: "LAlt",
-	    	map: extendLayer
+	    	map: extendLayer, mapSh: extendLayer
 		}
 	]
 

@@ -122,7 +122,8 @@ prepBlind(keyDef, out)
     ; use {blind+} if we need to output a non-shifted key while shift is down
     ; eg Shift+q => [
     if (CKeyDef.IsShiftDown()) {
-        if (!out.isShiftKey && !out.isShifted && !InStr(out.mods, "+")) {
+        ; if (!out.isShiftKey && !out.isShifted && !InStr(out.mods, "+")) {
+        if (out.needBlindShift && !InStr(out.mods, "+")) {
             return "{blind+}"            
         }
     }
@@ -145,7 +146,7 @@ sendOutValueDn(keydef)
 
 sendOutValueUp(keydef) 
 { 
-    OutputDebug "++send out dn " currentLayer.id ' ' keydef.name
+    OutputDebug "++send out up " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
         blindStr := prepBlind(keydef, out)
@@ -250,13 +251,9 @@ tata()
         {id: "main",
              map: "a @/  s @>+q",  mapSh: "a @/ S @>+Q"
         },
-        ; {id: "punx", key: "Space", tap: "Space"},
-        ; {id: "edit", key: "LAlt"}
-    ]
-    mappings := [
-        {id: "main", map: "a @/  s @>+q",  mapSh: "a @/ S @>+Q" },
-        ; {id: "main", map: "a s d f  i e +a :", mapSh: "a s d f  I e +z ["},
-        ; {id: "punx", map: "a s d  , `; ." },
+        {id: "punx", key: "Space", tap: "Space",
+            map: "a   e", mapSh: "a   e"},
+            ; map: "a s f g   i e +a :", mapSh: "a s f g  I e +z ["},
     ]
 
     InitLayout(layers)
@@ -267,4 +264,4 @@ tata()
     StopOnEscape := true
 }
 
-; tata()
+tata()
