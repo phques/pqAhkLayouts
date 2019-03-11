@@ -1,5 +1,4 @@
 
-mappings on layer dont work !?
-tap of layer access key : no output val
+shift on keys of extend layer does not work (either physical key or mapped key)
 
 cannot define AHK hotkeys anymore !!

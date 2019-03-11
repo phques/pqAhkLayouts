@@ -17,6 +17,7 @@ global CenterOnCurrWndMonitor := 1
 
 #include ../layersv2c.ahk
 #include punxLayer.ahk
+#include extendLayer.ahk
 ; #include ../../common/fromPkl/pkl_guiLayers.ahk
 
 ; ----
@@ -40,6 +41,7 @@ go()
 	)"
 
 	punxLayers := PunxLayerMappings()
+	extendLayer := ExtendLayerMappings()
 
 	layers := [
 	    {id: "main", 
@@ -49,10 +51,11 @@ go()
 
 	    {id: "punx", key: "Space", tap: "Space",
 	    	map: punxLayers.layerAZ, 
-	    	; mapSh: "a s d  ! { @"
 	    },
 
-	    ; {id: "edit", key: "LAlt"}
+	    {id: "edit", key: "LAlt",
+	    	map: extendLayer
+		}
 	]
 
 	InitLayout(layers)
