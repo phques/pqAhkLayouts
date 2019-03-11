@@ -215,9 +215,9 @@ InitLayout(layers)
     ; create mappings (keydefs in layers)
     for idx, val in layers {
         outputdebug val.id
-        outputdebug "   " val.map
+        outputdebug val.map
         outputdebug val.id "Sh"
-        outputdebug "   " val.mapSh
+        outputdebug val.mapSh
         ; get layer
         layer := layerDefsById[val.id]
         if (!layer) {

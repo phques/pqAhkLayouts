@@ -16,6 +16,7 @@ global ImgHeight := 54
 global CenterOnCurrWndMonitor := 1
 
 #include ../layersv2c.ahk
+#include punxLayer.ahk
 ; #include ../../common/fromPkl/pkl_guiLayers.ahk
 
 ; ----
@@ -38,6 +39,7 @@ go()
 	 @LSh z x c v   n m , . @/        Q Y _ ! ?  K F W M @>+V
 	)"
 
+	punxLayers := PunxLayerMappings()
 
 	layers := [
 	    {id: "main", 
@@ -46,8 +48,8 @@ go()
 	    },
 
 	    {id: "punx", key: "Space", tap: "Space",
-	    	map: "a s d  , `; .", 
-	    	mapSh: "a s d  ! { @"
+	    	map: punxLayers.layerAZ, 
+	    	; mapSh: "a s d  ! { @"
 	    },
 
 	    ; {id: "edit", key: "LAlt"}
@@ -55,9 +57,8 @@ go()
 
 	InitLayout(layers)
 
-	; fix dualmode / key so that hold is RShift, not '/' !!!
-	; main := layerDefsById["main"]
-
+	; debug / for now, since no hotkeys yet
+    StopOnEscape := true
 
 }
 

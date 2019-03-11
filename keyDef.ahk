@@ -242,7 +242,7 @@ class CKeyDef
         ; always isDual, ignored if no outTapValue
         outTapValue := (outTapStr ? new COutput(outTapStr) : 0)
         outTapValueSh := (outTapStr ? new COutput("+" outTapStr) : 0)
-        k1 := new CKeyDef(key, false, true, 0, [], [outTapValue,outTapValueSh])
+        k1 := new CKeyDef(key, false, true, [], [outTapValue,outTapValueSh])
         
         ; save layerId !
         k1.layerId := layerId
@@ -272,7 +272,7 @@ class CKeyDef
                 }
             }
             else {
-                OutputDebug "IsShiftDown no outval[1] " . keydef.name
+                ; OutputDebug "IsShiftDown no outval[1] " . keydef.name
             }
         }
 
