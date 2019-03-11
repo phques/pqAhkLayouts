@@ -10,7 +10,7 @@ swap vx qz ,.
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs"
+global ImgsDir := A_ScriptDir . "\imgs\AdNWpq2-3"
 global ImgWidth := 176
 global ImgHeight := 54
 global CenterOnCurrWndMonitor := 1
@@ -18,7 +18,7 @@ global CenterOnCurrWndMonitor := 1
 #include ../layersv2c.ahk
 #include punxLayer.ahk
 #include extendLayer.ahk
-; #include ../../common/fromPkl/pkl_guiLayers.ahk
+#include ../fromPkl/pkl_guiLayers.ahk
 
 ; ----
 
@@ -62,6 +62,8 @@ go()
 
 	; debug / for now, since no hotkeys yet
     StopOnEscape := true
+
+	DisplayHelpImage()
 
 }
 

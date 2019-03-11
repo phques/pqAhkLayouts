@@ -9,7 +9,7 @@ ExtendLayerMappings()
         q w e r     y u i o p [     insert escape tab alt       PgUp Home Up   End   Delete    AppsKey
        CL a f g     h j k l ; '     LWin Control Shift !Esc     PgDn Left Down Right Backspace Enter
         z x c v b     m , . /        ^z ^x ^c ^v Space               ^c   ^x   ^v    ^z
-        LShift                      LShift
+        LSh RSh LCt RCt              LSh RSh LCt RCt
     )"
     return layer
 }

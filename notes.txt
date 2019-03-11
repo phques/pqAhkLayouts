@@ -1,4 +1,4 @@
 
-shift on keys of extend layer does not work (either physical key or mapped key)
-
-cannot define AHK hotkeys anymore !!
++ shift on keys of extend layer does not work (either physical key or mapped key)
++ with LAlt used for layer access, ctrl+alt+Left/Right does not work (BBZero)
++ cannot define AHK hotkeys anymore !!

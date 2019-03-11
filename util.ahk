@@ -2,7 +2,8 @@
 ; Copyright 2018 Philippe Quesnel
 ; Licensed under the Academic Free License version 3.0
 
-global keyAbbrevs := { "SP" : "Space", "CL" : "CapsLock", "LSh" : "LShift", "RSh" : "RShift" }
+global keyAbbrevs := { "SP" : "Space", "CL" : "CapsLock", "LSh" : "LShift", "RSh" : "RShift", 
+	"LCt" : "LControl", "RCt" : "RControl"}
 
 ; key => 'sc000'
 MakeKeySC(key)
