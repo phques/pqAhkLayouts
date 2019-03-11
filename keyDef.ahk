@@ -261,13 +261,12 @@ class CKeyDef
     {
         ; is any of the currently 'down' keys a shift key ?
         For keysc, keydef in CKeyDef.downKeys {
-            ; OutputDebug "+dn " keydef.name
-            ; OutputDebug " " keydef.outValues[1].key
-            ; OutputDebug " " GetKeyName(keydef.outValues[1].key)
-            ; OutputDebug " " keydef.outValues[1].isShiftKey
+            OutputDebug "-- +dn " keydef.name
             if (keydef.outValues[1] ) {                
+                ; OutputDebug " " keydef.outValues[1].key
+                ; OutputDebug " " GetKeyName(keydef.outValues[1].key)
                 if (keydef.outValues[1].isShiftKey) {
-                    ; OutputDebug "found shift dn " . keydef.name
+                    OutputDebug "found shift dn " . keydef.name
                     Return True
                 }
             }

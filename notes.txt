@@ -1,4 +1,5 @@
 
 + shift on keys of extend layer does not work (either physical key or mapped key)
-+ with LAlt used for layer access, ctrl+alt+Left/Right does not work (BBZero)
++ with LAlt used for layer access, ctrl+alt+Left/Right does not work in BBZero
+  -> that's bacause Alt is not sent, similar to using Alt-gr
 + cannot define AHK hotkeys anymore !!

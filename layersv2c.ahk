@@ -132,11 +132,12 @@ prepBlind(keyDef, out)
 
 sendOutValueDn(keydef) 
 { 
+    OutputDebug "++send out dn " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
         blindStr := prepBlind(keydef, out)
         Send blindStr out.mods "{" out.key  " Down}"
-        ; outputdebug "Send " blindStr out.mods "{" out.key  " Down}"
+        outputdebug "Send " blindStr out.mods "{" Getkeyname(out.key)  " Down}"
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -144,10 +145,12 @@ sendOutValueDn(keydef)
 
 sendOutValueUp(keydef) 
 { 
+    OutputDebug "++send out dn " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
         blindStr := prepBlind(keydef, out)
         Send blindStr out.mods "{" out.key " Up}"
+        outputdebug "Send " blindStr out.mods "{" Getkeyname(out.key) " Up}"
     }
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
