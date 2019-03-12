@@ -94,10 +94,14 @@ pkl_displayHelpImage( activate := 0 )
             wnd := 0
             imgCtrl := 0
         }
+		prevFile := ""
 		return
 	}
-	if ( guiActive == 0 )
+	
+	if ( guiActive == 0 ) {
+		prevFile := ""
 		return
+	}
 
 
 	; check if mouse is over the help image
