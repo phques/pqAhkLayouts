@@ -5,6 +5,8 @@
 global wnd := 0
 global imgCtrl := 0
 
+global layerAccessKeyDn
+
 ; initial call to enable & display
 DisplayHelpImage()
 {
@@ -161,23 +163,25 @@ pkl_displayHelpImage( activate := 0 )
 
 	; avoid flicker for access keys that can also output themselves,
 	; skip 1st timer (not perfect, but helps)
-	; if (!blockedKeySkipped) {
-	; 	; already skipped once ?
-	; 	if (prevSkippedLayerId != CurrentLayer.id) {
-	; 		; ok, 1st time on this layer, skip if required
-	; 		if (CurrentLayer.accessKey && !CurrentLayer.blockAccessKey) {
-	; 			blockedKeySkipped := 1
-	; 			prevSkippedLayerId := CurrentLayer.index
-	; 			return
-	; 		}
-	; 	}
-	; }
+	if (!blockedKeySkipped) {
+		; already skipped once ?
+		if (prevSkippedLayerId != CurrentLayer.id) {
+			; ok, 1st time on this layer, skip if required
+    		;if (layerAccessKeyDn && layerAccessKeyDn.sc == sc)
+			if (layerAccessKeyDn && layerAccessKeyDn.outTapValues && layerAccessKeyDn.outTapValues[1]) {
+				OutputDebug "skip layer access key " layerAccessKeyDn.name
+				blockedKeySkipped := 1
+				prevSkippedLayerId := CurrentLayer.id
+				return
+			}
+		}
+	}
 
 	; once we change layer, reset  prevSkippedLayerId
-	; if (prevSkippedLayerId != CurrentLayer.index)
-	; 	prevSkippedLayerId := 0
+	if (prevSkippedLayerId != CurrentLayer.index)
+		prevSkippedLayerId := 0
 
-	; blockedKeySkipped := 0
+	blockedKeySkipped := 0
 
 	fileName := "layer" CurrentLayer.id
 
