@@ -16,5 +16,9 @@
  (again, should support in code to avoid probs)
 
 * fix missing help image code that avoids flashing layer change on dualMode space
+<<<<<<< HEAD
 * move hotkeys to separate file
 * create image for numpad
+=======
+* move hotkeys to separate file
+>>>>>>> 267f34d739f4066da593aa34734549e0e5907811
