@@ -15,5 +15,3 @@
 * layer lock key action (eg. for numpad) 
  (again, should support in code to avoid probs)
 
-* fix missing help image code that avoids flashing layer change on dualMode space
-* create image for numpad

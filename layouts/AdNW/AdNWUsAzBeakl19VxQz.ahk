@@ -10,16 +10,16 @@ swap vx qz ,.
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs"
+global ImgsDir := A_ScriptDir . "\imgs\beakl19" ; dont have real img, rememer swpped keys ;-)
 global ImgWidth := 176
 global ImgHeight := 54
 global CenterOnCurrWndMonitor := 1
 
-#include ../fromPkl/pkl_guiLayers.ahk
-#include ../layersv2c.ahk
-#include punxLayer.ahk
-#include extendLayer.ahk
-#include numpadLayer.ahk
+#include ../../fromPkl/pkl_guiLayers.ahk
+#include ../../layersv2c.ahk
+#include ../punxLayer.ahk
+#include ../extendLayer.ahk
+#include ../numpadLayer.ahk
 
 ; ----
 
@@ -83,8 +83,4 @@ return
 
 ;--- hotkeys, must be at the end -----
 
-#include winHotkeys.ahk
-
-
-
-
+#include ../winHotkeys.ahk
