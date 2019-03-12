@@ -1,5 +1,19 @@
 
-+ shift on keys of extend layer does not work (either physical key or mapped key)
-+ with LAlt used for layer access, ctrl+alt+Left/Right does not work in BBZero
+* with LAlt used for layer access, ctrl+alt+Left/Right does not work in BBZero
   -> that's bacause Alt is not sent, similar to using Alt-gr
-+ cannot define AHK hotkeys anymore !!
+
+* cannot define AHK hotkeys anymore !!
+  -> can choose a key that will not have a hotkey created for the layout,
+     and then create hotkeys normally for it (eg. LWin)
+  -> also could define a layer used to create 'Action' keys
+     - get the keydef from the layer and re-assign the key.onHoldDn ..
+       (should support this in the code! 'action keys')
+      ** a keydef could hold actions vs outVals,
+        so the funcs called foo onHold etc would be tied to out vs keydef
+        (need ts see if this is worth it, not certain I see an advantage)
+
+* layer lock key action (eg. for numpad) 
+ (again, should support in code to avoid probs)
+
+* fix missing help image code that avoids flashing layer change on dualMode space
+* move hotkeys to separate file

@@ -73,13 +73,22 @@ CreateHotkey(sc)
 
 
 ; create a hotkey foreach key scancode of US kbd
-CreateHotkeysForUsKbd()
+; dontCreateHotkeys is [] of scancodes to skip
+CreateHotkeysForUsKbd(dontCreateHotkeys)
 {
-    for idx, scanCode in usKbdScanCodes
-    {    
-        ; create hotkey
+    for _, scanCode in usKbdScanCodes
+    {   
+        ; not very efficient, but only done once at startup
         keysc := 'sc' scanCode
-        CreateHotkey(keysc)
+        skip := false
+        for _, scToSkip in dontCreateHotkeys {
+            if (scToSkip = keysc)
+                skip := true
+        }
+        if (!skip) {
+            ; create hotkey
+            CreateHotkey(keysc)
+        }
     }
 }
 
@@ -193,7 +202,7 @@ layerAccessUp(keydef)
 ;;----------
 
 
-InitLayout(layers)
+InitLayout(layers, dontCreateHotkeys)
 {
     ; create layers, 1st is main
     for idx, val in layers {
@@ -236,7 +245,7 @@ InitLayout(layers)
     ; create all hotkeys (do at end, needs data above)
     ; we need to trap all key events for dualMode 
     ; eg @Shift-F2, if no hotkey for F2 then we wont know a key was press and will output Tapval
-    CreateHotkeysForUsKbd()
+    CreateHotkeysForUsKbd(dontCreateHotkeys)
 
     ; hook mouse buttons, to avoid out tapVal for dualMode modifier (eg. shift+click)
     hookMouse()
@@ -256,7 +265,7 @@ tata()
             ; map: "a s f g   i e +a :", mapSh: "a s f g  I e +z ["},
     ]
 
-    InitLayout(layers)
+    InitLayout(layers, {})
 
     main := layerDefsById["main"]
     ; main.AddMappings("@LSh k", false)
