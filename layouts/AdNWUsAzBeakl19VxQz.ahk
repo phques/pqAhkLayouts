@@ -15,13 +15,15 @@ global ImgWidth := 176
 global ImgHeight := 54
 global CenterOnCurrWndMonitor := 1
 
+#include ../fromPkl/pkl_guiLayers.ahk
 #include ../layersv2c.ahk
 #include punxLayer.ahk
-; #include ../../common/fromPkl/pkl_guiLayers.ahk
+#include extendLayer.ahk
+#include numpadLayer.ahk
 
 ; ----
 
-go()
+CreateLayers()
 {
 	; using AngleZ ergo mod (lower left hand shifted left by 1, pinky on dualmode Shift)
 	; dualMode '/' : RShift | V
@@ -40,6 +42,8 @@ go()
 	)"
 
 	punxLayers := PunxLayerMappings()
+	extendLayer := ExtendLayerMappings()
+	numpadLayers := NumpadLayerMappings()
 
 	layers := [
 	    {id: "main", 
@@ -49,39 +53,38 @@ go()
 
 	    {id: "punx", key: "Space", tap: "Space",
 	    	map: punxLayers.layerAZ, 
-	    	; mapSh: "a s d  ! { @"
 	    },
 
-	    ; {id: "edit", key: "LAlt"}
+	    {id: "edit", key: "LAlt",
+	    	map: extendLayer, mapSh: extendLayer
+		},
+
+	    {id: "numpad", key: "b",
+	    	map: numpadLayers.indexOnB, 
+		},
 	]
 
-	InitLayout(layers)
+	; dont create layout hotkeys for these
+	; for eg, we will use Win-XX for hotkeys to do actions
+	; we need to do it this way for the Suspend hotkey w. #SuspendExempt
+	dontCreateHotkeys := [MakeKeySC("LWin")]
 
-	; debug / for now, since no hotkeys yet
-    StopOnEscape := true
+	InitLayout(layers, dontCreateHotkeys)
+
 
 }
 
 
-go()
+CreateLayers()
+DisplayHelpImage()
 
 return
-;--------
-
-;## PQ hotkeys like these dont work with my layersv2c.ahk :-(
-
-; Ctrl-Win-X qwerty
-#^sc02D:: ExitApp
-
-; Ctrl-Win-p qwerty
-#^sc019::Send 'philippe.quesnel'
-
-; Ctrl-Win-q qwerty
-#^sc010::Send 'philippe.quesnel@gmail.com'
 
 
-; Win-Delete to close the current window
-#Del::WinClose "A"
+;--- hotkeys, must be at the end -----
+
+#include winHotkeys.ahk
+
 
 
 

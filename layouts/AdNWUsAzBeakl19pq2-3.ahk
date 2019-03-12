@@ -77,68 +77,31 @@ CreateLayers()
 }
 
 
-CreateHotkeys_()
-{
-	; manually create hotkeys, on a layer
-	hotklay := layerDefsById["hotkeys"]
+; CreateHotkeys__()
+; {
+; 	; manually create hotkeys, on a layer
+; 	hotklay := layerDefsById["hotkeys"]
 
-	; Win-End: stop script
-	key := hotklay.GetKeydef("End")
-	key.onHoldDn := Func("ExitApp")
+; 	; Win-End: stop script
+; 	key := hotklay.GetKeydef("End")
+; 	key.onHoldDn := Func("ExitApp")
 
-	; Win-Delete to close the current window
-	key := hotklay.GetKeydef("Del")
-	key.onHoldDn := Func("WinClose").Bind("A")
+; 	; Win-Delete to close the current window
+; 	key := hotklay.GetKeydef("Del")
+; 	key.onHoldDn := Func("WinClose").Bind("A")
 
-	; Win-\   suspend / resume hotkeys (help image toggles at same time)
-	key := hotklay.GetKeydef("\")
-	key.onHoldDn := Func("SuspendKeysToggle")
+; 	; Win-\   suspend / resume hotkeys (help image toggles at same time)
+; 	key := hotklay.GetKeydef("\")
+; 	key.onHoldDn := Func("SuspendKeysToggle")
 
-}
+; }
 
 CreateLayers()
 DisplayHelpImage()
 
 return
 
-;--------
 
+;--- hotkeys, must be at the end -----
 
-; suspend / resume hotkeys and turn off/on help image
-#SuspendExempt true
-
-LWin & PgDn::
-    Suspend  "toggle"
-    if (A_IsSuspended)
-        DisplayHelpImageSuspendOn()
-    else 
-        DisplayHelpImageSuspendOff()
-return
-
-; stop script
-LWin & End:: ExitApp
-
-#SuspendExempt false
-
-
-; toggle help img on/off
-LWin & PgUp::DisplayHelpImageToggle()
-
-; close current active window
-LWin & Delete:: WinClose "A"
-
-; LWin-p qwerty
-LWin & sc019:: Send 'philippe.quesnel'
-; LWin-q qwerty
-LWin & sc010::Send 'philippe.quesnel@gmail.com'
-
-
-;## PQ hotkeys like these dont work with my layersv2c.ahk :-(
-; #^sc019::Send 'philippe.quesnel'
-
-
-
-
-
-
-
+#include winHotkeys.ahk
