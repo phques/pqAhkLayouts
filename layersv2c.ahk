@@ -133,12 +133,12 @@ prepBlind(keyDef, out)
 
 sendOutValueDn(keydef) 
 { 
-    OutputDebug "++send out dn " currentLayer.id ' ' keydef.name
+    ; OutputDebug "++send out dn " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
         blindStr := prepBlind(keydef, out)
         Send blindStr out.mods "{" out.key  " Down}"
-        outputdebug "Send " blindStr out.mods "{" Getkeyname(out.key)  " Down}"
+        ; outputdebug "Send " blindStr out.mods "{" Getkeyname(out.key)  " Down}"
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -146,12 +146,12 @@ sendOutValueDn(keydef)
 
 sendOutValueUp(keydef) 
 { 
-    OutputDebug "++send out up " currentLayer.id ' ' keydef.name
+    ; OutputDebug "++send out up " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
         blindStr := prepBlind(keydef, out)
         Send blindStr out.mods "{" out.key " Up}"
-        outputdebug "Send " blindStr out.mods "{" Getkeyname(out.key) " Up}"
+        ; outputdebug "Send " blindStr out.mods "{" Getkeyname(out.key) " Up}"
     }
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
@@ -252,7 +252,7 @@ tata()
              map: "a @/  s @>+q",  mapSh: "a @/ S @>+Q"
         },
         {id: "punx", key: "Space", tap: "Space",
-            map: "a   e", mapSh: "a   e"},
+            map: "a s d f   i e a u", mapSh: "a s d f   i E +a ["},
             ; map: "a s f g   i e +a :", mapSh: "a s f g  I e +z ["},
     ]
 
@@ -264,4 +264,4 @@ tata()
     StopOnEscape := true
 }
 
-tata()
+; tata()
