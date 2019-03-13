@@ -10,7 +10,7 @@ swap vx qz ,.
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\19pq2-3"
+global ImgsDir := A_ScriptDir . "\imgs\beakl19pq2-3"
 global ImgWidth := 176
 global ImgHeight := 54
 global CenterOnCurrWndMonitor := 1
@@ -55,11 +55,11 @@ CreateLayers()
 	    	map: punxLayers.layerAZ, 
 	    },
 
-	    {id: "edit", key: "LAlt",
+	    {id: "edit", key: "LAlt", toggle: true,
 	    	map: extendLayer, mapSh: extendLayer
 		},
 
-	    {id: "numpad", key: "b",
+	    {id: "numpad", key: "b", toggle: true,
 	    	map: numpadLayers.indexOnB, 
 		},
 
@@ -73,6 +73,10 @@ CreateLayers()
 	dontCreateHotkeys := [MakeKeySC("LWin")]
 
 	InitLayout(layers, dontCreateHotkeys)
+
+	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
+	punx := layerDefsById["punx"]
+	punx.AddMappings("b  Space", false)
 
 }
 

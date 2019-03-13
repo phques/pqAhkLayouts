@@ -55,11 +55,11 @@ CreateLayers()
 	    	map: punxLayers.layerAZ, 
 	    },
 
-	    {id: "edit", key: "LAlt",
+	    {id: "edit", key: "LAlt", toggle: true,
 	    	map: extendLayer, mapSh: extendLayer
 		},
 
-	    {id: "numpad", key: "b",
+	    {id: "numpad", key: "b", toggle: true,
 	    	map: numpadLayers.indexOnB, 
 		},
 	]
@@ -71,7 +71,9 @@ CreateLayers()
 
 	InitLayout(layers, dontCreateHotkeys)
 
-
+	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
+	punx := layerDefsById["punx"]
+	punx.AddMappings("b  Space", false)
 }
 
 
