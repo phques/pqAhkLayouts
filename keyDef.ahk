@@ -27,14 +27,15 @@ class COutput
         ; replace abbreviations with real value
         this.key := ApplyAbbrev(this.key)
 
+        ; PQ: cannot do this, some output might not be a <key>, eg french chars etc
         ; check for invalid key
-        sc := GetKeySC(this.key)
-        if (!sc) {
-            msg := "Cannot find scancode for '" . this.key . "' outStr: <" . outStr . ">"
-            outputdebug(msg)
-            if (MsgBox(msg, "Error", "O/C") = "Cancel")
-                ExitApp
-        }
+        ; sc := GetKeySC(this.key)
+        ; if (!sc) {
+        ;     msg := "Cannot find scancode for '" . this.key . "' outStr: <" . outStr . ">"
+        ;     outputdebug(msg)
+        ;     if (MsgBox(msg, "Error", "O/C") = "Cancel")
+        ;         ExitApp
+        ; }
 
         ; set modifier flags
         name := GetKeyName(this.key)
@@ -93,6 +94,15 @@ class CKeyDef
         this.isDown := false
         this.outValues := outValues
         this.outTapValues := outTapValues
+
+        ; check that we got a valid key
+        sc := GetKeySC(key)
+        if (!sc) {
+            msg := "Cannot find scancode for '" key "'"
+            outputdebug(msg)
+            if (MsgBox(msg, "Error", "O/C") = "Cancel")
+                ExitApp
+        }
     }
 
     ; overridables

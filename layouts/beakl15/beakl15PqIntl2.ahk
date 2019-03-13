@@ -54,7 +54,7 @@ CreateLayers()
 	(Join`r`n
 	    q w e r t   y u i o p [      : ï ô û ù  | ç [ ] + ~
 	 CL a s d f g   h j k l ; '    % - î é à =  * { " } ; #
-	 @LSh z x c v   n m , . @/       < è ê â \  & ( $ ) >
+	 @LSh z x c v   n m , . /        < è ê â \  & ( $ ) >
 	)"
 
 	punxLayers := PunxLayerMappings()
@@ -79,11 +79,7 @@ CreateLayers()
 	    	map: numpadLayers.indexOnB, 
 		},
 
-		; TODO: fix probs with french chars ("cannot find scancode")
-		; ?? 
-	    ; {id: "french", 
-	    ;  	map: layerFrench, 
-	    ; },
+	    {id: "french", map: layerFrench, },
 	]
 
 	; dont create layout hotkey for Left Win
@@ -101,8 +97,22 @@ CreateLayers()
 
 	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	punx.AddMappings("b  Space", false)
+
 }
 
+swapFrenchAndPunx()
+{
+	; get punx layer access keydef, on main layer 
+    mainLayer := layerDefsById["main"]
+	punx := layerDefsById["punx"]
+    punxAccessKeydef := mainLayer.GetKeydef(punx.key)
+
+    if (punxAccessKeydef.layerId == "french")
+    	punxAccessKeydef.layerId := "punx"
+    else
+    	punxAccessKeydef.layerId := "french"
+
+}
 
 CreateLayers()
 DisplayHelpImage()
@@ -113,3 +123,5 @@ return
 ;--- hotkeys, must be at the end -----
 
 #include ../winHotkeys.ahk
+
+LWin & Insert::swapFrenchAndPunx()
