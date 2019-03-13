@@ -1,4 +1,4 @@
-/* BEAKL15 mod PQ (based on latest BEAKL15)
+﻿/* BEAKL15 mod PQ (based on latest BEAKL15)
 
 2019-03-12 (2019-02-08)
 
@@ -38,16 +38,23 @@ CreateLayers()
 	; dualMode '/' : hold is RShift | tap is V
 	layerMain := "
 	(Join`r`n
-	     q w e r t   y u i o p [     q h o u x  w c r f z BS  
-	  CL a s d f g   h j k l ; '   ; y i e a .  d s t n b ``
+	     q w e r t   y u i o p [     q h o u x  w c r f z ``
+	  CL a s d f g   h j k l ; '   ; y i e a .  d s t n b BS
 	  @LSh z x c v   n m , . @/      j , / k '  g m l p @>+v    
 	)"
 
 	layerMainsh := "
 	(Join`r`n
-	    q w e r t   y u i o p [      Q H O U X  W C R F Z BS
-	    a s d f g   h j k l ; '      Y I E A @  D S T N B ^
-	 @LSh z x c v   n m , . @/       J ! ? K _  G M L P @>+V
+	    q w e r t   y u i o p [      Q H O U X  W C R F Z ^
+	    a s d f g   h j k l ; '      Y I E A @  D S T N B BS
+	 @LSh z x c v   n m , . @/       J ! ? K _  G M L P V
+	)"
+
+	layerFrench := "
+	(Join`r`n
+	    q w e r t   y u i o p [      : ï ô û ù  | ç [ ] + ~
+	 CL a s d f g   h j k l ; '    % - î é à =  * { " } ; #
+	 @LSh z x c v   n m , . @/       < è ê â \  & ( $ ) >
 	)"
 
 	punxLayers := PunxLayerMappings()
@@ -72,6 +79,11 @@ CreateLayers()
 	    	map: numpadLayers.indexOnB, 
 		},
 
+		; TODO: fix probs with french chars ("cannot find scancode")
+		; ?? 
+	    ; {id: "french", 
+	    ;  	map: layerFrench, 
+	    ; },
 	]
 
 	; dont create layout hotkey for Left Win
