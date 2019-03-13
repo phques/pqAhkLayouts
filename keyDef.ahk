@@ -1,16 +1,19 @@
-;-- CKeyDef --
+;-- CKeyDef / COutput --
+; pqAhkLayouts project
+; Copyright 2018 Philippe Quesnel
+; Licensed under the Academic Free License version 3.0
 
 #include util.ahk
 
-
+; holds output value for a key
 class COutput
 {
     ; outStr: 'a', '^c' (ctrl-c), "LShift", "CL"
-    ; can be one of abbrevs above
+    ; can be one of abbrevs supported by ApplyAbbrev()
     __New(outStr)
     {
-        this.mods := ""
-        this.key := ""
+        this.mods := ""     ; modifiers
+        this.key := ""      ; output val
         this.needBlindShift := false
         
         this.isShiftKey := false
@@ -40,13 +43,11 @@ class COutput
         this.isAltKey := (name ~= "i)alt")
         this.isWinKey := (name ~= "i)win")
         this.isModifier := this.isShiftKey || this.isCtrlKey
-        this.isModifier |= this.isAltKey ||this.isWinKey
+        this.isModifier |= this.isAltKey   || this.isWinKey
 
         ; set flag indicating if the char to output is non-shifted and thus
         ; we need to mask any down Shift keys to avoid sending the wrong thing 
-        ; eg: '[' is on Shifted layer, would send shift-[, which generates {
-        ; ShiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        ; ShiftedChars .='~!@#$`%^&*()_+{}|:"<>?'
+        ; eg: if '[' is on Shifted layer, would send shift-[, which generates {
         nonShiftedChars := 'abcdefghijklmnopqrstuvwxyz'
         nonShiftedChars .= "``1234567890-=[]\`;',./"
         if (InStr(nonShiftedChars, this.key, 1))
@@ -73,13 +74,14 @@ class COutput
 
 ;; ------------
 
+; holds definition of a key
 class CKeyDef
 {
-    static waitingDual := 0     ; CKeyDef
-    static downKeys := {}       ; CKeyDef[keysc]
+    static waitingDual := 0     ; CKeyDef of a dualMode key for possible Tap
+    static downKeys := {}       ; CKeyDef[keysc], currently down keys
 
     ; key: 'a', "LShift", "Escape", "sc020" ..
-    ; outXyz are COutput[2], [2] for shifted value
+    ; outXyz are COutput[2], outXyz[2] is shifted value
     __New(key, canRepeat, isDual, outValues, outTapValues)
     {
         this.name := GetKeyName(key)
@@ -97,10 +99,10 @@ class CKeyDef
     onHoldDn() { ; action when 1st pressed down / on repeat
     }
 
-    onHoldUp() { ; action on release: cancel onHoldDn action
+    onHoldUp() { ; action on release
     }
 
-    onTap() { ; action on press/release (dualMode keys only)
+    onTap() { ; action on press/release (Tap) (dualMode keys)
     }
 
     ; ---- base key mechanics ---
@@ -110,6 +112,7 @@ class CKeyDef
         if (this.isDown && !this.canRepeat)
             return
 
+        ; check to cancel waiting potential dualMode key Tap
         CKeyDef.checkOnDualDn()
 
         ; mark key as down, save in down keys 'list'
@@ -119,22 +122,24 @@ class CKeyDef
         if (this.isDual) 
             CKeyDef.waitingDual := this
 
+        ; call keys holdDown action
         this.onHoldDn()
     }
 
     OnKeyUp()
     {
-        ; do this 1st
+        ; do this 1st (mark key not down, remove from list of keys down)
         this.isDown := 0
         CKeyDef.downKeys.Delete(this.sc)
 
         ; Always need to do this
-        ; For a waiting dualMode that will do a Tap also ! 
-        ;   (normally a modifier, so it's ok to send its Up key)
+        ; For a waiting dualMode that would succeed to Tap also ! 
         this.onHoldUp()
 
         if (this.isDual) {
-            ; dualMode key 'tap', output its tap value
+            ; dualMode key 'tap' success: output its tap value
+            ; note that if a different had been pressed after this one, 
+            ; we would have removed CKeyDef.waitingDual
             if (CKeyDef.waitingDual == this) {
                 this.onTap()
                 CKeyDef.waitingDual := 0
@@ -148,19 +153,22 @@ class CKeyDef
     ;----
 
     /*static*/
+    ; check to cancel waiting potential dualMode key Tap
     checkOnDualDn()
     {
         waiting := CKeyDef.waitingDual
 
         if (waiting && waiting.sc != this.sc) {
-            ; waiting dual mode key, tap interrupted by other key,
-            ; stay in 'hold dn' (dn already sent) / cancel Tap possiblity
+            ; waiting dual mode key, tap interrupted by other key / mouse click,
+            ; stay in 'hold dn' mode (dn already sent) / cancel Tap possiblity
             CKeyDef.waitingDual := 0
         }
     }
 
     ;;------ mappings ----
 
+    ; save a mapping / outvalue for this key 
+    ; (either: out val/shift out val/tap val/shift tap val)
     AddMapping(outStr, isShiftedLayer, isTapValue)
     {
         ; setup output object
@@ -215,7 +223,7 @@ class CKeyDef
 
     ; outStr should be a modifier !! eg "LShift", "RAlt"
     /*static*/
-    CreateDualModifier(key, outStr, outTapStr)
+    CreateDualModifier(key, outStr, outTapStr := 0)
     {
         k1 := CKeyDef.CreateEmptyDualModifier(key)
         outValue := new COutput(outStr)
@@ -241,9 +249,9 @@ class CKeyDef
     }
 
     /*static*/
-    CreateLayerAccess(key, layerId, outTapStr)
+    CreateLayerAccess(key, layerId, outTapStr := 0)
     {
-        ; always isDual, ignored if no outTapValue
+        ; always isDual, onTap ignored if no outTapValue
         outTapValue := (outTapStr ? new COutput(outTapStr) : 0)
         outTapValueSh := (outTapStr ? new COutput("+" outTapStr) : 0)
         k1 := new CKeyDef(key, false, true, [], [outTapValue,outTapValueSh])
@@ -261,9 +269,9 @@ class CKeyDef
     ;---
 
     /*static*/
+    ; is any of the currently 'down' keys a shift key ?
     IsShiftDown()
     {
-        ; is any of the currently 'down' keys a shift key ?
         For keysc, keydef in CKeyDef.downKeys {
             ; OutputDebug "-- +dn " keydef.name
             if (keydef.outValues[1] ) {                

@@ -24,14 +24,14 @@ PunxLayerMappings()
 	(Join`r`n
 	       q w e r t    u i o p         $ < - > %    ~ [ ] @ 
 	   CL  a s d f g  h j k l ;       _ \ ( " ) !  % { = } ;
-	   LSh z x c        m , . /         # : * +      & ^ _ | 
+	  @LSh z x c        m , . /         # : * +      & ^ _ | 
 	)"
 
 	layerAZWideRight := "
 	(Join`r`n
 	       q w e r t      i o p [       $ < - > %     ~ [ ] @
 	   CL  a s d f g    j k l ; '     _ \ ( " ) !   % { = } ;
-	   LSh z x c          , . / RSh     # : * +       & ^ _ |
+	  @LSh z x c          , . / @RSh    # : * +       & ^ _ |
 	)"
 
 	return { layer: layer, 
