@@ -29,15 +29,15 @@ CreateLayers()
 	; dualMode '/' : RShift | V
 	layerMain := "
 	(Join`r`n
-	     q w e r t   y u i o p [     z h i , /   v f d r q BS
-	  CL a s d f g   h j k l ; '   ; y o e a .   g s t n p ``
+	     q w e r t   y u i o p [     z h i , /   v f d r q ``
+	  CL a s d f g   h j k l ; '   ; y o e a .   g s t n p BS
 	  @LSh z x c v   n m , . @/      j k ' u x   w c m l @>+b 
 	)"
 
 	layerMainsh := "
 	(Join`r`n
-	    q w e r t   y u i o p [      Z H I ! ?   V F D R Q BS
-	    a s d f g   h j k l ; '      Y O E A @   G S T N P ^
+	    q w e r t   y u i o p [      Z H I ! ?   V F D R Q ^
+	    a s d f g   h j k l ; '      Y O E A @   G S T N P BS
 	 @LSh z x c v   n m , . @/       J K _ U X   W C M L @>+B
 	)"
 
