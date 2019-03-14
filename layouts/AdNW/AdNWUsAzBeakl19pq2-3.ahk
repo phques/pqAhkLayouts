@@ -15,6 +15,10 @@ global ImgWidth := 176
 global ImgHeight := 54
 global CenterOnCurrWndMonitor := 1
 
+; for easyDragWindow script
+global DoubleAlt := 0
+
+
 #include ../../fromPkl/pkl_guiLayers.ahk
 #include ../../layersv2c.ahk
 #include ../punxLayer.ahk
@@ -109,3 +113,5 @@ return
 ;--- hotkeys, must be at the end -----
 
 #include ../winHotkeys.ahk
+
+; #include ..\..\easyWindowDrag\EasyWindowDrag_pq.ahk
