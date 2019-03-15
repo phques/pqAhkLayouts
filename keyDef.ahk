@@ -129,6 +129,8 @@ class CKeyDef
         this.isDown := true
         CKeyDef.downKeys[this.sc] := this
 
+        ; OutputDebug "kdn, " CKeyDef.downKeys.Count() " keys dn"
+
         if (this.isDual) 
             CKeyDef.waitingDual := this
 
