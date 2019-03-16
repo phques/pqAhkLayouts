@@ -46,12 +46,18 @@ class COutput
         this.isModifier := this.isShiftKey || this.isCtrlKey
         this.isModifier |= this.isAltKey   || this.isWinKey
 
-        ; set flag indicating if the char to output is non-shifted and thus
-        ; we need to mask any down Shift keys to avoid sending the wrong thing 
+        ; set flag indicating we need to mask Shift key for output that 
+        ; is a non-shifted, to avoid sending the wrong thing 
         ; eg: if '[' is on Shifted layer, would send shift-[, which generates {
+        /* still not right ! stuff like Delete, Home etc are not detected            
         nonShiftedChars := 'abcdefghijklmnopqrstuvwxyz'
         nonShiftedChars .= "``1234567890-=[]\`;',./"
         if (InStr(nonShiftedChars, this.key, 1))
+            this.needBlindShift := true
+        */
+        shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        shiftedChars .= '~!@#$%^&*()_+{}|:"<>?'
+        if (!InStr(shiftedChars, this.key, 1))
             this.needBlindShift := true
     }
 
