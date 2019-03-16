@@ -105,58 +105,51 @@ CreateHotkeysForUsKbd(dontCreateHotkeys)
 }
 
 ;--
-global DoubleAlt := 0
 
-onMouseDn()
+#include easyWindowDrag\EasyWindowDrag_pqFuncs.ahk
+
+global msdragActivateKey := ""
+global msdragSecKey := ""
+global eatUpBtn
+
+SetMouseDragKeys(activate, secondary)
 {
-
-    ; this is required so that Shift+LeftMouseButton does not output the tapval
-    ; for a dualMode LShift, for eg.
-    CKeyDef.checkOnDualDn()
-Return
-
-    main := layerDefs[1] ; msin is 1st
-    laltKeydef := main.GetKeyDef("LAlt")
-
-    if (!laltKeydef.isDown)
-        Return
-
-SetWinDelay 2
-CoordMode "Mouse"
-
-    OutputDebug "mouse, alt is down"
-    if DoubleAlt
-    {
-        MouseGetPos ,, KDE_id
-        ; This message is mostly equivalent to WinMinimize,
-        ; but it avoids a bug with PSPad.
-        PostMessage 0x112, 0xf020,,, "ahk_id " KDE_id
-        DoubleAlt := false
-        return
-    }
-    ; Get the initial mouse position and window id, and
-    ; abort if the window is maximized.
-    MouseGetPos KDE_X1, KDE_Y1, KDE_id
-    if WinGetMinMax("ahk_id " KDE_id)
-        return
-    ; Get the initial window position.
-    WinGetPos KDE_WinX1, KDE_WinY1,,, "ahk_id " KDE_id
-    Loop
-    {
-        if !GetKeyState("LButton", "P") ; Break if button has been released.
-            break
-        MouseGetPos KDE_X2, KDE_Y2 ; Get the current mouse position.
-        KDE_X2 -= KDE_X1 ; Obtain an offset from the initial mouse position.
-        KDE_Y2 -= KDE_Y1
-        KDE_WinX2 := (KDE_WinX1 + KDE_X2) ; Apply this offset to the window position.
-        KDE_WinY2 := (KDE_WinY1 + KDE_Y2)
-        WinMove KDE_WinX2, KDE_WinY2,,, "ahk_id " KDE_id ; Move the window to the new position.
-    }
-
+    msdragActivateKey := activate 
+    msdragSecKey := secondary
 }
 
-onMouseUp()
+; l/m/r
+onMouseDn(butt)
 {
+    ; this is required so that Shift+LeftMouseButton does not output the tapval
+    ; for a dualMode LShift for eg.
+    CKeyDef.checkOnDualDn()
+
+    eatDnBtn := false
+    if (msdragActivateKey){
+        if (butt == "LButton")
+            eatDnBtn := lmousebutt(msdragActivateKey, msdragSecKey)
+        else if (butt == "MButton")
+            eatDnBtn := mmousebutt(msdragActivateKey, msdragSecKey)
+        else if (butt == "RButton")
+            eatDnBtn := rmousebutt(msdragActivateKey, msdragSecKey)
+    }
+
+    if eatDnBtn 
+        outputdebug "Eat dn " butt
+    else
+        Send '{' butt ' Down}'
+}
+
+; l/m/r
+onMouseUp(butt)
+{
+    if eatUpBtn == butt {
+        outputdebug "eat up " butt
+        eatUpBtn := ''
+    }
+    else 
+        Send '{' butt ' Up}'
 }
 
 hookMouse()
@@ -165,14 +158,14 @@ hookMouse()
     fnUp := Func("onMouseUp")
 
     ; '~' lets the button through, we only need to KNOW that it was presssed
-    HotKey '~LButton', fnDn
-    HotKey '~LButton up', fnUp
+    HotKey 'LButton', fnDn.Bind("LButton")
+    HotKey 'LButton up', fnUp.Bind("LButton")
 
-    HotKey '~MButton', fnDn
-    HotKey '~MButton up', fnUp
+    HotKey 'MButton', fnDn.Bind("MButton")
+    HotKey 'MButton up', fnUp.Bind("MButton")
 
-    HotKey '~RButton', fnDn
-    HotKey '~RButton up', fnUp
+    HotKey 'RButton', fnDn.Bind("RButton")
+    HotKey 'RButton up', fnUp.Bind("RButton")
 
 }
 
@@ -369,7 +362,7 @@ tata()
 {
     layers := [
         {id: "main",
-             map: "a @/  s @>+q",  mapSh: "a @/ S @>+Q"
+             map: "a @/  s @>+q",  mapSh: "a s d f Home Delete z Q"
         },
         {id: "punx", key: "Space", tap: "Space",
             map: "a s d f   i e a u", mapSh: "a s d f   i E +a ["},

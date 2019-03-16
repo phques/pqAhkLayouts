@@ -98,6 +98,8 @@ CreateLayers()
 	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	punx.AddMappings("b  Space", false)
 
+	SetMouseDragKeys("space", "shift")
+
 }
 
 swapFrenchAndPunx()
@@ -125,3 +127,5 @@ return
 #include ../winHotkeys.ahk
 
 LWin & Insert::swapFrenchAndPunx()
+
+; #include ../../easyWindowDrag/EasyWindowDrag_KDE_Pq.ahk
