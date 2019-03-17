@@ -10,9 +10,9 @@ AdNW ansi angleZ BEALK19 pq2
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\beakl19-26pq2"
-global ImgWidth := 176
-global ImgHeight := 54
+global ImgsDir := A_ScriptDir . "\imgs\az29Beakl19pq2"
+global ImgWidth := 182
+global ImgHeight := 96
 global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
