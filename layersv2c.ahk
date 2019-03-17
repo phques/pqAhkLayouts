@@ -194,8 +194,8 @@ sendOutValueDn(keydef)
     out := keydef.GetValues(false)
     if (out) {
         blindStr := prepBlind(keydef, out)
-        Send blindStr out.mods "{" out.key  " Down}"
-        ; outputdebug "Send " blindStr out.mods "{" Getkeyname(out.key)  " Down}"
+        Send blindStr out.mods "{" out.val  " Down}"
+        outputdebug "Send " blindStr out.mods "{" Getkeyname(out.val)  " Down}"
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -208,8 +208,8 @@ sendOutValueUp(keydef)
     out := keydef.GetValues(false)
     if (out) {
         blindStr := prepBlind(keydef, out)
-        Send blindStr out.mods "{" out.key " Up}"
-        ; outputdebug "Send " blindStr out.mods "{" Getkeyname(out.key) " Up}"
+        Send blindStr out.mods "{" out.val " Up}"
+        ; outputdebug "Send " blindStr out.mods "{" Getkeyname(out.val) " Up}"
     }
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
@@ -221,8 +221,8 @@ sendTap(keydef)
     out := keydef.GetValues(true)
     if (out) {
         blindStr := prepBlind(keydef, out)
-        Send blindStr out.mods "{" out.key " Down}"
-        Send blindStr out.mods "{" out.key " Up}"
+        Send blindStr out.mods "{" out.val " Down}"
+        Send blindStr out.mods "{" out.val " Up}"
     }
     else
         outputdebug "sendTap no outTapValue, " keydef.name    

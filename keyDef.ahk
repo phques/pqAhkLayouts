@@ -13,7 +13,7 @@ class COutput
     __New(outStr)
     {
         this.mods := ""     ; modifiers
-        this.key := ""      ; output val
+        this.val := ""      ; output val
         this.needBlindShift := false
         
         this.isShiftKey := false
@@ -21,24 +21,24 @@ class COutput
         this.isAltKey := false
         this.isWinKey := false
 
-        ; split modifiers / key
+        ; split modifiers / val
         this.splitModsAndKey(outStr)
 
         ; replace abbreviations with real value
-        this.key := ApplyAbbrev(this.key)
+        this.val := ApplyAbbrev(this.val)
 
         ; PQ: cannot do this, some output might not be a <key>, eg french chars etc
         ; check for invalid key
-        ; sc := GetKeySC(this.key)
+        ; sc := GetKeySC(this.val)
         ; if (!sc) {
-        ;     msg := "Cannot find scancode for '" . this.key . "' outStr: <" . outStr . ">"
+        ;     msg := "Cannot find scancode for '" . this.val . "' outStr: <" . outStr . ">"
         ;     outputdebug(msg)
         ;     if (MsgBox(msg, "Error", "O/C") = "Cancel")
         ;         ExitApp
         ; }
 
         ; set modifier flags
-        name := GetKeyName(this.key)
+        name := GetKeyName(this.val)
         this.isShiftKey := (name ~= "i)shift")
         this.isCtrlKey := (name ~= "i)ctrl|control")
         this.isAltKey := (name ~= "i)alt")
@@ -52,28 +52,28 @@ class COutput
         /* still not right ! stuff like Delete, Home etc are not detected            
         nonShiftedChars := 'abcdefghijklmnopqrstuvwxyz'
         nonShiftedChars .= "``1234567890-=[]\`;',./"
-        if (InStr(nonShiftedChars, this.key, 1))
+        if (InStr(nonShiftedChars, this.val, 1))
             this.needBlindShift := true
         */
         shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         shiftedChars .= '~!@#$%^&*()_+{}|:"<>?'
-        if (!InStr(shiftedChars, this.key, 1))
+        if (!InStr(shiftedChars, this.val, 1))
             this.needBlindShift := true
     }
 
     ;-----
 
-    ; '^Z' => mods='^', key='Z'
-    splitModsAndKey(key)
+    ; '^Z' => mods='^', val='Z'
+    splitModsAndKey(val)
     {
         this.mods := ""
-        this.key := key
-        foundPos := RegExMatch(key, "^([#!+^<>]+)(.{1,})", match)
+        this.val := val
+        foundPos := RegExMatch(val, "^([#!+^<>]+)(.{1,})", match)
         if (foundPos) {
-            ; found prefix modifiers (shift: +,ctrl: ^ etc) in key
+            ; found prefix modifiers (shift: +,ctrl: ^ etc) in val
             ; separate them
             this.mods := match[1]
-            this.key := match[2]
+            this.val := match[2]
         }
     }
 }
@@ -293,8 +293,8 @@ class CKeyDef
         For keysc, keydef in CKeyDef.downKeys {
             ; OutputDebug "-- +dn " keydef.name
             if (keydef.outValues[1] ) {                
-                ; OutputDebug " " keydef.outValues[1].key
-                ; OutputDebug " " GetKeyName(keydef.outValues[1].key)
+                ; OutputDebug " " keydef.outValues[1].val
+                ; OutputDebug " " GetKeyName(keydef.outValues[1].val)
                 if (keydef.outValues[1].isShiftKey) {
                     ; OutputDebug "found shift dn " . keydef.name
                     Return True
