@@ -29,16 +29,17 @@ CreateLayers()
 	; dualMode '/' : RShift | V
 	layerMain := "
 	(Join`r`n
-	     q w e r t   y u i o p [     j u i o z  x d r l b BS
-	  CL a s d f g   h j k l ; '   ; g h e a .  p t s n c ``
+	     q w e r t   y u i o p [     j u i o z  x d r l b ``
+	  CL a s d f g   h j k l ; '   ; g h e a .  p t s n c BS
 	  @LSh z x c v   n m , . @/      q y ' , /  k f w m @>+v
+	  @LControl                    Escape   
 	)"
 
 	layerMainsh := "
 	(Join`r`n
-	    q w e r t   y u i o p        J U I O Z  X D R L B
-	    a s d f g   h j k l ; '      G H E A @  P T S N C ^
-	 @LSh z x c v   n m , . @/        Q Y _ ! ?  K F W M @>+V
+	    q w e r t   y u i o p [      J U I O Z  X D R L B ^
+	 CL a s d f g   h j k l ; '  ~CL G H E A @  P T S N C ~Del
+	 @LSh z x c v   n m , . @/       Q Y _ ! ?  K F W M @>+V
 	)"
 
 	punxLayers := PunxLayerMappings()
@@ -56,7 +57,7 @@ CreateLayers()
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
-	    	map: extendLayer, mapSh: extendLayer
+	    	map: extendLayer,
 		},
 
 	    {id: "numpad", key: "b", toggle: true,
@@ -74,6 +75,8 @@ CreateLayers()
 	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	punx := layerDefsById["punx"]
 	punx.AddMappings("b  Space", false)
+
+	SetMouseDragKeys("space", "control")
 }
 
 

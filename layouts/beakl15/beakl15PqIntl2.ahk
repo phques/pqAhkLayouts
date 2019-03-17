@@ -41,14 +41,14 @@ CreateLayers()
 	     q w e r t   y u i o p [     q h o u x  w c r f z ``
 	  CL a s d f g   h j k l ; '   ; y i e a .  d s t n b BS
 	  @LSh z x c v   n m , . @/      j , / k '  g m l p @>+v    
-	  @Control                      Escape
+	  @LControl                      Escape
 	)"
 
 	layerMainsh := "
 	(Join`r`n
-	    q w e r t   y u i o p [      Q H O U X  W C R F Z ^
-	    a s d f g   h j k l ; '      Y I E A @  D S T N B Delete
-	 @LSh z x c v   n m , . @/       J ! ? K _  G M L P V
+	    q w e r t   y u i o p [      q h o u x  w c r f z ^
+	 CL a s d f g   h j k l ; '  ~CL y i e a @  d s t n b ~Del
+	 @LSh z x c v   n m , . @/       j ! ? k _  g m l p v
 	)"
 
 	layerFrench := "
@@ -73,14 +73,14 @@ CreateLayers()
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
-	    	map: extendLayer, mapSh: extendLayer
+	    	map: extendLayer, ;mapSh: extendLayer
 		},
 
 	    {id: "numpad", key: "b", toggle: true,
 	    	map: numpadLayers.indexOnB, 
 		},
 
-	    {id: "french", key: "AppsKey", tap: "AppsKey", 
+	    {id: "french", ;key: "AppsKey", tap: "AppsKey", 
 	    	map: layerFrench, },
 	]
 
@@ -100,7 +100,7 @@ CreateLayers()
 	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	punx.AddMappings("b  Space", false)
 
-	SetMouseDragKeys("space", "shift")
+	SetMouseDragKeys("space", "control")
 
 }
 
@@ -112,15 +112,15 @@ swapFrenchAndPunx()
 	french := layerDefsById["french"]
 
     punxAccessKeydef := mainLayer.GetKeydef(punx.key)
-    frenchAccessKeydef := mainLayer.GetKeydef(french.key)
+    ; frenchAccessKeydef := mainLayer.GetKeydef(french.key)
 
     if (punxAccessKeydef.layerId == "punx") {
     	punxAccessKeydef.layerId := "french"
-	    frenchAccessKeydef.layerId := "punx"
+	    ; frenchAccessKeydef.layerId := "punx"
     }
     else {
     	punxAccessKeydef.layerId := "punx"
-	    frenchAccessKeydef.layerId := "french"
+	    ; frenchAccessKeydef.layerId := "french"
     }
 
 }
@@ -137,4 +137,3 @@ return
 
 LWin & Insert::swapFrenchAndPunx()
 
-; #include ../../easyWindowDrag/EasyWindowDrag_KDE_Pq.ahk

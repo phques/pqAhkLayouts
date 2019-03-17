@@ -42,25 +42,25 @@ CreateLayers()
 	layerMainsh := "
 	(Join`r`n
 	     q w e r       u i o p       Q U I @       M R C V
-	  CL a s d f g   h j k l ; '   ; G H E A !   W T N S P Delete
-	  @LSh z x c       m , . @/      K Y _ O       D L F @>+B    
+	  CL a s d f g   h j k l ; ' ~CL G H E A !   W T N S P ~Del
+	  @LSh z x c       m , . @/      K Y ? O       D L F @>+B    
 	)"
 
 	; created this one based on my std punxLayer, 
 	; adding jxz, moving stuff around a bit.
-	; use ? on shift main, can use !_ on shift main too
+	; use .,'@!_  on shift&main
 	layerJxzPunx := "
 	(Join`r`n
 	        q w e r t    u i o p     $ < - > ~     x [ ] z
-	     CL a s d f g  h j k l ;   _ \ ( " ) !   % { = } ;
-	     @LSh z x c v    m , . /     # : * + @     j ^ & | 
+	     CL a s d f g  h j k l ;   \ / ( " ) !   % { = } ;
+	     @LSh z x c v    m , . /     # : * + ``    j ^ & | 
 	)"
-	layerJxzPunxSh := "
-	(Join`r`n
-	        q w e r t    u i o p     $ < - > ~     X [ ] Z
-	     CL a s d f g  h j k l ;   _ \ ( " ) !   % { = } ;
-	     @LSh z x c v    m , . /     # : * + @     J ^ & | 
-	)"
+	; layerJxzPunxSh := "
+	; (Join`r`n
+	;         q w e r t    u i o p     $ < - > ~     X [ ] Z
+	;      CL a s d f g  h j k l ;   _ \ ( " ) !   % { = } ;
+	;      @LSh z x c v    m , . /     # : * + @     J ^ & | 
+	; )"
 
 	extendLayer := ExtendLayerMappings()
 	numpadLayers := NumpadLayerMappings()
@@ -76,7 +76,7 @@ CreateLayers()
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
-	    	map: extendLayer, mapSh: extendLayer
+	    	map: extendLayer, 
 		},
 
 	    {id: "numpad", key: "b", toggle: true,
@@ -96,28 +96,8 @@ CreateLayers()
 	punx := layerDefsById["punx"]
 	punx.AddMappings("b  Space", false)
 
-	SetMouseDragKeys("space", "shift")
+	; SetMouseDragKeys("space", "control")
 }
-
-
-; CreateHotkeys__()
-; {
-; 	; manually create hotkeys, on a layer
-; 	hotklay := layerDefsById["hotkeys"]
-
-; 	; Win-End: stop script
-; 	key := hotklay.GetKeydef("End")
-; 	key.onHoldDn := Func("ExitApp")
-
-; 	; Win-Delete to close the current window
-; 	key := hotklay.GetKeydef("Del")
-; 	key.onHoldDn := Func("WinClose").Bind("A")
-
-; 	; Win-\   suspend / resume hotkeys (help image toggles at same time)
-; 	key := hotklay.GetKeydef("\")
-; 	key.onHoldDn := Func("SuspendKeysToggle")
-
-; }
 
 CreateLayers()
 DisplayHelpImage()
@@ -129,4 +109,3 @@ return
 
 #include ../winHotkeys.ahk
 
-; #include ..\..\easyWindowDrag\EasyWindowDrag_pq.ahk

@@ -10,6 +10,7 @@ class COutput
 {
     ; outStr: 'a', '^c' (ctrl-c), "LShift", "CL"
     ; can be one of abbrevs supported by ApplyAbbrev()
+    ; see code below for "~key"
     __New(outStr)
     {
         this.mods := ""     ; modifiers
@@ -21,21 +22,19 @@ class COutput
         this.isAltKey := false
         this.isWinKey := false
 
+        ; if has ~ prefix, indicates we need to use Send {Blind+}
+        ; to mask out any down Shift 
+        ; eg, to send ';' (a non-shifted value) on a shifted layer
+        if (StrLen(outStr) > 1 && SubStr(outStr,1,1) == '~') {
+            outStr := SubStr(outStr,2)
+            this.needBlindShift := true
+        }
+
         ; split modifiers / val
         this.splitModsAndKey(outStr)
 
         ; replace abbreviations with real value
         this.val := ApplyAbbrev(this.val)
-
-        ; PQ: cannot do this, some output might not be a <key>, eg french chars etc
-        ; check for invalid key
-        ; sc := GetKeySC(this.val)
-        ; if (!sc) {
-        ;     msg := "Cannot find scancode for '" . this.val . "' outStr: <" . outStr . ">"
-        ;     outputdebug(msg)
-        ;     if (MsgBox(msg, "Error", "O/C") = "Cancel")
-        ;         ExitApp
-        ; }
 
         ; set modifier flags
         name := GetKeyName(this.val)
@@ -45,20 +44,6 @@ class COutput
         this.isWinKey := (name ~= "i)win")
         this.isModifier := this.isShiftKey || this.isCtrlKey
         this.isModifier |= this.isAltKey   || this.isWinKey
-
-        ; set flag indicating we need to mask Shift key for output that 
-        ; is a non-shifted, to avoid sending the wrong thing 
-        ; eg: if '[' is on Shifted layer, would send shift-[, which generates {
-        /* still not right ! stuff like Delete, Home etc are not detected            
-        nonShiftedChars := 'abcdefghijklmnopqrstuvwxyz'
-        nonShiftedChars .= "``1234567890-=[]\`;',./"
-        if (InStr(nonShiftedChars, this.val, 1))
-            this.needBlindShift := true
-        */
-        shiftedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        shiftedChars .= '~!@#$%^&*()_+{}|:"<>?'
-        if (!InStr(shiftedChars, this.val, 1))
-            this.needBlindShift := true
     }
 
     ;-----
@@ -231,8 +216,7 @@ class CKeyDef
     CreateStdKeydef(key, outStr)
     {
         outValue := new COutput(outStr)
-        outValueSh := new COutput("+" outStr)
-        k1 := new CKeyDef(key, true, false, [outValue,outValueSh], [])
+        k1 := new CKeyDef(key, true, false, [outValue,outValue], [])
         k1.onHoldDn := Func("sendOutValueDn")
         k1.onHoldUp := Func("sendOutValueUp")
 
@@ -245,9 +229,7 @@ class CKeyDef
     {
         k1 := CKeyDef.CreateEmptyDualModifier(key)
         outValue := new COutput(outStr)
-        outValueSh := new COutput("+" outStr)
         outTapValue := (!outTapStr ? 0 : new COutput(outTapStr))
-        outTapValueSh := (!outTapStr ? 0 : new COutput("+" outTapStr))
         k1.outValues := [outValue,outValue]
         k1.outTapValues := [outTapValue, outTapValue]
 
@@ -271,8 +253,7 @@ class CKeyDef
     {
         ; always isDual, onTap ignored if no outTapValue
         outTapValue := (outTapStr ? new COutput(outTapStr) : 0)
-        outTapValueSh := (outTapStr ? new COutput("+" outTapStr) : 0)
-        k1 := new CKeyDef(key, false, true, [], [outTapValue,outTapValueSh])
+        k1 := new CKeyDef(key, false, true, [], [outTapValue,outTapValue])
         
         ; save layerId !
         k1.layerId := layerId

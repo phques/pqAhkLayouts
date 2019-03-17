@@ -4,9 +4,9 @@
 
 #InstallKeybdHook
 #InstallMouseHook
-#Warn All, MsgBox
 ; def 70 
 #MaxHotkeysPerInterval 140
+; #Warn All, MsgBox
 
 #include util.ahk
 #include scancodes.ahk
@@ -30,7 +30,7 @@ global StopOnEscape := False ;debug, if True, Escape will stop the script
 ; func called by hotkey on key down 
 onHotkeyDn(sc)
 {
-    ; OutputDebug "onHotkeyDn '" . sc . "' " . GetKeyName(sc)
+    ; OutputDebug "<onHotkeyDn '" . sc . "' " . GetKeyName(sc)
 
     ; debug, hit Esc to stop script
     if (StopOnEscape && sc == MakeKeySC('Escape'))
@@ -55,7 +55,7 @@ onHotkeyDn(sc)
 ; func called by hotkey on key up
 onHotkeyUp(sc)
 {
-    ; OutputDebug "onHotkeyUp '" . sc . "' " . GetKeyName(sc)
+    ; OutputDebug ">onHotkeyUp '" . sc . "' " . GetKeyName(sc)
     
     ; check for current layer access key already pressed
     ; (once on the other layer, the keydef will not be the same !)
@@ -168,7 +168,7 @@ hookMouse()
     HotKey 'RButton up', fnUp.Bind("RButton")
 
 }
-
+ 
 ;-------
 
 ;; action funcs for keydefs, called in CKeyDef.OnKeyDn/Up
@@ -193,9 +193,9 @@ sendOutValueDn(keydef)
     ; OutputDebug "++send out dn " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
-        blindStr := prepBlind(keydef, out)
+        blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
         Send blindStr out.mods "{" out.val  " Down}"
-        outputdebug "Send " blindStr out.mods "{" Getkeyname(out.val)  " Down}"
+        ; outputdebug "Send " blindStr out.mods "{" out.val  " Down}"
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -207,9 +207,9 @@ sendOutValueUp(keydef)
     ; OutputDebug "++send out up " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
-        blindStr := prepBlind(keydef, out)
+        blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
         Send blindStr out.mods "{" out.val " Up}"
-        ; outputdebug "Send " blindStr out.mods "{" Getkeyname(out.val) " Up}"
+        ; outputdebug "Send " blindStr out.mods "{" out.val " Up}"
     }
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
@@ -220,7 +220,8 @@ sendTap(keydef)
 {
     out := keydef.GetValues(true)
     if (out) {
-        blindStr := prepBlind(keydef, out)
+        blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
+        ; outputdebug "Send " blindStr out.mods "{" out.val " Tap}"
         Send blindStr out.mods "{" out.val " Down}"
         Send blindStr out.mods "{" out.val " Up}"
     }
@@ -297,7 +298,7 @@ InitLayout(layers, dontCreateHotkeys)
 {
     ; create layers, 1st is main
     for idx, val in layers {
-        outputdebug "layer " idx  " " val.id " " val.key " " val.tap
+        outputdebug "Create layer " idx  " " val.id " " val.key " " val.tap
 
         ; no access key for main / 1st layer
         key := (idx > 1 ? val.key : 0)
@@ -321,10 +322,11 @@ InitLayout(layers, dontCreateHotkeys)
 
     ; create mappings (keydefs in layers)
     for idx, val in layers {
-        outputdebug val.id
+        outputdebug "Map " val.id
         outputdebug val.map
         outputdebug val.id "Sh"
         outputdebug val.mapSh
+
         ; get layer
         layer := layerDefsById[val.id]
         if (!layer) {
@@ -332,8 +334,18 @@ InitLayout(layers, dontCreateHotkeys)
             ExitApp
         }
         
-        layer.AddMappings(val.map, false)
-        layer.AddMappings(val.mapSh, true)
+        ; create new keydef on non-shifted layer, so both values are set
+        if (val.qwertyMask)
+            layer.AddMappingsFromTo(val.qwertyMask, val.map, false, true)
+        else
+            layer.AddMappings(val.map, false, true)
+
+        if (val.mapSh) {
+            if (val.qwertyMask)
+                layer.AddMappingsFromTo(val.qwertyMask, val.mapSh, true)
+            else
+                layer.AddMappings(val.mapSh, true)
+        }
     }
 
     ; assign optional Tap action to toggle layer on/off for access key
@@ -347,7 +359,7 @@ InitLayout(layers, dontCreateHotkeys)
     }
 
     ; create all hotkeys (do at end, needs data above)
-    ; we need to trap all key events for dualMode 
+    ; we need to trap all key events for dualMode to work properly.
     ; eg @Shift-F2, if no hotkey for F2 then we wont know a key was press and will output Tapval
     CreateHotkeysForUsKbd(dontCreateHotkeys)
 
@@ -362,11 +374,8 @@ tata()
 {
     layers := [
         {id: "main",
-             map: "a @/  s @>+q",  mapSh: "a s d f Home Delete z Q"
+             map: "a s d f  q w e r",  mapSh: "a s d f Home Delete z Q"
         },
-        {id: "punx", key: "Space", tap: "Space",
-            map: "a s d f   i e a u", mapSh: "a s d f   i E +a ["},
-            ; map: "a s f g   i e +a :", mapSh: "a s f g  I e +z ["},
     ]
 
     InitLayout(layers, {})
@@ -377,4 +386,21 @@ tata()
     StopOnEscape := true
 }
 
+; test / debug
+toto()
+{
+    layers := [
+        {id: "main",
+            qwertyMask: "a s d f",
+            map: "q w e r",  
+            mapSh: "Home Delete z Q"
+        },
+    ]
+
+    InitLayout(layers, {})
+
+    StopOnEscape := true
+}
+
 ; tata()
+; toto()

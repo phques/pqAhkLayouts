@@ -36,12 +36,13 @@ CreateLayers()
 	     q w e r t   y u i o p [     z h i , /   v f d r q ``
 	  CL a s d f g   h j k l ; '   ; y o e a .   g s t n p BS
 	  @LSh z x c v   n m , . @/      j k ' u x   w c m l @>+b 
+	  @LControl                    Escape   
 	)"
 
 	layerMainsh := "
 	(Join`r`n
 	    q w e r t   y u i o p [      Z H I ! ?   V F D R Q ^
-	    a s d f g   h j k l ; '      Y O E A @   G S T N P BS
+	 CL a s d f g   h j k l ; '  ~CL Y O E A @   G S T N P ~Del
 	 @LSh z x c v   n m , . @/       J K _ U X   W C M L @>+B
 	)"
 
@@ -60,7 +61,7 @@ CreateLayers()
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
-	    	map: extendLayer, mapSh: extendLayer
+	    	map: extendLayer,
 		},
 
 	    {id: "numpad", key: "b", toggle: true,
@@ -82,27 +83,9 @@ CreateLayers()
 	punx := layerDefsById["punx"]
 	punx.AddMappings("b  Space", false)
 
+	SetMouseDragKeys("space", "control")
 }
 
-
-; CreateHotkeys__()
-; {
-; 	; manually create hotkeys, on a layer
-; 	hotklay := layerDefsById["hotkeys"]
-
-; 	; Win-End: stop script
-; 	key := hotklay.GetKeydef("End")
-; 	key.onHoldDn := Func("ExitApp")
-
-; 	; Win-Delete to close the current window
-; 	key := hotklay.GetKeydef("Del")
-; 	key.onHoldDn := Func("WinClose").Bind("A")
-
-; 	; Win-\   suspend / resume hotkeys (help image toggles at same time)
-; 	key := hotklay.GetKeydef("\")
-; 	key.onHoldDn := Func("SuspendKeysToggle")
-
-; }
 
 CreateLayers()
 DisplayHelpImage()
@@ -113,5 +96,3 @@ return
 ;--- hotkeys, must be at the end -----
 
 #include ../winHotkeys.ahk
-
-; #include ..\..\easyWindowDrag\EasyWindowDrag_pq.ahk

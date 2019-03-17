@@ -29,15 +29,15 @@ CreateLayers()
 	; dualMode '/' : hold is RShift | tap is V
 	layerMain := "
 	(Join`r`n
-	     q w e r t   y u i o p [     q . o u j   w d n m , BS  
-	  CL a s d f g   h j k l ; '   ; h a e i k   g s r t p ``
+	     q w e r t   y u i o p [     q . o u j   w d n m , ``
+	  CL a s d f g   h j k l ; '   ; h a e i k   g s r t p BS
 	  @LSh z x c v   n m , . @/      z ' / y x   b c l f @>+v
 	)"
 
 	layerMainsh := "
 	(Join`r`n
-	    q w e r t   y u i o p [      Q @ O U J    W D N M ! BS
-	    a s d f g   h j k l ; '      H A E I K    G S R T P ^
+	    q w e r t   y u i o p [      Q @ O U J    W D N M ! ^
+	 CL a s d f g   h j k l ; '  ~CL H A E I K    G S R T P ~Del
 	 @LSh z x c v   n m , . @/       Z _ ? Y X    B C L F @>+V
 	)"
 
@@ -80,6 +80,9 @@ CreateLayers()
 
 	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	punx.AddMappings("b  Space", false)
+
+	SetMouseDragKeys("space", "control")
+
 }
 
 

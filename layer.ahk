@@ -8,6 +8,8 @@
 ; holds keydefs for a layer
 class CLayer
 {
+    static NoKeyChar := 0
+
     __New(id, key)
     {
         this.id := id
@@ -35,12 +37,13 @@ class CLayer
     AddKeyDef(keyDef)
     {
         this.keyDefs[keyDef.sc] := keyDef
+        return keyDef
     }
 
     ; fromAndTos is a multiline string
     ; each line is a mapping: "a s d   y i e"
     ;  a:y s:i e:d
-    AddMappings(fromAndTos, isShiftedLayer)
+    AddMappings(fromAndTos, isShiftedLayer, createKeyDef:=false)
     {
         ; loop on Lines
         Loop Parse fromAndTos, '`r`n'
@@ -58,8 +61,46 @@ class CLayer
             }
 
             ; process this Line
-            this.AddMappingsOne(fromAndToArray, isShiftedLayer)
+            this.AddMappingsFromArray(fromAndToArray, isShiftedLayer, createKeyDef)
 
+        }
+    }
+
+    ; from, tos are mapping strings (whitespace separ)
+    ; each line is a mapping: from "a s d"  to "y i e"
+    ;  a:y s:i e:d
+    AddMappingsFromTo(_froms, _tos, isShiftedLayer, createKeyDef:=false)
+    {
+        ; trim pre/post spaces and compress multi spaces into one
+        from := Trim(_froms)
+        from := RegExReplace(from, "\s{2,}", " ")
+
+        to := Trim(_tos)
+        to := RegExReplace(to, "\s{2,}", " ")
+
+        ; split from / to into into array (separ = space)
+        froms := StrSplit(from, A_Space)
+        tos := StrSplit(to, A_Space)
+
+        if (froms.Length() != tos.Length()) 
+        {
+            msg := Format("AddMappingsFromTo, From/to not same length {} {}!`n{} `n{}"
+                            , froms.Length(), tos.Length()
+                            , froms, tos, )
+            MsgBox(msg)
+            ExitApp
+        }
+
+        ; loop on froms / tos, create mappings in layer
+        Loop froms.Length()
+        {
+            f := froms[A_Index]
+            t := tos[A_Index]
+
+            ; skip this one if not mapped
+            if (t != NoKeyChar) {
+                this.AddMappingsFromArray([f, t], isShiftedLayer, createKeyDef)
+            }
         }
     }
 
@@ -67,7 +108,7 @@ class CLayer
     ;  a:y s:i e:d
     ; This method does the actual mapping creation
     ; handles dual mode keys
-    AddMappingsOne(fromAndTo, isShiftedLayer)
+    AddMappingsFromArray(fromAndTo, isShiftedLayer, createKeyDef:=false)
     {
         nbrOfMappings := fromAndTo.Length() // 2
 
@@ -76,7 +117,7 @@ class CLayer
             from := fromAndTo[A_Index]
             to := fromAndTo[A_Index + nbrOfMappings]
 
-            ; OutputDebug "AddMappingsOne " . from . " -> " . to
+            ; OutputDebug "AddMappingsFromArray " . from . " -> " . to
 
             ; leading @ indicates dual mode key (in 'from')
             ; (single tap generates tap value, held down is modifier)
@@ -91,8 +132,13 @@ class CLayer
             from := ApplyAbbrev(from)
             to := ApplyAbbrev(to)
 
+            ; OutputDebug " map " from " -> " to
+
             ; get 'from' keydef that will contain the output
-            fromKeyDef := this.GetKeydef(from)
+            if (createKeyDef)
+                fromKeyDef := this.AddKeyDef(CKeyDef.CreateStdKeydef(from, to))
+            else
+                fromKeyDef := this.GetKeydef(from)
 
             ; add mapping
             if (fromKeyDef) {
