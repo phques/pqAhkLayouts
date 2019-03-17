@@ -41,12 +41,13 @@ CreateLayers()
 	     q w e r t   y u i o p [     q h o u x  w c r f z ``
 	  CL a s d f g   h j k l ; '   ; y i e a .  d s t n b BS
 	  @LSh z x c v   n m , . @/      j , / k '  g m l p @>+v    
+	  @Control                      Escape
 	)"
 
 	layerMainsh := "
 	(Join`r`n
 	    q w e r t   y u i o p [      Q H O U X  W C R F Z ^
-	    a s d f g   h j k l ; '      Y I E A @  D S T N B BS
+	    a s d f g   h j k l ; '      Y I E A @  D S T N B Delete
 	 @LSh z x c v   n m , . @/       J ! ? K _  G M L P V
 	)"
 
@@ -79,7 +80,8 @@ CreateLayers()
 	    	map: numpadLayers.indexOnB, 
 		},
 
-	    {id: "french", map: layerFrench, },
+	    {id: "french", key: "AppsKey", tap: "AppsKey", 
+	    	map: layerFrench, },
 	]
 
 	; dont create layout hotkey for Left Win
@@ -107,12 +109,19 @@ swapFrenchAndPunx()
 	; get punx layer access keydef, on main layer 
     mainLayer := layerDefsById["main"]
 	punx := layerDefsById["punx"]
-    punxAccessKeydef := mainLayer.GetKeydef(punx.key)
+	french := layerDefsById["french"]
 
-    if (punxAccessKeydef.layerId == "french")
-    	punxAccessKeydef.layerId := "punx"
-    else
+    punxAccessKeydef := mainLayer.GetKeydef(punx.key)
+    frenchAccessKeydef := mainLayer.GetKeydef(french.key)
+
+    if (punxAccessKeydef.layerId == "punx") {
     	punxAccessKeydef.layerId := "french"
+	    frenchAccessKeydef.layerId := "punx"
+    }
+    else {
+    	punxAccessKeydef.layerId := "punx"
+	    frenchAccessKeydef.layerId := "french"
+    }
 
 }
 
