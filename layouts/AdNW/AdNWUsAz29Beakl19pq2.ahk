@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 2019-03-16
 AdNW ansi angleZ BEALK19 pq2
@@ -55,12 +55,13 @@ CreateLayers()
 	     CL a s d f g  h j k l ;   \ / ( " ) !   % { = } ;
 	     @LSh z x c v    m , . /     # : * + ``    j ^ & | 
 	)"
-	; layerJxzPunxSh := "
-	; (Join`r`n
-	;         q w e r t    u i o p     $ < - > ~     X [ ] Z
-	;      CL a s d f g  h j k l ;   _ \ ( " ) !   % { = } ;
-	;      @LSh z x c v    m , . /     # : * + @     J ^ & | 
-	; )"
+	layerJxzFrench := "
+	(Join`r`n
+						   9 0                       < >
+	        q w e r t    u i o p     ù û î ï ä     x " ç z
+	     CL a s d f g  h j k l ;   \ / è é à â   % « = » ;
+	     @LSh z x c v    m , . /     : ë ê ô œ     j ( ) -
+	)"
 
 	extendLayer := ExtendLayerMappings()
 	numpadLayers := NumpadLayerMappings()
@@ -73,6 +74,10 @@ CreateLayers()
 
 	    {id: "punx", key: "Space", tap: "Space",
 	    	map: layerJxzPunx, 
+	    },
+
+	    {id: "french", 
+	    	map: layerJxzFrench, 
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
@@ -99,6 +104,31 @@ CreateLayers()
 	; SetMouseDragKeys("space", "control")
 }
 
+
+swapFrenchAndPunx()
+{
+	; get punx layer access keydef, on main layer 
+    mainLayer := layerDefs[1]
+    ; mainLayer := layerDefsById["main"]
+	punx := layerDefsById["punx"]
+	french := layerDefsById["french"]
+
+    punxAccessKeydef := mainLayer.GetKeydef(punx.key)
+    ; frenchAccessKeydef := mainLayer.GetKeydef(french.key)
+
+    if (punxAccessKeydef.layerId == "punx") {
+    	mainLayer.id := "mainfr"
+    	punxAccessKeydef.layerId := "french"
+	    ; frenchAccessKeydef.layerId := "punx"
+    }
+    else {
+    	mainLayer.id := "main"
+    	punxAccessKeydef.layerId := "punx"
+	    ; frenchAccessKeydef.layerId := "french"
+    }
+
+}
+
 CreateLayers()
 DisplayHelpImage()
 
@@ -109,3 +139,4 @@ return
 
 #include ../winHotkeys.ahk
 
+LWin & Insert::swapFrenchAndPunx()
