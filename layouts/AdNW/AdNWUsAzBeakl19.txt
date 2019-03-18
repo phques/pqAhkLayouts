@@ -54,3 +54,33 @@
                    4.265 no hand altern. 43.961 two hand altern.
                    1.955 seesaw           7.532 indir same finger
                   3.7 12.5 18.9 13.0 --.- --.- 16.1 14.8 16.6  4.5 Sh  1.8  1.0
+
+--------
+
+------- 26 keys french !! -----------
+
+./opt29 -2 JeanneFR.txt -K kwezNew/stdUs29azBEAKL19pq2JFr.cfg
+
+61               434.980 total effort   314.594 positional effort    left right
+                   1.853 same finger rp   2.190 shift same finger top  9.5 16.5
+  béo,   cslq     72.136 hand alternat.  17.568 shift hand alter. mid 30.8 23.9
+  'aeih gtrnp      1.757 inward/outward  22.960 inward or outward bot  8.8 10.4
+ è.àu    dvmf     13.526 adjacent        24.837 shift adjacent    sum 49.1 50.9
+                  4.7 10.7 19.9 13.8 --.- --.- 14.7 15.2 15.1  5.8 Sh  2.1  1.3
+
+* -3 *
+8                703.436 total effort   314.594 positional effort    left right
+                   1.985 same finger rp   2.144 shift same finger top  9.5 16.5
+  béo,   cslq     72.136 hand alternat.  17.568 shift hand alter. mid 30.8 23.7
+  'aeih gtrnm      1.799 inward/outward  22.828 inward or outward bot  8.8 10.6
+ è.àu    dvpf     13.798 adjacent        24.883 shift adjacent    sum 49.1 50.9
+                   3.492 no hand altern. 42.147 two hand altern.
+                   2.464 seesaw           5.991 indir same finger
+                  4.7 10.7 19.9 13.8 --.- --.- 14.7 15.2 15.4  5.6 Sh  2.1  1.3
+                  
+7                43979.898 total effort   148.264 positional effort    left right
+                   0.000 same finger rp   0.000 shift same finger top  8.6  8.1
+  ?ê«û   ô»]ù     84.783 hand alternat.   0.000 shift hand alter. mid 26.2 31.3
+  w)xyœ z-j(;      2.500 inward/outward  15.217 inward or outward bot 19.1  6.7
+ kâî:    [—ç"     10.870 adjacent         0.000 shift adjacent    sum 53.9 46.1
+                 14.7  9.2 15.0 14.9 --.- --.- 10.8 23.1  8.3  3.9 Sh 13.5  2.1

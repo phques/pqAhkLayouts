@@ -69,3 +69,33 @@ adjusted (+) weight of low index key .. more strained w. 2 mid fingers on hi row
   %  ;   !  &      5.085 adjacent         0.000 shift adjacent    sum 43.7 56.3
        Â           3.1 10.0 22.0  8.6 --.- --.- 17.1 22.7 15.3  1.1 Sh  2.1  0.2
 
+--------
+
+Trying out french !
+corpus is text "Jeanne D'arc" from KLA latest 
+
+./opt23 -2 JeanneFR.txt -K kwezNew/stdUsLs20azBEAKL19pq3JFr.cfg
+
+30               884.231 total effort   321.687 positional effort    left right
+                   2.525 same finger rp   0.656 shift same finger top 25.6 18.5
+   aeé   csn      71.245 hand alternat.  13.020 shift hand alter. mid 19.7 24.4
+  goui' mtlrp      2.074 inward/outward  22.954 inward or outward bot  4.6  7.2
+  f  ,   d  v     11.203 adjacent        51.368 shift adjacent    sum 49.9 50.1
+                  4.3 13.0 20.5 12.1 --.- --.- 16.8 13.0 14.9  5.4 Sh  2.0  1.3
+
+* -3 *
+                 1138.772 total effort   331.107 positional effort    left right
+                   1.767 same finger rp   0.656 shift same finger top 28.3 19.5
+   aeu   dsn      71.245 hand alternat.  13.020 shift hand alter. mid 17.0 25.4
+  géoi' ctlrp      2.047 inward/outward  23.712 inward or outward bot  4.6  5.2
+  f  ,   m  v     12.235 adjacent        39.880 shift adjacent    sum 49.9 50.1
+                   5.014 no hand altern. 41.927 two hand altern.
+                   3.433 seesaw           6.746 indir same finger
+                  4.3 10.3 20.4 14.8 --.- --.- 16.8 13.0 14.9  5.4 Sh  2.0  1.3
+
+1                36276.410 total effort   146.281 positional effort    left right
+                   0.602 same finger rp   0.000 shift same finger top 19.6 25.5
+   è.(   )hb      78.313 hand alternat.  12.500 shift hand alter. mid 18.0 22.2
+  ôy-jâ çqàxz      1.167 inward/outward  15.663 inward or outward bot  6.2  8.5
+  w  ê   :  k      9.036 adjacent         0.000 shift adjacent    sum 43.8 56.2
+                  5.4 11.0 14.0 13.5 --.- --.- 14.8 17.7 16.1  7.6 Sh  4.4  6.8
