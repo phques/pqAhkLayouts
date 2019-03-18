@@ -5,10 +5,10 @@
 ;  InitLayout(layers, dontCreateHotkeys)
 
 
-;-- suspend / resume hotkeys and turn off/on help image
+;-- suspend / resume and turn off/on help image
 #SuspendExempt true
 
-LWin & PgDn::
+LWin & PgUp::
     Suspend  "toggle"
     if (A_IsSuspended)
         DisplayHelpImageSuspendOn()
@@ -24,7 +24,7 @@ LWin & End:: ExitApp
 
 
 ; toggle help img on/off
-LWin & PgUp::DisplayHelpImageToggle()
+; LWin & PgDn::DisplayHelpImageToggle()
 
 ; close current active window
 LWin & Delete:: WinClose "A"

@@ -16,6 +16,13 @@ GetQwerty20Mask(lsh, rsh)
 	    @LShift      x      ,     @RShift
 	)"
 
+	qwertyMask20RSh := "
+	(Join`r`n
+	           w e r      o p [
+	         a s d f g  k l ; ' Enter
+	   @LShift    c       .     @RShift
+	)"
+
 	qwertyMask20LRSh := "
 	(Join`r`n
 	             q w e      o p [
@@ -23,15 +30,12 @@ GetQwerty20Mask(lsh, rsh)
 	    @LShift      x      .     @RShift
 	)"
 
-	lsh := true
-	rsh := true
-
 	if (lsh & rsh)
 	  qwertyMask20 := qwertyMask20LRsh
 	else if (lsh)
 	  qwertyMask20 := qwertyMask20Lsh
-	; else if (rsh)
-	;   qwertyMask20 := qwertyMask20Rsh
+	else if (rsh)
+	  qwertyMask20 := qwertyMask20Rsh
 	else 
 	  qwertyMask20 := qwertyMask20Std
 
