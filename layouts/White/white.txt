@@ -1,0 +1,14 @@
+https://github.com/mw8/white_keyboard_layout/blob/master/README.md
+
+according to kla latst, it scores worst than colemake and dvorak ! :(
+
+# 1 2 3 4 5 @ $ 6 7 8 9 0   
+  v y d , ' _ j m l u ( ) = 
+  a t h e b - c s n o i   
+  p k g w q x r f . z   
+                
+
+` ! < > / | ~ % \ * [ ] ^   
+  V Y D ; " & J M L U { } ? 
+  A T H E B + C S N O I   
+  P K G W Q X R F : Z   
