@@ -20,49 +20,20 @@ global CenterOnCurrWndMonitor := 1
 global DoubleAlt := 0
 
 
-#include ../../fromPkl/pkl_guiLayers.ahk
-#include ../../layersv2c.ahk
-#include ../punxLayer.ahk
-#include ../extendLayer.ahk
-#include ../numpadLayer.ahk
+#include ../../../fromPkl/pkl_guiLayers.ahk
+#include ../../../layersv2c.ahk
+#include ../../punxLayer.ahk
+#include ../../extendLayer.ahk
+#include ../../numpadLayer.ahk
+#include qwerty20Masks.ahk
 
 ; ----
 
 CreateLayers()
 {
-	; note that 'std' right hand is still shifted right by 1
-	qwertyMask20Std := "
-	(Join`r`n
-	          w e r      i o p
-	        a s d f g  j k l ; '
-	  @LShift    c       ,     @RShift
-	)"
-
-	qwertyMask20Lsh := "
-	(Join`r`n
-	             q w e      i o p
-	    CapsLock a s d f  j k l ; '
-	    @LShift      x      ,     @RShift
-	)"
-
-	qwertyMask20LRSh := "
-	(Join`r`n
-	             q w e      o p [
-	    CapsLock a s d f  k l ; ' Enter
-	    @LShift      x      .     @RShift
-	)"
-
 	lsh := true
 	rsh := true
-
-	if (lsh & rsh)
-	  qwertyMask20 := qwertyMask20LRsh
-	else if (lsh)
-	  qwertyMask20 := qwertyMask20Lsh
-	; else if (rsh)
-	;   qwertyMask20 := qwertyMask20Rsh
-	else 
-	  qwertyMask20 := qwertyMask20Std
+	qwertyMask20 := GetQwerty20Mask(lsh, rsh)
 
 	; -2 seems to have better scrore (lower same finger than -3)
 	layerMain_2 := "
@@ -143,5 +114,5 @@ return
 
 ;--- hotkeys, must be at the end -----
 
-#include ../winHotkeys.ahk
+#include ../../winHotkeys.ahk
 
