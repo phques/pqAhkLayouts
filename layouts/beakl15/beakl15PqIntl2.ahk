@@ -20,8 +20,8 @@ http://shenafu.com/smf/index.php?topic=89.msg2221#msg2221
 ; MUST be declared *before* scripts that use them
 ; NB: 2019-03-12, images are not exactly th mappings found in this file!
 global ImgsDir := A_ScriptDir . "\imgs"
-global ImgWidth := 176
-global ImgHeight := 54
+global ImgWidth := 174
+global ImgHeight := 50
 global CenterOnCurrWndMonitor := 1
 
 #include ../../fromPkl/pkl_guiLayers.ahk
@@ -58,6 +58,13 @@ CreateLayers()
 	 @LSh z x c v   n m , . /        < è ê â \  & ( $ ) >
 	)"
 
+	layerFrenchSh := "
+	(Join`r`n
+	    q w e r t   y u i o p [      : Ï Ô Û Ù  | Ç { } + ~
+	 CL a s d f g   h j k l ; '    % _ Î É À +  * { " } : #
+	 @LSh z x c v   n m , . /        < È Ê Â |  & ( $ ) >
+	)"
+
 	punxLayers := PunxLayerMappings()
 	extendLayer := ExtendLayerMappings()
 	numpadLayers := NumpadLayerMappings()
@@ -81,7 +88,9 @@ CreateLayers()
 		},
 
 	    {id: "french", ;key: "AppsKey", tap: "AppsKey", 
-	    	map: layerFrench, },
+	    	map: layerFrench, 
+	    	mapSh: layerFrenchSh
+	    },
 	]
 
 	; dont create layout hotkey for Left Win

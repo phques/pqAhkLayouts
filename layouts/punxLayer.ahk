@@ -17,7 +17,7 @@ PunxLayerMappings()
 	(Join`r`n
 	      q w e r t      i o p [        $ < - > %     ~ [ ] @
 	   CL a s d f g    j k l ; '      _ \ ( " ) !   % { = } ;
-	      z x c v b      , . / RSh      # : * + ``    & ^ _ |
+	      z x c v b      , . / @RSh     # : * + ``    & ^ _ |
 	)"
 
 	; AngleZ, left bott pinky on LShift
@@ -25,14 +25,14 @@ PunxLayerMappings()
 	(Join`r`n
 	       q w e r t    u i o p         $ < - > %    ~ [ ] @ 
 	   CL  a s d f g  h j k l ;       _ \ ( " ) !  % { = } ;
-	   LSh z x c v      m , . /         # : * + ``   & ^ _ | 
+	  @LSh z x c v      m , . /         # : * + ``   & ^ _ | 
 	)"
 
 	layerAZWideRight := "
 	(Join`r`n
 	       q w e r t      i o p [       $ < - > %     ~ [ ] @
 	   CL  a s d f g    j k l ; '     _ \ ( " ) !   % { = } ;
-	   LSh z x c v        , . / RSh     # : * + ``    & ^ _ |
+	  @LSh z x c v        , . / @RSh    # : * + ``    & ^ _ |
 	)"
 
 	return { layer: layer, 

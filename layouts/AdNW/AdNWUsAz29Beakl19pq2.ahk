@@ -35,7 +35,7 @@ CreateLayers()
 	(Join`r`n
 	     q w e r       u i o p       q u i .       m r c v
 	  CL a s d f g   h j k l ; '   ; g h e a ,   w t n s p BS
-	  @LSh z x c       m , . @/      k y ' o       d l f @>+b 
+	  @LSh z x c v     m , . @/      k y ' o i     d l f @>+b 
 	  @LControl                    Escape   
 	)"
 
@@ -43,7 +43,7 @@ CreateLayers()
 	(Join`r`n
 	     q w e r       u i o p       Q U I @       M R C V
 	  CL a s d f g   h j k l ; ' ~CL G H E A !   W T N S P ~Del
-	  @LSh z x c       m , . @/      K Y ? O       D L F @>+B    
+	  @LSh z x c v     m , . @/      K Y ? O I     D L F @>+B    
 	)"
 
 	; created this one based on my std punxLayer, 
@@ -55,12 +55,19 @@ CreateLayers()
 	     CL a s d f g  h j k l ;   \ / ( " ) !   % { = } ;
 	     @LSh z x c v    m , . /     # : * + ``    j ^ & | 
 	)"
+						   ; 9 0                       < >
 	layerJxzFrench := "
 	(Join`r`n
-						   9 0                       < >
 	        q w e r t    u i o p     ù û î ï ä     x " ç z
 	     CL a s d f g  h j k l ;   \ / è é à â   % « = » ;
 	     @LSh z x c v    m , . /     : ë ê ô œ     j ( ) -
+	)"
+	; need layer since accented chars wont auto upper case ! (CapsLock wont work)
+	layerJxzFrenchSh := "
+	(Join`r`n
+	        q w e r t    u i o p     Ù Û Î Ï Ä     X " Ç Z
+	     CL a s d f g  h j k l ;   | ? È É À Â   % « + » :
+	     @LSh z x c v    m , . /     : Ë Ê Ô Œ     J < > _
 	)"
 
 	extendLayer := ExtendLayerMappings()
@@ -73,11 +80,12 @@ CreateLayers()
 	    },
 
 	    {id: "punx", key: "Space", tap: "Space",
-	    	map: layerJxzPunx, 
+	    	map: layerJxzPunx,
 	    },
 
 	    {id: "french", 
-	    	map: layerJxzFrench, 
+	    	map: layerJxzFrench,
+	    	mapSh: layerJxzFrenchSh,
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
@@ -140,3 +148,4 @@ return
 #include ../winHotkeys.ahk
 
 LWin & Insert::swapFrenchAndPunx()
+
