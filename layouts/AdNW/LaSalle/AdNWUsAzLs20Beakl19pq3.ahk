@@ -31,7 +31,7 @@ global DoubleAlt := 0
 
 CreateLayers()
 {
-	lsh := true
+	lsh := false
 	rsh := true
 	qwertyMask20 := GetQwerty20Mask(lsh, rsh)
 
@@ -50,11 +50,27 @@ CreateLayers()
 		b     y       f     w
 	)"
 
-	layerPunx := "
+	layerAlt := "
 	(Join`r`n
 		  ' , z       ) . k  
 		? " q - :   ( v j x $
-		%     ;       !     &
+		%     ;       !     @
+	)"	
+
+	; use actual \, near fingers anyways
+	layerPunx := "
+	(Join`r`n
+	      < - >     `` [ ] 
+	    _ ( & ) !  : { = } *
+	    #     +      ^     | 
+	)"
+
+	; not used, ref
+	layerPunx_ := "
+	(Join`r`n
+	        q w e r t    u i o p      $ < - > %    ~ [ ] @
+	     CL a s d f g  h j k l ;    _ \ ( " ) !  % { = } ;
+	     @LSh z x c v    m , . /      # : * + ``   & ^ _ | 
 	)"
 
 	extendLayer := ExtendLayerMappings()
@@ -71,9 +87,9 @@ CreateLayers()
 	     	;mapSh: layerMainSh
 	    },
 
-	    {id: "punx", key: punxKey, tap: punxTap,
+	    {id: "alt", key: punxKey, tap: punxTap,
 	    	qwertyMask: qwertyMask20, 
-	    	map: layerPunx, 
+	    	map: layerAlt, 
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
@@ -82,6 +98,11 @@ CreateLayers()
 
 	    {id: "numpad", key: "b", toggle: true,
 	    	map: numpadLayers.indexOnB, 
+		},
+
+	    {id: "punx", key: "m", toggle: true,
+	    	qwertyMask: qwertyMask20, 
+	    	map: layerPunx, 
 		},
 
 	]
@@ -95,9 +116,10 @@ CreateLayers()
 
 	main := layerDefsById["main"]
 	main.AddMappings("@LControl  Escape", false)
+	main.AddMappings("]  Backspace", false)
 
 	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
-	punx := layerDefsById["punx"]
+	punx := layerDefsById["alt"]
 	punx.AddMappings("b  Space", false)
 
 	if (rsh)
