@@ -11,8 +11,8 @@ AdNW ansi angleZ BEALK19 pq2b
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
 global ImgsDir := A_ScriptDir . "\imgs\az29Beakl19pq2b"
-global ImgWidth := 182
-global ImgHeight := 96
+global ImgWidth := 176
+global ImgHeight := 54
 global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
@@ -39,8 +39,8 @@ CreateLayers()
 	)"
 	layerMainSh := "
 	(Join`r`n
-	     q w e r       u i o p       Q U I Z      M R C V " 
-	  CL a s d f g   h j k l ; '   ; G H E A X  W T N S P ~Del
+	     q w e r       u i o p [     Q U I Z      M R C V " 
+	  CL a s d f g   h j k l ; '  CL G H E A X  W T N S P ~Del
 	  @LSh z x c v     m , . @/      K Y J O I    D L F @>+B
 	)"
 
@@ -53,17 +53,18 @@ CreateLayers()
 	)"
 
 
-	punxLayers := PunxLayerMappings()
+	; punxLayers := PunxLayerMappings()
 	extendLayer := ExtendLayerMappings()
 	numpadLayers := NumpadLayerMappings()
 
 	layers := [
 	    {id: "main", 
 	     	map: layerMain, 
+	     	mapSh: layerMainSh
 	    },
 
 	    {id: "punx", key: "Space", tap: "Space",
-	    	map: punxLayers.layerAZ, 
+	    	map: layerPunx, 
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
