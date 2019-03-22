@@ -55,9 +55,47 @@ CreateLayers()
 		  ' , z       ) . k  
 		? " q - :   ( v j x $
 		%     ;       !     @
-	)"	
+	)"
 
-	; use actual \, near fingers anyways
+	layerEdit1 := "
+	(Join`r`n
+		  . . .        Home  Up  End
+	 Ctrl Sh . . .  ^z Left Down Right ^x
+		.     Alt        ^c            ^v
+	)"
+	layerEdit2 := "
+	(Join`r`n
+		  . . .         ^z   Up  Right 
+	 Ctrl Sh . . .  ^x Left Home Down End
+		.     Alt       ^c            ^v
+	)"
+
+	layerEdit3 := "
+	(Join`r`n
+		  . . .          ^x  Up  End
+	 Ctrl Sh . . .  ^z Left Home Down Right
+		.     Alt      ^c             ^v
+	)"
+	layerEdit4 := "
+	(Join`r`n
+		  . . .        Home  Up  End
+	 Ctrl Sh . . .  ^c Left Down Right ^v
+		.     Alt       ^z             ^x
+	)"
+	layerEdit5 := "
+	(Join`r`n
+		  . . .          ^x Left Right 
+	 Ctrl Sh . . .  ^z Home Down Up   End
+		.     .          ^c           ^v
+	)"	
+	layerEdit6 := "
+	(Join`r`n
+		  . . .        Home   Up  End
+	 Ctrl Sh . . .  ^z Left Right Down ^x
+		.     Alt       ^c             ^v
+	)"
+
+	; for \, use actual key, not to far anyways
 	layerPunx := "
 	(Join`r`n
 	      < - >     `` [ ] 
@@ -65,19 +103,18 @@ CreateLayers()
 	    #     +      ^     | 
 	)"
 
-	; not used, ref
-	layerPunx_ := "
-	(Join`r`n
-	        q w e r t    u i o p      $ < - > %    ~ [ ] @
-	     CL a s d f g  h j k l ;    _ \ ( " ) !  % { = } ;
-	     @LSh z x c v    m , . /      # : * + ``   & ^ _ | 
-	)"
+	; layerPunx_ := "
+	; (Join`r`n
+	;         q w e r t    u i o p      $ < - > %    ~ [ ] @
+	;      CL a s d f g  h j k l ;    _ \ ( " ) !  % { = } ;
+	;      @LSh z x c v    m , . /      # : * + ``   & ^ _ | 
+	; )"
 
-	extendLayer := ExtendLayerMappings()
+	; extendLayer := ExtendLayerMappings()
 	numpadLayers := NumpadLayerMappings()
 
-	punxKey := (rsh ? "RAlt" : "Space")
-	punxTap := (rsh ? 0      : "Space")
+	; punxKey := (rsh ? "RAlt" : "Space")
+	; punxTap := (rsh ? 0      : "Space")
 	punxKey := "Space"
 	punxTap := "Space"
 	layers := [
@@ -93,14 +130,16 @@ CreateLayers()
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
-	    	map: extendLayer, 
+	    	qwertyMask: qwertyMask20, 
+	    	map: layerEdit5, 
+	    	; map: extendLayer, 
 		},
 
 	    {id: "numpad", key: "b", toggle: true,
 	    	map: numpadLayers.indexOnB, 
 		},
 
-	    {id: "punx", key: "m", toggle: true,
+	    {id: "punx", key: "m",
 	    	qwertyMask: qwertyMask20, 
 	    	map: layerPunx, 
 		},
