@@ -5,7 +5,7 @@
 #InstallKeybdHook
 #InstallMouseHook
 ; def 70 
-#MaxHotkeysPerInterval 140
+;#MaxHotkeysPerInterval 140
 ; #Warn All, MsgBox
 
 #include util.ahk
@@ -125,31 +125,31 @@ onMouseDn(butt)
     ; for a dualMode LShift for eg.
     CKeyDef.checkOnDualDn()
 
-    eatDnBtn := false
-    if (msdragActivateKey){
-        if (butt == "LButton")
-            eatDnBtn := lmousebutt(msdragActivateKey, msdragSecKey)
-        else if (butt == "MButton")
-            eatDnBtn := mmousebutt(msdragActivateKey, msdragSecKey)
-        else if (butt == "RButton")
-            eatDnBtn := rmousebutt(msdragActivateKey, msdragSecKey)
-    }
+    ; eatDnBtn := false
+    ; if (msdragActivateKey){
+    ;     if (butt == "LButton")
+    ;         eatDnBtn := lmousebutt(msdragActivateKey, msdragSecKey)
+    ;     else if (butt == "MButton")
+    ;         eatDnBtn := mmousebutt(msdragActivateKey, msdragSecKey)
+    ;     else if (butt == "RButton")
+    ;         eatDnBtn := rmousebutt(msdragActivateKey, msdragSecKey)
+    ; }
 
-    if eatDnBtn 
-        outputdebug "Eat dn " butt
-    else
-        Send '{' butt ' Down}'
+    ; if eatDnBtn 
+    ;     outputdebug "Eat dn " butt
+    ; else
+    ;     Send '{' butt ' Down}'
 }
 
 ; l/m/r
 onMouseUp(butt)
 {
-    if eatUpBtn == butt {
-        outputdebug "eat up " butt
-        eatUpBtn := ''
-    }
-    else 
-        Send '{' butt ' Up}'
+    ; if eatUpBtn == butt {
+    ;     outputdebug "eat up " butt
+    ;     eatUpBtn := ''
+    ; }
+    ; else 
+    ;     Send '{' butt ' Up}'
 }
 
 hookMouse()
@@ -158,14 +158,14 @@ hookMouse()
     fnUp := Func("onMouseUp")
 
     ; '~' lets the button through, we only need to KNOW that it was presssed
-    HotKey 'LButton', fnDn.Bind("LButton")
-    HotKey 'LButton up', fnUp.Bind("LButton")
+    HotKey '~LButton', fnDn.Bind("LButton")
+    HotKey '~LButton up', fnUp.Bind("LButton")
 
-    HotKey 'MButton', fnDn.Bind("MButton")
-    HotKey 'MButton up', fnUp.Bind("MButton")
+    HotKey '~MButton', fnDn.Bind("MButton")
+    HotKey '~MButton up', fnUp.Bind("MButton")
 
-    HotKey 'RButton', fnDn.Bind("RButton")
-    HotKey 'RButton up', fnUp.Bind("RButton")
+    HotKey '~RButton', fnDn.Bind("RButton")
+    HotKey '~RButton up', fnUp.Bind("RButton")
 
 }
  
