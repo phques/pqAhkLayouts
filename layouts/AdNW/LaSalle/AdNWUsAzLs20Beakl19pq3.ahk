@@ -57,6 +57,7 @@ CreateLayers()
 		%     ;       !     @
 	)"
 
+	; need backspace and delete
 	layerEdit1 := "
 	(Join`r`n
 		  . . .        Home  Up  End
@@ -96,6 +97,7 @@ CreateLayers()
 	)"
 
 	; for \, use actual key, not to far anyways
+	; missing / 
 	layerPunx := "
 	(Join`r`n
 	      < - >     `` [ ] 
@@ -113,10 +115,11 @@ CreateLayers()
 	; extendLayer := ExtendLayerMappings()
 	numpadLayers := NumpadLayerMappings()
 
-	; punxKey := (rsh ? "RAlt" : "Space")
+	; altKey := (rsh ? "RAlt" : "Space")
 	; punxTap := (rsh ? 0      : "Space")
-	punxKey := "Space"
-	punxTap := "Space"
+	altKey := "Space"
+	altTap := "Space"
+	punxKey := (rsh ? "m" : "n")
 	layers := [
 	    {id: "main", 
 	     	qwertyMask: qwertyMask20,
@@ -124,14 +127,14 @@ CreateLayers()
 	     	;mapSh: layerMainSh
 	    },
 
-	    {id: "alt", key: punxKey, tap: punxTap,
+	    {id: "alt", key: altKey, tap: altTap,
 	    	qwertyMask: qwertyMask20, 
 	    	map: layerAlt, 
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
 	    	qwertyMask: qwertyMask20, 
-	    	map: layerEdit5, 
+	    	map: layerEdit1, 
 	    	; map: extendLayer, 
 		},
 
@@ -139,7 +142,7 @@ CreateLayers()
 	    	map: numpadLayers.indexOnB, 
 		},
 
-	    {id: "punx", key: "m",
+	    {id: "punx", key: punxKey,
 	    	qwertyMask: qwertyMask20, 
 	    	map: layerPunx, 
 		},
@@ -155,7 +158,10 @@ CreateLayers()
 
 	main := layerDefsById["main"]
 	main.AddMappings("@LControl  Escape", false)
-	main.AddMappings("]  Backspace", false)
+	if (rsh)
+		main.AddMappings("]  Backspace", false)
+	else
+		main.AddMappings("[  Backspace", false)
 
 	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	punx := layerDefsById["alt"]
