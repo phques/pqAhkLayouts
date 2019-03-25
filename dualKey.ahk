@@ -1,3 +1,6 @@
+; testing a simple dualMode class
+; a key can then behave as a modifier when hel down
+; or output a value when tapped
 
 class CDualKey
 {
@@ -14,21 +17,15 @@ class CDualKey
 
 	reset()
 	{
-		this.needTapUp := false
-		this.needModifierUp := false
+		this.mode := "tap"	; tap or mod (modifier)
 		this.active := false
 		this.downTick := 0
 	}
 
-	mySendUp(val)
+	sendTap()
 	{
-		OutputDebug "SendInput {blind" this.modToMask "}{" val " up}"
-		SendInput "{blind" this.modToMask "}{" val " up}"
-	}
-	mySendDown(val)
-	{
-		OutputDebug "SendInput {blind" this.modToMask "}{" val " down}"
-		SendInput "{blind" this.modToMask "}{" val " down}"
+		SendInput "{blind" this.modToMask "}{" this.tapVal " up}"
+		SendInput "{blind" this.modToMask "}{" this.tapVal " down}"
 	}
 
 	OnDualDown()
@@ -37,6 +34,7 @@ class CDualKey
 		if (!this.active) {
 			OutputDebug "set active / downTick " A_ThisHotkey
 			this.active := true
+			this.mode := "tap" 	; until proven otherwise ;-)
 			this.downTick := A_TickCount
 		}
 	}
@@ -47,43 +45,40 @@ class CDualKey
 
 		if (this.active) {
 			; simple tap of the key: output tap val
-			if (!this.needTapUp && !this.needModifierUp) {
+			if (this.mode == "tap") {
 				OutputDebug "dualup send tap"
-				this.mySendDown(this.tapVal)
-				this.mySendUp(this.tapVal)
+				this.sendTap()
 			}
-
-			if (this.needModifierUp)
-				SendInput "{blind}{" this.modVal " down}"
-				; this.mySendUp(this.modVal)
-
-			if (this.needTapUp)
-				this.mySendUp(this.tapVal)
 		}
+
 		this.reset()
 	}
 
 	; called on other keys down
-	CheckDualOnHotkey() 
+	CheckDualOnHotkey(mods) 
 	{
 		if (this.active) {
-			if (this.downTick) {
-				; typing fast, we sometimes type the next key before releasing the prev
-				; this would cause unintended modifier + next key iso tap + next key
-				if ((A_TickCount - this.downTick) < this.tooFast) {
-					OutputDebug "CheckDualOnHotkey, < tooFast, send tapval down"
-					this.mySendDown(this.tapVal)
-					this.needTapUp := true
-				}
-				else {
-					OutputDebug "CheckDualOnHotkey, send modifier down"
-					; this.mySendDown(this.modVal)
-					SendInput "{blind}{" this.modVal " down}"
-					this.needModifierUp := true
-				}
+			if (this.mode == "tap") {
+				if (this.downTick) {
+					; typing fast, we sometimes type the next key before releasing the prev
+					; this would cause unintended modifier + next key iso tap + next key
+					if ((A_TickCount - this.downTick) < this.tooFast) {
+						OutputDebug "CheckDualOnHotkey, < tooFast, send tapval"
+						this.sendTap()
+						this.reset()  ; not active after sending tap val
+					}
+					else {
+						; got a key down while holding down dual mode key,
+						; it is now behaving as a modifier
+						this.mode := "mod"
+					}
+					this.downTick := 0
+				} ;; else .. internal error !?
+			}
 
-				; no need for this anymore
-				this.downTick := 0
+			; behaving as a modifier, add modifier value to array
+			if (this.mode == "mod") {
+				mods.push(this.modVal)
 			}
 		}
 	}
@@ -91,20 +86,30 @@ class CDualKey
 	;----------
 
 	;; static
-	; each key should call this, to check for dualmode keys 
+	; each key should call this, to check for dualmode keys combo
 	OnHotkey()
 	{
 		OutputDebug "onhotk " A_ThisHotkey
 
-		; check all dual keys
+		; check all dual keys, returns modifiers to use if any
+		mods := []
 		for idx, dkey in CDualKey.dualKeys {
-			dkey.CheckDualOnHotkey()
+			dkey.CheckDualOnHotkey(mods)
 		}
 
-		; output the hotkey that called this
+		; 1st output any (dualmode) modifiers that are down
+		for idx, mod in  mods {
+			SendInput "{blind}{" mod " down}"
+		}
+
+		; output the hotkey that called this.
 		val := substr(A_ThisHotkey,2)
-		OutputDebug  "OnHotkey, send hotkey {" val " down}"
-		SendInput "{blind}{" val " down}"
+		SendInput "{blind}" mods "{" val " down}"
+
+		; and realease modifiers
+		for idx, mod in  mods {
+			SendInput "{blind}{" mod " up}"
+		}
 	}
 
 	;; static
@@ -121,11 +126,11 @@ class CDualKey
 global spaceDual :=  CDualKey.CreateNewDual("Ralt", "space")
 global lctrlDual :=  CDualKey.CreateNewDual("LControl", "escape", "^")
 
-;; ## end of code
+;; ## end of code, hotkeys follow
 
 ;-------------
 
-; restore normal win or alt - space !
+; restore normal win or alt + space functions !
 #space::SendInput "{blind}#{space}"
 !space::SendInput "{blind}!{space}"
 
@@ -136,9 +141,13 @@ global lctrlDual :=  CDualKey.CreateNewDual("LControl", "escape", "^")
 *LControl:: lctrlDual.OnDualDown()
 *LControl Up:: lctrlDual.OnDualUp() 
 
-; hotkey to stop script
-#End::exitapp
+; win-end hotkey to stop script
+#End::
+  OutputDebug ëxiting script
+  exitapp
+return
 
+; hookup all keys (modifiers not hooked here)
 *a::
 *b::
 *c::
@@ -197,7 +206,7 @@ global lctrlDual :=  CDualKey.CreateNewDual("LControl", "escape", "^")
 *Insert::
 *Delete::
 *Backspace::
-; *Space::
+*Space::
 *Enter::
 *Tab::
 *F1::
