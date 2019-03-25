@@ -1,5 +1,9 @@
+; pqAhkLayouts project
+; Copyright 2018 Philippe Quesnel
+; Licensed under the Academic Free License version 3.0
+
 ; testing a simple dualMode class
-; a key can then behave as a modifier when hel down
+; a key can then behave as a modifier when held down
 ; or output a value when tapped
 
 class CDualKey
@@ -123,103 +127,3 @@ class CDualKey
 }
 
 
-global spaceDual :=  CDualKey.CreateNewDual("Ralt", "space")
-global lctrlDual :=  CDualKey.CreateNewDual("LControl", "escape", "^")
-
-;; ## end of code, hotkeys follow
-
-;-------------
-
-; restore normal win or alt + space functions !
-#space::SendInput "{blind}#{space}"
-!space::SendInput "{blind}!{space}"
-
-; dual mode space
-*space::	spaceDual.OnDualDown()
-*space Up:: spaceDual.OnDualUp() 
-
-*LControl:: lctrlDual.OnDualDown()
-*LControl Up:: lctrlDual.OnDualUp() 
-
-; win-end hotkey to stop script
-#End::
-  OutputDebug ëxiting script
-  exitapp
-return
-
-; hookup all keys (modifiers not hooked here)
-*a::
-*b::
-*c::
-*d::
-*e::
-*f::
-*g::
-*h::
-*i::
-*j::
-*k::
-*l::
-*m::
-*n::
-*o::
-*p::
-*q::
-*r::
-*s::
-*t::
-*u::
-*v::
-*w::
-*x::
-*y::
-*z::
-*0::
-*1::
-*2::
-*3::
-*4::
-*5::
-*6::
-*7::
-*8::
-*9::
-*.::
-*,::
-*`;::
-*`::
-*'::
-*/::
-*\::
-*[::
-*]::
-*-::
-*=::
-*Up::
-*Down::
-*Left::
-*Right::
-*Home::
-*End::
-*PgUp::
-*PgDn::
-*Insert::
-*Delete::
-*Backspace::
-*Space::
-*Enter::
-*Tab::
-*F1::
-*F2::
-*F3::
-*F4::
-*F5::
-*F6::
-*F7::
-*F8::
-*F9::
-*F10::
-*F11::
-*F12::
-	CDualKey.OnHotkey()
-return
