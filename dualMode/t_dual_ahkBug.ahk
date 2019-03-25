@@ -21,15 +21,11 @@ return
 
 
 *e::
-	val := substr(A_ThisHotkey,2)
-
 	if (spaceActive) 
 		SendInput "{blind}{ralt down}"
 
-
-	SendInput "{blind}{" val " down}"
+	SendInput "{blind}{e down}"
 return
 
 
-; space::RALT
-escape::exitapp
+*escape::exitapp
