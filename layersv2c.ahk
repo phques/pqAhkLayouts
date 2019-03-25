@@ -30,7 +30,7 @@ global StopOnEscape := False ;debug, if True, Escape will stop the script
 ; func called by hotkey on key down 
 onHotkeyDn(sc)
 {
-    ; OutputDebug "<onHotkeyDn '" . sc . "' " . GetKeyName(sc)
+    OutputDebug "<onHotkeyDn '" . sc . "' " . GetKeyName(sc)
 
     ; debug, hit Esc to stop script
     if (StopOnEscape && sc == MakeKeySC('Escape'))
@@ -55,7 +55,7 @@ onHotkeyDn(sc)
 ; func called by hotkey on key up
 onHotkeyUp(sc)
 {
-    ; OutputDebug ">onHotkeyUp '" . sc . "' " . GetKeyName(sc)
+    OutputDebug ">onHotkeyUp '" . sc . "' " . GetKeyName(sc)
     
     ; check for current layer access key already pressed
     ; (once on the other layer, the keydef will not be the same !)
@@ -190,12 +190,12 @@ prepBlind(keyDef, out)
 ; keydef onHoldDn action, called to 'send down'  out value of a key
 sendOutValueDn(keydef) 
 { 
-    ; OutputDebug "++send out dn " currentLayer.id ' ' keydef.name
+    OutputDebug "++send out dn " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
         Send blindStr out.mods "{" out.val  " Down}"
-        ; outputdebug "Send " blindStr out.mods "{" out.val  " Down}"
+        outputdebug "Send " blindStr out.mods "{" out.val  " Down}"
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -204,12 +204,12 @@ sendOutValueDn(keydef)
 ; keydef onHoldUp action, called to 'send up'  out value of a key
 sendOutValueUp(keydef) 
 { 
-    ; OutputDebug "++send out up " currentLayer.id ' ' keydef.name
+    OutputDebug "++send out up " currentLayer.id ' ' keydef.name
     out := keydef.GetValues(false)
     if (out) {
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
         Send blindStr out.mods "{" out.val " Up}"
-        ; outputdebug "Send " blindStr out.mods "{" out.val " Up}"
+        outputdebug "Send " blindStr out.mods "{" out.val " Up}"
     }
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
@@ -221,7 +221,7 @@ sendTap(keydef)
     out := keydef.GetValues(true)
     if (out) {
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
-        ; outputdebug "Send " blindStr out.mods "{" out.val " Tap}"
+        outputdebug "Send " blindStr out.mods "{" out.val " Tap}"
         Send blindStr out.mods "{" out.val " Down}"
         Send blindStr out.mods "{" out.val " Up}"
     }
@@ -391,9 +391,9 @@ toto()
 {
     layers := [
         {id: "main",
-            qwertyMask: "a s d f",
-            map: "q w e r",  
-            mapSh: "Home Delete z Q"
+            qwertyMask: "@b a s d f",
+            map: "@>!b g i e a",  
+            ; mapSh: "Home Delete z Q"
         },
     ]
 

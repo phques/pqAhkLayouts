@@ -80,6 +80,7 @@ class CKeyDef
         this.sc := MakeKeySC(key)
         this.canRepeat := canRepeat
         this.isDual := isDual
+        this.currDualMode := ""  ; tap / mod
         this.isLayerAccess := false
         
         this.isDown := false
@@ -122,8 +123,10 @@ class CKeyDef
 
         ; OutputDebug "kdn, " CKeyDef.downKeys.Count() " keys dn"
 
-        if (this.isDual) 
+        if (this.isDual)  {
             CKeyDef.waitingDual := this
+            this.currDualMode := "tap"  ; start in tap mode, until other key hit
+        }
 
         ; call keys holdDown action
         this.onHoldDn()
@@ -133,6 +136,7 @@ class CKeyDef
     {
         ; do this 1st (mark key not down, remove from list of keys down)
         this.isDown := 0
+        this.currDualMode := ""
         CKeyDef.downKeys.Delete(this.sc)
 
         ; Always need to do this
@@ -163,7 +167,8 @@ class CKeyDef
 
         if (waiting && waiting.sc != this.sc) {
             ; waiting dual mode key, tap interrupted by other key / mouse click,
-            ; stay in 'hold dn' mode (dn already sent) / cancel Tap possiblity
+            ; go to 'hold dn'  modifier mode / cancel Tap possiblity
+            waiting.currDualMode := "mod"
             CKeyDef.waitingDual := 0
         }
     }
