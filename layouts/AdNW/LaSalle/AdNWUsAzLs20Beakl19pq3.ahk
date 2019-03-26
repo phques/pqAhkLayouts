@@ -115,11 +115,6 @@ CreateLayers()
 	; extendLayer := ExtendLayerMappings()
 	numpadLayers := NumpadLayerMappings()
 
-	; altKey := (rsh ? "RAlt" : "Space")
-	; punxTap := (rsh ? 0      : "Space")
-	altKey := "Space"
-	altTap := "Space"
-	punxKey := (rsh ? "m" : "n")
 	layers := [
 	    {id: "main", 
 	     	qwertyMask: qwertyMask20,
@@ -127,7 +122,7 @@ CreateLayers()
 	     	;mapSh: layerMainSh
 	    },
 
-	    {id: "alt", key: altKey, tap: altTap,
+	    {id: "alt", key: "Space", tap: "Space",
 	    	qwertyMask: qwertyMask20, 
 	    	map: layerAlt, 
 	    },
@@ -138,11 +133,11 @@ CreateLayers()
 	    	; map: extendLayer, 
 		},
 
-	    {id: "numpad", key: "b", toggle: true,
+	    {id: "numpad", key: "v", toggle: true,
 	    	map: numpadLayers.indexOnB, 
 		},
 
-	    {id: "punx", key: punxKey,
+	    {id: "punx", key: (rsh ? "m" : "n"),
 	    	qwertyMask: qwertyMask20, 
 	    	map: layerPunx, 
 		},
@@ -158,18 +153,14 @@ CreateLayers()
 
 	main := layerDefsById["main"]
 	main.AddMappings("@LControl  Escape", false)
-	if (rsh)
-		main.AddMappings("]  Backspace", false)
-	else
-		main.AddMappings("[  Backspace", false)
+	main.AddMappingsFromTo((rsh ? "]" : "["), "Backspace", false)
+	main.AddMappingsFromTo((rsh ? "]" : "["), "~bbDelete", true)
+	main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", false)
+	main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", true)
 
 	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	punx := layerDefsById["alt"]
 	punx.AddMappings("b  Space", false)
-
-	if (rsh)
-	    main.AddMappings(", Enter", false)
-	    ; main.AddMappings("m Enter", false)
 
 	; SetMouseDragKeys("space", "control")
 }

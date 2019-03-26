@@ -69,8 +69,9 @@ class COutput
 ; holds definition of a key
 class CKeyDef
 {
-    static waitingDual := 0     ; CKeyDef of a dualMode key for possible Tap
-    static downKeys := {}       ; CKeyDef[keysc], currently down keys
+    static waitingDual := 0         ; CKeyDef of a dualMode key for possible Tap
+    static downKeys := {}           ; CKeyDef[keysc], currently down keys
+    static downDualModifiers := {}  ; CKeyDef[keysc], currently down dual modifier keys
 
     ; key: 'a', "LShift", "Escape", "sc020" ..
     ; outXyz are COutput[2], outXyz[2] is shifted value
@@ -124,12 +125,22 @@ class CKeyDef
         ; OutputDebug "kdn, " CKeyDef.downKeys.Count() " keys dn"
 
         if (this.isDual)  {
+            ; add to list of down dual modifiers
             CKeyDef.waitingDual := this
+            CKeyDef.downDualModifiers[this.sc] := this
             this.currDualMode := "tap"  ; start in tap mode, until other key hit
-        }
 
-        ; call keys holdDown action
-        this.onHoldDn()
+            ; (dont ouput dual mode modifiers down)
+            ; we get missing keys up when we do this
+            if (this.isLayerAccess) {
+                ; call keys holdDown action, in this case it's layer change
+                this.onHoldDn()
+            }
+        }
+        else {
+            ; call keys holdDown action
+            this.onHoldDn()
+        }
     }
 
     OnKeyUp()
@@ -137,20 +148,27 @@ class CKeyDef
         ; do this 1st (mark key not down, remove from list of keys down)
         this.isDown := 0
         this.currDualMode := ""
-        CKeyDef.downKeys.Delete(this.sc)
 
-        ; Always need to do this
-        ; For a waiting dualMode that would succeed to Tap also ! 
-        this.onHoldUp()
+        ; remove from list of down keys & dual modifiers
+        CKeyDef.downKeys.Delete(this.sc)
+        CKeyDef.downDualModifiers.Delete(this.sc)
+
 
         if (this.isDual) {
             ; dualMode key 'tap' success: output its tap value
-            ; note that if a different had been pressed after this one, 
+            ; note that if a different key had been pressed after this one, 
             ; we would have removed CKeyDef.waitingDual
             if (CKeyDef.waitingDual == this) {
                 this.onTap()
                 CKeyDef.waitingDual := 0
             }
+            if (this.isLayerAccess) {
+                ; call keys holdUp action, in this case it's layer change
+                this.onHoldUp()
+            }
+        }
+        else {
+            this.onHoldUp()
         }
 
         ; this.isDown := 0
@@ -167,7 +185,7 @@ class CKeyDef
 
         if (waiting && waiting.sc != this.sc) {
             ; waiting dual mode key, tap interrupted by other key / mouse click,
-            ; go to 'hold dn'  modifier mode / cancel Tap possiblity
+            ; cancel Tap possiblity
             waiting.currDualMode := "mod"
             CKeyDef.waitingDual := 0
         }
@@ -262,6 +280,7 @@ class CKeyDef
         
         ; save layerId !
         k1.layerId := layerId
+        k1.isLayerAccess := True
 
         k1.onHoldDn := Func("layerAccessDn")
         k1.onHoldUp := Func("layerAccessUp")
@@ -293,6 +312,18 @@ class CKeyDef
 
         ; non found
         return False
+    }
+
+    /*static*/
+    ; returns list of currently down dual mode modifiers (as key strings, ie "LShift")
+    GetDownDualModifiers()
+    {
+        downDualMods := []
+        for idx, keydef in CKeyDef.downDualModifiers {
+            if (keydef.outValues[1])
+                downDualMods.Push(keydef.outValues[1].val)
+        }
+        return downDualMods
     }
 }
 
