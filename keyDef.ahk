@@ -157,16 +157,17 @@ class CKeyDef
 
 
         if (this.isDual) {
+            ; call key's holdUp action, in this case it's layer change
+            ; do this 1st, so that if the key onTap is a layer toggle we dont overwrite it !
+            if (this.isLayerAccess) {
+                this.onHoldUp()
+            }
             ; dualMode key 'tap' success: output its tap value
             ; note that if a different key had been pressed after this one, 
             ; we would have removed CKeyDef.waitingDual
             if (CKeyDef.waitingDual == this) {
                 this.onTap()
                 CKeyDef.waitingDual := 0
-            }
-            if (this.isLayerAccess) {
-                ; call keys holdUp action, in this case it's layer change
-                this.onHoldUp()
             }
         }
         else {
