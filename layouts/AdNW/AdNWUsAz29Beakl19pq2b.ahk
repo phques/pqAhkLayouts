@@ -88,7 +88,7 @@ CreateLayers()
 	punx := layerDefsById["punx"]
 	punx.AddMappings("b  Space", false)
 
-	; SetMouseDragKeys("space", "control")
+	SetMouseDragKeys("space", "control")
 }
 
 

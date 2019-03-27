@@ -82,6 +82,7 @@ class CKeyDef
         this.canRepeat := canRepeat
         this.isDual := isDual
         this.currDualMode := ""  ; tap / mod
+        this.restoreDualOnUp := false
         this.isLayerAccess := false
         
         this.isDown := false
@@ -143,6 +144,7 @@ class CKeyDef
         }
     }
 
+
     OnKeyUp()
     {
         ; do this 1st (mark key not down, remove from list of keys down)
@@ -169,6 +171,10 @@ class CKeyDef
         }
         else {
             this.onHoldUp()
+            if (this.restoreDualOnUp) {
+	            this.isDual := true
+	            this.restoreDualOnUp := false
+            }
         }
 
         ; this.isDown := 0
@@ -177,9 +183,20 @@ class CKeyDef
 
     ;----
 
+    tempRemoveDual()
+    {
+    	outputdebug "tempRemoveDual()"
+        CKeyDef.downDualModifiers.Delete(this.sc)
+        this.isDual := false
+        this.restoreDualOnUp := true
+        
+        outputdebug "Send {blind}{" this.outValues[1].val " downr}" ; key up will send the up event
+        Send "{blind}{" this.outValues[1].val " downr}" ; key up will send the up event
+    }
+
     /*static*/
     ; check to cancel waiting potential dualMode key Tap
-    checkOnDualDn()
+    checkOnDualDn(isMouseClick := false)
     {
         waiting := CKeyDef.waitingDual
 
@@ -188,6 +205,10 @@ class CKeyDef
             ; cancel Tap possiblity
             waiting.currDualMode := "mod"
             CKeyDef.waitingDual := 0
+
+            if (isMouseClick) {
+            	waiting.tempRemoveDual()
+            }
         }
     }
 
@@ -318,12 +339,17 @@ class CKeyDef
     ; returns list of currently down dual mode modifiers (as key strings, ie "LShift")
     GetDownDualModifiers()
     {
+        dualModDn := ""
+        dualModUp := ""
         downDualMods := []
         for idx, keydef in CKeyDef.downDualModifiers {
-            if (keydef.outValues[1])
-                downDualMods.Push(keydef.outValues[1].val)
+            if (keydef.outValues[1]) {
+            	dualModDn .= "{" keydef.outValues[1].val " down}"
+            	dualModUp .= "{" keydef.outValues[1].val " up}"
+               ; downDualMods.Push(keydef.outValues[1].val)
+            }
         }
-        return downDualMods
+        return [dualModDn, dualModUp]
     }
 }
 

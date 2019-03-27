@@ -30,7 +30,7 @@ global StopOnEscape := False ;debug, if True, Escape will stop the script
 ; func called by hotkey on key down 
 onHotkeyDn(sc)
 {
-    ; OutputDebug "<onHotkeyDn '" . sc . "' " . GetKeyName(sc)
+    OutputDebug "<onHotkeyDn '" . sc . "' " . GetKeyName(sc)
 
     ; debug, hit Esc to stop script
     if (StopOnEscape && sc == MakeKeySC('Escape'))
@@ -55,7 +55,7 @@ onHotkeyDn(sc)
 ; func called by hotkey on key up
 onHotkeyUp(sc)
 {
-    ; OutputDebug ">onHotkeyUp '" . sc . "' " . GetKeyName(sc)
+    OutputDebug ">onHotkeyUp '" . sc . "' " . GetKeyName(sc)
     
     ; check for current layer access key already pressed
     ; (once on the other layer, the keydef will not be the same !)
@@ -119,37 +119,54 @@ SetMouseDragKeys(activate, secondary)
 }
 
 ; l/m/r
+global dnModsUpAfterClickup := ""
+
 onMouseDn(butt)
 {
     ; this is required so that Shift+LeftMouseButton does not output the tapval
     ; for a dualMode LShift for eg.
-    CKeyDef.checkOnDualDn()
+    CKeyDef.checkOnDualDn(true)
 
-    ; eatDnBtn := false
-    ; if (msdragActivateKey){
-    ;     if (butt == "LButton")
-    ;         eatDnBtn := lmousebutt(msdragActivateKey, msdragSecKey)
-    ;     else if (butt == "MButton")
-    ;         eatDnBtn := mmousebutt(msdragActivateKey, msdragSecKey)
-    ;     else if (butt == "RButton")
-    ;         eatDnBtn := rmousebutt(msdragActivateKey, msdragSecKey)
-    ; }
+    eatDnBtn := false
+    if (msdragActivateKey){
+        if (butt == "LButton")
+            eatDnBtn := lmousebutt(msdragActivateKey, msdragSecKey)
+        else if (butt == "MButton")
+            eatDnBtn := mmousebutt(msdragActivateKey, msdragSecKey)
+        else if (butt == "RButton")
+            eatDnBtn := rmousebutt(msdragActivateKey, msdragSecKey)
+    }
 
-    ; if eatDnBtn 
-    ;     outputdebug "Eat dn " butt
-    ; else
-    ;     Send '{' butt ' Down}'
+    if eatDnBtn {
+        outputdebug "Eat dn " butt
+    }
+    else {
+        dualMods := CKeyDef.GetDownDualModifiers()
+        ; dualModDn := ""
+        ; dualModUp := ""
+        ; for idx, dualMod in dualMods {
+        ;     dualModDn .= "{" dualMod " down}"
+        ;     dualModUp .= "{" dualMod " up}"
+        ; }
+        ; outputdebug "Send " dualMods[1] "{" butt " Down}" dualMods[2]
+        ; Send dualMods[1] '{' butt ' Down}' dualMods[2]
+        ; dnModsUpAfterClickup := dualModUp
+        Send '{' butt ' Down}'
+    }
 }
 
 ; l/m/r
 onMouseUp(butt)
 {
-    ; if eatUpBtn == butt {
-    ;     outputdebug "eat up " butt
-    ;     eatUpBtn := ''
-    ; }
-    ; else 
-    ;     Send '{' butt ' Up}'
+    if eatUpBtn == butt {
+        outputdebug "eat up " butt
+        eatUpBtn := ''
+    }
+    else {
+        outputdebug "Send {" butt " Up}" dnModsUpAfterClickup
+        Send '{' butt ' Up}' dnModsUpAfterClickup
+        dnModsUpAfterClickup := ""
+    }
 }
 
 hookMouse()
@@ -158,14 +175,16 @@ hookMouse()
     fnUp := Func("onMouseUp")
 
     ; '~' lets the button through, we only need to KNOW that it was presssed
-    HotKey '~LButton', fnDn.Bind("LButton")
-    HotKey '~LButton up', fnUp.Bind("LButton")
+    prefix := '~'
+    prefix := ''
+    HotKey prefix . 'LButton', fnDn.Bind("LButton")
+    HotKey prefix . 'LButton up', fnUp.Bind("LButton")
 
-    HotKey '~MButton', fnDn.Bind("MButton")
-    HotKey '~MButton up', fnUp.Bind("MButton")
+    HotKey prefix . 'MButton', fnDn.Bind("MButton")
+    HotKey prefix . 'MButton up', fnUp.Bind("MButton")
 
-    HotKey '~RButton', fnDn.Bind("RButton")
-    HotKey '~RButton up', fnUp.Bind("RButton")
+    HotKey prefix . 'RButton', fnDn.Bind("RButton")
+    HotKey prefix . 'RButton up', fnUp.Bind("RButton")
 
 }
  
@@ -198,16 +217,17 @@ sendOutValueDn(keydef)
         ; we do this rather than actually sending the modifier down whne pressed,
         ; because it causes sometimes some missed up keys !!!??
         dualMods := CKeyDef.GetDownDualModifiers()
-        dualModDn := ""
-        dualModUp := ""
-        for idx, dualMod in dualMods {
-            dualModDn .= "{" dualMod " down}"
-            dualModUp .= "{" dualMod " up}"
-        }
+        ; dualModDn := ""
+        ; dualModUp := ""
+        ; for idx, dualMod in dualMods {
+        ;     dualModDn .= "{" dualMod " down}"
+        ;     dualModUp .= "{" dualMod " up}"
+        ; }
 
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
-        Send blindStr dualModDn out.mods "{" out.val  " Down}" dualModUp
-        ; outputdebug "Send " blindStr dualModDn out.mods "{" out.val  " Down}" dualModUp
+
+        Send blindStr dualMods[1] out.mods "{" out.val  " Down}" dualMods[2]
+        outputdebug "Send " blindStr dualMods[1] out.mods "{" out.val  " Down}" dualMods[2]
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -220,8 +240,9 @@ sendOutValueUp(keydef)
     out := keydef.GetValues(false)
     if (out) {
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
+
         Send blindStr out.mods "{" out.val " Up}"
-        ; outputdebug "Send " blindStr out.mods "{" out.val " Up}"
+        outputdebug "Send " blindStr out.mods "{" out.val " Up}"
     }
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
@@ -232,9 +253,11 @@ sendTap(keydef)
 {
     out := keydef.GetValues(true)
     if (out) {
+        dualMods := CKeyDef.GetDownDualModifiers()
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
-        ; outputdebug "Send " blindStr out.mods "{" out.val " Tap}"
-        Send blindStr out.mods "{" out.val "}"
+
+        outputdebug "Send " blindStr dualMods[1] out.mods "{" out.val " Tap}" dualMods[2]
+        Send blindStr dualMods[1] out.mods "{" out.val "}" dualMods[2]
     }
     else
         outputdebug "sendTap no outTapValue, " keydef.name    
