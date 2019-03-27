@@ -30,7 +30,7 @@ global StopOnEscape := False ;debug, if True, Escape will stop the script
 ; func called by hotkey on key down 
 onHotkeyDn(sc)
 {
-    OutputDebug "<onHotkeyDn '" . sc . "' " . GetKeyName(sc)
+    ; OutputDebug "<onHotkeyDn '" . sc . "' " . GetKeyName(sc)
 
     ; debug, hit Esc to stop script
     if (StopOnEscape && sc == MakeKeySC('Escape'))
@@ -55,7 +55,7 @@ onHotkeyDn(sc)
 ; func called by hotkey on key up
 onHotkeyUp(sc)
 {
-    OutputDebug ">onHotkeyUp '" . sc . "' " . GetKeyName(sc)
+    ; OutputDebug ">onHotkeyUp '" . sc . "' " . GetKeyName(sc)
     
     ; check for current layer access key already pressed
     ; (once on the other layer, the keydef will not be the same !)
@@ -119,7 +119,6 @@ SetMouseDragKeys(activate, secondary)
 }
 
 ; l/m/r
-global dnModsUpAfterClickup := ""
 
 onMouseDn(butt)
 {
@@ -141,16 +140,7 @@ onMouseDn(butt)
         outputdebug "Eat dn " butt
     }
     else {
-        dualMods := CKeyDef.GetDownDualModifiers()
-        ; dualModDn := ""
-        ; dualModUp := ""
-        ; for idx, dualMod in dualMods {
-        ;     dualModDn .= "{" dualMod " down}"
-        ;     dualModUp .= "{" dualMod " up}"
-        ; }
-        ; outputdebug "Send " dualMods[1] "{" butt " Down}" dualMods[2]
-        ; Send dualMods[1] '{' butt ' Down}' dualMods[2]
-        ; dnModsUpAfterClickup := dualModUp
+        ; outputdebug "Send {" butt " Down}"
         Send '{' butt ' Down}'
     }
 }
@@ -163,9 +153,8 @@ onMouseUp(butt)
         eatUpBtn := ''
     }
     else {
-        outputdebug "Send {" butt " Up}" dnModsUpAfterClickup
-        Send '{' butt ' Up}' dnModsUpAfterClickup
-        dnModsUpAfterClickup := ""
+        ; outputdebug "Send {" butt " Up}" 
+        Send '{' butt ' Up}' 
     }
 }
 
@@ -217,17 +206,10 @@ sendOutValueDn(keydef)
         ; we do this rather than actually sending the modifier down whne pressed,
         ; because it causes sometimes some missed up keys !!!??
         dualMods := CKeyDef.GetDownDualModifiers()
-        ; dualModDn := ""
-        ; dualModUp := ""
-        ; for idx, dualMod in dualMods {
-        ;     dualModDn .= "{" dualMod " down}"
-        ;     dualModUp .= "{" dualMod " up}"
-        ; }
-
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
 
         Send blindStr dualMods[1] out.mods "{" out.val  " Down}" dualMods[2]
-        outputdebug "Send " blindStr dualMods[1] out.mods "{" out.val  " Down}" dualMods[2]
+        ; outputdebug "Send " blindStr dualMods[1] out.mods "{" out.val  " Down}" dualMods[2]
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -241,8 +223,9 @@ sendOutValueUp(keydef)
     if (out) {
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
 
+        ; #PQ need to send down dual modifiers here too ?
         Send blindStr out.mods "{" out.val " Up}"
-        outputdebug "Send " blindStr out.mods "{" out.val " Up}"
+        ; outputdebug "Send " blindStr out.mods "{" out.val " Up}"
     }
     else
         outputdebug "sendOutValueUp no outValue, " keydef.name    
@@ -256,8 +239,8 @@ sendTap(keydef)
         dualMods := CKeyDef.GetDownDualModifiers()
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
 
-        outputdebug "Send " blindStr dualMods[1] out.mods "{" out.val " Tap}" dualMods[2]
         Send blindStr dualMods[1] out.mods "{" out.val "}" dualMods[2]
+        ; outputdebug "Send " blindStr dualMods[1] out.mods "{" out.val " Tap}" dualMods[2]
     }
     else
         outputdebug "sendTap no outTapValue, " keydef.name    

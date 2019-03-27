@@ -185,13 +185,13 @@ class CKeyDef
 
     tempRemoveDual()
     {
-    	outputdebug "tempRemoveDual()"
+    	; outputdebug "tempRemoveDual()"
         CKeyDef.downDualModifiers.Delete(this.sc)
         this.isDual := false
         this.restoreDualOnUp := true
         
-        outputdebug "Send {blind}{" this.outValues[1].val " downr}" ; key up will send the up event
         Send "{blind}{" this.outValues[1].val " downr}" ; key up will send the up event
+        ; outputdebug "Send {blind}{" this.outValues[1].val " downr}" 
     }
 
     /*static*/
@@ -337,6 +337,7 @@ class CKeyDef
 
     /*static*/
     ; returns list of currently down dual mode modifiers (as key strings, ie "LShift")
+    ; [dualModDn, dualModUp]
     GetDownDualModifiers()
     {
         dualModDn := ""
