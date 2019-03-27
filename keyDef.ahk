@@ -190,8 +190,11 @@ class CKeyDef
         this.isDual := false
         this.restoreDualOnUp := true
         
-        Send "{blind}{" this.outValues[1].val " downr}" ; key up will send the up event
-        ; outputdebug "Send {blind}{" this.outValues[1].val " downr}" 
+        ; layer access key might be dual but have not outval (just tap val)
+        if (this.outValues[1] && this.outValues[1].val) {
+            Send "{blind}{" this.outValues[1].val " downr}" ; key up will send the up event
+            ; outputdebug "Send {blind}{" this.outValues[1].val " downr}" 
+        }
     }
 
     /*static*/
