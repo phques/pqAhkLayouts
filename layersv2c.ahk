@@ -108,6 +108,7 @@ CreateHotkeysForUsKbd(dontCreateHotkeys)
 
 #include easyWindowDrag\EasyWindowDrag_pqFuncs.ahk
 
+; mouse vars
 global msdragActivateKey := ""
 global msdragSecKey := ""
 global eatUpBtn
@@ -205,7 +206,7 @@ sendOutValueDn(keydef)
         ; we will output "{ralt down}{lshift down}{a}{ralt up}{lshift up}"
         ; we do this rather than actually sending the modifier down whne pressed,
         ; because it causes sometimes some missed up keys !!!??
-        dualMods := CKeyDef.GetDownDualModifiers()
+        dualMods := CKeyDef.GetDownDualModifiers(out.needBlindShift)
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
 
         Send blindStr dualMods[1] out.mods "{" out.val  " Down}" dualMods[2]
@@ -236,7 +237,7 @@ sendTap(keydef)
 {
     out := keydef.GetValues(true)
     if (out) {
-        dualMods := CKeyDef.GetDownDualModifiers()
+        dualMods := CKeyDef.GetDownDualModifiers(out.needBlindShift)
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
 
         Send blindStr dualMods[1] out.mods "{" out.val "}" dualMods[2]
@@ -384,6 +385,17 @@ InitLayout(layers, dontCreateHotkeys)
     hookMouse()
 }
 
+; try to reset everything, 
+; used when things get messed up with stuck modifiers etc
+DoReset()
+{
+Send "{LShift Up}{RShift Up}"
+    Send "{LControl Up}{RControl Up}"
+    Send "{LAlt Up}{RAlt Up}"
+    CKeyDef.waitingDual := 0
+    CKeyDef.downKeys := {}
+    CKeyDef.downDualModifiers := {}
+}
 ; ---------
 
 ; test / debug

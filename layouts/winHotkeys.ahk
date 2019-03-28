@@ -5,9 +5,12 @@
 ;  InitLayout(layers, dontCreateHotkeys)
 
 
-;-- suspend / resume and turn off/on help image
 #SuspendExempt true
 
+; try to reset, to solve stuck down modifiers
+LWin & PgDn::DoReset()
+
+; suspend / resume and turn off/on help image
 LWin & PgUp::
     Suspend  "toggle"
     if (A_IsSuspended)
@@ -16,15 +19,12 @@ LWin & PgUp::
         DisplayHelpImageSuspendOff()
 return
 
-;-- stop script
+; stop script
 LWin & End:: ExitApp
 
 #SuspendExempt false
 
 
-
-; toggle help img on/off
-; LWin & PgDn::DisplayHelpImageToggle()
 
 ; close current active window
 LWin & Delete:: WinClose "A"
