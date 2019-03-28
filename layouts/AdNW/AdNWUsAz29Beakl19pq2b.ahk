@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 2019-03-21
 AdNW ansi angleZ BEALK19 pq2b
@@ -32,14 +32,14 @@ CreateLayers()
 	; 
 	layerMain := "
 	(Join`r`n
-	     q w e r       u i o p [     q u i z      m r c v '
+	     q w e r       u i o p [     q u i z      m r c v CR
 	  CL a s d f g   h j k l ; '   ; g h e a x  w t n s p BS
 	  @LSh z x c v     m , . @/      k y j o i    d l f @>+b
 	  @LControl                    Escape   
 	)"
 	layerMainSh := "
 	(Join`r`n
-	     q w e r       u i o p [     Q U I Z      M R C V " 
+	     q w e r       u i o p [     Q U I Z      M R C V CR
 	  CL a s d f g   h j k l ; '  CL G H E A X  W T N S P ~Del
 	  @LSh z x c v     m , . @/      K Y J O I    D L F @>+B
 	)"
@@ -47,9 +47,23 @@ CreateLayers()
 	; modified version of std punx layer, added stuff normally on main
 	layerPunx := "
 	(Join`r`n   
-	       q w e r t    u i o p      $ < , > %   `` [ ] @ 
-	   CL  a s d f g  h j k l ;    _ / ( . ) !  ? { = } ;
-	  @LSh z x c v      m , . /      # : * + -    & ^ _ | 
+	       q w e r t    u i o p      $ < , > %    ? [ ] @ 
+	   CL  a s d f g  h j k l ;    _ / ( . ) !  = { ' } ;
+	  @LSh z x c v    n m , . /      # : * + -  & " ^ _ | 
+	)"
+
+	layerFrench := "
+	(Join`r`n
+	        q w e r t    u i o p     ù û î ï ä     - , ç *
+	     CL a s d f g  h j k l ;  `` ' è é à â   = « . » ;
+	     @LSh z x c v    m , . /     $ ë ê ô œ     ! ( ) ?
+	)"
+	; need layer since accented chars wont auto upper case ! (CapsLock wont work)
+	layerFrenchSh := "
+	(Join`r`n
+	        q w e r t    u i o p     Ù Û Î Ï Ä     _ ^ Ç #
+	     CL a s d f g  h j k l ;   ~ " È É À Â   + ~[ @ ~] :
+	     @LSh z x c v    m , . /     % Ë Ê Ô Œ     & < > |
 	)"
 
 
@@ -65,6 +79,11 @@ CreateLayers()
 
 	    {id: "punx", key: "Space", tap: "Space",
 	    	map: layerPunx, 
+	    },
+
+	    {id: "french",
+	    	map: layerFrench, 
+	    	mapSh: layerFrenchSh, 
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
@@ -96,25 +115,18 @@ swapFrenchAndPunx()
 {
 	; get punx layer access keydef, on main layer 
     mainLayer := layerDefs[1]
-    ; mainLayer := layerDefsById["main"]
 	punx := layerDefsById["punx"]
-	french := layerDefsById["french"]
-
     punxAccessKeydef := mainLayer.GetKeydef(punx.key)
-    ; frenchAccessKeydef := mainLayer.GetKeydef(french.key)
 
     if (punxAccessKeydef.layerId == "punx") {
-    	mainLayer.id := "mainfr"
     	punxAccessKeydef.layerId := "french"
-	    ; frenchAccessKeydef.layerId := "punx"
-    }
+   }
     else {
-    	mainLayer.id := "main"
     	punxAccessKeydef.layerId := "punx"
-	    ; frenchAccessKeydef.layerId := "french"
     }
 
 }
+
 
 CreateLayers()
 DisplayHelpImage()
