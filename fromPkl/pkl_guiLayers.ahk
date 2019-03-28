@@ -169,7 +169,7 @@ pkl_displayHelpImage( activate := 0 )
 			; ok, 1st time on this layer, skip if required
     		;if (layerAccessKeyDn && layerAccessKeyDn.sc == sc)
 			if (layerAccessKeyDn && layerAccessKeyDn.outTapValues && layerAccessKeyDn.outTapValues[1]) {
-				OutputDebug "skip layer access key " layerAccessKeyDn.name
+				; OutputDebug "skip layer access key " layerAccessKeyDn.name
 				blockedKeySkipped := 1
 				prevSkippedLayerId := CurrentLayer.id
 				return
@@ -178,7 +178,7 @@ pkl_displayHelpImage( activate := 0 )
 	}
 
 	; once we change layer, reset  prevSkippedLayerId
-	if (prevSkippedLayerId != CurrentLayer.index)
+	if (prevSkippedLayerId != CurrentLayer.id)
 		prevSkippedLayerId := 0
 
 	blockedKeySkipped := 0
