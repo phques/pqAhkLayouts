@@ -5,6 +5,8 @@
 
 #include util.ahk
 
+global pqAhkShiftIsDown := 0
+
 ; holds output value for a key
 class COutput
 {
@@ -136,7 +138,7 @@ class CKeyDef
             if (this.isLayerAccess) {
                 ; call keys holdDown action, in this case it's layer change
                 this.onHoldDn()
-            }
+            } 
         }
         else {
             ; call keys holdDown action
@@ -342,16 +344,18 @@ class CKeyDef
     /*static*/
     ; returns list of currently down dual mode modifiers (as key strings, ie "LShift")
     ; [dualModDn, dualModUp]
-    GetDownDualModifiers()
+    GetDownDualModifiers(skipShift := false)
     {
         dualModDn := ""
         dualModUp := ""
         downDualMods := []
         for idx, keydef in CKeyDef.downDualModifiers {
-            if (keydef.outValues[1]) {
-            	dualModDn .= "{" keydef.outValues[1].val " down}"
-            	dualModUp .= "{" keydef.outValues[1].val " up}"
-               ; downDualMods.Push(keydef.outValues[1].val)
+            if (keydef.outValues[1] && keydef.outValues[1].val) {
+            	; possibly skip shift modifiers
+            	if (!(skipShift && keydef.outValues[1].isShiftKey)) {
+	            	dualModDn .= "{" keydef.outValues[1].val " down}"
+	            	dualModUp .= "{" keydef.outValues[1].val " up}"
+	            }
             }
         }
         return [dualModDn, dualModUp]
