@@ -127,36 +127,36 @@ onMouseDn(butt)
     ; for a dualMode LShift for eg.
     CKeyDef.checkOnDualDn(true)
 
-    eatDnBtn := false
-    if (msdragActivateKey){
-        if (butt == "LButton")
-            eatDnBtn := lmousebutt(msdragActivateKey, msdragSecKey)
-        else if (butt == "MButton")
-            eatDnBtn := mmousebutt(msdragActivateKey, msdragSecKey)
-        else if (butt == "RButton")
-            eatDnBtn := rmousebutt(msdragActivateKey, msdragSecKey)
-    }
+    ; eatDnBtn := false
+    ; if (msdragActivateKey){
+    ;     if (butt == "LButton")
+    ;         eatDnBtn := lmousebutt(msdragActivateKey, msdragSecKey)
+    ;     else if (butt == "MButton")
+    ;         eatDnBtn := mmousebutt(msdragActivateKey, msdragSecKey)
+    ;     else if (butt == "RButton")
+    ;         eatDnBtn := rmousebutt(msdragActivateKey, msdragSecKey)
+    ; }
 
-    if eatDnBtn {
-        outputdebug "Eat dn " butt
-    }
-    else {
-        ; outputdebug "Send {" butt " Down}"
-        Send '{' butt ' Down}'
-    }
+    ; if eatDnBtn {
+    ;     outputdebug "Eat dn " butt
+    ; }
+    ; else {
+    ;     ; outputdebug "Send {" butt " Down}"
+    ;     Send '{' butt ' Down}'
+    ; }
 }
 
 ; l/m/r
 onMouseUp(butt)
 {
-    if eatUpBtn == butt {
-        outputdebug "eat up " butt
-        eatUpBtn := ''
-    }
-    else {
-        ; outputdebug "Send {" butt " Up}" 
-        Send '{' butt ' Up}' 
-    }
+    ; if eatUpBtn == butt {
+    ;     outputdebug "eat up " butt
+    ;     eatUpBtn := ''
+    ; }
+    ; else {
+    ;     ; outputdebug "Send {" butt " Up}" 
+    ;     Send '{' butt ' Up}' 
+    ; }
 }
 
 hookMouse()
@@ -166,7 +166,7 @@ hookMouse()
 
     ; '~' lets the button through, we only need to KNOW that it was presssed
     prefix := '~'
-    prefix := ''
+    ; prefix := ''
     HotKey prefix . 'LButton', fnDn.Bind("LButton")
     HotKey prefix . 'LButton up', fnUp.Bind("LButton")
 
