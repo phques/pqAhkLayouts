@@ -35,6 +35,14 @@ CreateLayers()
 	rsh := true
 	qwertyMask20 := GetQwerty20Mask(lsh, rsh)
 
+	; try both hands a std pos
+	qwertyMask20 := "
+	(Join`r`n
+	          w e r      u  i o 
+	        a s d f g  h j k l ;
+	   @LShift    c       m     /
+	)"
+
 	; -2 seems to have better scrore (lower same finger than -3)
 	; feels better too
 	layerMain_2 := "
@@ -97,10 +105,10 @@ CreateLayers()
 	)"
 
 	; for \, use actual key, not to far anyways
-	; missing / 
+	; missing ` 
 	layerPunx := "
 	(Join`r`n
-	      < - >     `` [ ] 
+	      < - >      / [ ] 
 	    _ ( & ) !  : { = } *
 	    #     +      ^     | 
 	)"
@@ -129,15 +137,17 @@ CreateLayers()
 
 	    {id: "edit", key: "LAlt", toggle: true,
 	    	qwertyMask: qwertyMask20, 
-	    	map: layerEdit1, 
+	    	map: layerEdit2, 
 	    	; map: extendLayer, 
 		},
 
-	    {id: "numpad", key: "v", toggle: true,
-	    	map: numpadLayers.indexOnB, 
+		; would've liked  to use V here, but it screws up??
+	    {id: "numpad", key: "b", toggle: true,
+	    	map: numpadLayers.thumbOnB, 
 		},
 
-	    {id: "punx", key: (rsh ? "m" : "n"),
+	    {id: "punx", key: "n",  ;; both hands at std
+	    ; {id: "punx", key: (rsh ? "m" : "n"),
 	    	qwertyMask: qwertyMask20, 
 	    	map: layerPunx, 
 		},
@@ -152,15 +162,29 @@ CreateLayers()
 	InitLayout(layers, dontCreateHotkeys)
 
 	main := layerDefsById["main"]
-	main.AddMappings("@LControl  Escape", false)
-	main.AddMappingsFromTo((rsh ? "]" : "["), "Backspace", false)
-	main.AddMappingsFromTo((rsh ? "]" : "["), "~bbDelete", true)
-	main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", false)
-	main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", true)
+	; main.AddMappings("@LControl  Escape", false)
+	; main.AddMappingsFromTo((rsh ? "]" : "["), "Backspace", false)
+	; main.AddMappingsFromTo((rsh ? "]" : "["), "~Delete", true)
+	; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", false)
+	; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", true)
 
-	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
-	punx := layerDefsById["alt"]
-	punx.AddMappings("b  Space", false)
+	; for use w. both hands at std pos
+	; trying not to use dualMode lshift, so try caps=lshift
+	;#pq not working (under linux VM though which has probs remapping capsl)
+	; main.AddMappingsFromTo("cl", "lshift", false)
+	; main.AddMappingsFromTo("cl", "cl", true)
+
+	main.AddMappingsFromTo("p", "Backspace", false)
+	main.AddMappingsFromTo("p", "~Delete", true)
+	main.AddMappingsFromTo("'", "Enter", false)
+	main.AddMappingsFromTo("'", "Enter", true)
+
+	; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
+	altGr := layerDefsById["alt"]
+	altGr.AddMappings("v  Space", false)
+
+	punx := layerDefsById["punx"]
+	punx.AddMappings("p  ``", false)
 
 	; SetMouseDragKeys("space", "control")
 }
