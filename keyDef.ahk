@@ -130,20 +130,20 @@ class CKeyDef
         if (this.isDual)  {
             ; add to list of down dual modifiers
             CKeyDef.waitingDual := this
-            CKeyDef.downDualModifiers[this.sc] := this
+            ; CKeyDef.downDualModifiers[this.sc] := this
             this.currDualMode := "tap"  ; start in tap mode, until other key hit
 
-            ; (dont ouput dual mode modifiers down)
+            ; (do ouput dual mode modifiers down)
             ; we get missing keys up when we do this
-            if (this.isLayerAccess) {
+            ; if (this.isLayerAccess) {
                 ; call keys holdDown action, in this case it's layer change
-                this.onHoldDn()
-            } 
+                ; this.onHoldDn()
+            ; } 
         }
-        else {
+        ; else {
             ; call keys holdDown action
             this.onHoldDn()
-        }
+        ; }
     }
 
 
@@ -155,15 +155,16 @@ class CKeyDef
 
         ; remove from list of down keys & dual modifiers
         CKeyDef.downKeys.Delete(this.sc)
-        CKeyDef.downDualModifiers.Delete(this.sc)
-
+        ; CKeyDef.downDualModifiers.Delete(this.sc)
 
         if (this.isDual) {
             ; call key's holdUp action, in this case it's layer change
             ; do this 1st, so that if the key onTap is a layer toggle we dont overwrite it !
-            if (this.isLayerAccess) {
+            ; if (this.isLayerAccess) {
+            ; always do this
                 this.onHoldUp()
-            }
+            ; }
+
             ; dualMode key 'tap' success: output its tap value
             ; note that if a different key had been pressed after this one, 
             ; we would have removed CKeyDef.waitingDual
@@ -174,10 +175,10 @@ class CKeyDef
         }
         else {
             this.onHoldUp()
-            if (this.restoreDualOnUp) {
-	            this.isDual := true
-	            this.restoreDualOnUp := false
-            }
+            ; if (this.restoreDualOnUp) {
+	           ;  this.isDual := true
+	           ;  this.restoreDualOnUp := false
+            ; }
         }
 
         ; this.isDown := 0
@@ -186,7 +187,8 @@ class CKeyDef
 
     ;----
 
-    tempRemoveDual()
+    ; not used in current version
+    _tempRemoveDual_()
     {
     	; outputdebug "tempRemoveDual()"
         CKeyDef.downDualModifiers.Delete(this.sc)
@@ -212,9 +214,9 @@ class CKeyDef
             waiting.currDualMode := "mod"
             CKeyDef.waitingDual := 0
 
-            if (isMouseClick) {
-            	waiting.tempRemoveDual()
-            }
+            ; if (isMouseClick) {
+            ; 	waiting.tempRemoveDual()
+            ; }
         }
     }
 

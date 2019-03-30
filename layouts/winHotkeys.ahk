@@ -8,10 +8,10 @@
 #SuspendExempt true
 
 ; try to reset, to solve stuck down modifiers
-LWin & PgDn::DoReset()
+LWin & PgUp::DoReset()
 
 ; suspend / resume and turn off/on help image
-LWin & PgUp::
+LWin & PgDn::
     Suspend  "toggle"
     if (A_IsSuspended)
         DisplayHelpImageSuspendOn()

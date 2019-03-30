@@ -207,10 +207,11 @@ sendOutValueDn(keydef)
         ; we do this rather than actually sending the modifier down whne pressed,
         ; because it causes sometimes some missed up keys !!!??
         dualMods := CKeyDef.GetDownDualModifiers(out.needBlindShift)
+        dualMods := ["",""]
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
 
-        Send blindStr dualMods[1] out.mods "{" out.val  " Down}" dualMods[2]
-        ; outputdebug "Send " blindStr dualMods[1] out.mods "{" out.val  " Down}" dualMods[2]
+        Send blindStr dualMods[1] out.mods "{" out.val  " DownR}" dualMods[2]
+        ; outputdebug "Send " blindStr dualMods[1] out.mods "{" out.val  " DownR}" dualMods[2]
     }
     else 
         outputdebug "sendOutValueDn no outValue, " keydef.name    
@@ -238,6 +239,7 @@ sendTap(keydef)
     out := keydef.GetValues(true)
     if (out) {
         dualMods := CKeyDef.GetDownDualModifiers(out.needBlindShift)
+        dualMods := ["",""]
         blindStr := out.needBlindShift ? "{blind+}" : "{blind}"
 
         Send blindStr dualMods[1] out.mods "{" out.val "}" dualMods[2]
@@ -389,13 +391,15 @@ InitLayout(layers, dontCreateHotkeys)
 ; used when things get messed up with stuck modifiers etc
 DoReset()
 {
-Send "{LShift Up}{RShift Up}"
+    outputdebug "Do reset()"
+    Send "{LShift Up}{RShift Up}"
     Send "{LControl Up}{RControl Up}"
     Send "{LAlt Up}{RAlt Up}"
     CKeyDef.waitingDual := 0
     CKeyDef.downKeys := {}
     CKeyDef.downDualModifiers := {}
 }
+
 ; ---------
 
 ; test / debug
