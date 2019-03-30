@@ -4,7 +4,8 @@
 AdNW ansi angleZ BEALK19 pq3
 20 keys (+space + 2shifts)
 LaSalle fingering
-
+2019-03-29
+adding french altGr
 */
 
 ; code only includes
@@ -31,17 +32,8 @@ global DoubleAlt := 0
 
 CreateLayers()
 {
-	lsh := false
-	rsh := true
-	qwertyMask20 := GetQwerty20Mask(lsh, rsh)
-
 	; try both hands a std pos
-	qwertyMask20 := "
-	(Join`r`n
-	          w e r      u  i o 
-	        a s d f g  h j k l ;
-	   @LShift    c       m     /
-	)"
+	qwertyMask20 := GetQwerty20Mask2(0, 0)
 
 	; -2 seems to have better scrore (lower same finger than -3)
 	; feels better too
@@ -65,7 +57,32 @@ CreateLayers()
 		%     ;       !     @
 	)"
 
-	; need backspace and delete
+	; missing âîûùï üëö
+	layerAltFr := "
+	(Join`r`n
+		  ô é ê       . , k  
+		q ' à è «   » v j x ç
+		?     ;       !     z
+	)"
+
+	; strange idea: place missing âîûùï üëö on shift layer !
+	layerAltFrSh := "
+	(Join`r`n
+		  Ô É Ê       ü ë K  
+		Q â À È û   ù V J X Ç
+		ï     î       ö     Z
+	)"
+
+	; for \, use actual key, not too far anyways
+	; missing ` (added manually below)
+	layerPunx := "
+	(Join`r`n
+	      < - >      / [ ] 
+	    _ ( & ) !  : { = } *
+	    #     +      ^     | 
+	)"
+
+	; need backspace (and delete) ?
 	layerEdit1 := "
 	(Join`r`n
 		  . . .        Home  Up  End
@@ -79,6 +96,7 @@ CreateLayers()
 		.     Alt       ^c            ^v
 	)"
 
+	; other edit tests
 	layerEdit3 := "
 	(Join`r`n
 		  . . .          ^x  Up  End
@@ -104,15 +122,6 @@ CreateLayers()
 		.     Alt       ^c             ^v
 	)"
 
-	; for \, use actual key, not to far anyways
-	; missing ` 
-	layerPunx := "
-	(Join`r`n
-	      < - >      / [ ] 
-	    _ ( & ) !  : { = } *
-	    #     +      ^     | 
-	)"
-
 	; layerPunx_ := "
 	; (Join`r`n
 	;         q w e r t    u i o p      $ < - > %    ~ [ ] @
@@ -133,6 +142,12 @@ CreateLayers()
 	    {id: "alt", key: "Space", tap: "Space",
 	    	qwertyMask: qwertyMask20, 
 	    	map: layerAlt, 
+	    },
+
+	    {id: "altFr",
+	    	qwertyMask: qwertyMask20, 
+	    	map: layerAltFr, 
+	    	mapSh: layerAltFrSh, 
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
@@ -173,7 +188,6 @@ CreateLayers()
 	;#pq not working (under linux VM though which has probs remapping capsl)
 	; main.AddMappingsFromTo("cl", "lshift", false)
 	; main.AddMappingsFromTo("cl", "cl", true)
-
 	main.AddMappingsFromTo("p", "Backspace", false)
 	main.AddMappingsFromTo("p", "~Delete", true)
 	main.AddMappingsFromTo("'", "Enter", false)
@@ -189,6 +203,22 @@ CreateLayers()
 	; SetMouseDragKeys("space", "control")
 }
 
+swapFrenchAndPunx()
+{
+	; get alt layer access keydef, on main layer 
+    mainLayer := layerDefs[1]
+	altGr := layerDefsById["alt"]
+    altGrAccessKeydef := mainLayer.GetKeydef(altGr.key)
+
+    if (altGrAccessKeydef.layerId == "alt") {
+    	altGrAccessKeydef.layerId := "altFr"
+   }
+    else {
+    	altGrAccessKeydef.layerId := "alt"
+    }
+
+}
+
 CreateLayers()
 DisplayHelpImage()
 
@@ -199,3 +229,4 @@ return
 
 #include ../../winHotkeys.ahk
 
+LWin & Insert::swapFrenchAndPunx()

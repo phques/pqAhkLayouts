@@ -41,3 +41,31 @@ GetQwerty20Mask(lsh, rsh)
 
 	return qwertyMask20
 }
+
+; 0 = std pos, -1 = shift left by 1, +1 shift right by 1 etc
+; lsh: 0, -1
+; rsh: 0, 1, 2
+GetQwerty20Mask2(lsh, rsh)
+{
+	qmaskL := []
+	if (lsh == 0)
+		qmaskL := ["w e r", "a s d f g", "@LShift c"]
+	else if (lsh == -1)
+		qmaskL := ["q w e", "CapsLock a s d f", "@LShift x"]
+
+	qmaskR := []
+	if (rsh == 0)
+		qmaskR := ["u i o", "h j k l `;", "m /"]
+	else if (rsh == 1)
+		qmaskR := ["i o p", "j k l `; '", ", @RShift"]
+	else if (rsh == 2)
+		qmaskR := ["o p [", "k l `; ' Cr", ". @RShift"]
+
+ 	ln1 := qmaskL[1]  " " qmaskR[1]
+ 	ln2 := qmaskL[2]  " " qmaskR[2]
+ 	ln3 := qmaskL[3]  " " qmaskR[3]
+ 	return ln1 "`r`n" ln2 "`r`n" ln3
+}
+
+
+
