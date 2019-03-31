@@ -32,8 +32,8 @@ global DoubleAlt := 0
 
 CreateLayers()
 {
-	; try both hands a std pos
-	qwertyMask20 := GetQwerty20Mask2(0, 0)
+	rightSh := 1
+	qwertyMask20 := GetQwerty20Mask2(0, rightSh)
 
 	; -2 seems to have better scrore (lower same finger than -3)
 	; feels better too
@@ -161,7 +161,7 @@ CreateLayers()
 	    	map: numpadLayers.thumbOnB, 
 		},
 
-	    {id: "punx", key: "n",  ;; both hands at std
+	    {id: "punx", key: (rightSh == 0) ? "n" : "m",
 	    ; {id: "punx", key: (rsh ? "m" : "n"),
 	    	qwertyMask: qwertyMask20, 
 	    	map: layerPunx, 
@@ -173,32 +173,35 @@ CreateLayers()
 	; for eg, we will use Win-XX for hotkeys to do actions
 	; we need to do it this way for the Suspend hotkey w. #SuspendExempt
 	dontCreateHotkeys := [MakeKeySC("LWin")]
-
 	InitLayout(layers, dontCreateHotkeys)
 
 	main := layerDefsById["main"]
+	punx := layerDefsById["punx"]
+	altGr := layerDefsById["alt"]
 	; main.AddMappings("@LControl  Escape", false)
-	; main.AddMappingsFromTo((rsh ? "]" : "["), "Backspace", false)
-	; main.AddMappingsFromTo((rsh ? "]" : "["), "~Delete", true)
-	; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", false)
-	; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", true)
 
 	; for use w. both hands at std pos
 	; trying not to use dualMode lshift, so try caps=lshift
 	;#pq not working (under linux VM though which has probs remapping capsl)
 	; main.AddMappingsFromTo("cl", "lshift", false)
 	; main.AddMappingsFromTo("cl", "cl", true)
-	main.AddMappingsFromTo("p", "Backspace", false)
-	main.AddMappingsFromTo("p", "~Delete", true)
-	main.AddMappingsFromTo("'", "Enter", false)
-	main.AddMappingsFromTo("'", "Enter", true)
+	if (rightSh)
+		topRightK := "["
+	else
+		topRightK := "p"
+	main.AddMappingsFromTo(topRightK, "Backspace", false)
+	main.AddMappingsFromTo(topRightK, "~Delete", true)
+
+	; if right hand on std pos, add enter on '
+	if (rightSh == 0) {
+		main.AddMappingsFromTo("'", "Enter", false)
+		main.AddMappingsFromTo("'", "Enter", true)
+	}
+
+	punx.AddMappingsFromTo(topRightK,  "``", false)
 
 	; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
-	altGr := layerDefsById["alt"]
 	altGr.AddMappings("v  Space", false)
-
-	punx := layerDefsById["punx"]
-	punx.AddMappings("p  ``", false)
 
 	; SetMouseDragKeys("space", "control")
 }
