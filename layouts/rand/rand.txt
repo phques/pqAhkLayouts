@@ -1,0 +1,19 @@
+1 random placement
+ ' b l j m r c f p . 
+ q y k , w i t z x g 
+ / h u e d s o v n a 
+
+1b random placement, swapped rows 2-3 (more vowels on row2)
+ ' b l j m r c f p . 
+ / h u e d s o v n a 
+ q y k , w i t z x g 
+
+ 2 (vowels forced left side)
+ , d f v i z s p x / 
+ c l u y e k q b h t 
+ n ' . a o r w j g m 
+
+3 (vowels on mid row)
+ m z b l r ' c q k w 
+ v o t y a i f e j u 
+ p n . g d h , / s x 
