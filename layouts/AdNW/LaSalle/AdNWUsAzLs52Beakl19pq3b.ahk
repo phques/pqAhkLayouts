@@ -15,9 +15,11 @@ on '2 layers'
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\ls52Beakl19pq3b"
-global ImgWidth := 164
-global ImgHeight := 94
+global ImgsDir := A_ScriptDir . "\imgs\ls52Beakl19pq3b\circles"
+; global ImgWidth := 180
+; global ImgHeight := 60
+global ImgWidth := 154
+global ImgHeight := 100
 global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
@@ -55,7 +57,6 @@ CreateLayers()
         h y o a ,  m t s l c  
         : % ) .      f v " b   
 	)"
-
 	layerAlt_2 := "
 	(Join`r`n
         + $ ' ``     j p g }    
@@ -63,18 +64,25 @@ CreateLayers()
         = { @ !      z * ] [    
 	)"
 
+       ;prefered
 	layerMain_3 := "
 	(Join`r`n
         ? i e u      d n r v 
         h y o a ,  p t s l c 
         : $ ) .      f x " w 
 	)"
-
 	layerAlt_3 := "
 	(Join`r`n
        `` ; ' #      q g m * 
         / ! ( - _  + b k z j 
         @ } { &      % = [ ] 
+	)"
+    ; #include punxLayer, w/o %` in left mid col
+    layerSyms3 := "
+	(Join`r`n
+		$ < - >      ~ [ ] @ 
+		\ ( " ) !  % { = } ;
+		# : * +      & ^ _ | 
 	)"
 
 	; need backspace (and delete) ?
@@ -105,6 +113,11 @@ CreateLayers()
 	    	map: layerAlt_3, 
 	    },
 
+	    {id: "syms", key: "m", toggle: true,
+	    	qwertyMask: qwertyMask26, 
+	    	map: layerSyms3, 
+	    },
+
 	    {id: "edit", key: "LAlt", toggle: true,
 	    	qwertyMask: qwertyMask26, 
 	    	map: layerEdit2, 
@@ -132,9 +145,10 @@ CreateLayers()
 	;#pq not working (under linux VM though which has probs remapping capsl)
 	; main.AddMappingsFromTo("cl", "lshift", false)
 	; main.AddMappingsFromTo("cl", "cl", true)
+	main.AddMappingsFromTo("t", "Tab", false)
 	if (qwertyMask26 == qwertyMask26_rsh) {
-		main.AddMappingsFromTo("]", "Backspace", false)
-		main.AddMappingsFromTo("]", "~Delete", true)
+		main.AddMappingsFromTo("v", "Backspace", false)
+		main.AddMappingsFromTo("v", "~Delete", true)
 	}
 	else {
 		main.AddMappingsFromTo("'", "Backspace", false)
