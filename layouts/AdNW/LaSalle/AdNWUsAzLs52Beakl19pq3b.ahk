@@ -72,9 +72,9 @@ CreateLayers()
 
 	layerAlt_3 := "
 	(Join`r`n
-       `` ; ' /      q g m * 
-        _ ! ( - &  # b k z j 
-        } @ { :      + = [ ] 
+       `` ; ' #      q g m * 
+        / ! ( - _  + b k z j 
+        @ } { &      % = [ ] 
 	)"
 
 	; need backspace (and delete) ?
