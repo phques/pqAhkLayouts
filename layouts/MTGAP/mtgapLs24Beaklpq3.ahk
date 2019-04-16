@@ -30,12 +30,19 @@ global DoubleAlt := 0
 CreateLayers()
 {
 	; try both hands a std pos
-	qwertyMask24 := "
+	qwertyMask24_std := "
 	(Join`r`n
 	          w e r      u i o 
 	        a s d f g  h j k l ; 
 	  @LShift z x c      m , . /
 	)"
+	qwertyMask24_wid := "
+	(Join`r`n
+	          w e r        i o p
+	        a s d f g    j k l ; '
+	  @LShift z x c        , . / @RShift
+	)"
+	qwertyMask24 := qwertyMask24_wid
 
 	; -2 seems to have better scrore (lower same finger than -3)
 	; feels better too
@@ -113,11 +120,16 @@ CreateLayers()
 	;#pq not working (under linux VM though which has probs remapping capsl)
 	; main.AddMappingsFromTo("cl", "lshift", false)
 	; main.AddMappingsFromTo("cl", "cl", true)
-	main.AddMappingsFromTo("p", "Backspace", false)
-	main.AddMappingsFromTo("p", "~Delete", true)
-	main.AddMappingsFromTo("'", "Enter", false)
-	main.AddMappingsFromTo("'", "Enter", true)
-
+	if (qwertyMask24 == qwertyMask24_std) {
+		main.AddMappingsFromTo("p", "Backspace", false)
+		main.AddMappingsFromTo("p", "~Delete", true)
+		main.AddMappingsFromTo("'", "Enter", false)
+		main.AddMappingsFromTo("'", "Enter", true)
+	}
+	else {
+		main.AddMappingsFromTo("[", "Backspace", false)
+		main.AddMappingsFromTo("[", "~Delete", true)
+	}
 	; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	altGr := layerDefsById["alt"]
 	altGr.AddMappings("v  Space", false)

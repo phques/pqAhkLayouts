@@ -109,6 +109,10 @@ CreateLayers()
 	punx := layerDefsById["punx"]
 	punx.AddMappings("b  Space", false)
 
+	main := layerDefsById["main"]
+	main.AddMappings("n  Enter", false)
+	main.AddMappings("n  +Enter", true)
+
 	; SetMouseDragKeys("space", "control")
 }
 
