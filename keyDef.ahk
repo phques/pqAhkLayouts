@@ -5,6 +5,10 @@
 
 #include util.ahk
 
+; ## support for Linux xkb file generation
+global savedLayersMappings
+global savedLayersMappingsLevel
+
 global pqAhkShiftIsDown := 0
 
 ; holds output value for a key
@@ -240,6 +244,18 @@ class CKeyDef
                 this.outValues[2] := outValue
             else 
                 this.outValues[1] := outValue
+
+            ; ## support for Linux xkb file generation
+            if (savedLayersMappings) {
+                levelIdx := savedLayersMappingsLevel
+                if (isShiftedLayer)
+                    levelIdx++
+
+                if (!savedLayersMappings[levelIdx])
+                    savedLayersMappings[levelIdx] := {}
+
+                savedLayersMappings[levelIdx][this.sc] := outValue
+            }
         }
     }
 

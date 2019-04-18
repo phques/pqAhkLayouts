@@ -30,12 +30,20 @@ global DoubleAlt := 0
 CreateLayers()
 {
 	; try both hands a std pos
-	qwertyMask26 := "
+	qwertyMask26_std := "
 	(Join`r`n
 	        q w e r      u i o p
 	        a s d f g  h j k l ; 
 	  @LShift z x c      m , . /
 	)"
+	qwertyMask26_wide := "
+	(Join`r`n
+	        q w e r      i o p [
+	        a s d f g  j k l ; '
+	  @LShift z x c      , . / @RShift
+	)"
+
+	qwertyMask26 := qwertyMask26_wide
 
 	; -2 and -3 have similar scores .. ??
 	; but -3 feels better (short test)
@@ -108,22 +116,18 @@ CreateLayers()
 	InitLayout(layers, dontCreateHotkeys)
 
 	main := layerDefsById["main"]
-	; main.AddMappings("@LControl  Escape", false)
-	; main.AddMappingsFromTo((rsh ? "]" : "["), "Backspace", false)
-	; main.AddMappingsFromTo((rsh ? "]" : "["), "~Delete", true)
-	; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", false)
-	; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", true)
 
-	; for use w. both hands at std pos
-	; trying not to use dualMode lshift, so try caps=lshift
-	;#pq not working (under linux VM though which has probs remapping capsl)
-	; main.AddMappingsFromTo("cl", "lshift", false)
-	; main.AddMappingsFromTo("cl", "cl", true)
-	main.AddMappingsFromTo("[", "Backspace", false)
-	main.AddMappingsFromTo("[", "~Delete", true)
-	main.AddMappingsFromTo("'", "Enter", false)
-	main.AddMappingsFromTo("'", "Enter", true)
-
+	main.AddMappingsFromTo("t", "Tab", false)
+	if (qwertyMask26 == qwertyMask26_wide) {
+		main.AddMappingsFromTo("v", "Backspace", false)
+		main.AddMappingsFromTo("v", "~Delete", true)
+	}
+	else {
+		main.AddMappingsFromTo("'", "Backspace", false)
+		main.AddMappingsFromTo("'", "~Delete", true)
+		main.AddMappingsFromTo("[", "Enter", false)
+		main.AddMappingsFromTo("[", "Enter", true)
+	}
 	; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	altGr := layerDefsById["alt"]
 	altGr.AddMappings("v  Space", false)

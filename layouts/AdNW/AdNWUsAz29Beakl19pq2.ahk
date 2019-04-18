@@ -12,7 +12,7 @@ AdNW ansi angleZ BEALK19 pq2
 ; MUST be declared *before* scripts that use them
 global ImgsDir := A_ScriptDir . "\imgs\az29Beakl19pq2"
 global ImgWidth := 182
-global ImgHeight := 96
+global ImgHeight := 48
 global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
@@ -101,7 +101,9 @@ CreateLayers()
 	; dont create layout hotkeys for these
 	; for eg, we will use Win-XX for hotkeys to do actions
 	; we need to do it this way for the Suspend hotkey w. #SuspendExempt
-	dontCreateHotkeys := [MakeKeySC("LWin")]
+	
+	; ## dont remap Numpad5, for some reason it does not work correctly 
+	dontCreateHotkeys := [MakeKeySC("LWin"), MakeKeySC("Numpad5")]
 
 	InitLayout(layers, dontCreateHotkeys)
 
