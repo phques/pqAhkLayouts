@@ -99,7 +99,7 @@ CreateLayers()
 	; dont create layout hotkeys for these
 	; for eg, we will use Win-XX for hotkeys to do actions
 	; we need to do it this way for the Suspend hotkey w. #SuspendExempt
-	dontCreateHotkeys := [MakeKeySC("LWin")]
+	dontCreateHotkeys := [MakeKeySC("LWin"), MakeKeySC("Numpad5")]
 
 	InitLayout(layers, dontCreateHotkeys)
 
