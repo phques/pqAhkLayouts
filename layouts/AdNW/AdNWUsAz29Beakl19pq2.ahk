@@ -53,7 +53,7 @@ CreateLayers()
 	(Join`r`n
 	        q w e r t    u i o p     $ < - > ~     x [ ] z
 	     CL a s d f g  h j k l ;   \ / ( " ) !   % { = } ;
-	     @LSh z x c v    m , . /     # : * + ``    j ^ & | 
+	     @LSh z x c v    m , . /     # : * + _    j ^ & | 
 	)"
 						   ; 9 0                       < >
 	layerJxzFrench := "
