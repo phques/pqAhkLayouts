@@ -88,18 +88,27 @@ CreateLayers()
 	; need backspace (and delete) ?
 	layerEdit1 := "
 	(Join`r`n
-		  . . . .       Home  Up  End .
+		  . . . .       Home  Up  End BS
 	 Ctrl Sh . . .  ^z Left Down Right ^x
 		. . . Alt        ^c   .    .   ^v
 	)"
 	layerEdit2 := "
 	(Join`r`n
-		  . . . .       ^z   Up  Right .
+		  . . . .       ^z   Up  Right BS
 	 Ctrl Sh . . .  ^x Left Home Down End
 		. . . Alt       ^c   .     .  ^v
 	)"
 
 	numpadLayers := NumpadLayerMappings()
+
+	; use thumb to press B, home row is (LaSalle) aWEf, 
+	; right hand shifted right by 1
+	thumbOnBshr := "
+	(Join`r`n
+	  w e       i o p [                   + -      7 8 9 BS
+	 a  d f   j k l ; '                /   = *   , 4 5 6 0 
+	            , . / @RShift                      1 2 3 . 
+	)"
 
 	layers := [
 	    {id: "main", 
@@ -126,7 +135,7 @@ CreateLayers()
 
 		; would've liked  to use V here, but it screws up??
 	    {id: "numpad", key: "b", toggle: true,
-	    	map: numpadLayers.thumbOnB, 
+	    	map: thumbOnBshr, ;numpadLayers.thumbOnB, 
 		},
 
 	]
