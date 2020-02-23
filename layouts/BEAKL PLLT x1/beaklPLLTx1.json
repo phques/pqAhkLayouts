@@ -1,0 +1,872 @@
+{
+    "label": "BEAKL PLLT x1",
+    "fingerStart": {
+        "1": 25,
+        "2": 26,
+        "3": 27,
+        "4": 28,
+        "5": 56,
+        "6": 59,
+        "7": 31,
+        "8": 32,
+        "9": 33,
+        "10": 34,
+        "11": -1,
+        "false": -1
+    },
+    "keyboardType": "matrix",
+    "author": "Amuseum",
+    "authorUrl": "",
+    "moreInfoUrl": "http://shenafu.com/smf/index.php?topic=89.0",
+    "moreInfoText": "Balanced Keyboard Layout",
+    "keys": [
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 1,
+            "id": 0,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 1,
+            "id": 1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 2,
+            "id": 2,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 3,
+            "id": 3,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 4,
+            "id": 4,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 4,
+            "id": 5,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 7,
+            "id": 6,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 7,
+            "id": 7,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 8,
+            "id": 8,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 9,
+            "id": 9,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 10,
+            "id": 10,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 10,
+            "id": 11,
+            "altGr": -1,
+            "shiftAltGr": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 1,
+            "id": 12,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 1,
+            "id": 13,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 105,
+            "shift": 73,
+            "finger": 2,
+            "id": 14,
+            "altGr": 113,
+            "shiftAltGr": 81,
+            "numpad": 53
+        },
+        {
+            "primary": 117,
+            "shift": 85,
+            "finger": 3,
+            "id": 15,
+            "altGr": 36,
+            "shiftAltGr": -1,
+            "numpad": 50
+        },
+        {
+            "primary": 111,
+            "shift": 79,
+            "finger": 4,
+            "id": 16,
+            "altGr": 106,
+            "shiftAltGr": 74,
+            "numpad": 51
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 4,
+            "id": 17,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 119,
+            "shift": 87,
+            "finger": 7,
+            "id": 18,
+            "altGr": 122,
+            "shiftAltGr": 90,
+            "numpad": -1
+        },
+        {
+            "primary": 109,
+            "shift": 77,
+            "finger": 7,
+            "id": 19,
+            "altGr": 118,
+            "shiftAltGr": 86,
+            "numpad": -1
+        },
+        {
+            "primary": 100,
+            "shift": 68,
+            "finger": 8,
+            "id": 20,
+            "altGr": 33,
+            "shiftAltGr": 124,
+            "numpad": -1
+        },
+        {
+            "primary": 110,
+            "shift": 78,
+            "finger": 9,
+            "id": 21,
+            "altGr": 35,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 10,
+            "id": 22,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 10,
+            "id": 23,
+            "altGr": -1,
+            "shiftAltGr": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 1,
+            "id": 24,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 121,
+            "shift": 89,
+            "finger": 1,
+            "id": 25,
+            "altGr": 63,
+            "shiftAltGr": -1,
+            "numpad": 55
+        },
+        {
+            "primary": 101,
+            "shift": 69,
+            "finger": 2,
+            "id": 26,
+            "altGr": 40,
+            "shiftAltGr": 60,
+            "numpad": 57
+        },
+        {
+            "primary": 32,
+            "shift": 34,
+            "finger": 3,
+            "id": 27,
+            "altGr": 45,
+            "shiftAltGr": 95,
+            "numpad": 49
+        },
+        {
+            "primary": 97,
+            "shift": 65,
+            "finger": 4,
+            "id": 28,
+            "altGr": 41,
+            "shiftAltGr": 62,
+            "numpad": 48
+        },
+        {
+            "primary": 103,
+            "shift": 71,
+            "finger": 4,
+            "id": 29,
+            "altGr": 39,
+            "shiftAltGr": 96,
+            "numpad": 52
+        },
+        {
+            "primary": 104,
+            "shift": 72,
+            "finger": 7,
+            "id": 30,
+            "altGr": 107,
+            "shiftAltGr": 75,
+            "numpad": -1
+        },
+        {
+            "primary": 114,
+            "shift": 82,
+            "finger": 7,
+            "id": 31,
+            "altGr": 123,
+            "shiftAltGr": 91,
+            "numpad": -1
+        },
+        {
+            "primary": 116,
+            "shift": 84,
+            "finger": 8,
+            "id": 32,
+            "altGr": 61,
+            "shiftAltGr": 64,
+            "numpad": -1
+        },
+        {
+            "primary": 115,
+            "shift": 83,
+            "finger": 9,
+            "id": 33,
+            "altGr": 125,
+            "shiftAltGr": 93,
+            "numpad": -1
+        },
+        {
+            "primary": 112,
+            "shift": 80,
+            "finger": 10,
+            "id": 34,
+            "altGr": 38,
+            "shiftAltGr": 37,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "shift": -1,
+            "finger": 10,
+            "id": 35,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 27,
+            "finger": 1,
+            "id": 36,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "finger": 1,
+            "id": 37,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 44,
+            "finger": 2,
+            "id": 38,
+            "shift": 59,
+            "altGr": 42,
+            "shiftAltGr": 94,
+            "numpad": 54
+        },
+        {
+            "primary": 8593,
+            "finger": 3,
+            "id": 39,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 46,
+            "finger": 4,
+            "id": 40,
+            "shift": 58,
+            "altGr": 47,
+            "shiftAltGr": 92,
+            "numpad": 56
+        },
+        {
+            "primary": -1,
+            "finger": 4,
+            "id": 41,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 19,
+            "shift": -1,
+            "finger": 5,
+            "id": 42,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 16,
+            "finger": 6,
+            "id": 43,
+            "shift": -16,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "finger": 7,
+            "id": 44,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 108,
+            "finger": 7,
+            "id": 45,
+            "shift": 76,
+            "altGr": 43,
+            "shiftAltGr": 126,
+            "numpad": -1
+        },
+        {
+            "primary": 99,
+            "shift": 67,
+            "finger": 8,
+            "id": 46,
+            "altGr": 120,
+            "shiftAltGr": 88,
+            "numpad": -1
+        },
+        {
+            "primary": 102,
+            "finger": 9,
+            "id": 47,
+            "shift": 70,
+            "altGr": 98,
+            "shiftAltGr": 66,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "finger": 10,
+            "id": 48,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "finger": 10,
+            "id": 49,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -1,
+            "finger": 1,
+            "id": 50,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1
+        },
+        {
+            "primary": -1,
+            "finger": 1,
+            "id": 51,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 8592,
+            "finger": 2,
+            "id": 52,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 8595,
+            "finger": 3,
+            "id": 53,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 8594,
+            "finger": 4,
+            "id": 54,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 8,
+            "finger": 5,
+            "id": 55,
+            "shift": -1,
+            "altGr": 8998,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 13,
+            "finger": 5,
+            "id": 56,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 17,
+            "finger": 5,
+            "id": 57,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 18,
+            "finger": 6,
+            "id": 58,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": -18,
+            "finger": 6,
+            "id": 59,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1
+        },
+        {
+            "primary": 9,
+            "finger": 6,
+            "id": 60,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 8598,
+            "finger": 7,
+            "id": 61,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 8600,
+            "finger": 8,
+            "id": 62,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "primary": 8670,
+            "finger": 9,
+            "id": 63,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1
+        },
+        {
+            "primary": 8671,
+            "finger": 10,
+            "id": 64,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1
+        },
+        {
+            "primary": -1,
+            "finger": 10,
+            "id": 65,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1
+        },
+        {
+            "id": 66,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 67,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 68,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 69,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 70,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 71,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 72,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 73,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 74,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 75,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 76,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 77,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 78,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 79,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 80,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 81,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 82,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 83,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 84,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 85,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 86,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 87,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 88,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 89,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 90,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 91,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 92,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 93,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        },
+        {
+            "id": 94,
+            "finger": 1,
+            "primary": -1,
+            "shift": -1,
+            "altGr": -1,
+            "shiftAltGr": -1,
+            "numpad": -1
+        }
+    ]
+}
