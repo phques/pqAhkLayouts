@@ -137,6 +137,14 @@ pkl_displayHelpImage( activate := 0 )
 					; found it
 					; X center on current monitor
 					xpos := ((left + right) / 2) - (ImgWidth / 2)
+
+					; my screens at work are not the same height
+					; so use found monitor's size vs A_ScreenHeight
+					if ( displayOnTop )
+						yPosition := 5
+					else
+						yPosition := bottom - ImgHeight - 60
+
 					break
 				}
 			}
