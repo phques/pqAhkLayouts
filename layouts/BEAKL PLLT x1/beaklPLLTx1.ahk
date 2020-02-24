@@ -17,9 +17,9 @@ in this it becomes only alt layer key.
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\beaklplltx1"
-global ImgWidth := 164
-global ImgHeight := 94
+global ImgsDir := A_ScriptDir . "\imgs"
+global ImgWidth := 160
+global ImgHeight := 54
 global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
@@ -88,11 +88,12 @@ CreateLayers()
 
   ; Q.J => actual Q J,  (use . as filler)
   ; ditto ZV| and <_>`
+  ; use empty QJ spot to add '-', so it is easy to do "->"
   layerAltSh := "
   (Join`r`n
-        Q . J       Z  V |  .      
-      . < _ > ~``   K ~[ @ ~] %   
-        ^  ~\          ~ X  B     
+        Q ~- J       Z  V |  .      
+      . < _  > ~``   K ~[ @ ~] %   
+        ^   ~\          ~ X  B     
   )"
 
   extendLayer := ExtendLayerMappings()
@@ -140,7 +141,7 @@ CreateLayers()
   main.AddMappingsFromTo("x", "Tab", true)
 
   ; add '-' on shift alt, so it is easy to do "->"
-  syms.AddMappingsFromTo("x", "~-", true)
+  ;syms.AddMappingsFromTo("x", "~-", true)
 
   ; if right hand on std pos, add enter on '
   ; and Shift on / 
