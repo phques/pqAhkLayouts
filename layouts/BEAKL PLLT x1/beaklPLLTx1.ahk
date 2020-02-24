@@ -81,8 +81,8 @@ CreateLayers()
 
   layerAlt := "
   (Join`r`n
-        q $ j      z v ! #     
-      ? ( - ) '    k { = } &   
+        q ' j      z v ! #     
+      ? ( - ) $    k { = } &   
         *   /        + x b  
   )"
 
@@ -91,9 +91,9 @@ CreateLayers()
   ; use empty QJ spot to add '-', so it is easy to do "->"
   layerAltSh := "
   (Join`r`n
-        Q ~- J       Z  V |  .      
-      . < _  > ~``   K ~[ @ ~] %   
-        ^   ~\          ~ X  B     
+        Q ~`` J     Z  V |  .      
+      . < _  > ~-   K ~[ @ ~] %   
+        ^   ~\         ~ X  B     
   )"
 
   extendLayer := ExtendLayerMappings()
