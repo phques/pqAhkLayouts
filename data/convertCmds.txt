@@ -1,0 +1,9 @@
+-- crop/ extract  a captured image of the layout inside a text editor
+convert Capture.PNG -crop 160x54+61+97 layersymssh.png
+
+Note that this PNG will contain offset data which will be taken into account on next commands
+To get rid of this I convert the file to jpg
+
+-- add a hilite rectangle (augment brightness by 10%) around 3 home keys
+convert 'layersymssh.jpg' -region 38x16+104+19 -brightness-contrast 10x0 -region 38x16+18+19 -brightness-contrast 10x0  'layersymssh.png'
+
