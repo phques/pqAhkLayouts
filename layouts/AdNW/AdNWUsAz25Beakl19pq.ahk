@@ -95,7 +95,7 @@ CreateLayers()
 	     	mapSh: layerMain_3Sh
 	    },
 
-	    {id: "punx", key: "Space", ;tap: "Space",
+	    {id: "syms", key: "Space", ;tap: "Space",
 	    	map: layerAlt,
 	    	mapSh: layerAltSh
 	    },
@@ -119,11 +119,11 @@ CreateLayers()
 
 	InitLayout(layers, dontCreateHotkeys)
 
-	punx := layerDefsById["punx"]
+	syms := layerDefsById["syms"]
 	main := layerDefsById["main"]
 
-	; add Space on punx B (hold will repeat! vs spacebar dual mode layer access which doesnt)
-	punx.AddMappings("b  Space", false)
+	; add Space on syms B (hold will repeat! vs spacebar dual mode layer access which doesnt)
+	syms.AddMappings("b  Space", false)
 
     main.AddMappingsFromTo("'", "Enter", false)
     main.AddMappingsFromTo("'", "+Enter", true)
@@ -134,8 +134,8 @@ CreateLayers()
     main.AddMappingsFromTo("/", "RSh", false) ;; shift on /
     main.AddMappingsFromTo("/", "RSh", true) ;; shift on /
 
-    punx.AddMappingsFromTo("/", "RSh", false) ;; shift on /
-    punx.AddMappingsFromTo("/", "RSh", true) ;; shift on /
+    syms.AddMappingsFromTo("/", "RSh", false) ;; shift on /
+    syms.AddMappingsFromTo("/", "RSh", true) ;; shift on /
 
 	; SetMouseDragKeys("space", "control")
 }
