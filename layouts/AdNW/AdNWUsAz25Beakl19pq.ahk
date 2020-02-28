@@ -42,8 +42,8 @@ CreateLayers()
 	)"
 	layerMain_3sh := "
 	(Join`r`n
-	    w e r       u i o        H O U       M S L  
-	  a s d f g   h j k l ;   P SP E A :   G T N R C
+	    w e r       u i o       H O  U       M S L  
+	  a s d f g   h j k l ;   P " E  A :   G T N R C
 	    z x c      m , .        Y ~; I       D F W  
 	)"
 
@@ -57,9 +57,9 @@ CreateLayers()
 
 	layerMain_2sh := "
 	(Join`r`n
-	    w e r       u i o       H I :        C R L   
-	  a s d f g   h j k l ;  G SP E A ~;   F T S N P 
-	    z x c v     m , .       Y U O I      D W M   
+	    w e r       u i o      H I :        C R L   
+	  a s d f g   h j k l ;  G " E A ~;   F T S N P 
+	    z x c v     m , .      Y U O I      D W M   
 	)"
 
 	; copied/modified from BEAKL PLLT x1
