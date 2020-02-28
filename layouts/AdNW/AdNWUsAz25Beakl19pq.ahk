@@ -33,18 +33,32 @@ CreateLayers()
 	; using AngleZ ergo mod (lower left hand shifted left by 1)
 	; actyually mirrored left/right vs AdNW output
 
-	;alternate ( opt -3 vs -2)
+	;alternate ( opt -3 vs -2) prefered!
 	layerMain_3 := "
 	(Join`r`n
 	    w e r       u i o        h o u       m s l  
 	  a s d f g   h j k l ;   p SP e a .   g t n r c
-	    z x c      m , .        y , i       d f w  
+	    z x c       m , .        y , i       d f w  
 	)"
 	layerMain_3sh := "
 	(Join`r`n
 	    w e r       u i o       H O  U       M S L  
 	  a s d f g   h j k l ;   P " E  A :   G T N R C
-	    z x c      m , .        Y ~; I       D F W  
+	    z x c       m , .        Y ~; I       D F W  
+	)"
+
+	; 'wide'
+	layerMain_3w := "
+	(Join`r`n
+	    w e r       i o p       h o u       m s l  
+	  a s d f g   j k l ; '   p SP e a .   g t n r c
+	    z x c       , . /       y , i       d f w  
+	)"
+	layerMain_3shw := "
+	(Join`r`n
+	    w e r       i o p       H O  U       M S L  
+	  a s d f g   j k l ; '   P " E  A :   G T N R C
+	    z x c       , . /        Y ~; I       D F W  
 	)"
 
 	; dup I to bott-center, for IO
@@ -77,38 +91,68 @@ CreateLayers()
 	    z   c     n m , .         ^   ~\      Z  ~ X  B     
 	)"
 
-	; created this one based on my std punxLayer, 
-	; adding bvkqxjz
-	__layerPunx := "
+	; 'wide'
+	layerAltw := "
 	(Join`r`n
-	    w e r       u i o         h o u      l s m  
-	  a s d f g   h j k l ;     p   e a .  c r n t g
-	    z x c       m , .         y , i      w f d  
+	    w e r       i o p        q ' j        v ! #  
+	  a s d f g   j k l ; '      ? ( - ) $    k { = } &
+	    z   c     m , . /        *   /      z + x b  
 	)"
 
+	layerAltShw := "
+	(Join`r`n
+	  q w e r         o p       Q Q ~`` J        V |     
+	  a s d f g   j k l ; '     < < _  > ~-   K ~[ @ ~] %   
+	    z   c     m , . /         ^   ~\      Z  ~ X  B     
+	)"
+
+
 	extendLayer := ExtendLayerMappings()
+	extendLayerw := ExtendLayerMappingsWide()
 	numpadLayers := NumpadLayerMappings()
 
-	layers := [
-	    {id: "main", 
-	     	map: layerMain_3, 
-	     	mapSh: layerMain_3Sh
-	    },
+	wide := 1
+	if (wide) {
+		layers := [
+		    {id: "main", 
+		     	map: layerMain_3w, 
+		     	mapSh: layerMain_3wSh
+		    },
 
-	    {id: "syms", key: "Space", ;tap: "Space",
-	    	map: layerAlt,
-	    	mapSh: layerAltSh
-	    },
+		    {id: "syms", key: "Space", ;tap: "Space",
+		    	map: layerAltw,
+		    	mapSh: layerAltwSh
+		    },
 
-	    {id: "edit", key: "LAlt", toggle: true,
-	    	map: extendLayer, 
-		},
+		    {id: "edit", key: "LAlt", toggle: true,
+		    	map: extendLayerw, 
+			},
 
-	    {id: "numpad", key: "b", toggle: true,
-	    	map: numpadLayers.indexOnB, 
-		},
+		    {id: "numpad", key: "b", toggle: true,
+		    	map: numpadLayers.indexOnBwide, 
+			},
+		]
+	} else {
+		layers := [
+		    {id: "main", 
+		     	map: layerMain_3, 
+		     	mapSh: layerMain_3Sh
+		    },
 
-	]
+		    {id: "syms", key: "Space", ;tap: "Space",
+		    	map: layerAlt,
+		    	mapSh: layerAltSh
+		    },
+
+		    {id: "edit", key: "LAlt", toggle: true,
+		    	map: extendLayer, 
+			},
+
+		    {id: "numpad", key: "b", toggle: true,
+		    	map: numpadLayers.indexOnBe, 
+			},
+		]
+	}
 
 	; dont create layout hotkeys for these
 	; for eg, we will use Win-XX for hotkeys to do actions
@@ -122,20 +166,20 @@ CreateLayers()
 	syms := layerDefsById["syms"]
 	main := layerDefsById["main"]
 
-	; add Space on syms B (hold will repeat! vs spacebar dual mode layer access which doesnt)
-	syms.AddMappings("b  Space", false)
+	if (!wide) {
+	    main.AddMappingsFromTo("'", "Enter", false)
+	    main.AddMappingsFromTo("'", "+Enter", true)
 
-    main.AddMappingsFromTo("'", "Enter", false)
-    main.AddMappingsFromTo("'", "+Enter", true)
+	    main.AddMappingsFromTo("/", "RSh", false) ;; shift on /
+	    main.AddMappingsFromTo("/", "RSh", true) ;; shift on /
+
+	    syms.AddMappingsFromTo("/", "RSh", false) ;; shift on /
+	    syms.AddMappingsFromTo("/", "RSh", true) ;; shift on /
+	}
 
 	main.AddMappingsFromTo("v", "Backspace", false)
 	main.AddMappingsFromTo("v", "~Delete", true)
 
-    main.AddMappingsFromTo("/", "RSh", false) ;; shift on /
-    main.AddMappingsFromTo("/", "RSh", true) ;; shift on /
-
-    syms.AddMappingsFromTo("/", "RSh", false) ;; shift on /
-    syms.AddMappingsFromTo("/", "RSh", true) ;; shift on /
 
 	; SetMouseDragKeys("space", "control")
 }

@@ -11,6 +11,13 @@ NumpadLayerMappings()
 	  x c v     m , . /       = / *     1 2 3 . 
 	)"
 
+	indexOnBwide := "
+	(Join`r`n
+	              i o p [                 7 8 9 BS
+	    d f     j k l ; '         + -   , 4 5 6 0 
+	  x c v     m , . /         = / *   . 1 2 3 
+	)"
+
 	; use thumb to press B, home row is (LaSalle) aWEf
 	thumbOnB := "
 	(Join`r`n
@@ -19,5 +26,6 @@ NumpadLayerMappings()
 	            m , . /                   1 2 3 . 
 	)"
 
-	return { indexOnB: indexOnB, thumbOnB: thumbOnB }
+	return { indexOnB: indexOnB, thumbOnB: thumbOnB, 
+			 indexOnBwide: indexOnBwide }
 }
