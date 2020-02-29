@@ -1,0 +1,96 @@
+-- original cfgs --
+
+./opt29.exe -2 englisch-t.txt -K Den/beaklArrNopinkyx1.cfg
+42               497.311 total effort   223.673 positional effort    left right
+                   1.758 same finger rp   4.713 shift same finger top  8.1 12.9
+   koyq bdrl      72.123 hand alternat.  27.753 shift hand alter. mid 25.9 31.7
+  pteaj fs_nm      1.252 inward/outward  24.342 inward or outward bot  7.7  7.7
+   g iz xcvh       9.935 adjacent        18.771 shift adjacent    sum 45.1 54.9
+      u w          0.016 ThumbTopRing
+                   0.031 ThumbTopMiddle
+                   0.021 ThumbTopIndex
+                  1.7  9.6 16.0 14.4  3.4  2.6 14.6 22.4 13.2  2.1 Sh  1.2  1.1
+
+./opt29.exe -2 englisch-t.txt -K Den/beaklArrNopinkyx2.cfg
+1067             402.271 total effort   121.795 positional effort    left right
+                   2.715 same finger rp   0.000 shift same finger top  9.7 11.2
+  youq wmrc       73.258 hand alternat.  24.897 shift hand alter. mid 21.1 22.0
+ jheax gtsnp       3.394 inward/outward  22.252 inward or outward bot  6.7 10.4
+  k iz vdlfb      14.148 adjacent        24.348 shift adjacent    sum 55.5 44.5
+     _            0.1  6.1 16.0 15.2 18.1  0.8 16.6 14.0 10.2  2.9 Sh  1.6  0.8
+
+./opt29.exe -2 englisch-t.txt -K Den/beaklArrNopinkyx3.cfg
+56195            585.509 total effort   291.929 positional effort    left right
+                   2.415 same finger rp   0.000 shift same finger top  9.6 10.6
+   bouj vcrm      70.739 hand alternat.  31.028 shift hand alter. mid 23.9 22.1
+  phaey gtsnf      2.863 inward/outward  25.070 inward or outward bot  6.7  8.3
+   k iz qdwlx     12.221 adjacent        20.334 shift adjacent    sum 58.0 42.0
+      _           1.7  6.0 12.7 19.8 17.8  1.1 15.7 12.1 11.2  1.9 Sh  1.3  1.1
+
+./opt29.exe -2 englisch-t.txt -K Den/beaklArrNopinkyx4.cfg
+258              198.218 total effort   184.692 positional effort    left right
+                   2.489 same finger rp   0.000 shift same finger top 10.0  9.0
+   gouj vchw      73.234 hand alternat.  27.074 shift hand alter. mid 26.1 20.2
+  kteay msrnp      1.468 inward/outward  22.501 inward or outward bot  6.1  9.8
+   q iz bdlfx     12.724 adjacent        24.472 shift adjacent    sum 60.0 40.0
+      _           0.6  9.1 16.0 16.5 17.8  1.0 15.5 12.5  9.1  1.8 Sh  1.3  1.0
+
+========
+ pq mods 
+
+./opt24.exe -2 englisch-t.txt -K Den/beakl\ NOTH22\ x1.cfg
+30014             27.143 total effort   252.604 positional effort    left right
+                   1.530 same finger rp   0.000 shift same finger top 12.5 13.9
+  lnd   oip       72.188 hand alternat.  25.209 shift hand alter. mid 22.5 38.8
+ crstg ,ae h       2.610 inward/outward  24.383 inward or outward bot  5.4  4.7
+  wfm   .uy       13.159 adjacent        25.506 shift adjacent    sum 41.3 58.7
+                  2.6 10.0 13.3 14.5  0.8  1.3 15.0 18.4 19.9  4.2 Sh  0.8  1.3
+
+./opt24.exe -3 englisch-t.txt -K Den/beakl\ NOTH22\ x1.cfg
+ 8                 95.058 total effort   254.718 positional effort    left right
+                   1.884 same finger rp   0.000 shift same finger top 10.2 14.4
+  frd   oiu       73.039 hand alternat.  23.989 shift hand alter. mid 23.3 39.4
+ csntp gae h       1.941 inward/outward  23.178 inward or outward bot  7.0  3.5
+  wlm   ,.y       11.249 adjacent        26.434 shift adjacent    sum 41.3 58.7
+                   5.037 no hand altern. 41.539 two hand altern.
+                   3.178 seesaw           6.422 indir same finger
+                  2.6  8.9 14.4 14.6  0.8  1.4 15.6 17.2 20.4  4.2 Sh  0.8  1.4
+
+space back on spacebar
+./opt25.exe -2 englisch-t.txt -K kwezNew/beaklArrNopinkyx4pq.cfg
+24679            187.631 total effort   164.781 positional effort    left right
+                   2.243 same finger rp   0.000 shift same finger top  9.8  8.8
+   gou   chm      72.323 hand alternat.  25.291 shift hand alter. mid 27.1 19.7
+  pteay fsrnw      1.395 inward/outward  23.579 inward or outward bot  8.0  7.8
+   .,i   dbl      11.722 adjacent        23.591 shift adjacent    sum 62.7 37.3
+      _           1.7 10.0 17.0 16.3 17.7  1.1 13.2 10.4 11.2  1.5 Sh  1.2  1.1
+
+./opt25.exe -3 englisch-t.txt -K kwezNew/beaklArrNopinkyx4pq.cfg
+11043            210.924 total effort   175.542 positional effort    left right
+                   3.429 same finger rp   0.000 shift same finger top 11.6  9.6
+   cnd   uoy      71.253 hand alternat.  35.454 shift hand alter. mid 23.3 25.8
+  bstrh waeip      2.020 inward/outward  23.463 inward or outward bot  7.2  3.7
+   fml   g,.      15.975 adjacent        22.150 shift adjacent    sum 59.5 40.5
+      _            5.382 no hand altern. 41.423 two hand altern.
+                   1.738 seesaw           8.793 indir same finger
+                  1.2  9.9 15.3 15.7 17.4  1.4 12.0 17.0  8.4  1.7 Sh  0.9  1.4
+
+noticed Shift keys were not US Std ..
+./opt25.exe -2 englisch-t.txt -K kwezNew/beaklArrNopinkyx4pq.cfg
+7312             237.862 total effort   205.246 positional effort    left right
+                   2.628 same finger rp   0.268 shift same finger top 11.8  8.6
+   pou   mlf      72.323 hand alternat.  25.291 shift hand alter. mid 32.4 25.0
+  gteay drnsb      1.489 inward/outward  23.193 inward or outward bot 11.1 11.0
+   .,i   hwc      12.592 adjacent         4.995 shift adjacent    sum 55.3 44.7
+       _          3.4 12.0 20.4 19.5 --.- --.- 17.4 12.7 11.9  2.7 Sh  1.5  1.3
+
+
+./opt25.exe -2 englisch-t.txt -K kwezNew/beaklArrNopinkyx4pq.cfg
+353              270.197 total effort   215.342 positional effort    left right
+                   3.553 same finger rp   0.054 shift same finger top 13.9 11.8
+   cnd   uop      70.960 hand alternat.  37.962 shift hand alter. mid 28.2 30.6
+  wstrh geaib      2.282 inward/outward  23.631 inward or outward bot  9.7  5.8
+   fml   y,.      16.071 adjacent         8.297 shift adjacent    sum 51.8 48.2
+       _           5.652 no hand altern. 42.320 two hand altern.
+                   2.233 seesaw           8.509 indir same finger
+                  2.8 11.9 18.3 18.9 --.- --.- 18.2 16.4 10.4  3.1 Sh  1.1  1.6
