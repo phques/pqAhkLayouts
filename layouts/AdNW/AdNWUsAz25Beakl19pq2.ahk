@@ -36,7 +36,7 @@ CreateLayers()
   (Join`r`n
       w e r      u i o  
     a s d f g  h j k l ;
-      z x c      m , .  
+      z x c v    m , .  
   )"
 
   ; -----------
@@ -47,14 +47,14 @@ CreateLayers()
   (Join`r`n
       y i .      m s l       
     g h e a ,  b t n r c      
-      p u o      d f w         
+      p u o i    d f w         
   )"
 
   layerMain_2sh := "
   (Join`r`n
       Y I :      M S L       
     G H E A ~; B T N R C      
-      P U O      D F W         
+      P U O I    D F W         
   )"
 
   ; opt -3
@@ -62,14 +62,14 @@ CreateLayers()
   (Join`r`n
 	  p o .      d n l  
 	w i e a g  f s r t c
-	  y , u      h b m  
+	  y , u _    h b m  
   )"
 
   layerMain_3sh := "
   (Join`r`n
 	  P O  :      D N L  
 	W I E  A G  F S R T C
-	  Y ~; U      H B M  
+	  Y ~; U _    H B M  
   )"
 
   ; -----------
@@ -82,14 +82,14 @@ CreateLayers()
   (Join`r`n
       q ' j        v ! #     
     ? ( - ) $    z { = } &   
-      * " /        k x +  
+      * " / .      k x +  
   )"
 
   layerAltSh := "
   (Join`r`n
       Q ~`` J        V |  .      
     < < _   > .   Z ~[ @ ~] %   
-      ^ ~- ~\        K X  ~  
+      ^ ~- ~\ .      K X  ~  
   )"
 
   ; need to move QJ to right hand !
@@ -156,13 +156,13 @@ CreateLayers()
   syms := layerDefsById["syms"]
   french := layerDefsById["french"]
 
-  main.AddMappingsFromTo("v", "Backspace", false)
-  main.AddMappingsFromTo("v", "~Delete", true)
+  main.AddMappingsFromTo("'", "Backspace", false)
+  main.AddMappingsFromTo("'", "~Delete", true)
 
-  ; add enter on ' and Shift on / 
-  main.AddMappingsFromTo("'", "Enter", false)
-  main.AddMappingsFromTo("'", "+Enter", true)
+  main.AddMappingsFromTo("n", "Enter", false)
+  main.AddMappingsFromTo("n", "+Enter", true)
 
+  ; add Shift on / 
   main.AddMappingsFromTo("/", "RSh", false) ;; shift on /
   main.AddMappingsFromTo("/", "RSh", true) ;; shift on /
 
