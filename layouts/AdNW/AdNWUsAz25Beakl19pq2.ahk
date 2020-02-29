@@ -4,6 +4,7 @@
 AdNW ansi angleZ BEALK19 pq
 22 keys, space on main keys (+space + 2shifts)
 ie Den's PLLT. pinky less, less thumb, but space back on spacebar
+Has french layer too 
 
 */
 
@@ -31,20 +32,11 @@ global DoubleAlt := 0
 CreateLayers()
 {
   ; try both hands a std pos
-  qwertyMask_std := "
+  qwertyMask := "
   (Join`r`n
-      w e r      u i o
-    a s d f g  h j k l ; 
-      z x c      m , . 
-  )"
-
-  ; shift right hand ->
-  ; supposedly more ergo, also, Enter and RShift are nearer 
-  qwertyMask_wide := "
-  (Join`r`n
-      w e r        i o p
-    a s d f g    j k l ; '
-      z x c        , . /
+      w e r      u i o  
+    a s d f g  h j k l ;
+      z x c      m , .  
   )"
 
   ; -----------
@@ -81,33 +73,46 @@ CreateLayers()
   )"
 
   ; -----------
-  ; copy from BEAKL PLLT x1, slightly modified PQ
+  ; copy from BEAKL PLLT x1, slightly modified PQ (including B now on main)
+
+  ; ' !# ?(-)$ {=}& *"/ +
+  ; ` | <_> [@]% ^\ ~
 
   layerAlt := "
   (Join`r`n
-        q ' j        v ! #     
-      ? ( - ) $    z { = } &   
-        * .  /        + x k  
+      q ' j        v ! #     
+    ? ( - ) $    z { = } &   
+      * " /        k x +  
   )"
 
   layerAltSh := "
   (Join`r`n
-        Q ~`` J        V |  .      
-      < < _   > .   Z ~[ @ ~] %   
-        ^ ~- ~\        ~ X  K  
+      Q ~`` J        V |  .      
+    < < _   > .   Z ~[ @ ~] %   
+      ^ ~- ~\        K X  ~  
+  )"
+
+  ; need to move QJ to right hand !
+  layerAlt_2fr := "
+  (Join`r`n
+    q w e r    u i o p     ë î ï â      v j ' /
+    a s d f g  h j k l ;   ê è é à ä  z « ! » ç
+      z x c v  n m , .      ù û ô œ  - k x q  
+  )"
+  layerAlt_2frsh := "
+  (Join`r`n
+    q w e r    u i o p     Ë Î Ï Â      V J " ~\
+    a s d f g  h j k l ;   Ê È É À Ä  Z ( ? ) Ç
+      z x c v  n m , .       Ù Û Ô Œ  + K X Q  
   )"
 
   ; -----------
-
-  rightSh := 0
-  qwertyMask := (rightSh ? qwertyMask_wide : qwertyMask_std)
 
   layerMain := layerMain_2
   layerMainSh := layerMain_2sh
 
   numpad := NumpadLayerMappings()
-  numpadLayers := (rightSh ? numpad.indexOnBwide : numpad.indexOnB)
-  extendLayer := (rightSh ? ExtendLayerMappingsWide() : ExtendLayerMappings())
+  extendLayer := ExtendLayerMappings()
 
 
   layers := [
@@ -123,13 +128,18 @@ CreateLayers()
         mapSh: layerAltSh,
       },
 
+      {id: "french", 
+        map: layerAlt_2fr,
+        mapSh: layerAlt_2frsh,
+      },
+
       {id: "edit", key: "LAlt", toggle: true,
         map: extendLayer, 
       },
 
     ; would've liked  to use V here, but it screws up??
       {id: "numpad", key: "b", toggle: true,
-        map: numpadLayers, 
+        map: numpad.indexOnB, 
       },
 
   ]
@@ -144,29 +154,45 @@ CreateLayers()
   ; PQ extras / adaptations for US kbd
   main := layerDefsById["main"]
   syms := layerDefsById["syms"]
+  french := layerDefsById["french"]
 
   main.AddMappingsFromTo("v", "Backspace", false)
   main.AddMappingsFromTo("v", "~Delete", true)
 
-  ; if right hand on std pos, 
   ; add enter on ' and Shift on / 
-  if (rightSh == 0) {
-    main.AddMappingsFromTo("'", "Enter", false)
-    main.AddMappingsFromTo("'", "Enter", true)
+  main.AddMappingsFromTo("'", "Enter", false)
+  main.AddMappingsFromTo("'", "+Enter", true)
 
-    main.AddMappingsFromTo("/", "RSh", false) ;; shift on /
-    main.AddMappingsFromTo("/", "RSh", true) ;; shift on /
+  main.AddMappingsFromTo("/", "RSh", false) ;; shift on /
+  main.AddMappingsFromTo("/", "RSh", true) ;; shift on /
 
-    syms.AddMappingsFromTo("/", "RSh", false) ;; shift on /
-    syms.AddMappingsFromTo("/", "RSh", true) ;; shift on /
-  }  else {
-    ; add Backspace on M for wide mod
-    main.AddMappingsFromTo("m", "Backspace", false)
-    main.AddMappingsFromTo("m", "~Delete", true)
-  }
+  syms.AddMappingsFromTo("/", "RSh", false) ;; shift on /
+  syms.AddMappingsFromTo("/", "RSh", true) ;; shift on /
 
+  french.AddMappingsFromTo("/", "RSh", false) ;; shift on /
+  french.AddMappingsFromTo("/", "RSh", true) ;; shift on /
 }
 
+swapSymsAndFrench()
+{
+  ; get syms layer access keydef, on main layer 
+  mainLayer := layerDefs[1]
+  syms := layerDefsById["syms"]
+  french := layerDefsById["french"]
+
+  symsAccessKeydef := mainLayer.GetKeydef(syms.key)
+
+  if (symsAccessKeydef.layerId == "syms") {
+    symsAccessKeydef.layerId := "french"
+    mainLayer.id := "mainfr"
+  }
+  else {
+    symsAccessKeydef.layerId := "syms"
+    mainLayer.id := "main"
+  }
+}
+
+;----------
 
 CreateLayers()
 DisplayHelpImage()
@@ -177,3 +203,5 @@ return
 ;--- hotkeys, must be at the end -----
 
 #include ../winHotkeys.ahk
+
+LWin & Insert::swapSymsAndFrench()
