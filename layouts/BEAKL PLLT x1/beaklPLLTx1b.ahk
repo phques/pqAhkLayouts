@@ -75,15 +75,15 @@ CreateLayers()
   ; need to move QJ to right hand !
   layerAlt_2fr := "
   (Join`r`n
-    q w e r t    u i o p   ï î û ô œ    v q j ' 
-    a s d f g  h j k l ;   è é ù à ä  - « ! » x
+    q w e r t    u i o p   ï î û ô œ    v q j ! 
+    a s d f g  h j k l ;   è é ù à ä  - « ' » x
     z x c      n m , .       ê ë â    z k ç b  
   )"
   layerAlt_2frsh := "
   (Join`r`n
-    Q W E R T    U I O P   Ï Î Û Ô Œ    V Q J ~/ 
-    A S D F G  H J K L ;   È É Ù À Ä  + ( ? ) X
-    Z X C      N M , .       Ê Ë Â    Z K Ç B  
+    Q W E R T    U I O P   Ï Î Û Ô Œ    V Q  J ?
+    A S D F G  H J K L ;   È É Ù À Ä  + ( ~/ ) X
+    Z X C      N M , .       Ê Ë Â    Z K Ç  B  
   )"
 
   extendLayer := ExtendLayerMappings()
