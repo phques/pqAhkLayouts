@@ -1,7 +1,10 @@
 /*
 
-2019-03-29
-MTGAP ansi angleZ BEALK19 pq3
+2020-03-01
+ls24spv1.0
+trying to see if I can place space on main !??
+took out $
+MTGAP ansi angleZ BEAKL
 24 keys (+space + 2shifts)
 LaSalle fingering
 */
@@ -10,7 +13,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\ls24Beakl19pq3"
+global ImgsDir := A_ScriptDir . "\imgs\ls24Beakl19"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -44,20 +47,18 @@ CreateLayers()
 	)"
 	qwertyMask24 := qwertyMask24_wid
 
-	; -2 seems to have better scrore (lower same finger than -3)
-	; feels better too
 	layerMain_2 := "
 	(Join`r`n
-           a  e  y         h  t  s   
-        g  u  o  i  _   m  n  r  d  c
-        -  >  !  p         l  q  z  v
+		    e  Sp i          h  t  s    
+		 c  o  u  a  g    m  n  d  r  f 
+		 -  >  _  y          l  v  j  b 
 	)"
 
 	layerAlt := "
 	(Join`r`n
-		    k  ,  ;         x  w  b   
-		 ?  '  (  .  *   =  f  )  "  / 
-		 $  +  [  :         j  ]  {  } 
+		    ,  .  (          :  w  "    
+		 !  /  '  p  ?    =  k  )  x  z 
+		 ]  [  }  ;          q  {  +  *
 	)"
 
 	; need backspace (and delete) ?
@@ -83,7 +84,7 @@ CreateLayers()
 	     	;mapSh: layerMainSh
 	    },
 
-	    {id: "alt", key: "Space", tap: "Space",
+	    {id: "alt", key: "Space", ; tap: "Space",
 	    	qwertyMask: qwertyMask24, 
 	    	map: layerAlt, 
 	    },

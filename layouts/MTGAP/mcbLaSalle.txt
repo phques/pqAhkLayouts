@@ -1,0 +1,297 @@
+LaSalle 24 keys
+
+mtgap weights
+	999, 0 ,  0  , 80, 999,  999, 80, 0  , 0 ,  999,
+	90 , 50,  50 , 0 , 90 ,  90 , 0 , 50 , 50,  90,
+	180, 220, 210, 80, 999,  999, 80, 210, 220, 180
+
+01110 01110
+11111 11111
+11110 01111
+
+011100111011111111111111001111
+
+48keys
+26letters
+22syms
+
+punx from allCharsStd (balanced text + pgm)
+,.-"_')(;=:/*!?$>{}[]\+|&<%@#^`~
+
+punc from text only
+,.'"-)(:!?;/[]%$|*=_+>\<&^#@`~{}
+
+take punc from allCharsStd, swap \ +
+,.-"_')(;=:/*!?$>{}[]+\|&<%@#^`~
+
+
+------
+
+2019-03-31
+ls24v1.0
+
+setksize beaklasalle
+setmask 011100111011111111111111001111
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?$>{}[]+
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set numThreads 6
+set singleKeySameFinger 0
+run
+
+Hands: 50% 49%
+Fingers: 2.0% 11% 20% 17% 0.00% 0.00% 17% 17% 11% 4.0% 
+
+    k  .  ;         x  w  "  
+ ?  '  (  f  /   *  ,  )  -  j
+ $  +  [  =         :  ]  {  }
+
+    a  e  d         h  t  s  
+ g  u  o  i  y   b  n  r  l  c
+ _  >  !  p         m  q  z  v
+
+Fitness:       35678715
+Distance:      23747870
+Finger work:   0
+Inward rolls:  7.65%
+Outward rolls: 4.43%
+Same hand:     34.07%
+Same finger:   2.94%
+Row change:    14.41%
+Home jump:     1.55%
+Ring jump:     1.73%
+To center:     1.87%
+
+
+------
+
+2019-03-31
+ls24v1.1
+
+setksize beaklasalle
+setmask 011100111011111111111111001111
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?$>{}[]+
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set numThreads 6
+set singleKeySameFinger 0
+set sameHand 10
+sethandbias -15
+run
+
+Hands: 46% 53%
+Fingers: 2.0% 11% 20% 13% 0.00% 0.00% 20% 17% 12% 4.0% 
+
+    k  ,  ;         x  w  b  
+ ?  '  (  .  *   =  f  )  "  /
+ $  +  [  :         j  ]  {  }
+
+    a  e  y         h  t  s  
+ g  u  o  i  _   m  n  r  d  c
+ -  >  !  p         l  q  z  v
+
+Fitness:       41829397
+Distance:      28214425
+Finger work:   94947
+Inward rolls:  5.86%
+Outward rolls: 3.69%
+Same hand:     29.76%
+Same finger:   2.26%
+Row change:    12.92%
+Home jump:     2.03%
+Ring jump:     1.70%
+To center:     0.83%
+
+------
+
+2020-03-01
+
+ls24spv1.0
+trying to see if I can place space on main !??
+took out $
+
+setksize beaklasalle
+setmask 011100111011111111111111001111
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set singleKeySameFinger 0
+set keepShiftPairSpace 0
+set sameHand 10
+sethandbias -15
+set numThreads 6
+run
+
+Hands: 42% 57%
+Fingers: 3.0% 11% 13% 16% 0.00% 0.00% 17% 21% 17% 3.0%
+
+    "  w  :         (  .  ,
+ z  x  )  k  =   ?  p  '  /  !
+ *  +  {  q         ;  }  [  ]
+
+    s  t  h         i SP  e
+ f  r  d  n  m   g  a  u  o  c
+ b  j  v  l         y  _  >  -
+
+Fitness:       54641164	
+Distance:      35139810
+Finger work:   1383614
+Inward rolls:  9.99%
+Outward rolls: 2.09%
+Same hand:     35.65%
+Same finger:   2.39%
+Row change:    16.84%
+Home jump:     2.13%
+Ring jump:     1.29%
+To center:     2.51%
+
+    ,  .  (          :  w  "    
+ !  /  '  p  ?    =  k  )  x  z 
+ ]  [  }  ;          q  {  +  *
+
+    e  Sp i          h  t  s    
+ c  o  u  a  g    m  n  d  r  f 
+ -  >  _  y          l  v  j  b 
+
+------
+
+2020-03-01
+
+ls20spv1.1
+trying to see if I can place space on main !??
+don't use low two mid fingers
+
+01110 01110
+11111 11111
+10010 01001
+
+abcdefghijklmnopqrstuvwxyz,.-"_')(;= /!?
+:*$>{}[]\+|&<%@#^`~
+
+swap *?
+swap Sp :
+
+setksize beaklasalle
+setmask 011100111011111111111001001001
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;= /!?
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set singleKeySameFinger 0
+set keepShiftPairSpace 0
+set sameHand 10
+#sethandbias -15
+set numThreads 6
+run
+
+Hands: 47% 52%
+Fingers: 2.0% 13% 17% 15% 0.00% 0.00% 16% 21% 11% 3.0%
+
+    k  y  ;         j  w  ,
+ (  )  "  b  =   /  .  _  -  !
+ ?        q         x        z
+
+    a  e  d         h SP  s
+ f  o  i  t  g   m  n  u  r  c
+ '        p         l        v
+
+Fitness:       47504744
+Distance:      25939520
+Finger work:   428334
+Inward rolls:  6.60%
+Outward rolls: 4.73%
+Same hand:     37.38%
+Same finger:   1.59%
+Row change:    17.92%
+Home jump:     2.05%
+Ring jump:     1.95%
+To center:     2.55%
+
+Hands: 51% 48%
+Fingers: 3.0% 11% 21% 16% 0.00% 0.00% 15% 17% 13% 2.0%
+
+    ,  w  (         )  y  .
+ ?  -  _  k  /   =  b  "  ;  j
+ z        x         q        !
+
+    s SP  h         d  e  a
+ c  r  u  n  m   g  t  i  o  f
+ v        l         p        '
+
+Fitness:       47504469
+Distance:      25938960
+Finger work:   516624
+Inward rolls:  6.44%
+Outward rolls: 4.92%
+Same hand:     37.09%
+Same finger:   1.51%
+Row change:    17.52%
+Home jump:     2.08%
+Ring jump:     1.94%
+To center:     2.57%
+
+   . y )      ( w ,   
+ j ; " b =  / k _ - ? 
+ !     q      x     z 
+
+   a e d      h SP s  
+ f o i t g  m n u r c 
+ '     p      l     v 
+
+
+------
+
+2020-03-01
+ls22spv1.2
+space on main
+
+01110 01110
+11111 11111
+01110 01110
+
+abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? {}
+$> []\+|&<%@#^`~
+
+#set singleKeySameFinger 15
+setksize beaklasalle
+setmask 011100111011111111110111001110
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? {}
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set singleKeySameFinger 0
+set keepShiftPairSpace 0
+set sameHand 10
+sethandbias -35
+set numThreads 6
+run
+
+
+Hands: 39% 60%
+Fingers: 2.0% 10% 13% 15% 0.00% 0.00% 21% 23% 14% 3.0%
+
+    k  w  x         "  .  ,
+ z  (  )  b  =   /  p  _  -  '
+    *  {  :         ;  }  ?
+
+    s  t  h         i SP  a
+ g  l  d  n  f   y  e  r  o  c
+    j  v  m         u  q  !
+
+Fitness:       62115247
+Distance:      38926595
+Finger work:   772057
+Inward rolls:  8.71%
+Outward rolls: 5.35%
+Same hand:     40.94%
+Same finger:   3.01%
+Row change:    19.32%
+Home jump:     0.97%
+Ring jump:     1.18%
+To center:     2.35%
+
+    , . "      x w k   
+  ' - _ p /  = b ) ( z 
+    ? } ;      : { *   
+    
+    a P i      h t s   
+  c o r e y  f n d l g 
+    ! q u      m v j   

@@ -1,8 +1,11 @@
 /*
 
-2019-03-29
-MTGAP ansi angleZ BEALK19 pq3
-24 keys (+space + 2shifts)
+2020-03-01
+ls22spv1.2
+space on main
+
+MTGAP ansi angleZ BEAKL
+22 keys (+space + 2shifts)
 LaSalle fingering
 */
 
@@ -10,7 +13,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\ls24Beakl19pq3"
+global ImgsDir := A_ScriptDir . "\imgs\ls24Beakl19"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -32,46 +35,38 @@ CreateLayers()
 	; try both hands a std pos
 	qwertyMask24_std := "
 	(Join`r`n
-	          w e r      u i o 
-	        a s d f g  h j k l ; 
-	  @LShift z x c      m , . /
+	      w e r      u i o 
+	    a s d f g  h j k l ; 
+	      z x c      m , . 
 	)"
 	qwertyMask24_wid := "
 	(Join`r`n
-	          w e r        i o p
-	        a s d f g    j k l ; '
-	  @LShift z x c        , . / @RShift
+	      w e r        i o p
+	    a s d f g    j k l ; '
+	      z x c        , . / 
 	)"
 	qwertyMask24 := qwertyMask24_wid
 
-	; -2 seems to have better scrore (lower same finger than -3)
-	; feels better too
 	layerMain_2 := "
 	(Join`r`n
-           a  e  y         h  t  s   
-        g  u  o  i  _   m  n  r  d  c
-        -  >  !  p         l  q  z  v
+	    a SP i      h t s   
+	  c o  r e y  f n d l g 
+	    !  q u      m v j   
 	)"
 
 	layerAlt := "
 	(Join`r`n
-		    k  ,  ;         x  w  b   
-		 ?  '  (  .  *   =  f  )  "  / 
-		 $  +  [  :         j  ]  {  } 
+	    , . "      x w k   
+	  ' - _ p /  = b ) ( z 
+	    ? } ;      : { *   
 	)"
 
 	; need backspace (and delete) ?
-	layerEdit1 := "
-	(Join`r`n
-		  . . .        Home  Up  End
-	 Ctrl Sh . . .  ^z Left Down Right ^x
-		. . . Alt        ^c   .    .   ^v
-	)"
 	layerEdit2 := "
 	(Join`r`n
 		  . . .         ^z   Up  Right 
 	 Ctrl Sh . . .  ^x Left Home Down End
-		. . . Alt       ^c   .     .  ^v
+		  . . c         ^c   .     ^v
 	)"
 
 	numpadLayers := NumpadLayerMappings()
@@ -83,7 +78,7 @@ CreateLayers()
 	     	;mapSh: layerMainSh
 	    },
 
-	    {id: "alt", key: "Space", tap: "Space",
+	    {id: "alt", key: "Space", ; tap: "Space",
 	    	qwertyMask: qwertyMask24, 
 	    	map: layerAlt, 
 	    },

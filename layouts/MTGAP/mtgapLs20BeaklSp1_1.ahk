@@ -1,7 +1,11 @@
 /*
 
-2019-03-29
-MTGAP ansi angleZ BEALK19 pq3
+2020-03-01
+ls20spv1.1
+trying to see if I can place space on main !??
+don't use low two mid fingers
+
+MTGAP ansi angleZ BEAKL
 24 keys (+space + 2shifts)
 LaSalle fingering
 */
@@ -10,7 +14,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\ls24Beakl19pq3"
+global ImgsDir := A_ScriptDir . "\imgs\ls24Beakl19"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -30,34 +34,32 @@ global DoubleAlt := 0
 CreateLayers()
 {
 	; try both hands a std pos
-	qwertyMask24_std := "
+	qwertyMask20_std := "
 	(Join`r`n
 	          w e r      u i o 
 	        a s d f g  h j k l ; 
-	  @LShift z x c      m , . /
+	  @LShift     c      m     /
 	)"
-	qwertyMask24_wid := "
+	qwertyMask20_wid := "
 	(Join`r`n
 	          w e r        i o p
 	        a s d f g    j k l ; '
-	  @LShift z x c        , . / @RShift
+	  @LShift     c        ,     @RShift
 	)"
-	qwertyMask24 := qwertyMask24_wid
+	qwertyMask20 := qwertyMask20_wid
 
-	; -2 seems to have better scrore (lower same finger than -3)
-	; feels better too
 	layerMain_2 := "
 	(Join`r`n
-           a  e  y         h  t  s   
-        g  u  o  i  _   m  n  r  d  c
-        -  >  !  p         l  q  z  v
+		   a e d      h SP s  
+		 f o i t g  m n u r c 
+		 '     p      l     v 
 	)"
 
 	layerAlt := "
 	(Join`r`n
-		    k  ,  ;         x  w  b   
-		 ?  '  (  .  *   =  f  )  "  / 
-		 $  +  [  :         j  ]  {  } 
+		   . y )      ( w ,   
+		 j ; " b =  / k _ - ? 
+		 !     q      x     z 
 	)"
 
 	; need backspace (and delete) ?
@@ -71,25 +73,25 @@ CreateLayers()
 	(Join`r`n
 		  . . .         ^z   Up  Right 
 	 Ctrl Sh . . .  ^x Left Home Down End
-		. . . Alt       ^c   .     .  ^v
+		.     Alt       ^c            ^v
 	)"
 
 	numpadLayers := NumpadLayerMappings()
 
 	layers := [
 	    {id: "main", 
-	     	qwertyMask: qwertyMask24,
+	     	qwertyMask: qwertyMask20,
 	     	map: layerMain_2, 
 	     	;mapSh: layerMainSh
 	    },
 
-	    {id: "alt", key: "Space", tap: "Space",
-	    	qwertyMask: qwertyMask24, 
+	    {id: "alt", key: "Space", ; tap: "Space",
+	    	qwertyMask: qwertyMask20, 
 	    	map: layerAlt, 
 	    },
 
 	    {id: "edit", key: "LAlt", toggle: true,
-	    	qwertyMask: qwertyMask24, 
+	    	qwertyMask: qwertyMask20, 
 	    	map: layerEdit2, 
 	    	; map: extendLayer, 
 		},
@@ -120,7 +122,7 @@ CreateLayers()
 	;#pq not working (under linux VM though which has probs remapping capsl)
 	; main.AddMappingsFromTo("cl", "lshift", false)
 	; main.AddMappingsFromTo("cl", "cl", true)
-	if (qwertyMask24 == qwertyMask24_std) {
+	if (qwertyMask20 == qwertyMask20_std) {
 		main.AddMappingsFromTo("p", "Backspace", false)
 		main.AddMappingsFromTo("p", "~Delete", true)
 		main.AddMappingsFromTo("'", "Enter", false)
