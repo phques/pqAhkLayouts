@@ -10,7 +10,7 @@ so move the most used character (Space) away from thumb. on the other hand,
 PQ
 kinda fits with what I like, was using Space as Alt layer dual mode key,
 in this it becomes only alt layer key.
-Small changes as suggested by Den
+Small changes as suggested by Den (and some perso changes)
 
 */
 
@@ -50,40 +50,40 @@ CreateLayers()
   (Join`r`n
         i u  o        m d n     
       y e Sp a g    l r t s p   
-        ,    .      w h c f     
+        ,    .      _ h c f     
   )"
   layerMainSh := "
   (Join`r`n
         I U O        M D N     
       Y E " A G    L R T S P   
-       ~;   :      W H C F     
+       ~;   :      _ H C F     
   )"
 
   layerAlt := "
   (Join`r`n
-        q ' j        v ! #     
-      ? ( - ) $    + { = } x   
-        *   /      z k & b  
+        q ' j        x ! #     
+      ? ( - ) $    + { = } b   
+        *   /      z v & k  
   )"
   layerAltSh := "
   (Join`r`n
-        Q ~`` J        V |  .      
-      < < _  > ~-   ~ ~[ @ ~] X   
-        ^   ~\      Z  K %  B     
+        Q ~`` J        X |  .      
+      < < _  > ~-   ~ ~[ @ ~] B   
+        ^   ~\      Z  V %  K     
   )"
 
   ; need to move QJ to right hand !
   layerAlt_2fr := "
   (Join`r`n
-    q w e r t    u i o p   ï î û ô œ    v q j ! 
-    a s d f g  h j k l ;   è é ù à ä  - « ' » x
-    z x c      n m , .       ê ë â    z k ç b  
+    q w e r t    u i o p   ï î û ô œ    x q j ! 
+    a s d f g  h j k l ;   è é ù à ä  - « ' » b
+    z x c      n m , .       ê ë â    z v ç k  
   )"
   layerAlt_2frsh := "
   (Join`r`n
-    Q W E R T    U I O P   Ï Î Û Ô Œ    V Q  J ?
-    A S D F G  H J K L ;   È É Ù À Ä  + ( ~/ ) X
-    Z X C      N M , .       Ê Ë Â    Z K Ç  B  
+    Q W E R T    U I O P   Ï Î Û Ô Œ    X Q  J ?
+    A S D F G  H J K L ;   È É Ù À Ä  + ( ~/ ) B
+    Z X C      N M , .       Ê Ë Â    Z V Ç  K  
   )"
 
   extendLayer := ExtendLayerMappings()
@@ -96,7 +96,7 @@ CreateLayers()
         mapSh: layerMainSh
       },
 
-      {id: "syms", key: "Space", ;tap: "Space",
+      {id: "syms", key: "Space", tap: "w",
         qwertyMask: qwertyMask,
         map: layerAlt,
         mapSh: layerAltSh,
