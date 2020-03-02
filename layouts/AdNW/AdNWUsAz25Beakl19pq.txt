@@ -33,4 +33,145 @@
   _#q    j+`       4.587 adjacent         0.000 shift adjacent    sum 38.7 61.3
        Ã¹          0.4  9.7 19.2  9.5 --.- --.-  9.2 30.1 21.6  0.4 Sh  0.0  0.0
 
-----------
+============= 2020-03-01 =================
+
+# Configuration for a keyboard with Ansi layout (pc205 with LSGT) with 'angleZ' ergo mod.
+# application of BEAKL19 on 22 main keys (ie no pinky use on top/bottom rows)
+# ie Den's PLLT. pinky less, less thumb (space on main, other key on spacebar)
+
+./opt25.exe -2 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3.cfg
+13716            447.044 total effort   332.072 positional effort    left right
+                   1.631 same finger rp   0.490 shift same finger top 11.2 11.3
+   lsm   .ih      73.565 hand alternat.  23.365 shift hand alter. mid 23.0 36.4
+  crntf ,ae g      2.396 inward/outward  22.909 inward or outward bot  6.8 11.3
+  wbd    ouy      15.213 adjacent        19.670 shift adjacent    sum 41.0 59.0
+       p          3.4 10.0 12.8 14.7 --.- --.- 15.0 18.5 22.4  3.2 Sh  0.8  1.5
+
+./opt25.exe -3 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3.cfg
+11560            565.287 total effort   325.874 positional effort    left right
+                   1.951 same finger rp   0.666 shift same finger top 11.1 12.5
+   lsm   uoh      73.190 hand alternat.  24.688 shift hand alter. mid 23.0 36.5
+  crntf .ae p      2.796 inward/outward  22.946 inward or outward bot  6.9 10.0
+  wbd    i,y      14.564 adjacent        19.588 shift adjacent    sum 41.0 59.0
+       g           4.614 no hand altern. 40.840 two hand altern.
+                   2.198 seesaw           6.799 indir same finger
+                  3.5 10.0 12.8 14.7 --.- --.- 16.2 17.3 22.4  3.2 Sh  0.8  1.5
+
+
+bad YOU again
+./opt25.exe -2 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3b.cfg
+127              479.858 total effort   354.051 positional effort    left right
+                   1.631 same finger rp   0.490 shift same finger top 11.2 12.5
+   lsm   uho      73.565 hand alternat.  23.365 shift hand alter. mid 23.0 36.4
+  crntf ,e ag      1.794 inward/outward  22.909 inward or outward bot  6.8 10.1
+  wbd    iy.      14.060 adjacent        25.068 shift adjacent    sum 41.0 59.0
+       p          3.4 10.0 12.8 14.7 --.- --.- 19.5 22.4 14.0  3.2 Sh  0.8  1.5
+
+./opt25.exe -3 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3b.cfg
+208              598.499 total effort   358.333 positional effort    left right
+                   2.293 same finger rp   0.683 shift same finger top 11.8 14.4
+   lrd   uio      72.715 hand alternat.  33.606 shift hand alter. mid 23.4 37.0
+  ctnsf ge ap      1.706 inward/outward  23.078 inward or outward bot  8.3  5.0
+  mbh    .y,      10.601 adjacent        27.678 shift adjacent    sum 43.6 56.4
+       w           4.940 no hand altern. 42.708 two hand altern.
+                   2.847 seesaw           6.764 indir same finger
+                  3.4 13.0 12.3 14.9 --.- --.- 15.0 24.2 13.9  3.2 Sh  0.8  1.5
+
+
+./opt25.exe -2 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq4.cfg
+12               403.312 total effort   278.202 positional effort    left right
+                   1.719 same finger rp   0.091 shift same finger top  8.5 11.1
+   yi.   msl      71.706 hand alternat.  26.926 shift hand alter. mid 23.7 32.6
+  ghea, ft rw      2.552 inward/outward  24.676 inward or outward bot 11.3 12.8
+   puo   dcn      14.364 adjacent        27.214 shift adjacent    sum 43.5 56.5
+       b          2.9  7.3 18.4 14.9 --.- --.- 14.7 24.9 14.4  2.5 Sh  1.3  1.0
+
+./opt25.exe -3 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq4.cfg
+10941            522.531 total effort   282.644 positional effort    left right
+                   1.687 same finger rp   0.274 shift same finger top  9.1  6.2
+   frm   ,h.      73.190 hand alternat.  24.688 shift hand alter. mid 21.8 36.9
+  wsntb ye ap      1.728 inward/outward  23.210 inward or outward bot 10.2 15.9
+   cld   iuo      16.018 adjacent        23.785 shift adjacent    sum 41.0 59.0
+       g           4.614 no hand altern. 40.840 two hand altern.
+                   2.774 seesaw           7.474 indir same finger
+                  2.3 10.1 14.4 14.2 --.- --.- 18.7 23.2 14.0  3.2 Sh  0.8  1.5
+
+./opt25.exe -2 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3c.cfg
+229              586.196 total effort   345.428 positional effort    left right
+                   1.487 same finger rp   0.097 shift same finger top  9.5 13.6
+   ui.   csr      73.253 hand alternat.  23.834 shift hand alter. mid 24.2 34.2
+  ghea, mt nw      2.668 inward/outward  23.318 inward or outward bot  8.9  9.5
+  y_o    dfl      12.439 adjacent        30.520 shift adjacent    sum 42.6 57.4
+       p          3.0  7.9 16.5 15.2 --.- --.- 15.8 24.6 14.7  2.4 Sh  1.3  0.9
+
+./opt25.exe -3 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3c.cfg
+10495            702.700 total effort   343.635 positional effort    left right
+                   1.366 same finger rp   0.716 shift same finger top  9.5 13.1
+   ui.   msr      72.867 hand alternat.  25.230 shift hand alter. mid 24.2 35.1
+  phea, ft nc      2.558 inward/outward  23.807 inward or outward bot  8.9  9.2
+  y_o    dwl      12.542 adjacent        30.118 shift adjacent    sum 42.6 57.4
+       g           4.763 no hand altern. 40.255 two hand altern.
+                   3.016 seesaw           6.245 indir same finger
+                  3.0  7.9 16.5 15.2 --.- --.- 14.9 24.2 14.7  3.6 Sh  1.3  0.9
+
+./opt25.exe -2 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3c.cfg
+no angleZ
+22               518.027 total effort   278.050 positional effort    left right
+                   1.425 same finger rp   0.097 shift same finger top  8.7 11.3
+   yi.   msl      73.253 hand alternat.  23.834 shift hand alter. mid 24.2 33.2
+  ghea, ft rw      2.666 inward/outward  23.380 inward or outward bot  9.7 12.9
+   u_o   dcn      12.819 adjacent        30.520 shift adjacent    sum 42.6 57.4
+       p          3.0  7.9 16.5 15.2 --.- --.- 14.9 25.4 14.7  2.4 Sh  1.3  0.9
+
+./opt25.exe -3 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3c.cfg
+no angleZ
+26               635.387 total effort   275.113 positional effort    left right
+                   1.430 same finger rp   0.295 shift same finger top  8.7 11.3
+   yi.   msl      72.867 hand alternat.  25.230 shift hand alter. mid 24.2 33.9
+  phea, ft nw      2.704 inward/outward  23.743 inward or outward bot  9.7 12.2
+   u_o   dcr      12.725 adjacent        30.118 shift adjacent    sum 42.6 57.4
+       g           4.763 no hand altern. 40.255 two hand altern.
+                   2.963 seesaw           6.293 indir same finger
+                  3.0  7.9 16.5 15.2 --.- --.- 14.9 25.4 14.7  2.4 Sh  1.3  0.9
+
+no X, SP fixed on D
+./opt25.exe -2 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3d.cfg
+21673            566.224 total effort   318.002 positional effort    left right
+                   1.529 same finger rp   0.528 shift same finger top 13.8 12.0
+   oiy   lrd      73.902 hand alternat.  33.338 shift hand alter. mid 36.9 24.1
+  ga e. mnstc      1.388 inward/outward  22.627 inward or outward bot  4.7  8.4
+  ,_u    hwf       9.279 adjacent        28.205 shift adjacent    sum 55.5 44.5
+       p          3.1 14.2 23.2 15.1 --.- --.- 15.8 12.5 12.8  3.5 Sh  1.4  0.8
+
+no X, SP fixed on D
+./opt25.exe -3 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3d.cfg
+10683            683.009 total effort   319.254 positional effort    left right
+                   1.958 same finger rp   0.528 shift same finger top 13.8 10.5
+   oiy   frl      73.902 hand alternat.  33.338 shift hand alter. mid 36.9 25.3
+  ga e. dsntc      1.845 inward/outward  22.198 inward or outward bot  4.7  8.7
+  ,_u    hwm       9.284 adjacent        29.567 shift adjacent    sum 55.5 44.5
+       p           4.179 no hand altern. 44.051 two hand altern.
+                   2.834 seesaw           7.168 indir same finger
+                  3.1 14.2 23.2 15.1 --.- --.- 15.1 12.7 13.2  3.5 Sh  1.4  0.8
+
+no X, SP fixed on D
+no anglez
+./opt25.exe -2 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3d.cfg
+47               512.568 total effort   258.489 positional effort    left right
+                   2.237 same finger rp   0.086 shift same finger top  8.3  9.2
+   .i,   frm      73.902 hand alternat.  33.338 shift hand alter. mid 37.3 24.1
+  ge ay dsntw      1.763 inward/outward  21.919 inward or outward bot  9.9 11.1
+   u_o   hlc       9.990 adjacent        20.643 shift adjacent    sum 55.5 44.5
+       p          3.1 13.6 23.2 15.6 --.- --.- 15.1 14.7 12.4  2.3 Sh  1.4  0.8
+
+
+no X, SP fixed on D
+no anglez
+./opt25.exe -3 englisch-t.txt -K kwezNew/stdUs25azBEAKL19pq3d.cfg
+11247            628.470 total effort   272.248 positional effort    left right
+                   1.868 same finger rp   0.528 shift same finger top  8.3  9.2
+   .i,   frm      73.902 hand alternat.  33.338 shift hand alter. mid 37.3 25.3
+  ga ey dsntc      1.887 inward/outward  22.288 inward or outward bot  9.9 10.0
+   o_u   hlw       9.472 adjacent        27.653 shift adjacent    sum 55.5 44.5
+       p           4.179 no hand altern. 44.051 two hand altern.
+                   2.915 seesaw           6.565 indir same finger
