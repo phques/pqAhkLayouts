@@ -53,13 +53,13 @@ CreateLayers()
   (Join`r`n
         i u  o        m d n     
       y e Sp a g    l r t s p   
-        ,    .      _ h c f     
+        ,    .    Tab h c f     
   )"
   layerMainSh := "
   (Join`r`n
         I U O        M D N     
       Y E " A G    L R T S P   
-       ~;   :      _ H C F     
+       ~;   :   +Tab H C F     
   )"
 
   altAccessTap := 'w'
@@ -113,8 +113,8 @@ CreateLayers()
         mapSh: layerAltfrsh,
       },
 
+      ; {id: "edit", key: "RAlt", toggle: true,
       {id: "edit", key: "LAlt", toggle: true,
-      ; {id: "edit", key: "LAlt", toggle: true,
         map: extendLayer, 
       },
 
