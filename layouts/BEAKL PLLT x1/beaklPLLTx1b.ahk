@@ -65,15 +65,15 @@ CreateLayers()
   altAccessTap := 'w'
   layerAlt := "
   (Join`r`n
-        q ' j        x ! #     
-      ? ( - ) $    + { = } b   
-        *   /      z v & k  
+        q ' j        x ! k     
+      ? ( - ) $    # { = } b   
+        *   /      z v & +  
   )"
   layerAltSh := "
   (Join`r`n
-        Q ~`` J        X |  .      
-      < < _  > ~-   ~ ~[ @ ~] B   
-        ^   ~\      Z  V %  K     
+        Q ~`` J        X |  K      
+      < < _  > ~-   . ~[ @ ~] B   
+        ^   ~\      Z  V %  ~     
   )"
 
   ; need to move QJ to right hand !
@@ -82,16 +82,16 @@ CreateLayers()
   (Join`r`n
     q w e r t    u i o p   ï î û ô œ    x q j ! 
     a s d f g  h j k l ;   è é ù à ä  - « ' » b
-    z x c      n m , .       ê ë â    z v ç k  
+    z x c      n m , .       ê ë â    w v ç k  
   )"
   layerAltfrsh := "
   (Join`r`n
     Q W E R T    U I O P   Ï Î Û Ô Œ    X Q  J ?
     A S D F G  H J K L ;   È É Ù À Ä  + ( ~/ ) B
-    Z X C      N M , .       Ê Ë Â    Z V Ç  K  
+    Z X C      N M , .       Ê Ë Â    W V Ç  K  
   )"
 
-  extendLayer := ExtendLayerMappings()
+  extendLayer := ExtendLayerMappingsAlt()
   numpadLayers := NumpadLayerMappings()
 
   altAccesKey := "Space"
@@ -114,6 +114,7 @@ CreateLayers()
       },
 
       {id: "edit", key: "LAlt", toggle: true,
+      ; {id: "edit", key: "LAlt", toggle: true,
         map: extendLayer, 
       },
 
