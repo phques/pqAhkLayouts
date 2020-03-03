@@ -26,6 +26,9 @@ global CenterOnCurrWndMonitor := 1
 ; for easyDragWindow script
 global DoubleAlt := 0
 
+global altAccessTapFr := 0
+global altAccessTap := 0
+global altAccesKey := 0
 
 #include ../../fromPkl/pkl_guiLayers.ahk
 #include ../../layersv2c.ahk
@@ -59,6 +62,7 @@ CreateLayers()
        ~;   :      _ H C F     
   )"
 
+  altAccessTap := 'w'
   layerAlt := "
   (Join`r`n
         q ' j        x ! #     
@@ -73,13 +77,14 @@ CreateLayers()
   )"
 
   ; need to move QJ to right hand !
-  layerAlt_2fr := "
+  altAccessTapFr := 'z'
+  layerAltfr := "
   (Join`r`n
     q w e r t    u i o p   ï î û ô œ    x q j ! 
     a s d f g  h j k l ;   è é ù à ä  - « ' » b
     z x c      n m , .       ê ë â    z v ç k  
   )"
-  layerAlt_2frsh := "
+  layerAltfrsh := "
   (Join`r`n
     Q W E R T    U I O P   Ï Î Û Ô Œ    X Q  J ?
     A S D F G  H J K L ;   È É Ù À Ä  + ( ~/ ) B
@@ -89,6 +94,7 @@ CreateLayers()
   extendLayer := ExtendLayerMappings()
   numpadLayers := NumpadLayerMappings()
 
+  altAccesKey := "Space"
   layers := [
       {id: "main", 
         qwertyMask: qwertyMask,
@@ -96,15 +102,15 @@ CreateLayers()
         mapSh: layerMainSh
       },
 
-      {id: "syms", key: "Space", tap: "w",
+      {id: "syms", key: altAccesKey, tap: altAccessTap,
         qwertyMask: qwertyMask,
         map: layerAlt,
         mapSh: layerAltSh,
       },
 
       {id: "french", 
-        map: layerAlt_2fr,
-        mapSh: layerAlt_2frsh,
+        map: layerAltfr,
+        mapSh: layerAltfrsh,
       },
 
       {id: "edit", key: "LAlt", toggle: true,
@@ -149,23 +155,44 @@ CreateLayers()
 }
 
 
+; swap alt layer between syms and french
+; we just change the layer accessed by the layer access key !
 swapSymsAndFrench()
 {
   ; get syms layer access keydef, on main layer 
   mainLayer := layerDefs[1]
-  syms := layerDefsById["syms"]
-  french := layerDefsById["french"]
-
-  symsAccessKeydef := mainLayer.GetKeydef(syms.key)
+  symsAccessKeydef := mainLayer.GetKeydef(altAccesKey)
 
   if (symsAccessKeydef.layerId == "syms") {
+    ; change the layer accessed by the layer access key
     symsAccessKeydef.layerId := "french"
+    
+    ; Change the Tap value of alt layer access key
+    ; e.g. Space: w <-> Space: z
+    symsAccessKeydef.AddMapping(altAccessTapFr, false, true)
+    symsAccessKeydef.AddMapping(altAccessTapFr, true, true)
+    ; tapVal := new COutput(altAccessTapFr)
+
+    ; changing the main layer name changes the accessed img file
     mainLayer.id := "mainfr"
   }
   else {
+    ; change the layer accessed by the layer access key
     symsAccessKeydef.layerId := "syms"
+
+    ; Change the Tap value of alt layer access key
+    ; e.g. Space: w <-> Space: z
+    symsAccessKeydef.AddMapping(altAccessTap, false, true)
+    symsAccessKeydef.AddMapping(altAccessTap, true, true)
+    ; tapVal := new COutput(altAccessTap)
+
+    ; changing the main layer name changes the accessed img file
     mainLayer.id := "main"
   }
+
+  ; change the Tap value of alt layer access key
+  ; e.g. Space: w <-> Space: z
+  ; symsAccessKeydef.outTapValues := [tapVal, tapVal]
 }
 
 
