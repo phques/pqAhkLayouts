@@ -1,0 +1,5 @@
+PLLTx1b_1 - PLLTx1b_5, work in progress
+
+PLLTx1b_5.klc is an actual working Microsoft config of PLLTx1b,
+using AltGr to access alt layer.
+was not able to generate with w on Space (can place it there, but gives error on gen)
