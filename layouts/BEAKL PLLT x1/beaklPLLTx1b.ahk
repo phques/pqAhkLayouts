@@ -1,5 +1,5 @@
 ﻿/*  http://shenafu.com/smf/index.php?topic=89.msg2409;topicseen#msg2409
-(Den)
+(Den) PLLT x1(b)
 PLLT may be my other radical idea here. 
 "Pinky-Less, Less Thumb" further minimizes pinkies by eliminating the remote corner keys hit 
 by the pinkies. also theoretically thumbs are slower than other fingers, 
@@ -43,53 +43,70 @@ CreateLayers()
   qwertyMask := "
   (Join`r`n
       w e r       u i o
-    a s d f g   h j k l ; 
-      z   c     n m , . 
+    a s d f g   h j k l ; '
+      z   c v   n m , . /
   )"
 
+  ; layerMain := "
+  ; (Join`r`n
+  ;       i u  o        m d n     
+  ;     y e Sp a g    l r t s p   
+  ;       ,    .    Tab h c f     
+  ; )"
+  ; layerMainSh := "
+  ; (Join`r`n
+  ;       I U O        M D N     
+  ;     Y E " A G    L R T S P   
+  ;      ~;   :   +Tab H C F     
+  ; )"
 
-
+  ; trying with . ,  iso  , .
   layerMain := "
   (Join`r`n
-        i u  o        m d n     
-      y e Sp a g    l r t s p   
-        ,    .    Tab h c f     
+        i u  o           m d n      
+      y e Sp a g       l r t s p CR 
+        .    , BS    Tab h c f RSh  
   )"
+  altAccessTap := 'w'
+
   layerMainSh := "
   (Join`r`n
-        I U O        M D N     
-      Y E " A G    L R T S P   
-       ~;   :   +Tab H C F     
+        I U O            M D N       
+      Y E " A G        L R T S P +CR 
+        :  ~; ~Del  +Tab H C F RSh   
   )"
 
-  altAccessTap := 'w'
+
   layerAlt := "
   (Join`r`n
-        q ' j        x ! k     
-      ? ( - ) $    # { = } b   
-        *   /      z v & +  
+        q ' j            x ! k      
+      ? ( - ) $        # { = } b CR 
+        *   / :        z v & + RSh  
   )"
+
   layerAltSh := "
   (Join`r`n
-        Q ~`` J        X |  K      
-      < < _  > ~-   . ~[ @ ~] B   
-        ^   ~\      Z  V %  ~     
+        Q ~`` J          X |  K       
+      < < _  > ~-     . ~[ @ ~] B +CR 
+        ^   ~\ .      Z  V %  ~ RSh   
   )"
 
   ; need to move QJ to right hand !
-  altAccessTapFr := 'z'
   layerAltfr := "
   (Join`r`n
-    q w e r t    u i o p   ï î û ô œ    x q j ! 
-    a s d f g  h j k l ;   è é ù à ä  - « ' » b
-    z x c      n m , .       ê ë â    w v ç k  
+    q w e r t    u i o p   ï î û ô œ    x q j !   
+    a s d f g  h j k l ;   ê é ù à ä  - « ' » b   
+    z x c      n m , . /     è ë â    w v ç k RSh 
   )"
+  altAccessTapFr := 'z'
+
   layerAltfrsh := "
   (Join`r`n
-    Q W E R T    U I O P   Ï Î Û Ô Œ    X Q  J ?
-    A S D F G  H J K L ;   È É Ù À Ä  + ( ~/ ) B
-    Z X C      N M , .       Ê Ë Â    W V Ç  K  
+    Q W E R T    U I O P   Ï Î Û Ô Œ    X Q  J ?   
+    A S D F G  H J K L ;   Ê É Ù À Ä  + ( ~/ ) B   
+    Z X C      N M , . /     È Ë Â    W V Ç  K RSh 
   )"
+
 
   extendLayer := ExtendLayerMappingsAlt()
   numpadLayers := NumpadLayerMappings()
@@ -113,12 +130,11 @@ CreateLayers()
         mapSh: layerAltfrsh,
       },
 
-      ; {id: "edit", key: "RAlt", toggle: true,
       {id: "edit", key: "LAlt", toggle: true,
         map: extendLayer, 
       },
 
-    ; would've liked  to use V here, but it screws up??
+      ; would've liked  to use V here, but it screws up??
       {id: "numpad", key: "b", toggle: true,
         map: numpadLayers.thumbOnB, 
       },
@@ -134,25 +150,15 @@ CreateLayers()
 
   main := layerDefsById["main"]
   syms := layerDefsById["syms"]
+  extend := layerDefsById["edit"]
   french := layerDefsById["french"]
 
-  ; PQ extras / adaptations for US kbd
-  main.AddMappingsFromTo("v", "Backspace", false)
-  main.AddMappingsFromTo("v", "~Delete", true)
+  ; add an extend/edit layer access key on RShift
+  ; try with Tap '=' for fun :-p
+  k := CKeyDef.CreateLayerAccess("RShift", extend.id, '=')
+  main.AddKeyDef(k)
+  SetKeyToToggleLayer("RShift", extend.id)  ; want it Togglable
 
-  ; right hand on std pos, add enter on '
-  ; and Shift on / 
-  main.AddMappingsFromTo("'", "Enter", false)
-  main.AddMappingsFromTo("'", "+Enter", true)
-
-  main.AddMappingsFromTo("/", "RSh", false) ;; shift on /
-  main.AddMappingsFromTo("/", "RSh", true) ;; shift on /
-
-  syms.AddMappingsFromTo("/", "RSh", false) ;; shift on /
-  syms.AddMappingsFromTo("/", "RSh", true) ;; shift on /
-
-  french.AddMappingsFromTo("/", "RSh", false) ;; shift on /
-  french.AddMappingsFromTo("/", "RSh", true) ;; shift on /
 }
 
 
@@ -172,7 +178,6 @@ swapSymsAndFrench()
     ; e.g. Space: w <-> Space: z
     symsAccessKeydef.AddMapping(altAccessTapFr, false, true)
     symsAccessKeydef.AddMapping(altAccessTapFr, true, true)
-    ; tapVal := new COutput(altAccessTapFr)
 
     ; changing the main layer name changes the accessed img file
     mainLayer.id := "mainfr"
@@ -185,19 +190,15 @@ swapSymsAndFrench()
     ; e.g. Space: w <-> Space: z
     symsAccessKeydef.AddMapping(altAccessTap, false, true)
     symsAccessKeydef.AddMapping(altAccessTap, true, true)
-    ; tapVal := new COutput(altAccessTap)
 
     ; changing the main layer name changes the accessed img file
     mainLayer.id := "main"
   }
-
-  ; change the Tap value of alt layer access key
-  ; e.g. Space: w <-> Space: z
-  ; symsAccessKeydef.outTapValues := [tapVal, tapVal]
 }
 
 
 ;---
+
 CreateLayers()
 DisplayHelpImage()
 
