@@ -1,6 +1,7 @@
 /* balanced13-iso-shifted-v2
 
 http://shenafu.com/smf/index.php?topic=89.msg2877#msg2877
+Moesasji
 
 2020-03-02
 

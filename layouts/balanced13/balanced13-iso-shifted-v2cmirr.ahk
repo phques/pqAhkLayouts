@@ -1,4 +1,4 @@
-/* balanced13-iso-shifted-v2mirr
+/* balanced13-iso-shifted-v2cmirr
 
 http://shenafu.com/smf/index.php?topic=89.msg2877#msg2877
 Moesasji
@@ -44,15 +44,15 @@ CreateLayers()
     layerMain := "
     (Join`r`n
         Esc ; y o u '    ?   b l d c v "  
-        LSh p i e a .    ?   w n t s r RSh
-            z j k , x Tab CR m h g f q  
+        LSh h i e a .    ?   w n t s r RSh
+            z j k , x Tab CR f m p g q  
     )"
 
     layerMainsh := "
     (Join`r`n
        +Esc ! Y O U %     ?    B L D C V ~`` 
-        LSh P I E A &     ?    W N T S R RSh 
-            Z J K ? X +Tab +CR M H G F Q     
+        LSh H I E A &     ?    W N T S R RSh 
+            Z J K ? X +Tab +CR F M P G Q     
     )"
 
     punxLayers := PunxLayerMappings()
