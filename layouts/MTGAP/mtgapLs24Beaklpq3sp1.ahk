@@ -140,8 +140,8 @@ CreateLayers()
 	else {
 		;main.AddMappingsFromTo("[", "Backspace", false)
 		;main.AddMappingsFromTo("[", "~Delete", true)
-		main.AddMappingsFromTo("m", "Backspace", false)
-		main.AddMappingsFromTo("m", "~Delete", true)
+		main.AddMappingsFromTo("v", "Backspace", false)
+		main.AddMappingsFromTo("v", "~Delete", true)
 	}
 	; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	altGr := layerDefsById["alt"]
