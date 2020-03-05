@@ -1,0 +1,37 @@
+
+`!@#$%^&*()-=_+~
+[]\|{};':",.<>/?
+
+main
+    a e y      h t s  
+  g u o i .  m n r d c
+  ,     p      l q z v
+
+maish
+    A E Y       H T S  
+  G U O I :   M N R D C
+  ;     P       L Q Z V
+
+alt
+    k ' /       x w b 
+  ? ( - ) &   = f { ! }  
+  *     "       j ~ $ +
+
+alts
+    K # \       X W B  
+  - < _ > |   = F [ @ ]
+  ^     :       J ` . %
+
+-------------
+
+pllt x1 syms / symsSh
+    q ' j     z v ! #     
+  ? ( - ) $   k { = } &   
+    *   /       + x b  
+
+    Q ` J     Z V | .      
+  . < _ > -   K [ @ ] %   
+    ^   \       ~ X B     
+
+-------------
+

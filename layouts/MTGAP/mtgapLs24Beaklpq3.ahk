@@ -29,118 +29,148 @@ global DoubleAlt := 0
 
 CreateLayers()
 {
-	; try both hands a std pos
-	qwertyMask24_std := "
-	(Join`r`n
-	          w e r      u i o 
-	        a s d f g  h j k l ; 
-	  @LShift z x c      m , . /
-	)"
-	qwertyMask24_wid := "
-	(Join`r`n
-	          w e r        i o p
-	        a s d f g    j k l ; '
-	  @LShift z x c        , . / @RShift
-	)"
-	qwertyMask24 := qwertyMask24_wid
+    ; try both hands a std pos
+    qwertyMask24_std := "
+    (Join`r`n
+              w e r      u i o 
+            a s d f g  h j k l ; 
+      @LShift     c      m , . /
+    )"
+    qwertyMask24_wid := "
+    (Join`r`n
+              w e r        i o p
+            a s d f g    j k l ; '
+      @LShift     c        , . / @RShift
+    )"
+    ; qwertyMask24_std := "
+    ; (Join`r`n
+    ;           w e r      u i o 
+    ;         a s d f g  h j k l ; 
+    ;   @LShift z x c      m , . /
+    ; )"
+    ; qwertyMask24_wid := "
+    ; (Join`r`n
+    ;           w e r        i o p
+    ;         a s d f g    j k l ; '
+    ;   @LShift z x c        , . / @RShift
+    ; )"
+    qwertyMask24 := qwertyMask24_wid
 
-	; -2 seems to have better scrore (lower same finger than -3)
-	; feels better too
-	layerMain_2 := "
-	(Join`r`n
-           a  e  y         h  t  s   
-        g  u  o  i  _   m  n  r  d  c
-        -  >  !  p         l  q  z  v
-	)"
+    ; -2 seems to have better scrore (lower same finger than -3)
+    ; feels better too
+    layerMain_2 := "
+    (Join`r`n
+          a e y      h t s  
+        g u o i .  m n r d c
+        ,     p      l q z v
+    )"
+    layerMain_2sh := "
+    (Join`r`n
+          A E Y       H T S  
+        G U O I :   M N R D C
+       ~;     P       L Q Z V
+    )"
 
-	layerAlt := "
-	(Join`r`n
-		    k  ,  ;         x  w  b   
-		 ?  '  (  .  *   =  f  )  "  / 
-		 $  +  [  :         j  ]  {  } 
-	)"
+    layerAlt := "
+    (Join`r`n
+          k ' /       x w b 
+        ? ( - ) &   = f { ! }  
+        *     "       j - $ +
+    )"
+    layerAltsh := "
+    (Join`r`n
+          K  # ~\         X  W  B   
+      ~- ~<  _ ~>  |  ~=  F ~[  @ ~]
+        ^       :         J ``  _  %
+    )"
 
-	; need backspace (and delete) ?
-	layerEdit1 := "
-	(Join`r`n
-		  . . .        Home  Up  End
-	 Ctrl Sh . . .  ^z Left Down Right ^x
-		. . . Alt        ^c   .    .   ^v
-	)"
-	layerEdit2 := "
-	(Join`r`n
-		  . . .         ^z   Up  Right 
-	 Ctrl Sh . . .  ^x Left Home Down End
-		. . . Alt       ^c   .     .  ^v
-	)"
-	layerEdit3 := "
-	(Join`r`n
-		  . . .         ^z   Up  Right 
-	 Ctrl Sh . . .  ^x Left Home End Down
-		. . . Alt       ^c   .     .  ^v
-	)"
+    ; original, symbols placed by MTGAP
+    ; layerMain_2 := "
+    ; (Join`r`n
+    ;        a  e  y         h  t  s   
+    ;     g  u  o  i  _   m  n  r  d  c
+    ;     -  >  !  p         l  q  z  v
+    ; )"
 
-	numpadLayers := NumpadLayerMappings()
+    ; layerAlt := "
+    ; (Join`r`n
+    ;         k  ,  ;         x  w  b   
+    ;      ?  '  (  .  *   =  f  )  "  / 
+    ;      $  +  [  :         j  ]  {  } 
+    ; )"
 
-	layers := [
-	    {id: "main", 
-	     	qwertyMask: qwertyMask24,
-	     	map: layerMain_2, 
-	     	;mapSh: layerMainSh
-	    },
+    ; need backspace (and delete) ?
+    layerEdit1 := "
+    (Join`r`n
+          . . .        Home  Up  End
+     Ctrl Sh . . .  ^z Left Down Right ^x
+        .     Alt        ^c   .    .   ^v
+    )"
+    layerEdit2 := "
+    (Join`r`n
+          . . .         ^z   Up  Right 
+     Ctrl Sh . . .  ^x Left Home Down End
+        .     Alt       ^c   .     .  ^v
+    )"
+    layerEdit3 := "
+    (Join`r`n
+          . . .         ^z   Up  Right 
+     Ctrl Sh . . .  ^x Left Home End Down
+        .     Alt       ^c   .     .  ^v
+    )"
 
-	    {id: "alt", key: "Space", tap: "Space",
-	    	qwertyMask: qwertyMask24, 
-	    	map: layerAlt, 
-	    },
+    numpadLayers := NumpadLayerMappings()
 
-	    {id: "edit", key: "LAlt", toggle: true,
-	    	qwertyMask: qwertyMask24, 
-	    	map: layerEdit3, 
-	    	; map: extendLayer, 
-		},
+    layers := [
+        {id: "main", 
+            qwertyMask: qwertyMask24,
+            map: layerMain_2, 
+            mapSh: layerMain_2sh
+        },
 
-		; would've liked  to use V here, but it screws up??
-	    {id: "numpad", key: "b", toggle: true,
-	    	map: numpadLayers.thumbOnB, 
-		},
+        {id: "alt", key: "Space", tap: "Space",
+            qwertyMask: qwertyMask24, 
+            map: layerAlt, 
+            mapSh: layerAltSh, 
+        },
 
-	]
+        {id: "edit", key: "LAlt", toggle: true,
+            qwertyMask: qwertyMask24, 
+            map: layerEdit3, 
+        },
 
-	; dont create layout hotkeys for these
-	; for eg, we will use Win-XX for hotkeys to do actions
-	; we need to do it this way for the Suspend hotkey w. #SuspendExempt
-	dontCreateHotkeys := [MakeKeySC("LWin")]
+        ; would've liked  to use V here, but it screws up??
+        {id: "numpad", key: "b", toggle: true,
+            map: numpadLayers.thumbOnB, 
+        },
 
-	InitLayout(layers, dontCreateHotkeys)
+    ]
 
-	main := layerDefsById["main"]
-	; main.AddMappings("@LControl  Escape", false)
-	; main.AddMappingsFromTo((rsh ? "]" : "["), "Backspace", false)
-	; main.AddMappingsFromTo((rsh ? "]" : "["), "~Delete", true)
-	; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", false)
-	; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", true)
+    ; dont create layout hotkeys for these
+    ; for eg, we will use Win-XX for hotkeys to do actions
+    ; we need to do it this way for the Suspend hotkey w. #SuspendExempt
+    dontCreateHotkeys := [MakeKeySC("LWin")]
 
-	; for use w. both hands at std pos
-	; trying not to use dualMode lshift, so try caps=lshift
-	;#pq not working (under linux VM though which has probs remapping capsl)
-	; main.AddMappingsFromTo("cl", "lshift", false)
-	; main.AddMappingsFromTo("cl", "cl", true)
-	if (qwertyMask24 == qwertyMask24_std) {
-		main.AddMappingsFromTo("p", "Backspace", false)
-		main.AddMappingsFromTo("p", "~Delete", true)
-		main.AddMappingsFromTo("'", "Enter", false)
-		main.AddMappingsFromTo("'", "Enter", true)
-	}
-	else {
-		;main.AddMappingsFromTo("[", "Backspace", false)
-		;main.AddMappingsFromTo("[", "~Delete", true)
-		main.AddMappingsFromTo("m", "Backspace", false)
-		main.AddMappingsFromTo("m", "~Delete", true)
-	}
-	; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
-	altGr := layerDefsById["alt"]
-	altGr.AddMappings("v  Space", false)
+    InitLayout(layers, dontCreateHotkeys)
+
+    main := layerDefsById["main"]
+    altGr := layerDefsById["alt"]
+
+    ; for use w. both hands at std pos
+    if (qwertyMask24 == qwertyMask24_std) {
+        main.AddMappingsFromTo("p", "Backspace", false)
+        main.AddMappingsFromTo("p", "~Delete", true)
+        main.AddMappingsFromTo("'", "Enter", false)
+        main.AddMappingsFromTo("'", "Enter", true)
+    }
+    else {
+        ;main.AddMappingsFromTo("[", "Backspace", false)
+        ;main.AddMappingsFromTo("[", "~Delete", true)
+        main.AddMappingsFromTo("m", "Backspace", false)
+        main.AddMappingsFromTo("m", "~Delete", true)
+    }
+    ; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
+    ; altGr.AddMappings("v  Space", false)
 
 }
 
