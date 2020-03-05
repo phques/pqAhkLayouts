@@ -65,7 +65,7 @@ CreateLayers()
   (Join`r`n
         i u  o           m d n      
       y e Sp a g       l r t s p CR 
-        .    , BS    Tab h c f RSh  
+        .    , Tab    BS h c f RSh  
   )"
   altAccessTap := 'w'
 
@@ -73,7 +73,7 @@ CreateLayers()
   (Join`r`n
         I U O            M D N       
       Y E " A G        L R T S P +CR 
-        :  ~; ~Del  +Tab H C F RSh   
+        :  ~; ~Tab  +Del H C F RSh   
   )"
 
 
