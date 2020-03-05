@@ -73,6 +73,12 @@ CreateLayers()
 	 Ctrl Sh . . .  ^x Left Home Down End
 		. . . Alt       ^c   .     .  ^v
 	)"
+	layerEdit3 := "
+	(Join`r`n
+		  . . .         ^z   Up  Right 
+	 Ctrl Sh . . .  ^x Left Home End Down
+		. . . Alt       ^c   .     .  ^v
+	)"
 
 	numpadLayers := NumpadLayerMappings()
 
@@ -90,7 +96,7 @@ CreateLayers()
 
 	    {id: "edit", key: "LAlt", toggle: true,
 	    	qwertyMask: qwertyMask24, 
-	    	map: layerEdit2, 
+	    	map: layerEdit3, 
 	    	; map: extendLayer, 
 		},
 
@@ -129,8 +135,8 @@ CreateLayers()
 	else {
 		;main.AddMappingsFromTo("[", "Backspace", false)
 		;main.AddMappingsFromTo("[", "~Delete", true)
-		main.AddMappingsFromTo("m", "Backspace", false)
-		main.AddMappingsFromTo("m", "~Delete", true)
+		main.AddMappingsFromTo("v", "Backspace", false)
+		main.AddMappingsFromTo("v", "~Delete", true)
 	}
 	; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
 	altGr := layerDefsById["alt"]
