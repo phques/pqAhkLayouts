@@ -50,18 +50,18 @@ CreateLayers()
 	qwertyMask24 := qwertyMask24_wid
 
 	; -2 seems to have better scrore (lower same finger than -3)
-	; feels better too
+	; feels better too eaoi u
 	layerMain_2 := "
 	(Join`r`n
-           a  e  y         h  t  s   
-        g  u  o  i  _   m  Sp  r  d  c
+           e  Sp y         h  t  s   
+        g  a  o  i  _   m  n  r  d  c
         -  >  !  p         l  q  z  v
 	)"
-	tapKey := 'n'
+	tapKey := 'u'
 
 	layerAlt := "
 	(Join`r`n
-		    k  ,  ;         x  w  b   
+		    ,  k  ;         x  w  b   
 		 ?  '  (  .  *   =  f  )  "  / 
 		 $  +  [  :         j  ]  {  } 
 	)"

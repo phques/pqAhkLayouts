@@ -54,10 +54,10 @@ CreateLayers()
 	layerMain_2 := "
 	(Join`r`n
            a  e  y         h  t  s   
-        g  u  o  i  _   m  Sp  r  d  c
+        g  u  o  i  _   m  n  r  d  Sp
         -  >  !  p         l  q  z  v
 	)"
-	tapKey := 'n'
+	tapKey := 'c'
 
 	layerAlt := "
 	(Join`r`n
