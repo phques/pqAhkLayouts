@@ -98,6 +98,12 @@ CreateLayers()
 	 Ctrl Sh . . .  ^x Left Home Down End
 		. . . Alt       ^c   .     .  ^v
 	)"
+	layerEdit3 := "
+	(Join`r`n
+		  . . . .       ^z   Up  Right BS
+	 Ctrl Sh . . .  ^x Left Home End  Down
+		. . . Alt       ^c   .     .  ^v
+	)"
 
 	numpadLayers := NumpadLayerMappings()
 
@@ -129,7 +135,7 @@ CreateLayers()
 
 	    {id: "edit", key: "LAlt", toggle: true,
 	    	qwertyMask: qwertyMask26, 
-	    	map: layerEdit2, 
+	    	map: layerEdit3, 
 	    	; map: extendLayer, 
 		},
 
