@@ -73,7 +73,7 @@ CreateLayers()
   (Join`r`n
         I U O            M D N       
       Y E " A G        L R T S P +CR 
-        :  ~; ~Tab  +Del H C F RSh   
+        :  ~; +Tab  +Del H C F RSh   
   )"
 
 
