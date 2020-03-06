@@ -10,7 +10,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\ls24Beakl19pq3"
+global ImgsDir := A_ScriptDir . "\imgs"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -34,8 +34,9 @@ CreateLayers()
     (Join`r`n
               w e r      u i o 
             a s d f g  h j k l ; 
-      @LShift     c      m , . /
+      @LShift     c      m , . @/
     )"
+
     qwertyMask24_wid := "
     (Join`r`n
               w e r        i o p
@@ -54,6 +55,8 @@ CreateLayers()
     ;         a s d f g    j k l ; '
     ;   @LShift z x c        , . / @RShift
     ; )"
+
+    ; qwertyMask24 := qwertyMask24_std
     qwertyMask24 := qwertyMask24_wid
 
     ; -2 seems to have better scrore (lower same finger than -3)
@@ -62,26 +65,26 @@ CreateLayers()
     (Join`r`n
           a e y      h t s  
         g u o i .  m n r d c
-        ,     p      l q z v
+        ,     p      l q z @>+v
     )"
     layerMain_2sh := "
     (Join`r`n
           A E Y       H T S  
         G U O I :   M N R D C
-       ~;     P       L Q Z V
+       ~;     P       L Q Z @>+V
     )"
 
     layerAlt := "
     (Join`r`n
           k ' /       x w b 
         ? ( - ) &   = f { ! }  
-        *     "       j - $ +
+        *     "       j - $ @>++
     )"
     layerAltsh := "
     (Join`r`n
           K  # ~\         X  W  B   
       ~- ~<  _ ~>  |  ~=  F ~[  @ ~]
-        ^       :         J ``  _  %
+        ^       :         J ``  _  @>+%
     )"
 
     ; original, symbols placed by MTGAP
@@ -112,11 +115,12 @@ CreateLayers()
      Ctrl Sh . . .  ^x Left Home Down End
         .     Alt       ^c   .     .  ^v
     )"
+    ; can be used with left hand moved (thumb on Alt, or on home pos)
     layerEdit3 := "
     (Join`r`n
-          . . .         ^z   Up  Right 
-     Ctrl Sh . . .  ^x Left Home End Down
-        .     Alt       ^c   .     .  ^v
+          Del BS Esc         ^z   Up  Right 
+     Ctrl Sh  .  Sh .  ^x Left Home End Down
+     Del      BS           ^c   .     .  ^v
     )"
 
     numpadLayers := NumpadLayerMappings()
@@ -128,7 +132,7 @@ CreateLayers()
             mapSh: layerMain_2sh
         },
 
-        {id: "alt", key: "Space", tap: "Space",
+        {id: "syms", key: "Space", tap: "Space",
             qwertyMask: qwertyMask24, 
             map: layerAlt, 
             mapSh: layerAltSh, 
@@ -154,23 +158,22 @@ CreateLayers()
     InitLayout(layers, dontCreateHotkeys)
 
     main := layerDefsById["main"]
-    altGr := layerDefsById["alt"]
+    altGr := layerDefsById["syms"]
 
     ; for use w. both hands at std pos
     if (qwertyMask24 == qwertyMask24_std) {
-        main.AddMappingsFromTo("p", "Backspace", false)
-        main.AddMappingsFromTo("p", "~Delete", true)
+        main.AddMappingsFromTo("n", "Backspace", false)
+        main.AddMappingsFromTo("n", "~Delete", true)
         main.AddMappingsFromTo("'", "Enter", false)
         main.AddMappingsFromTo("'", "Enter", true)
     }
     else {
-        ;main.AddMappingsFromTo("[", "Backspace", false)
-        ;main.AddMappingsFromTo("[", "~Delete", true)
         main.AddMappingsFromTo("m", "Backspace", false)
         main.AddMappingsFromTo("m", "~Delete", true)
     }
-    ; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
-    ; altGr.AddMappings("v  Space", false)
+
+    main.AddMappingsFromTo("v", "Tab", false)
+    main.AddMappingsFromTo("v", "+Tab", true)
 
 }
 
