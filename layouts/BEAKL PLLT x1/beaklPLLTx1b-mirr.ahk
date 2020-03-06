@@ -12,6 +12,7 @@ kinda fits with what I like, was using Space as Alt layer dual mode key,
 in this it becomes only alt layer key.
 Small changes as suggested by Den (and some perso changes)
 
+Trying mirror version, since left forearm seems to be a bit overloaded for me
 */
 
 ; code only includes
@@ -42,53 +43,41 @@ CreateLayers()
 {
   qwertyMask := "
   (Join`r`n
-      w e r       u i o     
-    a s d f g   h j k l ; ' 
-      z   c v   n m , . /   
+      w e r       u i o
+    a s d f g   h j k l ; '
+      z x c v   n m   . /
   )"
 
-  ; layerMain := "
-  ; (Join`r`n
-  ;       i u  o        m d n     
-  ;     y e Sp a g    l r t s p   
-  ;       ,    .    Tab h c f     
-  ; )"
-  ; layerMainSh := "
-  ; (Join`r`n
-  ;       I U O        M D N     
-  ;     Y E " A G    L R T S P   
-  ;      ~;   :   +Tab H C F     
-  ; )"
 
   ; trying with . ,  iso  , .
   layerMain := "
   (Join`r`n
-        i u  o           m d n      
-      y e Sp a g       l r t s p CR 
-        .    , Tab    BS h c f RSh  
+      n d m             o u  i            
+    p s t r l         g a Sp e y CR 
+      f c h Tab      BS ,    . RSh           
   )"
   altAccessTap := 'w'
 
   layerMainSh := "
   (Join`r`n
-        I U O            M D N       
-      Y E " A G        L R T S P +CR 
-        :  ~; +Tab  +Del H C F RSh   
+      N D M               O U I            
+    P S T R L          G  A " E Y +CR 
+      F C H +TAB     DEL ~,   . RSH           
   )"
 
 
   layerAlt := "
   (Join`r`n
-        q ' j            x ! k      
-      ? ( - ) $        # { = } b CR 
-        *   / :        z v & + RSh  
+      w e r       u i o          q ' j       x ! k      
+    a s d f g   h j k l ; '    ? ( - ) $   # { = } b CR 
+      z   c v   n m , . /        *   / :   z v & + RSh  
   )"
 
   layerAltSh := "
   (Join`r`n
-        Q ~`` J          X |  K       
-      < < _  > ~-     . ~[ @ ~] B +CR 
-        ^   ~\ .      Z  V %  ~ RSh   
+      w e r       u i o          Q ~`` J       X |  K       
+    a s d f g   h j k l ; '    < < _  > ~-  . ~[ @ ~] B +CR 
+      z   c v   n m , . /        ^   ~\ .   Z  V %  ~ RSh   
   )"
 
   ; need to move QJ to right hand !
@@ -120,7 +109,6 @@ CreateLayers()
       },
 
       {id: "syms", key: altAccesKey, tap: altAccessTap,
-        qwertyMask: qwertyMask,
         map: layerAlt,
         mapSh: layerAltSh,
       },
