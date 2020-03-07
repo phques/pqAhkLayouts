@@ -4,17 +4,13 @@
 MTGAP ansi angleZ BEALK19 pq3
 24 keys (+space + 2shifts)
 LaSalle fingering
-
-manually modified
- dont use 2 bottom mid fingers
- use ,. on main, added shift layers + more syms 
 */
 
 ; code only includes
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs1.1b"
+global ImgsDir := A_ScriptDir . "\imgs"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -38,93 +34,52 @@ CreateLayers()
     (Join`r`n
               w e r      u i o 
             a s d f g  h j k l ; 
-      @LShift     c      m , . @/
+      @LShift z x c      m , . @/
     )"
 
     qwertyMask24_wid := "
     (Join`r`n
               w e r        i o p
             a s d f g    j k l ; '
-      @LShift     c        , . / @RShift
+      @LShift z x c        , . / @RShift
     )"
-    ; qwertyMask24_std := "
-    ; (Join`r`n
-    ;           w e r      u i o 
-    ;         a s d f g  h j k l ; 
-    ;   @LShift z x c      m , . /
-    ; )"
-    ; qwertyMask24_wid := "
-    ; (Join`r`n
-    ;           w e r        i o p
-    ;         a s d f g    j k l ; '
-    ;   @LShift z x c        , . / @RShift
-    ; )"
 
     ; qwertyMask24 := qwertyMask24_std
     qwertyMask24 := qwertyMask24_wid
 
-    ; -2 seems to have better scrore (lower same finger than -3)
-    ; feels better too
     layerMain_2 := "
     (Join`r`n
-          a e y      h t s  
-        g u o i .  m n r d c
-        ,     p      l q z @>+v
-    )"
-    layerMain_2sh := "
-    (Join`r`n
-          A E Y       H T S  
-        G U O I :   M N R D C
-       ~;     P       L Q Z @>+V
-    )"
+           a  e  d         h  t  s  
+        g  u  o  i  y   b  n  r  l  c
+        _  >  !  p         m  q  z  @>+v
+     )"
 
     layerAlt := "
     (Join`r`n
-          k ' /       x w b 
-        ? ( - ) &   = f { ! }  
-        *     "       j - $ @>++
+           k  .  ;         x  w  "  
+        ?  '  (  f  /   *  ,  )  -  j
+        $  +  [  =         :  ]  {  @>+}
     )"
-    layerAltsh := "
-    (Join`r`n
-          K  # ~\         X  W  B   
-      ~- ~<  _ ~>  |  ~=  F ~[  @ ~]
-        ^       :         J ``  _  @>+%
-    )"
-
-    ; original, symbols placed by MTGAP
-    ; layerMain_2 := "
-    ; (Join`r`n
-    ;        a  e  y         h  t  s   
-    ;     g  u  o  i  _   m  n  r  d  c
-    ;     -  >  !  p         l  q  z  v
-    ; )"
-
-    ; layerAlt := "
-    ; (Join`r`n
-    ;         k  ,  ;         x  w  b   
-    ;      ?  '  (  .  *   =  f  )  "  / 
-    ;      $  +  [  :         j  ]  {  } 
-    ; )"
 
     ; need backspace (and delete) ?
     layerEdit1 := "
     (Join`r`n
           . . .        Home  Up  End
      Ctrl Sh . . .  ^z Left Down Right ^x
-        .     Alt        ^c   .    .   ^v
+        . . . Alt        ^c   .    .   ^v
     )"
     layerEdit2 := "
     (Join`r`n
           . . .         ^z   Up  Right 
      Ctrl Sh . . .  ^x Left Home Down End
-        .     Alt       ^c   .     .  ^v
+        . . . Alt       ^c   .     .  ^v
     )"
     ; can be used with left hand moved (thumb on Alt, or on home pos)
     layerEdit3 := "
     (Join`r`n
           Del BS Esc         ^z   Up  Right 
      Ctrl Sh  .  Sh .  ^x Left Home End Down
-     Del      BS           ^c   .     .  ^v
+     Del . .  BS           ^c   .     .  ^v
     )"
 
     numpadLayers := NumpadLayerMappings()

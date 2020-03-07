@@ -1,5 +1,5 @@
 {
-    "label": "mtgapLs24Sp1.0",
+    "label": "mtgapLs24v1.0",
     "fingerStart": {
         "1": 25,
         "2": 14,
@@ -142,7 +142,7 @@
         },
         {
             "primary": 32,
-            "shift": 34,
+            "shift": 64,
             "altGr": 46,
             "shiftAltGr": 64,
             "finger": 3,
@@ -358,13 +358,12 @@
             "id": 41
         },
         {
-            "primary": 17,
+            "primary": 13,
             "shift": -1,
             "altGr": -1,
             "shiftAltGr": -1,
             "finger": 5,
-            "id": 42,
-            "numpad": -1
+            "id": 42
         },
         {
             "primary": 16,
@@ -471,22 +470,20 @@
             "id": 55
         },
         {
-            "primary": 13,
+            "primary": 32,
             "shift": -1,
             "altGr": -1,
             "shiftAltGr": -1,
             "finger": 5,
-            "id": 56,
-            "numpad": -1
+            "id": 56
         },
         {
-            "primary": -1,
+            "primary": 17,
             "shift": -1,
             "altGr": -1,
             "shiftAltGr": -1,
             "finger": 5,
-            "id": 57,
-            "numpad": -1
+            "id": 57
         },
         {
             "primary": 18,

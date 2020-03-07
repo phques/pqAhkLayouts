@@ -1,0 +1,49 @@
+2019-03-31                        2019-03-31                        2020-03-07
+ls24v1.0                          ls24v1.1                          ls24v1.2
+                                                                    
+Hands: 50% 49%                    Hands: 46% 53%                    Hands: 47% 52%
+    k  .  ;         x  w  "           k  ,  ;         x  w  b           k  ,  ?         =  w  b
+ ?  '  (  f  /   *  ,  )  -  j     ?  '  (  .  *   =  f  )  "  /     :  -  (  f  /   *  .  )  "  j
+ $  +  [  =         :  ]  {  }     $  +  [  :         j  ]  {  }     $  +  [  ;         x  ]  {  }
+                                                                    
+    a  e  d         h  t  s           a  e  y         h  t  s           a  e  y         h  t  s
+ g  u  o  i  y   b  n  r  l  c     g  u  o  i  _   m  n  r  d  c     g  u  o  i  '   m  n  r  d  c
+ _  >  !  p         m  q  z  v     -  >  !  p         l  q  z  v     _  !  >  p         l  q  z  v
+                                                                    
+Fitness:       35678715           Fitness:       41829397           Fitness:       36999894
+Distance:      23747870           Distance:      28214425           Distance:      24325360
+Finger work:   0                  Finger work:   94947              Finger work:   101424
+Inward rolls:  7.65%              Inward rolls:  5.86%              Inward rolls:  6.70%
+Outward rolls: 4.43%              Outward rolls: 3.69%              Outward rolls: 3.91%
+Same hand:     34.07%             Same hand:     29.76%             Same hand:     32.27%
+Same finger:   2.94%              Same finger:   2.26%              Same finger:   2.15%
+Row change:    14.41%             Row change:    12.92%             Row change:    13.59%
+Home jump:     1.55%              Home jump:     2.03%              Home jump:     2.11%
+Ring jump:     1.73%              Ring jump:     1.70%              Ring jump:     1.72%
+To center:     1.87%              To center:     0.83%              To center:     0.82%
+
+
+
+2020-03-01                        2020-03-01                        2020-03-01                  2020-03-07
+ls24spv1.0  (actual mirrored)     ls20spv1.1                        ls22spv1.2  (mirrored)      ls24spv1.2 
+                                                                                                
+Hands: 57% 42%                    Hands: 47% 52%                    Hands: 60% 39%              Hands: 47% 52%
+    ,  .  (          :  w  "          k  y  ;         j  w  ,           , . "      x w k            k  y  q         j  w  ,
+ !  /  '  p  ?    =  k  )  x  z    (  )  "  b  =   /  .  _  -  !      ' - _ p /  = b ) ( z       (  )  "  b  ?   /  .  _  -  !
+ ]  [  }  ;          q  {  +  *    ?        q         x        z        ? } ;      : { *         {  +  >  :         ;  [  ]  }
+                                                                                                
+    e  Sp i          h  t  s          a  e  d         h SP  s           a P i      h t s            a  e  p         h SP  s
+ c  o  u  a  g    m  n  d  r  f    f  o  i  t  g   m  n  u  r  c      c o r e y  f n d l g       f  o  i  t  g   m  n  u  r  c
+ -  >  _  y          l  v  j  b    '        p         l        v        ! q u      m v j         '  *  =  d         l  x  z  v
+                                                                                                
+Fitness:       54641164           Fitness:       47504744           Fitness:       62115247     Fitness:       56549128
+Distance:      35139810           Distance:      25939520           Distance:      38926595     Distance:      34721830
+Finger work:   1383614            Finger work:   428334             Finger work:   772057       Finger work:   454888
+Inward rolls:  9.99%              Inward rolls:  6.60%              Inward rolls:  8.71%        Inward rolls:  6.00%
+Outward rolls: 2.09%              Outward rolls: 4.73%              Outward rolls: 5.35%        Outward rolls: 4.53%
+Same hand:     35.65%             Same hand:     37.38%             Same hand:     40.94%       Same hand:     37.39%
+Same finger:   2.39%              Same finger:   1.59%              Same finger:   3.01%        Same finger:   1.67%
+Row change:    16.84%             Row change:    17.92%             Row change:    19.32%       Row change:    18.75%
+Home jump:     2.13%              Home jump:     2.05%              Home jump:     0.97%        Home jump:     2.97%
+Ring jump:     1.29%              Ring jump:     1.95%              Ring jump:     1.18%        Ring jump:     1.94%
+To center:     2.51%              To center:     2.55%              To center:     2.35%        To center:     2.58%

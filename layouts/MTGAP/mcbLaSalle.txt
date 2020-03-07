@@ -295,3 +295,131 @@ To center:     2.35%
     a P i      h t s   
   c o r e y  f n d l g 
     ! q u      m v j   
+
+------
+2020-03-07
+ls24v1.2 (1.0 w. new weights)
+
+mtgap weights (note mid col right index is lower effort than right!)
+    999, 0 ,  0  ,100, 999,  999,100, 0  , 0 ,  999,
+    90 , 50,  50 , 0 , 110,  100, 0  ,50 , 50,  90,
+    180, 220, 220, 80, 999,  999, 80, 220, 220, 180
+
+//  999, 0 ,  0  , 80, 999,  999, 80, 0  , 0 ,  999,
+//  90 , 50,  50 , 0 , 90 ,  90 , 0 , 50 , 50,  90,
+//  180, 220, 210, 80, 999,  999, 80, 210, 220, 180
+
+setksize beaklasalle
+setmask 011100111011111111111111001111
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?$>{}[]+
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set numThreads 6
+set singleKeySameFinger 0
+run
+
+**Results almost same as v1.1 with previous weights!! 
+(letters on main are same)
+
+Hands: 47% 52%
+Fingers: 2.0% 12% 20% 13% 0.00% 0.00% 19% 17% 12% 4.0%
+
+    k  ,  ?         =  w  b
+ :  -  (  f  /   *  .  )  "  j
+ $  +  [  ;         x  ]  {  }
+
+    a  e  y         h  t  s
+ g  u  o  i  '   m  n  r  d  c
+ _  !  >  p         l  q  z  v
+
+Fitness:       36999894
+Distance:      24325360
+Finger work:   101424
+Inward rolls:  6.70%
+Outward rolls: 3.91%
+Same hand:     32.27%
+Same finger:   2.15%
+Row change:    13.59%
+Home jump:     2.11%
+Ring jump:     1.72%
+To center:     0.82%
+
+------
+
+2020-03-07
+
+ls24spv1.2 (spv1.0 w. new weights)
+
+setksize beaklasalle
+setmask 011100111011111111111111001111
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set singleKeySameFinger 0
+set keepShiftPairSpace 0
+set sameHand 10
+sethandbias -15
+set numThreads 6
+run
+
+-- straange !
+Hands: 47% 52%
+Fingers: 2.0% 13% 17% 15% 0.00% 0.00% 16% 21% 12% 3.0%
+
+    k  y  q         j  w  ,
+ (  )  "  b  ?   /  .  _  -  !
+ {  +  >  :         ;  [  ]  }
+
+    a  e  p         h SP  s
+ f  o  i  t  g   m  n  u  r  c
+ '  *  =  d         l  x  z  v
+
+Fitness:       56549128
+Distance:      34721830
+Finger work:   454888
+Inward rolls:  6.00%
+Outward rolls: 4.53%
+Same hand:     37.39%
+Same finger:   1.67%
+Row change:    18.75%
+Home jump:     2.97%
+Ring jump:     1.94%
+To center:     2.58%
+
+----
+2020-03-07
+ls24spv1.3 (new weights)
+
+setksize beaklasalle
+setmask 011100111011111111111111001111
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set singleKeySameFinger 0
+set keepShiftPairSpace 0
+set sameHand 10
+set numThreads 6
+run
+
+Hands: 48% 51%
+Fingers: 3.0% 13% 17% 15% 0.00% 0.00% 15% 22% 12% 3.0%
+
+    k  y  :         j  .  ,
+ (  )  "  w  *   ?  b  _  -  /
+ {  +  >  ;         q  [  ]  }
+
+    a  e  p         f SP  s
+ u  o  i  t  g   m  n  l  r  c
+ '  !  =  d         h  x  z  v
+
+Fitness:       50213478
+Distance:      27806290
+Finger work:   452518
+Inward rolls:  5.10%
+Outward rolls: 4.93%
+Same hand:     36.74%
+Same finger:   2.15%
+Row change:    19.19%
+Home jump:     3.36%
+Ring jump:     1.48%
+To center:     2.59%

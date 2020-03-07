@@ -15,3 +15,11 @@ Note that mtgapLs24Sp1.0 with Space on main,
 has much higher hand use for the hand with Space,
 and was originally generated with this on the right hand (vowels)
 (mtgapLs24Sp1.0-mirr is the original actually)
+
+Even though it is more difficult to get used to having the vowels+space
+on the right, it might make sense to have this high load on the right,
+since my left forearm gets uncomfortable when typing more
+
+On the other hand, mtgapLs24v1.0,
+vowels on the left, no space on main,
+has almost 50-50 left/right balance
