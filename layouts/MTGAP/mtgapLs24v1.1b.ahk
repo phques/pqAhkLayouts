@@ -174,6 +174,8 @@ CreateLayers()
 
     main.AddMappingsFromTo("v", "Tab", false)
     main.AddMappingsFromTo("v", "+Tab", true)
+    main.AddMappingsFromTo("t", "Esc", false)
+    main.AddMappingsFromTo("t", "+Esc", true)
 
 }
 
