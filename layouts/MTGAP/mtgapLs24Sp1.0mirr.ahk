@@ -2,11 +2,10 @@
 
 2020-03-07
 ls24spv1.0-mirr
-trying to see if I can place space on main !??
-took out $
 MTGAP ansi angleZ BEAKL
 24 keys (+space + 2shifts)
 LaSalle fingering
+Space on main
 
 mirror of ls24spv1.0, vowels+space on right hand 
 (was actually generated like this)
@@ -16,7 +15,7 @@ mirror of ls24spv1.0, vowels+space on right hand
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs"
+global ImgsDir := A_ScriptDir . "\imgssp1.0-mirr"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -64,19 +63,6 @@ CreateLayers()
         *  +  {  q         ;  }  [  ]
     )"
 
-    ; need backspace (and delete) ?
-    layerEdit1 := "
-    (Join`r`n
-          . . .        Home  Up  End
-     Ctrl Sh . . .  ^z Left Down Right ^x
-        . . . Alt        ^c   .    .   ^v
-    )"
-    layerEdit2 := "
-    (Join`r`n
-          . . .         ^z   Up  Right 
-     Ctrl Sh . . .  ^x Left Home Down End
-        . . . Alt       ^c   .     .  ^v
-    )"
     ; can be used with left hand moved (thumb on Alt, or on home pos)
     layerEdit3 := "
     (Join`r`n
@@ -94,7 +80,7 @@ CreateLayers()
             ;mapSh: layerMainSh
         },
 
-        {id: "alt", key: "Space", ; tap: "Space",
+        {id: "syms", key: "Space", ; tap: "Space",
             qwertyMask: qwertyMask24, 
             map: layerAlt, 
         },
@@ -120,32 +106,23 @@ CreateLayers()
     InitLayout(layers, dontCreateHotkeys)
 
     main := layerDefsById["main"]
-    ; main.AddMappings("@LControl  Escape", false)
-    ; main.AddMappingsFromTo((rsh ? "]" : "["), "Backspace", false)
-    ; main.AddMappingsFromTo((rsh ? "]" : "["), "~Delete", true)
-    ; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", false)
-    ; main.AddMappingsFromTo((rsh ? "," : "m"), "Enter", true)
+    altGr := layerDefsById["syms"]
 
-    ; for use w. both hands at std pos
-    ; trying not to use dualMode lshift, so try caps=lshift
-    ;#pq not working (under linux VM though which has probs remapping capsl)
-    ; main.AddMappingsFromTo("cl", "lshift", false)
-    ; main.AddMappingsFromTo("cl", "cl", true)
     if (qwertyMask24 == qwertyMask24_std) {
-        main.AddMappingsFromTo("p", "Backspace", false)
-        main.AddMappingsFromTo("p", "~Delete", true)
+        main.AddMappingsFromTo("n", "Backspace", false)
+        main.AddMappingsFromTo("n", "~Delete", true)
         main.AddMappingsFromTo("'", "Enter", false)
         main.AddMappingsFromTo("'", "Enter", true)
     }
     else {
-        ;main.AddMappingsFromTo("[", "Backspace", false)
-        ;main.AddMappingsFromTo("[", "~Delete", true)
         main.AddMappingsFromTo("m", "Backspace", false)
         main.AddMappingsFromTo("m", "~Delete", true)
     }
-    ; add Space on altGr  (hold will repeat! vs spacebar dual mode layer access which doesnt)
-    altGr := layerDefsById["alt"]
-    altGr.AddMappings("v  Space", false)
+
+    main.AddMappingsFromTo("v", "Tab", false)
+    main.AddMappingsFromTo("v", "+Tab", true)
+    main.AddMappingsFromTo("t", "Esc", false)
+    main.AddMappingsFromTo("t", "+Esc", true)
 
 }
 

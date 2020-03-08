@@ -100,7 +100,7 @@ CreateLayers()
             ;mapSh: layerMainSh
         },
 
-        {id: "alt", key: "Space",  tap: altGrTap,
+        {id: "syms", key: "Space",  tap: altGrTap,
             qwertyMask: qwertyMask24, 
             map: layerAlt, 
         },

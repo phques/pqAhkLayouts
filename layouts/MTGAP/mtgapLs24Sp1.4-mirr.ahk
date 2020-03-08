@@ -12,7 +12,7 @@ space on main
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs"
+global ImgsDir := A_ScriptDir . "\imgssp1.4-mirr"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -53,7 +53,8 @@ CreateLayers()
          g  i  o SP  k  m  n  d  r  c 
          '  !  _  u        l  q  j  @>+b 
     )"
-    altGrTap := 'b'
+    ; add extra B on spacebar, avoids bottom pinky (& dual mode)
+    altGrTap := 'b'  
 
     layerAlt := "
     (Join`r`n
@@ -62,19 +63,7 @@ CreateLayers()
          ?  +  {  >         :  }  [  @>+]
     )"
 
-    ; need backspace (and delete) ?
-    layerEdit1 := "
-    (Join`r`n
-          . . .        Home  Up  End
-     Ctrl Sh . . .  ^z Left Down Right ^x
-        . . . Alt        ^c   .    .   ^v
-    )"
-    layerEdit2 := "
-    (Join`r`n
-          . . .         ^z   Up  Right 
-     Ctrl Sh . . .  ^x Left Home Down End
-        . . . Alt       ^c   .     .  ^v
-    )"
+
     ; can be used with left hand moved (thumb on Alt, or on home pos)
     layerEdit3 := "
     (Join`r`n
@@ -92,7 +81,7 @@ CreateLayers()
             ;mapSh: layerMainSh
         },
 
-        {id: "alt", key: "Space",  tap: altGrTap,
+        {id: "syms", key: "Space",  tap: altGrTap,
             qwertyMask: qwertyMask24, 
             map: layerAlt, 
         },
