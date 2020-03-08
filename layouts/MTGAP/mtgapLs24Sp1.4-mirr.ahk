@@ -69,7 +69,7 @@ CreateLayers()
     (Join`r`n
           Del BS Esc         ^z   Up  Right 
      Ctrl Sh ^BS Sh .    ^x Left Home End Down
-     Del . Ins BS            ^c   .    ^v   ^v
+     Del . Ins BS            ^c   ^v   .  ^v
     )"
 
     numpadLayers := NumpadLayerMappings()

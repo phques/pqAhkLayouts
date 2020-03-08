@@ -25,16 +25,16 @@ To center:     1.87%              To center:     0.83%              To center:  
 
 
 2020-03-01                        2020-03-01                        2020-03-01                  2020-03-07                        2020-03-07
-ls24spv1.0  (actual mirrored)     ls20spv1.1                        ls22spv1.2  (mirrored)      ls24spv1.2                        ls24spv1.3 (new weights)
+ls24spv1.0                        ls20spv1.1                        ls22spv1.2  (mirrored)      ls24spv1.2                        ls24spv1.3 (new weights)
                                                                                                                                   
-Hands: 57% 42%                    Hands: 47% 52%                    Hands: 60% 39%              Hands: 47% 52%                    Hands: 48% 51%
-    ,  .  (          :  w  "          k  y  ;         j  w  ,           , . "      x w k            k  y  q         j  w  ,           k  y  :         j  .  ,
- !  /  '  p  ?    =  k  )  x  z    (  )  "  b  =   /  .  _  -  !      ' - _ p /  = b ) ( z       (  )  "  b  ?   /  .  _  -  !     (  )  "  w  *   ?  b  _  -  /
- ]  [  }  ;          q  {  +  *    ?        q         x        z        ? } ;      : { *         {  +  >  :         ;  [  ]  }     {  +  >  ;         q  [  ]  }
-                                                                                                                                  
-    e  Sp i          h  t  s          a  e  d         h SP  s           a P i      h t s            a  e  p         h SP  s           a  e  p         f SP  s
- c  o  u  a  g    m  n  d  r  f    f  o  i  t  g   m  n  u  r  c      c o r e y  f n d l g       f  o  i  t  g   m  n  u  r  c     u  o  i  t  g   m  n  l  r  c
- -  >  _  y          l  v  j  b    '        p         l        v        ! q u      m v j         '  *  =  d         l  x  z  v     '  !  =  d         h  x  z  v
+Hands: 42% 57%                    Hands: 47% 52%                    Hands: 60% 39%              Hands: 47% 52%                    Hands: 48% 51%
+    "  w  :         (  .  ,        k  y  ;         j  w  ,           , . "      x w k            k  y  q         j  w  ,           k  y  :         j  .  ,
+ z  x  )  k  =   ?  p  '  /  !     (  )  "  b  =   /  .  _  -  !      ' - _ p /  = b ) ( z       (  )  "  b  ?   /  .  _  -  !     (  )  "  w  *   ?  b  _  -  /
+ *  +  {  q         ;  }  [  ]     ?        q         x        z        ? } ;      : { *         {  +  >  :         ;  [  ]  }     {  +  >  ;         q  [  ]  }
+                                                                                                    
+    s  t  h         i SP  e        a  e  d         h SP  s           a P i      h t s            a  e  p         h SP  s           a  e  p         f SP  s
+ f  r  d  n  m   g  a  u  o  c     f  o  i  t  g   m  n  u  r  c      c o r e y  f n d l g       f  o  i  t  g   m  n  u  r  c     u  o  i  t  g   m  n  l  r  c
+ b  j  v  l         y  _  >  -     '        p         l        v        ! q u      m v j         '  *  =  d         l  x  z  v     '  !  =  d         h  x  z  v
                                                                                                                                   
 Fitness:       54641164           Fitness:       47504744           Fitness:       62115247     Fitness:       56549128           Fitness:       50213478
 Distance:      35139810           Distance:      25939520           Distance:      38926595     Distance:      34721830           Distance:      27806290
