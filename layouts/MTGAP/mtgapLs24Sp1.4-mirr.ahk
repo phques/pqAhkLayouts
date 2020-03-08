@@ -1,11 +1,11 @@
 /*
 
 2020-03-07
-ls24spv1.2 (spv1.0 w. new weights)
+ls24spv1.4-mirr put back vowels on left
 MTGAP ansi angleZ BEAKL
 24 keys (+space + 2shifts)
 LaSalle fingering
-
+space on main
 */
 
 ; code only includes
@@ -49,17 +49,17 @@ CreateLayers()
 
     layerMain_2 := "
     (Join`r`n
-            a  e  p         h SP  s
-         f  o  i  t  g   m  n  u  r  c
-         '  *  =  d         l  x  z  @>+v
+            a  e  v        h  t  s    
+         g  i  o SP  k  m  n  d  r  c 
+         '  !  _  u        l  q  j  @>+b 
     )"
     altGrTap := 'b'
 
     layerAlt := "
     (Join`r`n
-            k  y  q         j  w  ,
-         (  )  "  b  ?   /  .  _  -  !
-         {  +  >  :         ;  [  ]  @>+}
+            -  .  x         z  p  w    
+         (  ;  ,  y  /   *  f  "  =  ) 
+         ?  +  {  >         :  }  [  @>+]
     )"
 
     ; need backspace (and delete) ?

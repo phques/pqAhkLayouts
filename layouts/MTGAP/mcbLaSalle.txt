@@ -299,6 +299,8 @@ To center:     2.35%
 ------
 2020-03-07
 ls24v1.2 (1.0 w. new weights)
+**Results almost same as v1.1 with previous weights!! 
+  (letters on main are same)
 
 mtgap weights (note mid col right index is lower effort than right!)
     999, 0 ,  0  ,100, 999,  999,100, 0  , 0 ,  999,
@@ -317,9 +319,6 @@ set keepShiftPairOther 0
 set numThreads 6
 set singleKeySameFinger 0
 run
-
-**Results almost same as v1.1 with previous weights!! 
-(letters on main are same)
 
 Hands: 47% 52%
 Fingers: 2.0% 12% 20% 13% 0.00% 0.00% 19% 17% 12% 4.0%
@@ -348,7 +347,7 @@ To center:     0.82%
 
 2020-03-07
 
-ls24spv1.2 (spv1.0 w. new weights)
+ls24spv1.2 (new weights)
 
 setksize beaklasalle
 setmask 011100111011111111111111001111
@@ -423,3 +422,43 @@ Row change:    19.19%
 Home jump:     3.36%
 Ring jump:     1.48%
 To center:     2.59%
+
+----
+2020-03-07
+ls24spv1.4 (new weights)
+
+setksize beaklasalle
+setmask 011100111011111111111111001111
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set singleKeySameFinger 0
+set keepShiftPairSpace 0
+set sameHand 10
+sethandbias -15
+set toCenter 45
+set numThreads 6
+run
+
+Hands: 44% 55%
+Fingers: 4.0% 12% 12% 17% 0.00% 0.00% 22% 18% 13% 2.0%
+
+    w  p  z         x  .  -
+ (  =  "  f  *   /  y  ,  ;  )
+ [  ]  {  :         >  }  +  ?
+
+    s  t  h         v  e  a
+ c  r  d  n  m   k SP  o  i  g
+ b  j  q  l         u  _  !  '
+
+Fitness:       56807304
+Distance:      33660365
+Finger work:   460679
+Inward rolls:  5.92%
+Outward rolls: 3.99%
+Same hand:     34.61%
+Same finger:   2.08%
+Row change:    16.01%
+Home jump:     1.05%
+Ring jump:     1.11%
+To center:     1.38%
