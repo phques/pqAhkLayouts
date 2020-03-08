@@ -358,8 +358,8 @@
             "id": 41
         },
         {
-            "primary": 17,
-            "shift": -1,
+            "primary": 16,
+            "shift": -16,
             "altGr": -1,
             "shiftAltGr": -1,
             "finger": 5,
@@ -367,12 +367,13 @@
             "numpad": -1
         },
         {
-            "primary": 16,
-            "shift": -16,
+            "primary": 17,
+            "shift": -1,
             "altGr": -1,
             "shiftAltGr": -1,
             "finger": 6,
-            "id": 43
+            "id": 43,
+            "numpad": -1
         },
         {
             "primary": -1,
@@ -471,7 +472,7 @@
             "id": 55
         },
         {
-            "primary": -18,
+            "primary": 13,
             "shift": -1,
             "altGr": -1,
             "shiftAltGr": -1,
@@ -497,7 +498,7 @@
             "id": 58
         },
         {
-            "primary": 13,
+            "primary": -18,
             "shift": -1,
             "altGr": -1,
             "shiftAltGr": -1,
