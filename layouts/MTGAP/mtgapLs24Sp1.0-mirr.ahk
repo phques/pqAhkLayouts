@@ -9,6 +9,11 @@ Space on main
 
 mirror of ls24spv1.0, vowels+space on right hand 
 (was actually generated like this)
+
+B was on dual mode left shift, which does not work well,
+trying it on SP ! 
+(actually a bit better results on KLA, lower distance, but higher same finger (!?))
+
 */
 
 ; code only includes
@@ -39,7 +44,7 @@ CreateLayers()
     (Join`r`n
               w e r      u i o 
             a s d f g  h j k l ; 
-      @LShift z x c      m , . /
+      @LShift z x c      m , . @/
     )"
     qwertyMask24_wid := "
     (Join`r`n
@@ -47,28 +52,31 @@ CreateLayers()
             a s d f g    j k l ; '
       @LShift z x c        , . / @RShift
     )"
-    qwertyMask24 := qwertyMask24_wid
+    ; qwertyMask24 := qwertyMask24_wid
+    qwertyMask24 := qwertyMask24_std
 
     layerMain_2 := "
     (Join`r`n
            s  t  h         i SP  e
         f  r  d  n  m   g  a  u  o  c
-        b  j  v  l         y  _  >  -
+        b  j  v  l         y  _  >  @>+-
     )"
+    ; altGrTap := 'b'
+    altGrTap := 'v'  ; V is hard to reach, so put THAT one on SP
 
     layerAlt := "
     (Join`r`n
            "  w  :         (  .  ,
         z  x  )  k  =   ?  p  '  /  !
-        *  +  {  q         ;  }  [  ]
+        *  +  {  q         ;  }  [  @>+]
     )"
 
     ; can be used with left hand moved (thumb on Alt, or on home pos)
     layerEdit3 := "
     (Join`r`n
           Del BS Esc         ^z   Up  Right 
-     Ctrl Sh  .  Sh .  ^x Left Home End Down
-     Del . .  BS           ^c   .     .  ^v
+     Ctrl Sh ^BS Sh .    ^x Left Home End Down
+     Del . Ins BS            ^c   .     ^v  ^v
     )"
 
     numpadLayers := NumpadLayerMappings()
@@ -80,7 +88,7 @@ CreateLayers()
             ;mapSh: layerMainSh
         },
 
-        {id: "syms", key: "Space", ; tap: "Space",
+        {id: "syms", key: "Space",  tap: altGrTap,
             qwertyMask: qwertyMask24, 
             map: layerAlt, 
         },
@@ -113,6 +121,13 @@ CreateLayers()
         main.AddMappingsFromTo("n", "~Delete", true)
         main.AddMappingsFromTo("'", "Enter", false)
         main.AddMappingsFromTo("'", "Enter", true)
+
+        ; trying to set altGr-N to send "ing" .. does not work
+        ; altGr.AddMappingsFromTo("n", "q", false)
+        ; nkey := altGr.GetKeydef('n')
+        ; nkey.outValues[1].val := "ing"
+        ; nkey.outValues[2].val := "ING"
+        ;; nkey.outValues := [, new COutput("ING")]
     }
     else {
         main.AddMappingsFromTo("m", "Backspace", false)
@@ -135,3 +150,8 @@ return
 ;--- hotkeys, must be at the end -----
 
 #include ../winHotkeys.ahk
+
+; Win-N inserts ING
+; since IG is not comfy, and I noticed it is often used in ing 
+; (going, intersting, everything, string)
+LWin & sc031::Send("ing")

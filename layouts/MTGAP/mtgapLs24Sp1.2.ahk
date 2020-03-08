@@ -62,25 +62,12 @@ CreateLayers()
          {  +  >  :         ;  [  ]  @>+}
     )"
 
-    ; need backspace (and delete) ?
-    layerEdit1 := "
-    (Join`r`n
-          . . .        Home  Up  End
-     Ctrl Sh . . .  ^z Left Down Right ^x
-        . . . Alt        ^c   .    .   ^v
-    )"
-    layerEdit2 := "
-    (Join`r`n
-          . . .         ^z   Up  Right 
-     Ctrl Sh . . .  ^x Left Home Down End
-        . . . Alt       ^c   .     .  ^v
-    )"
     ; can be used with left hand moved (thumb on Alt, or on home pos)
     layerEdit3 := "
     (Join`r`n
-          Del BS Esc           ^z   Up  Right 
-     Ctrl Sh ^BS Sh .    ^x Left Home End Down
-     Del . Ins BS            ^c   .     .  ^v
+          Del BS Esc         ^z   Up  Right 
+     Ctrl Sh ^BS Sh .    ^x Left Home End  Down
+     Del . Ins BS            ^c   .   ^v  ^v
     )"
 
     numpadLayers := NumpadLayerMappings()

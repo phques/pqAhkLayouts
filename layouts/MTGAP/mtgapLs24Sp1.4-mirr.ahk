@@ -67,9 +67,9 @@ CreateLayers()
     ; can be used with left hand moved (thumb on Alt, or on home pos)
     layerEdit3 := "
     (Join`r`n
-          Del BS Esc           ^z   Up  Right 
+          Del BS Esc         ^z   Up  Right 
      Ctrl Sh ^BS Sh .    ^x Left Home End Down
-     Del . Ins BS            ^c   .     .  ^v
+     Del . Ins BS            ^c   .    ^v   ^v
     )"
 
     numpadLayers := NumpadLayerMappings()
