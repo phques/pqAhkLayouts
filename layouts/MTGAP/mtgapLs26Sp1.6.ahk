@@ -37,14 +37,14 @@ CreateLayers()
     (Join`r`n
               w e r      u i o 
             a s d f g  h j k l ; 
-      @LShift z x c b  n m , . @/
+      @LShift z x c v  n m , . @/
     )"
 
     qwertyMask26_wid := "
     (Join`r`n
               w e r        i o p
             a s d f g    j k l ; '
-      @LShift z x c b    n , . / @RShift
+      @LShift z x c v    n , . / @RShift
     )"
     ; qwertyMask26 := qwertyMask26_wid
     qwertyMask26 := qwertyMask26_std
@@ -52,16 +52,16 @@ CreateLayers()
     layerMain_2 := "
     (Join`r`n
             a  e  v         h  t  s
-         g  i  o SP  _   m  n  d  r  c
-         '  =  !  u         l  b  j  @>+f
+         g  i  o SP  -   m  n  d  r  c
+         '  =  *  u  _   f  l  q  j  @>+b
     )"
-    altGrTap := 'b'
+    altGrTap := 'f'
 
     layerAlt := "
     (Join`r`n
-            -  .  x         z  p  w
-         (  )  ;  y  /   *  ,  k  "  q
-         {  }  [  ?         :  ]  +  >
+            "  .  ?         !  p  w
+         (  )  ;  y  [   ]  ,  k  x  z
+         {  &  <  /  \   +  :  >  |  @>+}
     )"
 
 
@@ -111,18 +111,18 @@ CreateLayers()
     altGr := layerDefsById["syms"]
 
     if (qwertyMask26 == qwertyMask26_std) {
-        main.AddMappingsFromTo("n", "Backspace", false)
-        main.AddMappingsFromTo("n", "~Delete", true)
+        main.AddMappingsFromTo("p", "Backspace", false)
+        main.AddMappingsFromTo("p", "~Delete", true)
         main.AddMappingsFromTo("'", "Enter", false)
         main.AddMappingsFromTo("'", "Enter", true)
     }
     else {
-        main.AddMappingsFromTo("m", "Backspace", false)
-        main.AddMappingsFromTo("m", "~Delete", true)
+        main.AddMappingsFromTo("[", "Backspace", false)
+        main.AddMappingsFromTo("[", "~Delete", true)
     }
 
-    main.AddMappingsFromTo("v", "Tab", false)
-    main.AddMappingsFromTo("v", "+Tab", true)
+    main.AddMappingsFromTo("q", "Tab", false)
+    main.AddMappingsFromTo("q", "+Tab", true)
     main.AddMappingsFromTo("t", "Esc", false)
     main.AddMappingsFromTo("t", "+Esc", true)
 
