@@ -44,10 +44,10 @@ CreateLayers()
     (Join`r`n
               w e r        i o p
             a s d f g    j k l ; '
-      @LShift z x c v    n , . / @RShift
+      @LShift z x c v    m , . / @RShift
     )"
-    ; qwertyMask26 := qwertyMask26_wid
-    qwertyMask26 := qwertyMask26_std
+    qwertyMask26 := qwertyMask26_wid
+    ; qwertyMask26 := qwertyMask26_std
 
     layerMain_2 := "
     (Join`r`n
@@ -55,7 +55,7 @@ CreateLayers()
          g  i  o SP  -   m  n  d  r  c
          '  =  *  u  _   f  l  q  j  @>+b
     )"
-    altGrTap := 'f'
+    altGrTap := 'y'
 
     layerAlt := "
     (Join`r`n
@@ -93,9 +93,8 @@ CreateLayers()
             ; map: extendLayer, 
         },
 
-        ; would've liked  to use V here, but it screws up??
         {id: "numpad", key: "b", toggle: true,
-            map: numpadLayers.thumbOnB, 
+            map: numpadLayers.thumbOnBwide, 
         },
 
     ]
@@ -121,10 +120,10 @@ CreateLayers()
         main.AddMappingsFromTo("[", "~Delete", true)
     }
 
-    main.AddMappingsFromTo("q", "Tab", false)
-    main.AddMappingsFromTo("q", "+Tab", true)
-    main.AddMappingsFromTo("t", "Esc", false)
-    main.AddMappingsFromTo("t", "+Esc", true)
+    main.AddMappingsFromTo("q", "Esc", false)
+    main.AddMappingsFromTo("q", "+Esc", true)
+    main.AddMappingsFromTo("t", "Tab", false)
+    main.AddMappingsFromTo("t", "+Tab", true)
 
 }
 
