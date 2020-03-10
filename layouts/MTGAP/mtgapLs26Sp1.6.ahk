@@ -33,18 +33,21 @@ global DoubleAlt := 0
 CreateLayers()
 {
     ; try both hands a std pos
+    ; using dualmode shift on home row pinkies
+    ; this is habt breaking ! so leave dualMode on real shift keys
+    ; (also causes probs when using Shift as a normal key and we do for eg. ctrl-shift-up .. )
     qwertyMask26_std := "
     (Join`r`n
               w e r      u i o 
            @a s d f g  h j k l @; 
-      LShift z x c v  n m , . /
+     @LShift z x c v  n m , . @/
     )"
 
     qwertyMask26_wid := "
     (Join`r`n
               w e r        i o p
            @a s d f g    j k l ; @'
-      LShift z x c v    m , . / RShift
+     @LShift z x c v    m , . / @RShift
     )"
     qwertyMask26 := qwertyMask26_wid
     ; qwertyMask26 := qwertyMask26_std
@@ -75,8 +78,9 @@ CreateLayers()
 
     numpadLayers := NumpadLayerMappings()
 
+    ; use std extend layout, have to get used to switching to old way!
     layerExtend := layerEdit3
-    layerExtend :=ExtendLayerMappingsWide()
+    layerExtend := ExtendLayerMappingsWide()
 
     layers := [
         {id: "main", 
@@ -120,6 +124,11 @@ CreateLayers()
     else {
         main.AddMappingsFromTo("[", "Backspace", false)
         main.AddMappingsFromTo("[", "~Delete", true)
+
+        main.AddMappingsFromTo("n", "Control", false)
+        main.AddMappingsFromTo("n", "Control", true)
+        altGr.AddMappingsFromTo("n", "Control", false)
+        altGr.AddMappingsFromTo("n", "Control", true)
     }
 
     main.AddMappingsFromTo("q", "Esc", false)
