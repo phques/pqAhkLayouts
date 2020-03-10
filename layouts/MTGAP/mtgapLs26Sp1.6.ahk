@@ -36,15 +36,15 @@ CreateLayers()
     qwertyMask26_std := "
     (Join`r`n
               w e r      u i o 
-            a s d f g  h j k l ; 
-      @LShift z x c v  n m , . @/
+           @a s d f g  h j k l @; 
+      LShift z x c v  n m , . /
     )"
 
     qwertyMask26_wid := "
     (Join`r`n
               w e r        i o p
-            a s d f g    j k l ; '
-      @LShift z x c v    m , . / @RShift
+           @a s d f g    j k l ; @'
+      LShift z x c v    m , . / RShift
     )"
     qwertyMask26 := qwertyMask26_wid
     ; qwertyMask26 := qwertyMask26_std
@@ -52,16 +52,16 @@ CreateLayers()
     layerMain_2 := "
     (Join`r`n
             a  e  v         h  t  s
-         g  i  o SP  -   m  n  d  r  c
-         '  =  *  u  _   f  l  q  j  @>+b
+      @<+g  i  o SP  -   m  n  d  r  @>+c
+         '  =  *  u  _   f  l  q  j  b
     )"
     altGrTap := 'y'
 
     layerAlt := "
     (Join`r`n
             "  .  ?         !  p  w
-         (  )  ;  y  [   ]  ,  k  x  z
-         {  &  <  /  \   +  :  >  |  @>+}
+      @<+(  )  ;  y  [   ]  ,  k  x  @>+z
+         {  &  <  /  \   +  :  >  |  }
     )"
 
 
@@ -74,6 +74,9 @@ CreateLayers()
     )"
 
     numpadLayers := NumpadLayerMappings()
+
+    layerExtend := layerEdit3
+    layerExtend :=ExtendLayerMappingsWide()
 
     layers := [
         {id: "main", 
@@ -88,9 +91,8 @@ CreateLayers()
         },
 
         {id: "edit", key: "LAlt", toggle: true,
-            qwertyMask: qwertyMask26, 
-            map: layerEdit3, 
-            ; map: extendLayer, 
+            ; qwertyMask: qwertyMask26, 
+            map: layerExtend, 
         },
 
         {id: "numpad", key: "b", toggle: true,
