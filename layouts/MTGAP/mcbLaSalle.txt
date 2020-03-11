@@ -509,7 +509,7 @@ To center:     0.73%
 
 ----
 2020-03-08
-ls26spv1.6 (new weights => 26keys)
+ls26spv1.6 (new weights2 => 26keys)
 
 mtgap weights (note mid col right index is lower effort than right!)
     999, 0 ,  0  ,100, 999,  999,100, 0  , 0 ,  999,
@@ -562,3 +562,42 @@ Row change:    16.30%
 Home jump:     1.09%
 Ring jump:     1.09%
 To center:     1.28%
+
+-----
+2020-03-09
+ls26spv1.7 (new weights2 => 26keys)
+
+setksize beaklasalle
+setmask 011100111011111111111111111111
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?>{}[]\+|& <
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set singleKeySameFinger 0
+set keepShiftPairSpace 0
+set sameHand 30
+set toCenter 60
+set numThreads 6
+run
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 13% 12% 4.0%
+
+    -  .  /         z  p  w
+ (  )  ;  y  +   *  ,  "  =  q
+ [  &  <  >  \   |  x  {  }  ]
+
+    a  e  k         h  t  s
+ g  i  o SP  _   m  n  d  r  c
+ '  ?  :  u  !   f  l  v  j  b
+
+Fitness:       56094552
+Distance:      30259080
+Finger work:   398942
+Inward rolls:  4.79%
+Outward rolls: 3.58%
+Same hand:     32.41%
+Same finger:   1.96%
+Row change:    15.92%
+Home jump:     1.14%
+Ring jump:     0.97%
+To center:     1.16%

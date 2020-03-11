@@ -1,19 +1,18 @@
 /*
 
-2020-03-08
-ls26spv1.6
+2020-03-09
+ls26spv1.7
 MTGAP ansi angleZ BEAKL
 26 keys
 LaSalle fingering
 space on main
-shift as dual mode on home row pinkies (eventually ! bug on alt layers now)
 */
 
 ; code only includes
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgssp1.6"
+global ImgsDir := A_ScriptDir . "\imgssp1.7"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -54,17 +53,17 @@ CreateLayers()
 
     layerMain_2 := "
     (Join`r`n
-            a  e  v         h  t  s
-      @<+g  i  o SP  -   m  n  d  r  @>+c
-         '  =  *  u  _   f  l  q  j  b
+            a  e  k         h  t  s
+      @<+g  i  o SP  _   m  n  d  r  @>+c
+      @<+'  ?  :  u  !   f  l  v  j  @>+b
     )"
     altGrTap := 'y'
 
     layerAlt := "
     (Join`r`n
-            "  .  ?         !  p  w
-      @<+(  )  ;  y  [   ]  ,  k  x  @>+z
-         {  &  <  /  \   +  :  >  |  }
+            -  .  /         z  p  w
+      @<+(  )  ;  y  +   *  ,  "  =  @>+q
+      @<+[  &  <  >  \   |  x  {  }  @>+]
     )"
 
 
