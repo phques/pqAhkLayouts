@@ -80,7 +80,7 @@ CreateLayers()
 
     ; use std extend layout, have to get used to switching to old way!
     layerExtend := layerEdit3
-    layerExtend := ExtendLayerMappingsWideAlt()
+    layerExtend := ExtendLayerMappingsWide()
 
     layers := [
         {id: "main", 

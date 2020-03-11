@@ -43,7 +43,7 @@ ExtendLayerMappingsWide()
     (Join`r`n
         1 2 3 4 5 6 7 8 9 0 - =     F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12
         q w e r     u i o p [     escape tab insert alt            PgUp Home Up   End   Delete    
-       CL a s f g   j k l ; '     LWin Shift Control Shift !Esc   PgDn Left Down Right Backspace 
+       CL a s f g   j k l ; '     LWin Control Shift Shift !Esc   PgDn Left Down Right Backspace 
         z x c v b   m , . /        ^z ^x ^c ^v Space               ^z  ^c   ^x   ^v
     )"
         ; LSh RSh LCt RCt              LSh RSh LCt RCt
@@ -60,7 +60,7 @@ ExtendLayerMappingsWideAlt()
     (Join`r`n
         1 2 3 4 5 6 7 8 9 0 - =     F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12
         q w e r     u i o p [     escape tab insert alt            PgUp Home Up   End   Delete    
-       CL a s f g   j k l ; '     LWin Control Shift Shift !Esc   PgDn Left Down Right Backspace 
+       CL a s f g   j k l ; '     LWin Shift Control Shift !Esc   PgDn Left Down Right Backspace 
         z x c v b   m , . /        ^z ^x ^c ^v Space               ^z  ^c   ^x   ^v
     )"
         ; LSh RSh LCt RCt              LSh RSh LCt RCt

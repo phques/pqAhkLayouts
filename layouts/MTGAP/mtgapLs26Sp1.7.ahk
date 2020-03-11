@@ -57,7 +57,8 @@ CreateLayers()
       @<+g  i  o SP  _   m  n  d  r  @>+c
       @<+'  ?  :  u  !   f  l  v  j  @>+b
     )"
-    altGrTap := 'y'
+    altGrTap := 'y' ; same-ginger with SP
+    altGrTap := 'b' ; dual mode shift on bottom pinky
 
     layerAlt := "
     (Join`r`n
@@ -79,7 +80,7 @@ CreateLayers()
 
     ; use std extend layout, have to get used to switching to old way!
     layerExtend := layerEdit3
-    layerExtend := ExtendLayerMappingsWideAlt()
+    layerExtend := ExtendLayerMappingsWide()
 
     layers := [
         {id: "main", 
