@@ -40,12 +40,22 @@ global altAccesKey := 0
 
 CreateLayers()
 {
-  qwertyMask := "
+  qwertyMask_std := "
   (Join`r`n
       w e r       u i o     
-    a s d f g   h j k l ; ' 
-      z   c v   n m , . /   
+   @a s d f g   h j k l @;  
+      z   c v   n m , .     
   )"
+
+  qwertyMask_wid := "
+  (Join`r`n
+          w e r        i o p
+       @a s d f g    j k l ; @'
+          z   c v    m , . / 
+  )"
+
+  ; qwertyMask := qwertyMask_std
+  qwertyMask := qwertyMask_wid
 
   ; layerMain := "
   ; (Join`r`n
@@ -63,52 +73,71 @@ CreateLayers()
   ; trying with . ,  iso  , .
   layerMain := "
   (Join`r`n
-        i u  o           m d n      
-      y e Sp a g       l r t s p CR 
-        .    , Tab    BS h c f RSh  
+         i  u   o             m  d  n      
+   @<+y  e  Sp  a  g       l  r  t  s @>+p  
+         .      ,  .       .  h  c  f     
   )"
   altAccessTap := 'w'
 
   layerMainSh := "
   (Join`r`n
         I U O            M D N       
-      Y E " A G        L R T S P +CR 
-        :  ~; +Tab  +Del H C F RSh   
+   @<+Y E " A G        L R T S @>+P  
+        :  ~; .        . H C F    
   )"
 
 
   layerAlt := "
   (Join`r`n
         q ' j            x ! k      
-      ? ( - ) $        # { = } b CR 
-        *   / :        z v & + RSh  
+   @<+? ( - ) $        # { = } @>+b  
+        *   / :        z v & +   
   )"
 
   layerAltSh := "
   (Join`r`n
         Q ~`` J          X |  K       
-      < < _  > ~-     . ~[ @ ~] B +CR 
-        ^   ~\ .      Z  V %  ~ RSh   
+   @<+< < _  > ~-     . ~[ @ ~] @>+B  
+        ^   ~\ .      Z  V %  ~    
   )"
 
   ; need to move QJ to right hand !
-  layerAltfr := "
-  (Join`r`n
-    q w e r t    u i o p   ï î û ô œ    x q j !   
-    a s d f g  h j k l ;   ê é ù à ä  - « ' » b   
-    z x c      n m , . /     è ë â    w v ç k RSh 
-  )"
+  if (qwertyMask == qwertyMask_std) {
+    layerAltfr := "
+    (Join`r`n
+      q w e r t      u i o p       ï î û ô œ    x q j !   
+     @a s d f g    h j k l @;   @<+ê é ù à ä  - « ' » @>+b   
+      z x c        n m , . /         è ë â    w v ç k RSh 
+    )"
+  } else  {
+    layerAltfr := "
+    (Join`r`n
+      q w e r t      i o p [       ï î û ô œ    x q j !   
+     @a s d f g    j k l ; @'   @<+ê é ù à ä  - « ' » @>+b   
+      z x c        m , . /           è ë â    w v ç k    
+    )"
+  }
+
   altAccessTapFr := 'z'
 
-  layerAltfrsh := "
-  (Join`r`n
-    Q W E R T    U I O P   Ï Î Û Ô Œ    X Q  J ?   
-    A S D F G  H J K L ;   Ê É Ù À Ä  + ( ~/ ) B   
-    Z X C      N M , . /     È Ë Â    W V Ç  K RSh 
-  )"
+  if (qwertyMask == qwertyMask_std) {
+    layerAltfrsh := "
+    (Join`r`n
+      Q W E R T    U I O P      Ï Î Û Ô Œ    X Q  J ?   
+     @A S D F G  H J K L @;  @<+Ê É Ù À Ä  + ( ~/ ) @>+B   
+      Z X C      N M , . /        È Ë Â    W V Ç  K  
+    )"
+  } else  {
+    layerAltfrsh := "
+    (Join`r`n
+      Q W E R T    I O P [     Ï Î Û Ô Œ    X Q  J ?   
+     @A S D F G  J K L ; @' @<+Ê É Ù À Ä  + ( ~/ ) @>+B   
+      Z X C      M , . /         È Ë Â    W V Ç  K  
+    )"
+  }
 
-
-  extendLayer := ExtendLayerMappingsAlt()
+  ; extendLayer := ExtendLayerMappingsAlt()
+  extendLayer := ExtendLayerMappingsWide()  
   numpadLayers := NumpadLayerMappings()
 
   altAccesKey := "Space"
@@ -149,9 +178,30 @@ CreateLayers()
   InitLayout(layers, dontCreateHotkeys)
 
   main := layerDefsById["main"]
-  syms := layerDefsById["syms"]
+  altGr := layerDefsById["syms"]
   extend := layerDefsById["edit"]
   french := layerDefsById["french"]
+
+  if (qwertyMask == qwertyMask_std) {
+      main.AddMappingsFromTo("p", "Backspace", false)
+      main.AddMappingsFromTo("p", "~Delete", true)
+      main.AddMappingsFromTo("'", "Enter", false)
+      main.AddMappingsFromTo("'", "Enter", true)
+  }
+  else {
+      main.AddMappingsFromTo("[", "Backspace", false)
+      main.AddMappingsFromTo("[", "~Delete", true)
+
+      main.AddMappingsFromTo("n", "Control", false)
+      main.AddMappingsFromTo("n", "Control", true)
+      altGr.AddMappingsFromTo("n", "Control", false)
+      altGr.AddMappingsFromTo("n", "Control", true)
+  }
+
+  main.AddMappingsFromTo("q", "Esc", false)
+  main.AddMappingsFromTo("q", "+Esc", true)
+  main.AddMappingsFromTo("t", "Tab", false)
+  main.AddMappingsFromTo("t", "+Tab", true)
 
   ; add an extend/edit layer access key on RShift
   ; try with Tap '=' for fun :-p

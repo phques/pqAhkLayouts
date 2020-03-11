@@ -40,26 +40,26 @@ global DoubleAlt := 0
 CreateLayers()
 {
     ; try both hands a std pos
-    qwertyMask24_std := "
+    qwertyMask_std := "
     (Join`r`n
               w e r      u i o 
-            a s d f g  h j k l ; 
+           @a s d f g  h j k l @; 
       @LShift z x c      m , . @/
     )"
-    qwertyMask24_wid := "
+    qwertyMask_wid := "
     (Join`r`n
               w e r        i o p
-            a s d f g    j k l ; '
+           @a s d f g    j k l ; @'
       @LShift z x c        , . / @RShift
     )"
-    ; qwertyMask24 := qwertyMask24_wid
-    qwertyMask24 := qwertyMask24_std
+    qwertyMask := qwertyMask_wid
+    ; qwertyMask := qwertyMask_std
 
     layerMain_2 := "
     (Join`r`n
            s  t  h         i SP  e
-        f  r  d  n  m   g  a  u  o  c
-        b  j  v  l         y  _  >  @>+-
+     @<+f  r  d  n  m   g  a  u  o  @>+c
+     @<+b  j  v  l         y  _  >  @>+-
     )"
     ; altGrTap := 'b'
     altGrTap := 'v'  ; V is hard to reach, so put THAT one on SP
@@ -67,8 +67,8 @@ CreateLayers()
     layerAlt := "
     (Join`r`n
            "  w  :         (  .  ,
-        z  x  )  k  =   ?  p  '  /  !
-        *  +  {  q         ;  }  [  @>+]
+     @<+z  x  )  k  =   ?  p  '  /  @>+!
+     @<+*  +  {  q         ;  }  [  @>+]
     )"
 
     ; can be used with left hand moved (thumb on Alt, or on home pos)
@@ -81,22 +81,26 @@ CreateLayers()
 
     numpadLayers := NumpadLayerMappings()
 
+    ; use std extend layout, have to get used to switching to old way!
+    layerExtend := layerEdit3
+    layerExtend := ExtendLayerMappingsWide()
+
     layers := [
         {id: "main", 
-            qwertyMask: qwertyMask24,
+            qwertyMask: qwertyMask,
             map: layerMain_2, 
             ;mapSh: layerMainSh
         },
 
         {id: "syms", key: "Space",  tap: altGrTap,
-            qwertyMask: qwertyMask24, 
+            qwertyMask: qwertyMask, 
             map: layerAlt, 
         },
 
         {id: "edit", key: "LAlt", toggle: true,
-            qwertyMask: qwertyMask24, 
-            map: layerEdit3, 
-            ; map: extendLayer, 
+            ; qwertyMask: qwertyMask, 
+            ; map: layerEdit3, 
+            map: extendLayer, 
         },
 
         ; would've liked  to use V here, but it screws up??
@@ -116,28 +120,26 @@ CreateLayers()
     main := layerDefsById["main"]
     altGr := layerDefsById["syms"]
 
-    if (qwertyMask24 == qwertyMask24_std) {
-        main.AddMappingsFromTo("n", "Backspace", false)
-        main.AddMappingsFromTo("n", "~Delete", true)
+    if (qwertyMask == qwertyMask_std) {
+        main.AddMappingsFromTo("p", "Backspace", false)
+        main.AddMappingsFromTo("p", "~Delete", true)
         main.AddMappingsFromTo("'", "Enter", false)
         main.AddMappingsFromTo("'", "Enter", true)
-
-        ; trying to set altGr-N to send "ing" .. does not work
-        ; altGr.AddMappingsFromTo("n", "q", false)
-        ; nkey := altGr.GetKeydef('n')
-        ; nkey.outValues[1].val := "ing"
-        ; nkey.outValues[2].val := "ING"
-        ;; nkey.outValues := [, new COutput("ING")]
     }
     else {
-        main.AddMappingsFromTo("m", "Backspace", false)
-        main.AddMappingsFromTo("m", "~Delete", true)
+        main.AddMappingsFromTo("[", "Backspace", false)
+        main.AddMappingsFromTo("[", "~Delete", true)
+
+        main.AddMappingsFromTo("n", "Control", false)
+        main.AddMappingsFromTo("n", "Control", true)
+        altGr.AddMappingsFromTo("n", "Control", false)
+        altGr.AddMappingsFromTo("n", "Control", true)
     }
 
-    main.AddMappingsFromTo("v", "Tab", false)
-    main.AddMappingsFromTo("v", "+Tab", true)
-    main.AddMappingsFromTo("t", "Esc", false)
-    main.AddMappingsFromTo("t", "+Esc", true)
+    main.AddMappingsFromTo("q", "Esc", false)
+    main.AddMappingsFromTo("q", "+Esc", true)
+    main.AddMappingsFromTo("t", "Tab", false)
+    main.AddMappingsFromTo("t", "+Tab", true)
 
 }
 
