@@ -178,13 +178,18 @@ class CLayer
                 ExitApp
             }
 
+            out := new COutput(SubStr(to, 2))
+            ; MsgBox '[' out.mods "] [" out.val ']'
+
             ; last char is tap val
-            dualTap := SubStr(to, toLen, 1)  
-
             ; hold val
-            dualHold := SubStr(to, 2, toLen-2) ; "#" / "<+"
+            ; dualHold := SubStr(to, 2, toLen-2) ; "#" / "<+"
+            ; dualTap := SubStr(to, toLen, 1)  
 
-            ; < > indicate left or right versino of modifier (as in Autohotkey keys)
+            dualTap := out.val
+            dualHold := out.mods
+
+            ; < > indicate left or right version of modifier (as in Autohotkey keys)
             side := ""
             if (SubStr(dualHold, 1, 1) == "<") {
                 side := "L"
@@ -203,6 +208,7 @@ class CLayer
                 dualHold := side "Control"
             if (dualHold == "+")
                 dualHold := side "Shift"
+
         }
 
         ; create new dualMode modifier keydef if required
