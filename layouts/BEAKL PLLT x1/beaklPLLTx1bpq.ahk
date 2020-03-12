@@ -57,33 +57,33 @@ CreateLayers()
   ; qwertyMask := qwertyMask_std
   qwertyMask := qwertyMask_wid
 
-  ; layerMain := "
-  ; (Join`r`n
-  ;       i u  o g      m d n     
-  ;     y e Sp a g    l r t s p   
-  ;       ,    .    Tab h c f     
-  ; )"
-  ; layerMainSh := "
-  ; (Join`r`n
-  ;       I U O G      M D N     
-  ;     Y E " A G    L R T S P   
-  ;      ~;   :   +Tab H C F     
-  ; )"
+/*  layerMain := "
+  (Join`r`n
+        i u  o g      m d n     
+      y e Sp a g    l r t s p   
+        ,    .    Tab h c f     
+  )"
+  layerMainSh := "
+  (Join`r`n
+        I U O G      M D N     
+      Y E " A G    L R T S P   
+       ~;   :   +Tab H C F     
+  )"
+  trying with . ,  iso  , .
+  layerMain := "
+  (Join`r`n
+         i  u   o  g          m  d  n      
+   @<+y  e  Sp  a  g       l  r  t  s @>+p  
+         .      ,  .       .  h  c  f     
+  )"
+  layerMainSh := "
+  (Join`r`n
+        I U O G          M D N       
+   @<+Y E " A G        L R T S @>+P  
+        :  ~; .        . H C F    
+  )"
 
-  ; trying with . ,  iso  , .
-  ; layerMain := "
-  ; (Join`r`n
-  ;        i  u   o  g          m  d  n      
-  ;  @<+y  e  Sp  a  g       l  r  t  s @>+p  
-  ;        .      ,  .       .  h  c  f     
-  ; )"
-  ; layerMainSh := "
-  ; (Join`r`n
-  ;       I U O G          M D N       
-  ;  @<+Y E " A G        L R T S @>+P  
-  ;       :  ~; .        . H C F    
-  ; )"
-
+*/
   ; swap g,.
   layerMain := "
   (Join`r`n
@@ -124,25 +124,23 @@ CreateLayers()
      @a s d f g    h j k l @;   @<+ê é ù à ä  - « ' » @>+b   
       z x c        n m , . /         è ë â    w v ç k RSh 
     )"
-  } else  {
-    layerAltfr := "
-    (Join`r`n
-      q w e r t      i o p [       ï î û ô œ    x q j !   
-     @a s d f g    j k l ; @'   @<+ê é ù à ä  - « ' » @>+b   
-      z x c        m , . /           è ë â    w v ç k    
-    )"
-  }
 
-  altAccessTapFr := 'z'
-
-  if (qwertyMask == qwertyMask_std) {
     layerAltfrsh := "
     (Join`r`n
       Q W E R T    U I O P      Ï Î Û Ô Œ    X Q  J ?   
      @A S D F G  H J K L @;  @<+Ê É Ù À Ä  + ( ~/ ) @>+B   
       Z X C      N M , . /        È Ë Â    W V Ç  K  
     )"
+
   } else  {
+
+    layerAltfr := "
+    (Join`r`n
+      q w e r t      i o p [       ï î û ô œ    x q j !   
+     @a s d f g    j k l ; @'   @<+ê é ù à ä  - « ' » @>+b   
+      z x c        m , . /           è ë â    w v ç k    
+    )"
+
     layerAltfrsh := "
     (Join`r`n
       Q W E R T    I O P [     Ï Î Û Ô Œ    X Q  J ?   
@@ -150,6 +148,8 @@ CreateLayers()
       Z X C      M , . /         È Ë Â    W V Ç  K  
     )"
   }
+
+  altAccessTapFr := 'z'
 
   ; extendLayer := ExtendLayerMappingsAlt()
   extendLayer := ExtendLayerMappingsWide()  
@@ -180,7 +180,7 @@ CreateLayers()
 
       ; would've liked  to use V here, but it screws up??
       {id: "numpad", key: "b", toggle: true,
-        map: numpadLayers.thumbOnB, 
+        map: numpadLayers.indexOnBwide, 
       },
 
   ]

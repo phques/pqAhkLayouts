@@ -35,21 +35,21 @@ CreateLayers()
     ; using dualmode shift on home row pinkies
     ; this is habt breaking ! so leave dualMode on real shift keys
     ; (also causes probs when using Shift as a normal key and we do for eg. ctrl-shift-up .. )
-    qwertyMask26_std := "
+    qwertyMask_std := "
     (Join`r`n
               w e r      u i o 
            @a s d f g  h j k l @; 
      @LShift z x c v  n m , . @/
     )"
 
-    qwertyMask26_wid := "
+    qwertyMask_wid := "
     (Join`r`n
               w e r        i o p
            @a s d f g    j k l ; @'
      @LShift z x c v    m , . / @RShift
     )"
-    qwertyMask26 := qwertyMask26_wid
-    ; qwertyMask26 := qwertyMask26_std
+    qwertyMask := qwertyMask_wid
+    ; qwertyMask := qwertyMask_std
 
     layerMain_2 := "
     (Join`r`n
@@ -82,30 +82,30 @@ CreateLayers()
     layerEdit3 := "
     (Join`r`n
           Del BS Esc           ^z   Up  Right 
-     Ctrl Sh ^BS Sh .    ^x Left Home End Down
+     Ctrl Sh  .  Sh .    ^x Left Home End @>+Down
       Del  . Ins BS .     .  ^c   ^v   .  ^v
     )"
 
     numpadLayers := NumpadLayerMappings()
 
     ; use std extend layout, have to get used to switching to old way!
-    layerExtend := layerEdit3
+    ; layerExtend := layerEdit3
     layerExtend := ExtendLayerMappingsWide()
 
     layers := [
         {id: "main", 
-            qwertyMask: qwertyMask26,
+            qwertyMask: qwertyMask,
             map: layerMain_2, 
             ;mapSh: layerMainSh
         },
 
         {id: "syms", key: "Space",  tap: altGrTap,
-            qwertyMask: qwertyMask26, 
+            qwertyMask: qwertyMask, 
             map: layerAlt, 
         },
 
         {id: "edit", key: "LAlt", toggle: true,
-            ; qwertyMask: qwertyMask26, 
+            ; qwertyMask: qwertyMask, 
             map: layerExtend, 
         },
 
@@ -125,7 +125,7 @@ CreateLayers()
     main := layerDefsById["main"]
     altGr := layerDefsById["syms"]
 
-    if (qwertyMask26 == qwertyMask26_std) {
+    if (qwertyMask == qwertyMask_std) {
         main.AddMappingsFromTo("p", "Backspace", false)
         main.AddMappingsFromTo("p", "~Delete", true)
         main.AddMappingsFromTo("'", "Enter", false)

@@ -105,7 +105,7 @@ CreateLayers()
 
         ; would've liked  to use V here, but it screws up??
         {id: "numpad", key: "b", toggle: true,
-            map: numpadLayers.thumbOnB, 
+            map: numpadLayers.thumbOnBwide, 
         },
 
     ]
