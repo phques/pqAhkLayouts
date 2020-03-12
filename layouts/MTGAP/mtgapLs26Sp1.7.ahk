@@ -57,6 +57,16 @@ CreateLayers()
       @<+g  i  o SP  _   m  n  d  r  @>+c
       @<+'  ?  :  u  !   f  l  v  j  @>+b
     )"
+
+    ; try swapped io
+    ; lower same finger (ai I guess), butter higher distance/finger use
+    ; also means IOn io os reverse roll
+    ; layerMain_2 := "
+    ; (Join`r`n
+    ;         a  e  k         h  t  s
+    ;   @<+g  o  i SP  _   m  n  d  r  @>+c
+    ;   @<+'  ?  :  u  !   f  l  v  j  @>+b
+    ; )"
     altGrTap := 'y' ; same-ginger with SP
     altGrTap := 'b' ; dual mode shift on bottom pinky
 
