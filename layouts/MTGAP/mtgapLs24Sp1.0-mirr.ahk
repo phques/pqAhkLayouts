@@ -100,7 +100,7 @@ CreateLayers()
         {id: "edit", key: "LAlt", toggle: true,
             ; qwertyMask: qwertyMask, 
             ; map: layerEdit3, 
-            map: extendLayer, 
+            map: layerExtend, 
         },
 
         ; would've liked  to use V here, but it screws up??
