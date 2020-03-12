@@ -72,3 +72,28 @@ Row change:    16.01%             Row change:    16.13%             Row change: 
 Home jump:     1.05%              Home jump:     1.03%              Home jump:     1.09%              Home jump:     1.14%
 Ring jump:     1.11%              Ring jump:     1.15%              Ring jump:     1.09%              Ring jump:     0.97%
 To center:     1.38%              To center:     0.73%              To center:     1.28%              To center:     1.16%
+
+
+2020-03-11
+ls26sp2.0 (sp1.7, new weights3)
+
+Hands: 53% 46%
+    :  .  /         z  p  w
+ (  )  ;  k  \   *  ,  "  =  q
+ {  &  <  >  [   ]  x  +  |  }
+
+    a  e  g         h  t  s
+ y  i  o SP  _   m  n  d  r  c
+ -  ?  !  u  '   f  l  v  j  b
+
+Fitness:       59918066
+Distance:      35063400
+Finger work:   349671
+Inward rolls:  4.81%
+Outward rolls: 3.30%
+Same hand:     32.43%
+Same finger:   2.67%
+Row change:    16.47%
+Home jump:     1.28%
+Ring jump:     0.87%
+To center:     1.28%
