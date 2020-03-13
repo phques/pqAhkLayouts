@@ -47,11 +47,12 @@ CreateLayers()
 	)"
 	qwertyMask := qwertyMask_wid
 
+	; swap gy ml
 	layerMain_2 := "
 	(Join`r`n
 		    e  Sp i          h  t  s    
-		 c  o  u  a  g    m  n  d  r  f 
-		 -  >  _  y          l  v  j  b 
+		 c  o  u  a  y    l  n  d  r  f 
+		 -  >  _  g          m  v  j  b 
 	)"
     altGrTap := 'v'  ; V is hard to reach, so put THAT one on SP
     altGrTap := 'b'
@@ -61,7 +62,7 @@ CreateLayers()
 	(Join`r`n
 		    ,  .  (          :  w  "    
 		 !  /  '  p  ?    =  k  )  x  z 
-		 ]  [  }  ;          q  {  +  *
+		 [  ]  {  ;          q  }  +  *
 	)"
 
 	; need backspace (and delete) ?
@@ -139,7 +140,6 @@ CreateLayers()
     main.AddMappingsFromTo("q", "+Esc", true)
     main.AddMappingsFromTo("t", "Tab", false)
     main.AddMappingsFromTo("t", "+Tab", true)
-
 
 }
 
