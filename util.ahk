@@ -3,7 +3,7 @@
 ; Licensed under the Academic Free License version 3.0
 
 global keyAbbrevs := {
-	"SP" : "Space", "CL" : "CapsLock", "CR": "Enter",
+	"SP" : "Space", "CL" : "CapsLock", "CR": "Enter", "BS": "BackSpace",
 	"LSh" : "LShift", "RSh" : "RShift", "SH" : "Shift",
 	"LCt" : "LControl", "RCt" : "RControl", "Ctrl": "Control", 
 }
