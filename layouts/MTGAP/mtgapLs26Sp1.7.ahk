@@ -69,6 +69,7 @@ CreateLayers()
     ; )"
     altGrTap := 'y' ; same-ginger with SP
     altGrTap := 'b' ; dual mode shift on bottom pinky
+    altGrTap := 'v' ; hard to reach 
 
     layerAlt := "
     (Join`r`n
