@@ -123,6 +123,7 @@ CreateLayers()
         main.AddMappingsFromTo("'", "Enter", true)
     }
     else {
+        ; wide
         main.AddMappingsFromTo("[", "Backspace", false)
         main.AddMappingsFromTo("[", "~Delete", true)
 
@@ -130,6 +131,11 @@ CreateLayers()
         main.AddMappingsFromTo("n", "Control", true)
         altGr.AddMappingsFromTo("n", "Control", false)
         altGr.AddMappingsFromTo("n", "Control", true)
+
+        main.AddMappingsFromTo( "h", "Shift", false)
+        main.AddMappingsFromTo( "h", "Shift", true)
+        altGr.AddMappingsFromTo("h", "Shift", false)
+        altGr.AddMappingsFromTo("h", "Shift", true)
     }
 
     main.AddMappingsFromTo("q", "Esc", false)
