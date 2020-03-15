@@ -22,16 +22,16 @@ NumpadLayerMappings()
 	thumbOnB := "
 	(Join`r`n
 	  w e       u i o p         + -       7 8 9 BS
-	 a  d f   h j k l ; '     /   = *   , 4 5 6 0 CR
-	            m , . /                   1 2 3 . 
+	 a  d f   h j k l ; '     /   * .   , 4 5 6 0 CR
+	      c     m , . /             =     1 2 3 . 
 	)"
 
 	; use thumb to press B, home row is (LaSalle) aWEf
 	thumbOnBwide := "
 	(Join`r`n
 	  w e       i o p [         + -       7 8 9 BS
-	 a  d f   j k l ; '       /   = *   , 4 5 6 0 
-	          m , . /                   . 1 2 3   
+	 a  d f   j k l ; '       /   * .   , 4 5 6 0 
+	      c   m , . /               =   . 1 2 3   
 	)"
 
 	return { indexOnB: indexOnB, 
