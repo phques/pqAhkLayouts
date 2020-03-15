@@ -1,23 +1,27 @@
 /*
 
-2020-03-09
-ls26spv1.7
+2020-03-07
+ls24spv1.0-mirr
 MTGAP ansi angleZ BEAKL
-26 keys
+24 keys (+space + 2shifts)
 LaSalle fingering
-space on main
+Space on main
 
-2020-03-14
-swapped , - (bring ., together, can try ,. or .,)
-added missing symbols / manual place syms
-cf mtgapLs26Sp1.7b.txt
+mirror of ls24spv1.0, vowels+space on right hand 
+(was actually generated like this)
+
+B was on dual mode left shift, which does not work well,
+trying it on SP ! 
+(actually a bit better results on KLA, lower distance, but higher same finger (!?))
+
+swap ml gy (to reduce mid col access)
 */
 
 ; code only includes
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgssp1.7"
+global ImgsDir := A_ScriptDir . "\imgssp1.0-mirr"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -37,106 +41,70 @@ global DoubleAlt := 0
 CreateLayers()
 {
     ; try both hands a std pos
-    ; using dualmode shift on home row pinkies
-    ; this is habt breaking ! so leave dualMode on real shift keys
-    ; (also causes probs when using Shift as a normal key and we do for eg. ctrl-shift-up .. )
     qwertyMask_std := "
     (Join`r`n
               w e r      u i o 
            @a s d f g  h j k l @; 
-     @LShift z x c v  n m , . @/
+      @LShift z x c      m , . @/
     )"
-
     qwertyMask_wid := "
     (Join`r`n
               w e r        i o p
            @a s d f g    j k l ; @'
-     @LShift z x c v    m , . / @RShift
+      @LShift z x c        , . / @RShift
     )"
-
-    ; qwertyMask := qwertyMask_std
     qwertyMask := qwertyMask_wid
-    
-    ; ----------------------------
+    ; qwertyMask := qwertyMask_std
 
-    /* Orig
-           -  .  /         z  p  w
-        (  )  ;  y  +   *  ,  "  =  q
-        [  &  <  >  \   |  x  {  }  ]
-
-           a  e  k         h  t  s
-        g  i  o SP  _   m  n  d  r  c
-        '  ?  :  u  !   f  l  v  j  b
-    */
-
-    ; syms on top /digits row 
-    if (qwertyMask == qwertyMask_std)
-        layerMaskTop :=  " 2 3 4    9 0  "
-    else
-        layerMaskTop :=  " 2 3 4    0 -  "
-    layerMainTop :=  " @ # $    % ^  "
-
-    layerMain := "
+    layerMain_2 := "
     (Join`r`n
-           a  e  k         h  t  s
-     @<+g  i  o SP  _   m  n  d  r  @>+c
-     @<+'  ?  :  u  !   f  l  v  j  @>+b
+           s  t  h         i SP  e
+     @<+f  r  d  n  l   y  a  u  o  @>+c
+     @<+b  j  v  m         g  _  >  @>+-
     )"
+    ; altGrTap := 'b'
+    altGrTap := 'v'  ; V is hard to reach, so put THAT one on SP
 
-    layerMainSh := "
-    (Join`r`n
-           A  E  K         H  T  S
-     @<+G  I  O SP  _   M  N  D  R  @>+C
-     @<+`  ~  :  U  !   F  L  V  J  @>+B
-    )"
-
-    altGrTap := 'y' ; same-ginger with SP
-    altGrTap := 'v' ; hard to reach 
-    altGrTap := 'b' ; dual mode shift on bottom pinky
-
-    ; manual placed syms ver
     layerAlt := "
     (Join`r`n
-            .  ,  =         z  p  w      
-      @<+(  {  ;  y  +   *  -  "  }  @>+q
-      @<+[  &  <  )  \   /  x  >  |  @>+]
+           "  w  :         (  .  ,
+     @<+z  x  )  k  =   ?  p  '  /  @>+!
+     @<+*  +  {  q         ;  }  [  @>+]
     )"
 
-    ; ----------------------------
-
     ; can be used with left hand moved (thumb on Alt, or on home pos)
-    ; layerEdit3 := "
-    ; (Join`r`n
-    ;       Del BS Esc           ^z   Up  Right 
-    ;  Ctrl Sh  .  Sh .    ^x Left Home End @>+Down
-    ;   Del  . Ins BS .     .  ^c   ^v   .  ^v
-    ; )"
+    layerEdit3 := "
+    (Join`r`n
+          Del BS Esc         ^z   Up  Right 
+     Ctrl Sh ^BS Sh .    ^x Left Home End Down
+     Del . Ins BS            ^c   ^v   .  ^v
+    )"
 
     numpadLayers := NumpadLayerMappings()
 
     ; use std extend layout, have to get used to switching to old way!
-    ; layerExtend := layerEdit3
+    layerExtend := layerEdit3
     layerExtend := ExtendLayerMappingsWide()
-
-    ; ----------------------------
 
     layers := [
         {id: "main", 
             qwertyMask: qwertyMask,
-            map: layerMain, 
-            mapSh: layerMainSh
+            map: layerMain_2, 
+            ;mapSh: layerMainSh
         },
 
-        {id: "syms", key: "Space", toggle: true, ; tap: altGrTap,
+        {id: "syms", key: "Space",  tap: altGrTap,
             qwertyMask: qwertyMask, 
             map: layerAlt, 
         },
 
         {id: "edit", key: "LAlt", toggle: true,
             ; qwertyMask: qwertyMask, 
+            ; map: layerEdit3, 
             map: layerExtend, 
         },
 
+        ; would've liked  to use V here, but it screws up??
         {id: "numpad", key: "b", toggle: true,
             map: numpadLayers.thumbOnBwide, 
         },
@@ -153,7 +121,6 @@ CreateLayers()
     main := layerDefsById["main"]
     altGr := layerDefsById["syms"]
 
-    ; added extra special mappings
     if (qwertyMask == qwertyMask_std) {
         main.AddMappingsFromTo("p", "Backspace", false)
         main.AddMappingsFromTo("p", "~Delete", true)
@@ -161,8 +128,6 @@ CreateLayers()
         main.AddMappingsFromTo("'", "Enter", true)
     }
     else {
-        main.AddMappingsFromTo(layerMaskTop, layerMainTop, false)
-
         main.AddMappingsFromTo("[", "Backspace", false)
         main.AddMappingsFromTo("[", "~Delete", true)
 
@@ -188,3 +153,8 @@ return
 ;--- hotkeys, must be at the end -----
 
 #include ../winHotkeys.ahk
+
+; Win-N inserts ING
+; since IG is not comfy, and I noticed it is often used in ing 
+; (going, intersting, everything, string)
+LWin & sc031::Send("ing")

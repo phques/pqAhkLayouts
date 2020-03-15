@@ -1,0 +1,26 @@
+manual added missing symbols @#$ %^ `~
+and swapped , -  on altgr
+(brings ,. together)
+(then swap to .,)
+
+    @ # $         % ^     
+    a e k       h t s     
+  g i o   _   m n d r c   
+  ' ? : u !   f l v j b   
+
+    A E K       H T S     
+  G I O       M N D R C   
+  ` ~   U     F L V J B   
+                                   
+    . , =       z p w     
+  ( { ; y +   * - " } q   
+  [ & < ) \   / x > | ]   
+
+()
+=
+{}
+*+
+/\
+<>
+[]
+&|
