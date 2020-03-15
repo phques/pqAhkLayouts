@@ -89,15 +89,15 @@ CreateLayers()
     layerAlt := "
     (Join`r`n
           , . !          z p w     
-     @<+( ) ; y /      = - v q @>+"
-          + [ ] \      * x { }     
+     @<+< > ; y {      = - v q @>+"
+          + / ( \      * x } )     
     )"
 
     layerAltSh := "
     (Join`r`n
           , & |          Z P W     
-     @<+< > ; Y ~      = - V Q @>+"
-          + [ ] \      * X { }     
+     @<+[ ] ; Y ~      = - V Q @>+"
+          + / ( \      * X } )     
     )"
 
     altGrTap := 'y' ; same-ginger with SP
