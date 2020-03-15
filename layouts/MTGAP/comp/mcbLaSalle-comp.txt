@@ -74,26 +74,27 @@ Ring jump:     1.11%              Ring jump:     1.15%              Ring jump:  
 To center:     1.38%              To center:     0.73%              To center:     1.28%              To center:     1.16%
 
 
-2020-03-11
-ls26sp2.0 (sp1.7, new weights3)
+2020-03-11                        2020-03-15                        2020-03-15                        2020-03-15
+ls26sp2.0 (sp1.7, new weights3)   ls24spv2.1 (new weights2)         ls24spv2.2 (new weights4)         ls24spv2.3 (new weights5)
+                                                                                                      
+Hands: 53% 46%                                                      Hands: 53% 46%                    Hands: 53% 46%
+    :  .  /         z  p  w           -  .  !         z  p  w           -  .  !         x  w  p           -  .  !         z  p  w
+ (  )  ;  k  \   *  ,  "  =  q     (  )  ;  y  /   =  ,  k  "  q     (  :  ;  y  [   =  ,  )  "  q     (  )  ;  y  }   =  ,  k  q  "
+ {  &  <  >  [   ]  x  +  |  }        +  [  ]  \   *  x  {  }           +  \  /  }   z  j  {  ]           +  [  /  \   *  x  {  ]
+                                                                                                      
+    a  e  g         h  t  s           a  e  v         h  t  s           a  e  k         h  t  s           a  e  v         h  t  s
+ y  i  o SP  _   m  n  d  r  c     g  i  o SP  '   m  n  d  r  c     g  i  o SP  _   m  n  r  d  c     g  i  o SP  '   m  n  d  r  c
+ -  ?  !  u  '   f  l  v  j  b        ?  :  u  _   f  l  b  j           ?  *  u  '   f  l  b  v           ?  :  u  _   f  l  b  j
+                                                                                                      
+Fitness:       59918066           Fitness:       56427744           Fitness:       61092292           Fitness:       55866974
+Distance:      35063400           Distance:      29434715           Distance:      29465755           Distance:      28930400
+Finger work:   349671             Finger work:   456341             Finger work:   294117             Finger work:   418181
+Inward rolls:  4.81%              Inward rolls:  5.21%              Inward rolls:  5.03%              Inward rolls:  5.21%
+Outward rolls: 3.30%              Outward rolls: 3.96%              Outward rolls: 2.74%              Outward rolls: 3.95%
+Same hand:     32.43%             Same hand:     33.50%             Same hand:     32.39%             Same hand:     33.49%
+Same finger:   2.67%              Same finger:   1.93%              Same finger:   2.44%              Same finger:   1.92%
+Row change:    16.47%             Row change:    16.02%             Row change:    15.83%             Row change:    16.02%
+Home jump:     1.28%              Home jump:     1.11%              Home jump:     1.01%              Home jump:     1.11%
+Ring jump:     0.87%              Ring jump:     1.02%              Ring jump:     1.06%              Ring jump:     1.06%
+To center:     1.28%              To center:     1.30%              To center:     1.29%              To center:     1.28%
 
-Hands: 53% 46%
-    :  .  /         z  p  w
- (  )  ;  k  \   *  ,  "  =  q
- {  &  <  >  [   ]  x  +  |  }
-
-    a  e  g         h  t  s
- y  i  o SP  _   m  n  d  r  c
- -  ?  !  u  '   f  l  v  j  b
-
-Fitness:       59918066
-Distance:      35063400
-Finger work:   349671
-Inward rolls:  4.81%
-Outward rolls: 3.30%
-Same hand:     32.43%
-Same finger:   2.67%
-Row change:    16.47%
-Home jump:     1.28%
-Ring jump:     0.87%
-To center:     1.28%

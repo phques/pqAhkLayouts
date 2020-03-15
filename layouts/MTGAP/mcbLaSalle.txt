@@ -819,3 +819,52 @@ Row change:    15.83%
 Home jump:     1.01%
 Ring jump:     1.06%
 To center:     1.29%
+
+--------
+
+2020-03-15
+ls24spv2.3 (new weights5)
+
+brought back weights up a bit for bottom mid column
+    999, 0 ,  0  ,100, 999,  999,100, 0  , 0 ,  999,
+    90 , 50,  50 , 0 , 110,  100, 0  ,50 , 50,  90,
+    180, 220, 220, 80, 140,  135, 80, 220, 220, 180
+
+setksize beaklasalle
+setmask 011100111011111111110111111110
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[]\+ |&
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set singleKeySameFinger 0
+set keepShiftPairSpace 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set numThreads 6
+run
+
+almost same as 2.1 but swapped q " 
+which I tried doing manually now with other layouts ;-)
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 14% 12% 3.0%
+
+    -  .  !         z  p  w
+ (  )  ;  y  }   =  ,  k  q  "
+    +  [  /  \   *  x  {  ]
+
+    a  e  v         h  t  s
+ g  i  o SP  '   m  n  d  r  c
+    ?  :  u  _   f  l  b  j
+
+Fitness:       55866974
+Distance:      28930400
+Finger work:   418181
+Inward rolls:  5.21%
+Outward rolls: 3.95%
+Same hand:     33.49%
+Same finger:   1.92%
+Row change:    16.02%
+Home jump:     1.11%
+Ring jump:     1.06%
+To center:     1.28%
