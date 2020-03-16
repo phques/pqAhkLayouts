@@ -98,3 +98,29 @@ Home jump:     1.28%              Home jump:     1.11%              Home jump:  
 Ring jump:     0.87%              Ring jump:     1.02%              Ring jump:     1.06%              Ring jump:     1.06%
 To center:     1.28%              To center:     1.30%              To center:     1.29%              To center:     1.28%
 
+2020-03-15
+ls29spv2.5b 
+
+Hands: 52% 47%
+       +  ^            ]  &
+    -  .  [         z  g  k
+ /  :  ;  ,  \   {  p  )  "  $
+    <  %  >  #   }  =  |  @
+                  *
+       (  `            w  x
+    a  e  v         h  t  n
+ y  i  o SP  '   f  s  r  l  m
+    ?  !  u  _   b  d  j  q
+                  c
+Fitness:       54699676
+Distance:      29879741
+Finger work:   962895
+Inward rolls:  5.24%
+Outward rolls: 2.65%
+Same hand:     33.16%
+Same finger:   2.47%
+Row change:    17.11%
+Home jump:     2.31%
+Ring jump:     0.63%
+To center:     1.14%
+To outside:    0.00%
