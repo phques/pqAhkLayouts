@@ -35,8 +35,8 @@ setmask 011100111011111111111111001111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?$>{}[]+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set numThreads 6
 set singleKeySameFinger 0
+set numThreads 6
 run
 
 Hands: 50% 49%
@@ -73,10 +73,10 @@ setmask 011100111011111111111111001111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?$>{}[]+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set numThreads 6
 set singleKeySameFinger 0
 set sameHand 10
 sethandbias -15
+set numThreads 6
 run
 
 Hands: 46% 53%
@@ -115,8 +115,8 @@ setmask 011100111011111111111111001111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 10
 sethandbias -15
 set numThreads 6
@@ -176,8 +176,8 @@ setmask 011100111011111111111001001001
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;= /!?
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 10
 #sethandbias -15
 set numThreads 6
@@ -257,8 +257,8 @@ setmask 011100111011111111110111001110
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? {}
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 10
 sethandbias -35
 set numThreads 6
@@ -354,8 +354,8 @@ setmask 011100111011111111111111001111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 10
 sethandbias -15
 set numThreads 6
@@ -394,8 +394,8 @@ setmask 011100111011111111111111001111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 10
 set numThreads 6
 run
@@ -432,8 +432,8 @@ setmask 011100111011111111111111001111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 10
 sethandbias -15
 set toCenter 45
@@ -474,8 +474,8 @@ setmask 011100111011111111111111001111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 10
 set toCenter 60
 set rowChangeDown = 10
@@ -530,8 +530,8 @@ setmask 011100111011111111111111111111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?>{}[]\+|& <
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 10
 set toCenter 60
 set rowChangeDown = 10
@@ -572,8 +572,8 @@ setmask 011100111011111111111111111111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?>{}[]\+|& <
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set toCenter 60
 set numThreads 6
@@ -612,8 +612,8 @@ setmask 011100111011111111111111001111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? >{}[]+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set toCenter 60
 set numThreads 6
@@ -653,8 +653,8 @@ setmask 011100111011111111111111111111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?>{}[]\+|&$<
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set toCenter 60
 set numThreads 6
@@ -698,8 +698,8 @@ setmask 011100111011111111111111111111
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?>{}[]\+|& <
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set toCenter 60
 set numThreads 6
@@ -743,8 +743,8 @@ setmask 011100111011111111110111111110
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[]\+ |&
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set toCenter 60
 set numThreads 6
@@ -786,8 +786,8 @@ setmask 011100111011111111110111111110
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[]\+ |&
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set sameHand 50
 set toCenter 60
@@ -835,8 +835,8 @@ setmask 011100111011111111110111111110
 use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[]\+ |&
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set toCenter 60
 set keepBrackets 0
@@ -904,8 +904,8 @@ setmask 000000000000001110011100011111111110001111111100000000000000000000000001
 use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\+
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set toCenter 60
 set keepBrackets 0
@@ -969,8 +969,8 @@ setmask 000110001100001110011100011111111110001111111100000000000000000000000001
 use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\+|&$%@#^`
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 0
 set keepShiftPairSpace 0
+set singleKeySameFinger 0
 set sameHand 30
 set toCenter 60
 set keepBrackets 0
@@ -1005,7 +1005,7 @@ To center:     1.25%
 To outside:    0.00%
 
 .. eventually generated this one !!
-(weird fitness/distance/same hand/same finger all got worst )
+(weird, fitness/distance/same hand/same finger all got worst )
 2.5b
 
 Hands: 52% 47%
@@ -1048,8 +1048,8 @@ setmask 000110001100001110011100011111111110001111111100000000000000000000000001
 use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\+|&$%@#^~
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
-set singleKeySameFinger 10
 set keepShiftPairSpace 0
+set singleKeySameFinger 10
 set sameHand 30
 set toCenter 60
 set keepBrackets 0
@@ -1082,3 +1082,49 @@ Ring jump:     0.95%
 To center:     1.25%
 To outside:    0.00%
 
+----------
+
+2020-03-15
+ls28spv2.7
+
+try no thumb
+missing `~^
+
+setksize kinesis
+setmask 000110001100001110011100011111111110001111111100000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\+|&$%@#^~
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set numThreads 6
+run
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 15% 12% 3.0%
+
+          $  #            ]  &
+       -  .  >         z  p  x
+    /  :  ;  y  [   *  ,  )  "  q
+       %  +  }  \   {  =  |  <
+
+          (  @            w  v
+       a  e  k         h  t  s
+    g  i  o SP  _   m  n  d  r  c
+       ?  !  u  '   f  l  b  j
+
+Fitness:       56890940
+Distance:      32468468
+Finger work:   1397200
+Inward rolls:  4.93%
+Outward rolls: 3.51%
+Same hand:     32.34%
+Same finger:   2.11%
+Row change:    16.31%
+Home jump:     1.02%
+Ring jump:     0.88%
+To center:     1.29%
+To outside:    0.00%
