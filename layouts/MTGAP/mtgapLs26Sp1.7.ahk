@@ -11,6 +11,7 @@ space on main
 swapped , - (bring ., together, can try ,. or .,)
 added missing symbols / manual place syms
 cf mtgapLs26Sp1.7b.txt
+also changed '?:u! to :?!u' (1.7c.json)
 */
 
 ; code only includes
@@ -57,6 +58,11 @@ CreateLayers()
     ; qwertyMask := qwertyMask_std
     qwertyMask := qwertyMask_wid
     
+    if (qwertyMask == qwertyMask_std)
+        layerMaskTop :=  " 2 3 4    9 0  "
+    else
+        layerMaskTop :=  " 2 3 4    0 -  "
+
     ; ----------------------------
 
     /* Orig
@@ -70,24 +76,20 @@ CreateLayers()
     */
 
     ; syms on top /digits row 
-    if (qwertyMask == qwertyMask_std)
-        layerMaskTop :=  " 2 3 4    9 0  "
-    else
-        layerMaskTop :=  " 2 3 4    0 -  "
     layerMainTop :=  " @ # $    % ^  "
 
     layerMain := "
     (Join`r`n
            a  e  k         h  t  s
      @<+g  i  o SP  _   m  n  d  r  @>+c
-     @<+'  ?  :  u  !   f  l  v  j  @>+b
+     @<+:  ?  !  u  '   f  l  v  j  @>+b
     )"
 
     layerMainSh := "
     (Join`r`n
            A  E  K         H  T  S
-     @<+G  I  O SP  _   M  N  D  R  @>+C
-     @<+`  ~  :  U  !   F  L  V  J  @>+B
+     @<+G  I  O SP  ~   M  N  D  R  @>+C
+     @<+:  ?  !  U  ``  F  L  V  J  @>+B
     )"
 
     altGrTap := 'y' ; same-ginger with SP
