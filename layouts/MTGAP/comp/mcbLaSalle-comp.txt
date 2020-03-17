@@ -102,30 +102,29 @@ To center:     1.28%              To center:     1.30%              To center:  
 
 
 
-2020-03-15                        2020-03-15
-ls29spv2.5b                       ls28spv2.7
-                                  
-Hands: 52% 47%                    Hands: 53% 46%
-       +  ^            ]  &              $  #            ]  &
-    -  .  [         z  g  k           -  .  >         z  p  x
- /  :  ;  ,  \   {  p  )  "  $     /  :  ;  y  [   *  ,  )  "  q
-    <  %  >  #   }  =  |  @           %  +  }  \   {  =  |  <
-                  *               
-       (  `            w  x              (  @            w  v
-    a  e  v         h  t  n           a  e  k         h  t  s
- y  i  o SP  '   f  s  r  l  m     g  i  o SP  _   m  n  d  r  c
-    ?  !  u  _   b  d  j  q           ?  !  u  '   f  l  b  j
-                  c               
-Fitness:       54699676           Fitness:       56890940
-Distance:      29879741           Distance:      32468468
-Finger work:   962895             Finger work:   1397200
-Inward rolls:  5.24%              Inward rolls:  4.93%
-Outward rolls: 2.65%              Outward rolls: 3.51%
-Same hand:     33.16%             Same hand:     32.34%
-Same finger:   2.47%              Same finger:   2.11%
-Row change:    17.11%             Row change:    16.31%
-Home jump:     2.31%              Home jump:     1.02%
-Ring jump:     0.63%              Ring jump:     0.88%
-To center:     1.14%              To center:     1.29%
-To outside:    0.00%              To outside:    0.00%
-
+2020-03-15                        2020-03-15                        2020-03-16                        
+ls29spv2.5b                       ls28spv2.7                        ls28spv2.8
+                                                                    
+Hands: 52% 47%                    Hands: 53% 46%                    Hands: 53% 46%
+       +  ^            ]  &              $  #            ]  &           @  +               ]  &
+    -  .  [         z  g  k           -  .  >         z  p  x           -  .  >         z  p  x
+ /  :  ;  ,  \   {  p  )  "  $     /  :  ;  y  [   *  ,  )  "  q     /  :  ;  y  [   *  ,  )  "  q
+    <  %  >  #   }  =  |  @           %  +  }  \   {  =  |  <           <  %  }  \   {  =  |  #
+                  *                                                 
+       (  `            w  x              (  @            w  v           $  (               w  v
+    a  e  v         h  t  n           a  e  k         h  t  s           a  e  k         h  t  s
+ y  i  o SP  '   f  s  r  l  m     g  i  o SP  _   m  n  d  r  c     g  i  o SP  _   m  n  d  r  c
+    ?  !  u  _   b  d  j  q           ?  !  u  '   f  l  b  j           ?  !  u  '   f  l  b  j
+                  c                                                 
+Fitness:       54699676           Fitness:       56890940           Fitness:       56673932
+Distance:      29879741           Distance:      32468468           Distance:      32302780
+Finger work:   962895             Finger work:   1397200            Finger work:   1409400
+Inward rolls:  5.24%              Inward rolls:  4.93%              Inward rolls:  4.93%
+Outward rolls: 2.65%              Outward rolls: 3.51%              Outward rolls: 3.52%
+Same hand:     33.16%             Same hand:     32.34%             Same hand:     32.34%
+Same finger:   2.47%              Same finger:   2.11%              Same finger:   2.09%
+Row change:    17.11%             Row change:    16.31%             Row change:    16.31%
+Home jump:     2.31%              Home jump:     1.02%              Home jump:     1.02%
+Ring jump:     0.63%              Ring jump:     0.88%              Ring jump:     0.88%
+To center:     1.14%              To center:     1.29%              To center:     1.29%
+To outside:    0.00%              To outside:    0.00%              To outside:    0.00%

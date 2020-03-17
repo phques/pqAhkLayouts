@@ -1131,6 +1131,7 @@ To outside:    0.00%
 
 -----
 
+2020-03-16
 ls28spv2.8
 missing `~^
 no thumb
@@ -1192,6 +1193,7 @@ To outside:    0.00%
 
 -----
 
+2020-03-16
 ls28spv2.9
 missing `~^
 no thumb
