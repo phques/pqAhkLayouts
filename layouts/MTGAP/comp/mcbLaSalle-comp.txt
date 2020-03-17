@@ -102,7 +102,7 @@ To center:     1.28%              To center:     1.30%              To center:  
 
 
 
-2020-03-15                        2020-03-15                        2020-03-16                        
+2020-03-15                        2020-03-15                        2020-03-16                                                
 ls29spv2.5b                       ls28spv2.7                        ls28spv2.8
                                                                     
 Hands: 52% 47%                    Hands: 53% 46%                    Hands: 53% 46%
@@ -128,3 +128,6 @@ Home jump:     2.31%              Home jump:     1.02%              Home jump:  
 Ring jump:     0.63%              Ring jump:     0.88%              Ring jump:     0.88%
 To center:     1.14%              To center:     1.29%              To center:     1.29%
 To outside:    0.00%              To outside:    0.00%              To outside:    0.00%
+
+
+

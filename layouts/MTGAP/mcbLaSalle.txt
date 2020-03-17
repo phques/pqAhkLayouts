@@ -1239,3 +1239,56 @@ Ring jump:     0.88%
 To center:     1.29%
 To outside:    0.00%
 
+-----
+
+2020-03-17
+ls28spv3.0
+
+higher weights for digits top row
+            999, 999, 220, 200, 999, 999,   999, 999, 200, 220, 999, 999, 
+            999, 999, 0,   0 ,  100, 999,   999, 100, 0  , 0,   999, 999, 
+            999, 90 , 50,  50 , 0 ,  110,   100, 0 ,  50 , 50,  90,  999, 
+            999, 999, 230, 220, 80,  140,   135, 80,  220, 230, 999, 999, 
+            //  thumbs !? only really have one : spacebar ..
+            999, 999, 999, 999, 999, 999,   999, 999, 999, 999, 999, 999,   
+            999, 999, 999, 999, 999, 999,   999, 999, 999, 999, 999, 100, 
+
+setksize kinesis
+setmask 001100001100001110011100011111111110001111111100000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\+|&$%@#^~
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set numThreads 6
+run
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 16% 10% 3.0%
+
+       @  &               ]  +
+       -  .  >         z  w  p
+    /  :  ;  y  [   *  ,  )  "  =
+       <  %  }  \   {  x  |  #
+
+       $  (               v  q
+       a  e  k         h  t  s
+    g  i  o SP  _   m  n  r  d  c
+       ?  !  u  '   f  l  b  j
+
+Fitness:       56960447
+Distance:      30365390
+Finger work:   1123320
+Inward rolls:  4.97%
+Outward rolls: 2.72%
+Same hand:     32.35%
+Same finger:   2.46%
+Row change:    16.04%
+Home jump:     1.11%
+Ring jump:     1.04%
+To center:     1.28%
+To outside:    0.00%
+
