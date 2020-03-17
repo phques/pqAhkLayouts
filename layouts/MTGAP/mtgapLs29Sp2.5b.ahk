@@ -36,7 +36,7 @@ CreateLayers()
     ; this is habt breaking ! so leave dualMode on real shift keys
     qwertyMask_std := "
     (Join`r`n
-          2 3          9 0
+           3 4         9 0
           w e r      u i o
        @a s d f g  h j k l @;
         z x c v    n m , . 
@@ -44,7 +44,7 @@ CreateLayers()
 
     qwertyMask_wid := "
     (Join`r`n
-          2 3          0 -
+           3 4         0 -
           w e r      i o p   
        @a s d f g  j k l ; @'
         z x c v    m , . /   
