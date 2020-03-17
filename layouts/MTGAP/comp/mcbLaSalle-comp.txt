@@ -49,6 +49,7 @@ Ring jump:     1.29%              Ring jump:     1.95%              Ring jump:  
 To center:     2.51%              To center:     2.55%              To center:     2.35%        To center:     2.58%              To center:     2.59%
 
 
+
 2020-03-07                        2020-03-08                        2020-03-08                        2020-03-09
 ls24spv1.4 (new weights)          ls24spv1.5 (new weights)          ls26spv1.6                        ls26spv1.7 
                                                                                                       
@@ -74,6 +75,7 @@ Ring jump:     1.11%              Ring jump:     1.15%              Ring jump:  
 To center:     1.38%              To center:     0.73%              To center:     1.28%              To center:     1.16%
 
 
+
 2020-03-11                        2020-03-15                        2020-03-15                        2020-03-15
 ls26sp2.0 (sp1.7, new weights3)   ls24spv2.1 (new weights2)         ls24spv2.2 (new weights4)         ls24spv2.3 (new weights5)
                                                                                                       
@@ -97,6 +99,8 @@ Row change:    16.47%             Row change:    16.02%             Row change: 
 Home jump:     1.28%              Home jump:     1.11%              Home jump:     1.01%              Home jump:     1.11%
 Ring jump:     0.87%              Ring jump:     1.02%              Ring jump:     1.06%              Ring jump:     1.06%
 To center:     1.28%              To center:     1.30%              To center:     1.29%              To center:     1.28%
+
+
 
 2020-03-15                        2020-03-15
 ls29spv2.5b                       ls28spv2.7
