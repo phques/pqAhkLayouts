@@ -130,29 +130,31 @@ To center:     1.14%              To center:     1.29%              To center:  
 To outside:    0.00%              To outside:    0.00%              To outside:    0.00%              To outside:    0.00%
 
 
-2020-03-17
-ls28spv3.0
+2020-03-17                        2020-03-17
+ls28spv3.0                        ls28spv3.1
+                                  
+Hands: 53% 46%                    Hands: 53% 46%
+    @  &               ]  +           %  [               ]  &
+    -  .  >         z  w  p           -  .  /         x  w  p
+ /  :  ;  y  [   *  ,  )  "  =     (  )  ;  y  \   *  ,  "  =  z
+    <  %  }  \   {  x  |  #           @  <  >  #   {  }  +  |
+                                  
+    $  (               v  q           ?  :               v  q
+    a  e  k         h  t  s           a  e  k         h  t  s
+ g  i  o SP  _   m  n  r  d  c     g  i  o SP  '   m  n  r  d  c
+    ?  !  u  '   f  l  b  j           !  $  u  _   f  l  b  j
+                                  
+Fitness:       56960447           Fitness:       57038072
+Distance:      30365390           Distance:      30305200
+Finger work:   1123320            Finger work:   1118330
+Inward rolls:  4.97%              Inward rolls:  5.05%
+Outward rolls: 2.72%              Outward rolls: 2.76%
+Same hand:     32.35%             Same hand:     32.43%
+Same finger:   2.46%              Same finger:   2.45%
+Row change:    16.04%             Row change:    15.90%
+Home jump:     1.11%              Home jump:     1.07%
+Ring jump:     1.04%              Ring jump:     1.08%
+To center:     1.28%              To center:     1.27%
+To outside:    0.00%              To outside:    0.00%
 
-Hands: 53% 46%
-    @  &               ]  +
-    -  .  >         z  w  p
- /  :  ;  y  [   *  ,  )  "  =
-    <  %  }  \   {  x  |  #
 
-    $  (               v  q
-    a  e  k         h  t  s
- g  i  o SP  _   m  n  r  d  c
-    ?  !  u  '   f  l  b  j
-
-Fitness:       56960447
-Distance:      30365390
-Finger work:   1123320
-Inward rolls:  4.97%
-Outward rolls: 2.72%
-Same hand:     32.35%
-Same finger:   2.46%
-Row change:    16.04%
-Home jump:     1.11%
-Ring jump:     1.04%
-To center:     1.28%
-To outside:    0.00%

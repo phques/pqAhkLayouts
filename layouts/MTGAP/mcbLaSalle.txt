@@ -1292,3 +1292,50 @@ Ring jump:     1.04%
 To center:     1.28%
 To outside:    0.00%
 
+-----
+
+2020-03-17
+ls28spv3.1
+
+ver set keepBrackets 1
+only syms & Z placed diff.
+
+setksize kinesis
+setmask 001100001100001110011100011111111110001111111100000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\+|&$%@#^~
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set numThreads 6
+run
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 16% 10% 3.0%
+
+       %  [               ]  &
+       -  .  /         x  w  p
+    (  )  ;  y  \   *  ,  "  =  z
+       @  <  >  #   {  }  +  |
+
+       ?  :               v  q
+       a  e  k         h  t  s
+    g  i  o SP  '   m  n  r  d  c
+       !  $  u  _   f  l  b  j
+
+Fitness:       57038072
+Distance:      30305200
+Finger work:   1118330
+Inward rolls:  5.05%
+Outward rolls: 2.76%
+Same hand:     32.43%
+Same finger:   2.45%
+Row change:    15.90%
+Home jump:     1.07%
+Ring jump:     1.08%
+To center:     1.27%
+To outside:    0.00%
+

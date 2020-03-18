@@ -1,67 +1,58 @@
-
-as of 2020-03-16
 best of my layouts mtap lasalle (that I'm taking interest into)
 tests on KLA, using compound texts alice+jonathan+prince+farm+dragonboy
+
+--------------
+as of 2020-03-17
+
+** std US kbd KLA versions  **
+  (altGr thumb on space)
+
+22:25 ..
+NEW, noticed same finger TR in 3.1b,
+  checked 2.8 and RD are swapped,
+  tried that in 3.1 !! and best results yet
+
+  ...
+considering 3.1b, 2.8b, 3.0b 2.1c
+
+--3.1b vs 2.8b,
+3.1b > 'same'
+after analysis is seems to be because higher (single finger & hand) thumb use.
+since I use SP as thumb key for altGr and it can only be ONE thumb on KLA,
+in real life this would alternate left/right and that part of the score would be better
+
+2.8 was created w. lower weights on top digits row, 
+it has <sameFinger but >dist/fingerCost
+
+--3.1b vs 3.0,
+similar, 3.1 has better placed syms ('keepBrackets=1')
+
+
+--------------
+as of 2020-03-16
 
 considering 2.8, 2.5b 2.5b has similar values to 2.8 except higher sameHand
 cant say I like 2.5b, french in particular was not very good on quick test
 2.1cb ?
 
+** MATRIX form !!**
+
 mtgapLs28Sp2.8(b)  (swap ,-)
 #1  +0%  73.33  missing: `~^
-
-       @  +               ]  &
-       ,  .  >         z  p  x
-    /  :  ;  y  [   *  -  )  "  q
-       <  %  }  \   {  =  |  #
-
-       $  (               w  v
-       a  e  k         h  t  s
-    g  i  o SP  _   m  n  d  r  c
-       ?  !  u  '   f  l  b  j
-
 
 mtgapLs24Sp2.1cb  (manually modified 2.1)
 #2  +4%  76.22
 
-    @ # $                  % ^     
-    a e k                h t s     
-  g i o ␣ '            m n d r c   
-    ? : u _            f l b j     
-
-    , . !                z p w     
-  ( ) ; y /            = - v q "   
-    + [ ] \            * x { }     
-
-
 mtgapLs24Sp2.3b
 #4  +4%  76.55  missing: `~@#$%^&|<>
 
-    a e v                h t s     
-  g i o ␣ '            m n d r c   
-    ? : u _            f l b j     
-
-    , . !                z p w     
-  ( ) ; y }            = - k q "   
-    + [ / \            * x { ] 
-
-
 mtgapLs29Sp2.5b
 #6  +4%  76.93  missing: ~
-
-    ( `                    w x     
-    a e v                h t n     
-  y i o ␣ '            f s r l m   
-    ? ! u _            b d j q     
-          c                                                                                  
-    + ^                    ] &     
-    - . [                z g k     
-  / : ; , \            { p ) " $   
-    < % > #            } = | @     
-          *                  
 
 
 compared to a favorite of mine
 BEAKL PLLT x1
 #8  +11%  81.39
 this one's advantage: "easy", syms placed logically
+
+--------------
