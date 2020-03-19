@@ -1,0 +1,43 @@
+If I could have 4 layers (main, mainShift, altGr, altGrSh) in the optimizer,
+how would I design a layout ?
+
+
+21 sym keys,     42 syms (includes 0-9)
+26 letters keys  52 chars
+=
+47 keys          94 syms/chars
+
+with 4 layers, need 24keys = 96syms
+
+--
+but using numpad, remove 0-9
+so 84 syms/chars
+with 4 layers, need exactly 21keys
+
+----
+
+min beakl keys = 9+2 * 2 = 22
+ wer   uio
+asdfg hjkl;
+ zxc   m,.
+
+----
+
+min lasalle keys = 18 (9x2)
+(here I really want to keep only the good keys)
+ wer   uio
+asdfg hjkl;
+   c   m
+
+need 21, has 18 so need 3 more
+add 4 (2x2) keys, 1 extra !
+  3     9
+ wer   uio
+asdfg hjkl;
+   cv nm
+
+or try exactly 21 (dont use v)
+  3     9
+ wer   uio
+asdfg hjkl;
+   c  nm
