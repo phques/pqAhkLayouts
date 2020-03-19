@@ -2,6 +2,17 @@ best of my layouts mtap lasalle (that I'm taking interest into)
 tests on KLA, using compound texts alice+jonathan+prince+farm+dragonboy
 
 --------------
+as of 2020-03-18
+
+** std US kbd KLA versions  **
+  (altGr thumb on space)
+
+3.3b (3.3 swap ,')
+vs 3.1bRD very similar
+3.3b has lower sameFinger and finger Use
+
+
+--------------
 as of 2020-03-17
 
 ** std US kbd KLA versions  **
@@ -10,7 +21,7 @@ as of 2020-03-17
 22:25 ..
 NEW, noticed same finger TR in 3.1b,
   checked 2.8 and RD are swapped,
-  tried that in 3.1 !! and best results yet
+  tried that in 3.1 !! and best results yet 3.1.bRD
 
   ...
 considering 3.1b, 2.8b, 3.0b 2.1c

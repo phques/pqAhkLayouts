@@ -1298,7 +1298,7 @@ To outside:    0.00%
 ls28spv3.1
 
 ver set keepBrackets 1
-only syms & Z placed diff.
+only syms & Z placed diff. (vs 3.0)
 
 setksize kinesis
 setmask 001100001100001110011100011111111110001111111100000000000000000000000000
@@ -1339,3 +1339,117 @@ Ring jump:     1.08%
 To center:     1.27%
 To outside:    0.00%
 
+-----
+
+2020-03-18
+ls28spv3.2
+
+set keepBrackets 0
+higher samefinger +30
+
+normal
+sameFingerP = 150
+sameFingerR = 140
+sameFingerM = 110
+sameFingerI = 90
+
+setksize kinesis
+setmask 001100001100001110011100011111111110001111111100000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\+|&$%@#^~
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+run
+
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 15% 11% 3.0%
+
+       @  &               ]  |
+       -  .  >         z  p  x
+    /  )  ;  y  [   *  ,  k  "  :
+       <  %  }  \   {  =  +  #
+
+       $  (               w  q
+       a  e  v         h  t  s
+    g  i  o SP  _   m  n  d  r  c
+       ?  !  u  '   f  l  b  j
+
+Fitness:       57554922
+Distance:      31792340
+Finger work:   1286260
+Inward rolls:  5.24%
+Outward rolls: 3.92%
+Same hand:     33.49%
+Same finger:   1.94%
+Row change:    16.48%
+Home jump:     1.00%
+Ring jump:     1.02%
+To center:     1.29%
+To outside:    0.00%
+
+
+-----
+
+2020-03-18
+ls28spv3.3
+
+set keepBrackets 1
+higher samefinger +30
+
+normal
+sameFingerP = 150
+sameFingerR = 140
+sameFingerM = 110
+sameFingerI = 90
+
+setksize kinesis
+setmask 001100001100001110011100011111111110001111111100000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\+|&$%@#^~
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+run
+
+       %  [               ]  +
+       -  .  /         *  p  x
+    (  )  ;  y  \   =  ,  k  "  q
+       @  <  >  #   {  }  |  &
+
+       ?  :               w  z
+       a  e  v         h  t  s
+    g  i  o SP  '   m  n  d  r  c
+       !  $  u  _   f  l  b  j
+
+Fitness:       57615172
+Distance:      31681480
+Finger work:   1284180
+Inward rolls:  5.26%
+Outward rolls: 3.90%
+Same hand:     33.50%
+Same finger:   1.92%
+Row change:    16.38%
+Home jump:     1.04%
+Ring jump:     1.03%
+To center:     1.27%
+To outside:    0.00%
+
+can do the usual 3.3(b) and swap ,-
