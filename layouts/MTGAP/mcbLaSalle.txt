@@ -1453,3 +1453,265 @@ To center:     1.27%
 To outside:    0.00%
 
 can do the usual 3.3(b) and swap ,-
+
+
+--------
+
+2020-03-19
+ls21spv3.4
+
+(cf defining4LayersReq.txt)
+try for min nbr keys, exactly 21 ! (dont use v, no thumb)
+  3     9
+ wer   uio
+asdfg hjkl;
+   c  nm
+
+0 0 0 1 0 0   0 0 1 0 0 0 
+0 0 1 1 1 0   0 1 1 1 0 0 
+0 1 1 1 1 1   1 1 1 1 1 0 
+0 0 0 0 1 0   1 1 0 0 0 0 
+0 0 0 0 0 0   0 0 0 0 0 0   
+0 0 0 0 0 0   0 0 0 0 0 0 
+
+syms from allCharsStd
+,.-"_')(;=:/*!?$>{}[]\+|&<%@#^`~
+
+21keys : 42chars (including SP)
+abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?  $>{}[]\+|&<%@#^`~
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000010110000000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set numThreads 4
+run
+
+Hands: 54% 45%
+Fingers: 2.0% 13% 17% 23% 0.00% 0.00% 18% 15% 10% 3.0%
+
+          ?               *
+       -  .  !         j  w  b
+    (  )  ;  y  /   =  ,  k  "  q
+             :      z  x
+
+          '               v
+       a  e  p         h  t  s
+    g  i  o SP  _   m  n  r  d  c
+             u      f  l
+
+Fitness:       56241586
+Distance:      28230645
+Finger work:   1174366
+Inward rolls:  4.98%
+Outward rolls: 2.84%
+Same hand:     33.17%
+Same finger:   2.99%
+Row change:    16.38%
+Home jump:     1.12%
+Ring jump:     1.19%
+To center:     1.00%
+To outside:    0.00%
+
+high samefinger .. swap RD show apply
+swap ,- helps
+
+--------
+
+2020-03-19
+ls21spv3.5
+
+set keepBrackets 0
+higher samefinger +30
+
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000010110000000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+run
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 16% 10% 3.0%
+
+          ?               *
+       -  .  !         :  w  p
+    (  )  ;  y  /   q  ,  b  j  "
+             z      =  x
+
+          '               v
+       a  e  k         h  t  s
+    g  i  o SP  _   m  n  r  d  c
+             u      f  l
+
+Fitness:       56858619
+Distance:      27682635
+Finger work:   1016559
+Inward rolls:  4.91%
+Outward rolls: 2.71%
+Same hand:     32.45%
+Same finger:   2.30%
+Row change:    15.91%
+Home jump:     1.04%
+Ring jump:     1.10%
+To center:     1.13%
+To outside:    0.00%
+
+
+--------
+
+2020-03-19
+ls21spv3.6
+
+set keepBrackets 1
+higher samefinger +30
+
+** exactly same results as 3.5
+
+--------
+
+2020-03-19
+ls21spv3.7
+
+set keepBrackets 0
+try min set of syms to use as base to create 4 layers full layout
+according to adnw opt english-t (dont think it takes programming in consideration)
+16825 .
+16766 ,
+13049 v
+9452 k 
+5003 - 
+4529 T 
+4180 ' 
+4110 " 
+..
+661 ; 
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000010110000000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"'``````````
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set numThreads 4
+run
+
+Hands: 54% 45%
+Fingers: 2.0% 13% 17% 23% 0.00% 0.00% 18% 15% 10% 3.0%
+
+bad same finger (TR?)
+          `               `
+       -  .  `         z  w  b
+    `  `  "  y  `   `  ,  k  x  q
+             `      `  j
+
+          `               v
+       a  e  p         h  t  s
+    g  i  o SP  '   m  n  r  d  c
+             u      f  l
+
+Fitness:       52827504
+Distance:      26845810
+Finger work:   1158764
+Inward rolls:  4.97%
+Outward rolls: 3.00%
+Same hand:     32.94%
+Same finger:   2.91%
+Row change:    16.18%
+Home jump:     1.07%
+Ring jump:     1.18%
+To center:     0.96%
+To outside:    0.00%
+
+
+--------
+
+2020-03-19
+ls21spv3.8
+
++sameFinger
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000010110000000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-"'``````````
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+run
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 16% 10% 3.0%
+
+bad same finger (TR?)
+
+          `               `
+       -  .  `         z  w  p
+    `  `  "  y  `   `  ,  b  j  q
+             `      `  x
+
+          `               v
+       a  e  k         h  t  s
+    g  i  o SP  '   m  n  r  d  c
+             u      f  l
+
+Fitness:       53456449
+Distance:      26268820
+Finger work:   1039199
+Inward rolls:  4.89%
+Outward rolls: 2.84%
+Same hand:     32.12%
+Same finger:   2.28%
+Row change:    15.67%
+Home jump:     0.99%
+Ring jump:     1.06%
+To center:     1.10%
+To outside:    0.00%
+
+
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000010110000000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz ,.-````````````
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+run
