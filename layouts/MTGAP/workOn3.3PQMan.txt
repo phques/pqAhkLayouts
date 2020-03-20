@@ -1,0 +1,142 @@
+trying my hand at doing manual placement of syms/punx 
+based on existing layouts
+
+-----------
+2020-03-19
+ls21spv3.8  'base' min sysm in it
+base does not seems to have good results .. try something else
+(cf 3.3 below)
+
+          `               `
+       -  .  `         z  w  p
+    `  `  "  y  `   `  ,  b  j  q
+             `      `  x
+
+          `               v
+       a  e  k         h  t  s
+    g  i  o SP  '   m  n  r  d  c
+             u      f  l
+
+
+,.-"_')(;=:/*!?$>{}[]\+|&<%@#^`~
+    _ )(;=:/*!?$>{}[]\+|&<%@#^`~
+
+	          ~               ~
+	       -  .  ~         z  w  p
+	    ~  ~  "  y  ~   ~  ,  b  j  q
+	             ~      ~  x
+
+	          ~               ~
+	       ~  ~  ~         Z  W  P
+	    ~  ~  ~  Y  ~   ~  ~  B  J  Q
+	             ~      ~  X
+
+	          ~               v
+	       a  e  k         h  t  s
+	    g  i  o SP  '   m  n  r  d  c
+	             u      f  l
+
+	          ~               V
+	       A  E  K         H  T  S
+	    G  I  O SP  ~   M  N  R  D  C
+	             U      F  L
+
+------------------
+2020-03-18
+ls28spv3.3 one of my best results on KLA (US kbd)
+
+       %  [               ]  +
+       -  .  /         *  p  x
+    (  )  ;  y  \   =  ,  k  "  q
+       @  <  >  #   {  }  |  &
+
+       ?  :               w  z
+       a  e  v         h  t  s
+    g  i  o SP  '   m  n  d  r  c
+       !  $  u  _   f  l  b  j
+
+
+3.3 PQ : 3.3, remove syms and Z and place by hand
+
+forgot to count SP .. so missing 1 spot!
+need +1key
+
+
+from mtgap allCharsStd:
+,.-"_')(;=:/*!?$>{}[]\+|&<%@#^`~
+   ^`~ ->   0=empty spot
+
+          \               B   
+       &  |  0         J  P  X
+    $  [  %  Y  ^   #  @  K  ]  Q
+             <  0   Z  >      
+
+          /               b   
+       -  .  :         j  p  x
+    *  {  ;  y  +   =  ,  k  }  q
+             (  >   z  )               <== extra > so I can do ->
+
+          !               w   
+       a  e  v         h  t  s
+    g  i  o SP  '   m  n  d  r  c
+             u  `   f  l      
+
+          ?               W   
+       A  E  V         H  T  S
+    G  I  O  _  "   M  N  D  R  C
+             U  ~   F  L     
+
+
+after testing on KLA,
+got 3.3pq1b3
+(b): good old swap ,-
+Then, looking at sameFinger, realized right pinky had high sameFinger ??
+turns out that moving CR to mid column (and then swap Tab Cr so Cr is on Left hand)
+gives me best results yet !
+
+
+-- missing 1key, forgot to count SP
+   miss ^`~
+
+          \               B   
+       &  |  ^         J  P  X
+    $  [  %  Y  0   #  @  K  ]  Q
+             <      Z  >      
+
+          /               b   
+       -  .  :         j  p  x
+    *  {  ;  y  +   =  ,  k  }  q
+             (      z  )      
+
+          !               w   
+       a  e  v         h  t  s
+    g  i  o SP  '   m  n  d  r  c
+             u      f  l      
+
+          ?               W   
+       A  E  V         H  T  S
+    G  I  O  _  "   M  N  D  R  C
+             U      F  L      
+
+
+--- forgot BJ !
+          ~               ~   
+       &  |  ~         Z  P  X
+    ~  [  ~  Y  ~   ~  ~  K  ]  Q
+             ~      \  ~      
+
+          <               >   
+       -  .  :         z  p  x
+    *  {  ;  y  +   =  ,  k  }  q
+             (      /  )      
+
+          !               w   
+       a  e  v         h  t  s
+    g  i  o SP  '   m  n  d  r  c
+             u      f  l      
+
+          ?               W   
+       A  E  V         H  T  S
+    G  I  O  _  "   M  N  D  R  C
+             U      F  L      
+
