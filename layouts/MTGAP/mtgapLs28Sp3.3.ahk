@@ -131,6 +131,11 @@ CreateLayers()
         main.AddMappingsFromTo("n", "Control", true)
         altGr.AddMappingsFromTo("n", "Control", false)
         altGr.AddMappingsFromTo("n", "Control", true)
+
+        main.AddMappingsFromTo( "h", "Alt", false)
+        main.AddMappingsFromTo( "h", "Alt", true)
+        altGr.AddMappingsFromTo("h", "Alt", false)
+        altGr.AddMappingsFromTo("h", "Alt", true)
     }
 
     main.AddMappingsFromTo("q", "Esc", false)
