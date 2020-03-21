@@ -55,11 +55,14 @@ ls28spv3.3 one of my best results on KLA (US kbd)
     g  i  o SP  '   m  n  d  r  c
        !  $  u  _   f  l  b  j
 
-
-3.3 PQ : 3.3, remove syms and Z and place by hand
+------
+2020-03-19
+ls22Sp3.3pq1 : 
+  take min keys (cf defining4LayersReq.txt) based on 3.3
+  remove syms and BJZ and place them by hand
 
 forgot to count SP .. so missing 1 spot!
-need +1key
+need +1key (so 4 new spots !)
 
 
 from mtgap allCharsStd:
@@ -87,56 +90,89 @@ from mtgap allCharsStd:
              U  ~   F  L     
 
 
-after testing on KLA,
-got 3.3pq1b3
+after testing on KLA, and tweaking
+got 3.3pq1b3 (best yet)
 (b): good old swap ,-
 Then, looking at sameFinger, realized right pinky had high sameFinger ??
 turns out that moving CR to mid column (and then swap Tab Cr so Cr is on Left hand)
 gives me best results yet !
 
+Note: doing this CR-Tab thing on next best 3.3b made that one best !!
 
--- missing 1key, forgot to count SP
-   miss ^`~
+
+===================
+2020-03-20
+ls28spv3.9 newest best results on KLA (US kbd)
+moved CR on main too !
+
+       &  ]               }  +
+       )  .  [         z  p  v
+    /  :  (  y  \   =  ,  k  "  ;
+       <  %  !  @   *  x  {  |
+
+       ?  '               w  q
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       $  >  u  _   f  l  b  j
+
+
+-- 4.1 -1key on top right -1key top bottom
+this one places for me two of the keys I had to place
+       ?  '               w
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       *  /  u  _   f  l  b
+
+       |  ]               }
+       )  .  [         x  p  v
+    !  :  (  y  >   q  ,  k  "  ;
+       <  +  z  \   =  j  {
+
+
+-- 4.1pq2 based on 4.1 (adjusted 3.3pq1 to use base chars/main punx of 4.1)
+bxpkjqv
+bjpxkq
+q =#  Might want to keep Q on same spot as 3.3pq1 (swap q =) ?
+Also consider the good old -, swap
+
+          !               w   
+       a  e Cr         h  t  s
+    g  i  o SP  '   m  n  d  r  c
+             u  `   f  l      
+
+          ?               W   
+       A  E  +Cr       H  T  S
+    G  I  O  _  "   M  N  D  R  C
+             U  ~   F  L     
+
+          /               b   
+       -  .  :         x  p  v
+    *  {  ;  y  +   q  ,  k  }  =
+             (  z   j  )
 
           \               B   
-       &  |  ^         J  P  X
-    $  [  %  Y  0   #  @  K  ]  Q
-             <      Z  >      
+       &  |  -         X  P  V
+    $  [  %  Y  ^   Q  @  K  ]  #
+             <  Z   J  >      
+
+   
+---
+          \               B   
+       &  |  0         J  P  X
+    $  [  %  Y  ^   #  @  K  ]  Q
+             <  0   Z  >      
 
           /               b   
        -  .  :         j  p  x
     *  {  ;  y  +   =  ,  k  }  q
-             (      z  )      
+             (  >   z  )               <== extra > so I can do ->
 
           !               w   
        a  e  v         h  t  s
     g  i  o SP  '   m  n  d  r  c
-             u      f  l      
+             u  `   f  l      
 
           ?               W   
        A  E  V         H  T  S
     G  I  O  _  "   M  N  D  R  C
-             U      F  L      
-
-
---- forgot BJ !
-          ~               ~   
-       &  |  ~         Z  P  X
-    ~  [  ~  Y  ~   ~  ~  K  ]  Q
-             ~      \  ~      
-
-          <               >   
-       -  .  :         z  p  x
-    *  {  ;  y  +   =  ,  k  }  q
-             (      /  )      
-
-          !               w   
-       a  e  v         h  t  s
-    g  i  o SP  '   m  n  d  r  c
-             u      f  l      
-
-          ?               W   
-       A  E  V         H  T  S
-    G  I  O  _  "   M  N  D  R  C
-             U      F  L      
-
+             U  ~   F  L     

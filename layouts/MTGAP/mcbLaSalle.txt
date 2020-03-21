@@ -1722,13 +1722,14 @@ run
 2020-03-20
 ls28spv3.9
 
-changed 3.3 add \n  <-- cannot enter it w. "use" !!
+#^
+changed 3.3 add \n 
 no keepbrackets
 no +samefinger
 
 setksize kinesis
 setmask 001100001100001110011100011111111110001111111100000000000000000000000000
-use abcdefghijklmnopqrstuvwxyz \n,.-"_')(;=:/*!?<>{}[]\+|&$%@#^
+use abcdefghijklmnopqrstuvwxyz \n,.-"_')(;=:/*!?<>{}[]\\+|&$%@
 set keepShiftPairLetters 0
 set keepShiftPairOther 0
 set keepShiftPairSpace 0
@@ -1738,3 +1739,278 @@ set toCenter 60
 set keepBrackets 0
 set numThreads 4
 run
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 17% 22% 0.00% 0.00% 18% 16% 10% 3.0%
+
+       &  ]               }  +
+       )  .  [         z  w  p
+    /  :  (  y  \   =  ,  k  "  ;
+       <  %  !  @   *  x  {  |
+
+       ?  '               v  q
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  r  d  c
+       $  >  u  _   f  l  b  j
+
+Fitness:       59993115
+Distance:      31525420
+Finger work:   1128930
+Inward rolls:  5.11%
+Outward rolls: 2.65%
+Same hand:     32.49%
+Same finger:   2.37%
+Row change:    15.78%
+Home jump:     1.12%
+Ring jump:     1.17%
+To center:     1.28%
+To outside:    0.00%
+
+
+-----
+
+2020-03-20
+ls28spv3.9
+
+changed 3.3 add \n 
+no keepbrackets
++samefinger
+
+setksize kinesis
+setmask 001100001100001110011100011111111110001111111100000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz \n,.-"_')(;=:/*!?<>{}[]\\+|&$%@
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+run
+
+missing: `~#^
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 17% 22% 0.00% 0.00% 18% 15% 11% 3.0%
+
+       &  ]               }  +
+       )  .  [         z  p  v
+    /  :  (  y  \   =  ,  k  "  ;
+       <  %  !  @   *  x  {  |
+
+       ?  '               w  q
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       $  >  u  _   f  l  b  j
+
+Fitness:       60605829
+Distance:      32609620
+Finger work:   1388569
+Inward rolls:  5.05%
+Outward rolls: 3.44%
+Same hand:     32.48%
+Same finger:   2.03%
+Row change:    16.11%
+Home jump:     1.12%
+Ring jump:     1.01%
+To center:     1.28%
+To outside:    0.00%
+
+-----
+
+2020-03-20
+ls28spv4.0
+
+changed 3.9, remove 1 key on top
+
+setksize kinesis
+setmask 001100001000001110011100011111111110001111111100000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz \n,.-"_')(;=:/*!?<>{}[]\\+|&$%@
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+run
+
+missing: `~@#%^
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 17% 22% 0.00% 0.00% 18% 15% 11% 3.0%
+
+       &  ]               }
+       )  .  [         q  p  v
+    $  :  (  y  >   =  ,  k  "  ;
+       <  +  !  \   z  x  {  |
+
+       ?  '               w
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       *  /  u  _   f  l  b  j
+
+Fitness:       60615745
+Distance:      32514095
+Finger work:   1365130
+Inward rolls:  5.06%
+Outward rolls: 3.45%
+Same hand:     32.59%
+Same finger:   2.04%
+Row change:    16.14%
+Home jump:     1.14%
+Ring jump:     1.02%
+To center:     1.27%
+To outside:    0.00%
+
+-----
+
+2020-03-20
+ls28spv4.1
+
+changed 3.9, -1key on top right, -1key bottom right
+
+0 0 1 1 0 0   0 0 1 0 0 0 
+0 0 1 1 1 0   0 1 1 1 0 0 
+0 1 1 1 1 1   1 1 1 1 1 0 
+0 0 1 1 1 1   1 1 1 0 0 0 
+0 0 0 0 0 0   0 0 0 0 0 0   
+0 0 0 0 0 0   0 0 0 0 0 0
+
+setksize kinesis
+setmask 001100001000001110011100011111111110001111111000000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz \n,.-"_')(;=:/*!?<>{}[]\\+|&$%@
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+run
+
+missing: $&%@#^`~
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 17% 22% 0.00% 0.00% 18% 15% 11% 3.0%
+
+       |  ]               }
+       )  .  [         x  p  v
+    !  :  (  y  >   q  ,  k  "  ;
+       <  +  z  \   =  j  {
+
+       ?  '               w
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       *  /  u  _   f  l  b
+
+Fitness:       60438350
+Distance:      32300555
+Finger work:   1329580
+Inward rolls:  5.08%
+Outward rolls: 3.51%
+Same hand:     32.74%
+Same finger:   2.02%
+Row change:    16.21%
+Home jump:     1.10%
+Ring jump:     1.04%
+To center:     1.27%
+To outside:    0.00%
+
+can put B on spacebar in actual AHK layout
+
+try my hand at placing syms for human use (keep brackets)
+and complete syms
+ls28spv4.1b
+
+       |  {               }
+       ;  .  [         x  p  v
+    <  (  !  y  ]   q  ,  k  )  >
+       %  +  z  \   =  j  $
+
+       &  @               W
+       A  E +Cr        H  T  S
+    G  I  O  "  :   M  N  D  R  C
+       `  ~  U  ^   F  L  B
+
+       ?  '               w
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       *  /  u  _   f  l  b
+
+
+
+-----
+
+2020-03-20
+ls26spv4.2
+
+changed 4.1 (changed 3.9: -2keys)
++ set keepBrackets 1
+
+missing: $&%@#^`~
+
+DAGN, this one places vowels on the right.. screws up the whol point of removing keys on right hand (consonants normally)
+sethandbias 5 handles this
+
+setksize kinesis
+setmask 001100001000001110011100011111111110001111111000000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz \n,.-"_')(;=:/*!?<>{}[]\\+|&$%@
+set keepShiftPairLetters 0
+set keepShiftPairOther 0
+set keepShiftPairSpace 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 5
+sethandbias 5
+run
+
+hmm , higher fitness & distance
+
+Hands: 54% 45%
+Fingers: 2.0% 12% 18% 22% 0.00% 0.00% 18% 15% 10% 3.0%
+
+       |  {               }
+       ;  .  !         q  p  x
+    (  :  ,  y  \   =  v  k  "  )
+       +  <  [  ]   z  j  >
+
+       ?  '               w
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       *  /  u  _   f  l  b
+
+Fitness:       62560805
+Distance:      34728160
+Finger work:   1157260
+Inward rolls:  6.05%
+Outward rolls: 3.39%
+Same hand:     33.37%
+Same finger:   2.08%
+Row change:    15.97%
+Home jump:     1.04%
+Ring jump:     1.07%
+To center:     1.25%
+To outside:    0.00%
+
