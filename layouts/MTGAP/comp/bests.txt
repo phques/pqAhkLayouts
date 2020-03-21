@@ -5,6 +5,18 @@ tests on KLA, using compound texts alice+jonathan+prince+farm+dragonboy
 as of 2020-03-18
 
 ** std US kbd KLA versions  **
+  (altGr thumb on space, some CR on main)
+
+including few tests on some code
+mtgapUsLs26spv4.2b / mtgapUsLs26spv4.1b (Cr on main)
+mtgapLs28Sp3.3bCrSh
+mtgapLs28Sp3.3pq1bCrSh
+
+
+--------------
+as of 2020-03-18
+
+** std US kbd KLA versions  **
   (altGr thumb on space)
 
 3.3b (3.3 swap ,')

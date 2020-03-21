@@ -1876,7 +1876,7 @@ To outside:    0.00%
 -----
 
 2020-03-20
-ls28spv4.1
+ls26spv4.1
 
 changed 3.9, -1key on top right, -1key bottom right
 
@@ -1936,8 +1936,8 @@ can put B on spacebar in actual AHK layout
 
 try my hand at placing syms for human use (keep brackets)
 and complete syms
-ls28spv4.1b
-
+ls26spv4.1b
+missing #
        |  {               }
        ;  .  [         x  p  v
     <  (  !  y  ]   q  ,  k  )  >
@@ -1952,7 +1952,6 @@ ls28spv4.1b
        a  e \n         h  t  s
     g  i  o SP  -   m  n  d  r  c
        *  /  u  _   f  l  b
-
 
 
 -----
@@ -2014,3 +2013,27 @@ Ring jump:     1.07%
 To center:     1.25%
 To outside:    0.00%
 
+
+try my hand at placing syms for human use (keep brackets)
+and complete syms
+ls26spv4.2b
+
+       .  .               .
+       .  %  .         Q  P  X
+    .  .  .  Y  .   .  V  K  .  .
+       .  .  .  .   Z  J  .
+
+       |  {               }
+       ;  .  !         q  p  x
+    (  :  ,  y  \   =  v  k  "  )
+       +  <  [  ]   z  j  >
+
+       ?  '               w
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       *  /  u  _   f  l  b
+
+       ~  `               W
+       A  E +Cr        H  T  S
+    G  I  O  @  &   M  N  D  R  C
+       $  ^  U  #   F  L  B
