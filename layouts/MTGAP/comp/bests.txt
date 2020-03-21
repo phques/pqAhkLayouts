@@ -2,15 +2,20 @@ best of my layouts mtap lasalle (that I'm taking interest into)
 tests on KLA, using compound texts alice+jonathan+prince+farm+dragonboy
 
 --------------
-as of 2020-03-18
+as of 2020-03-20
 
 ** std US kbd KLA versions  **
   (altGr thumb on space, some CR on main)
 
-including few tests on some code
-mtgapUsLs26spv4.2b / mtgapUsLs26spv4.1b (Cr on main)
+including few tests on some code (limited subset)
+mtgapUsLs26SpCr4.2b / mtgapUsLs26SpCr4.1b (Cr on main)
 mtgapLs28Sp3.3bCrSh
-mtgapLs28Sp3.3pq1bCrSh
+mtgapLs22Sp3.3pq1bCrSh
+
+compound code (same limited subset)
+mtgapLs28Sp3.3bCrSh
+mtgapUsLs26SpCr4.1b / mtgapUsLs26SpCr4.2b (Cr on main)
+mtgapLs22Sp3.3pq1bCrSh
 
 
 --------------

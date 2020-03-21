@@ -1720,7 +1720,7 @@ run
 -----
 
 2020-03-20
-ls28spv3.9
+ls28SpCr3.9_ (forgot to rename next one to 4.0)
 
 #^
 changed 3.3 add \n 
@@ -1770,7 +1770,7 @@ To outside:    0.00%
 -----
 
 2020-03-20
-ls28spv3.9
+ls28SpCr3.9 (should've been 4.0)
 
 changed 3.3 add \n 
 no keepbrackets
@@ -1824,7 +1824,7 @@ To outside:    0.00%
 -----
 
 2020-03-20
-ls28spv4.0
+ls27SpCr4.0
 
 changed 3.9, remove 1 key on top
 
@@ -1876,7 +1876,7 @@ To outside:    0.00%
 -----
 
 2020-03-20
-ls26spv4.1
+ls26SpCrv4.1
 
 changed 3.9, -1key on top right, -1key bottom right
 
@@ -1936,7 +1936,7 @@ can put B on spacebar in actual AHK layout
 
 try my hand at placing syms for human use (keep brackets)
 and complete syms
-ls26spv4.1b
+ls26SpCr4.1b
 missing #
        |  {               }
        ;  .  [         x  p  v
@@ -1957,7 +1957,7 @@ missing #
 -----
 
 2020-03-20
-ls26spv4.2
+ls26SpCr4.2
 
 changed 4.1 (changed 3.9: -2keys)
 + set keepBrackets 1
@@ -2016,7 +2016,7 @@ To outside:    0.00%
 
 try my hand at placing syms for human use (keep brackets)
 and complete syms
-ls26spv4.2b
+ls26SpCr4.2b
 
        .  .               .
        .  %  .         Q  P  X

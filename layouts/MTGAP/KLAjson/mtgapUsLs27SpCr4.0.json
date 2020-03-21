@@ -1,5 +1,5 @@
 {
-  "label": "mtgapUsLs26spv4.2",
+  "label": "mtgapUsLs28SpCr4.0",
   "author": "phil quesnel",
   "moreInfoUrl": "https://en.wikipedia.org/wiki/QWERTY",
   "moreInfoText": "Wikipedia Entry",
@@ -49,7 +49,7 @@
     {
       "primary": 63,
       "shift": -1,
-      "altGr": 124,
+      "altGr": 38,
       "shiftAltGr": -1,
       "numpad": -1,
       "finger": 3,
@@ -58,7 +58,7 @@
     {
       "primary": 39,
       "shift": -1,
-      "altGr": 123,
+      "altGr": 93,
       "shiftAltGr": -1,
       "numpad": -1,
       "finger": 3,
@@ -166,7 +166,7 @@
     {
       "primary": 97,
       "shift": 65,
-      "altGr": 59,
+      "altGr": 41,
       "shiftAltGr": -1,
       "numpad": -1,
       "finger": 2,
@@ -184,7 +184,7 @@
     {
       "primary": 13,
       "shift": -1,
-      "altGr": 33,
+      "altGr": 91,
       "shiftAltGr": -1,
       "numpad": 0,
       "finger": 4,
@@ -229,8 +229,8 @@
     {
       "primary": 115,
       "shift": 83,
-      "altGr": 120,
-      "shiftAltGr": 88,
+      "altGr": 118,
+      "shiftAltGr": 86,
       "numpad": 57,
       "finger": 9,
       "id": 23
@@ -283,7 +283,7 @@
     {
       "primary": 103,
       "shift": 71,
-      "altGr": 40,
+      "altGr": 36,
       "shiftAltGr": -1,
       "numpad": 0,
       "finger": 1,
@@ -301,7 +301,7 @@
     {
       "primary": 111,
       "shift": 79,
-      "altGr": 44,
+      "altGr": 40,
       "shiftAltGr": -1,
       "numpad": 0,
       "finger": 3,
@@ -319,7 +319,7 @@
     {
       "primary": 45,
       "shift": -1,
-      "altGr": 92,
+      "altGr": 62,
       "shiftAltGr": -1,
       "numpad": 0,
       "finger": 4,
@@ -337,8 +337,8 @@
     {
       "primary": 110,
       "shift": 78,
-      "altGr": 118,
-      "shiftAltGr": 86,
+      "altGr": 44,
+      "shiftAltGr": -1,
       "numpad": 52,
       "finger": 7,
       "id": 35
@@ -364,7 +364,7 @@
     {
       "primary": 99,
       "shift": 67,
-      "altGr": 41,
+      "altGr": 59,
       "shiftAltGr": -1,
       "numpad": 48,
       "finger": 10,
@@ -400,7 +400,7 @@
     {
       "primary": 42,
       "shift": -1,
-      "altGr": 43,
+      "altGr": 60,
       "shiftAltGr": -1,
       "numpad": -1,
       "finger": 2,
@@ -409,7 +409,7 @@
     {
       "primary": 47,
       "shift": -1,
-      "altGr": 60,
+      "altGr": 43,
       "shiftAltGr": -1,
       "numpad": -1,
       "finger": 3,
@@ -418,7 +418,7 @@
     {
       "primary": 117,
       "shift": 85,
-      "altGr": 91,
+      "altGr": 33,
       "shiftAltGr": -1,
       "numpad": -1,
       "finger": 4,
@@ -427,7 +427,7 @@
     {
       "primary": 95,
       "shift": -1,
-      "altGr": 93,
+      "altGr": 92,
       "shiftAltGr": -1,
       "numpad": -1,
       "finger": 4,
@@ -454,8 +454,8 @@
     {
       "primary": 108,
       "shift": 76,
-      "altGr": 106,
-      "shiftAltGr": 74,
+      "altGr": 120,
+      "shiftAltGr": 88,
       "numpad": 49,
       "finger": 7,
       "id": 48
@@ -463,16 +463,16 @@
     {
       "primary": 98,
       "shift": 66,
-      "altGr": 62,
+      "altGr": 123,
       "shiftAltGr": -1,
       "numpad": 50,
       "finger": 8,
       "id": 49
     },
     {
-      "primary": -1,
-      "shift": -1,
-      "altGr": -1,
+      "primary": 106,
+      "shift": 74,
+      "altGr": 124,
       "shiftAltGr": -1,
       "numpad": 51,
       "finger": 9,
