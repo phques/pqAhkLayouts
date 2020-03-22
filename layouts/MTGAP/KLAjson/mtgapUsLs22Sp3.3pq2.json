@@ -1,5 +1,5 @@
 {
-    "label": "mtgapUsLs22Sp3.3pq1bCrSh",
+    "label": "mtgapUsLs22Sp3.3pq2",
     "fingerStart": {
         "1": 29,
         "2": 16,
@@ -104,8 +104,8 @@
         {
             "primary": 119,
             "shift": 87,
-            "altGr": 98,
-            "shiftAltGr": 66,
+            "altGr": -1,
+            "shiftAltGr": -1,
             "numpad": -1,
             "finger": 8,
             "id": 9
@@ -310,7 +310,7 @@
         },
         {
             "primary": 32,
-            "shift": 95,
+            "shift": 34,
             "altGr": 121,
             "shiftAltGr": 89,
             "numpad": 0,
@@ -319,7 +319,7 @@
         },
         {
             "primary": 39,
-            "shift": 34,
+            "shift": 95,
             "altGr": 43,
             "shiftAltGr": 94,
             "numpad": 0,
@@ -440,7 +440,7 @@
             "altGr": -1,
             "shiftAltGr": -1,
             "numpad": -1,
-            "finger": 4,
+            "finger": 5,
             "id": 46
         },
         {
@@ -462,8 +462,8 @@
             "id": 48
         },
         {
-            "primary": -1,
-            "shift": -1,
+            "primary": 98,
+            "shift": 66,
             "altGr": -1,
             "shiftAltGr": -1,
             "numpad": 50,

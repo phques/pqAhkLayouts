@@ -1,5 +1,5 @@
 {
-    "label": "mtgapUsLs22Sp3.3pq1bCrSh",
+    "label": "mtgapUsLs22Sp3.3pq1bCrShB",
     "fingerStart": {
         "1": 29,
         "2": 16,
@@ -104,8 +104,8 @@
         {
             "primary": 119,
             "shift": 87,
-            "altGr": 98,
-            "shiftAltGr": 66,
+            "altGr": -1,
+            "shiftAltGr": -1,
             "numpad": -1,
             "finger": 8,
             "id": 9
@@ -462,8 +462,8 @@
             "id": 48
         },
         {
-            "primary": -1,
-            "shift": -1,
+            "primary": 98,
+            "shift": 66,
             "altGr": -1,
             "shiftAltGr": -1,
             "numpad": 50,
