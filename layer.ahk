@@ -84,9 +84,9 @@ class CLayer
 
         if (froms.Length() != tos.Length()) 
         {
-            msg := Format("AddMappingsFromTo, From/to not same length {} {}!`n{} `n{}"
-                            , froms.Length(), tos.Length()
-                            , froms, tos, )
+            msg := Format("AddMappingsFromTo {}, From/to not same length {} {}!`n{} `n{}",
+                           this.id , froms.Length(), tos.Length(),
+                           from, to, )
             MsgBox(msg)
             ExitApp
         }
