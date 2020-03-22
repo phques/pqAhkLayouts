@@ -37,41 +37,55 @@ CreateLayers()
     qwertyMask_std := "
     (Join`r`n
            3 4         9 0
-          w e r      u i o
-       @a s d f g  h j k l @;
+       q w e r t  y u i o p
+    CL a s d f g  h j k l ; ' 
         z x c v    n m , . 
     )"
 
     qwertyMask_wid := "
     (Join`r`n
            3 4         0 -
-          w e r      i o p   
-       @a s d f g  j k l ; @'
+       q w e r t  u i o p [  
+    CL a s d f g  j k l ; ' Enter
         z x c v    m , . /   
     )"
     ; qwertyMask := qwertyMask_std
     qwertyMask := qwertyMask_wid
 
     ;----------------
-    ; missing `~^
-    ; swap ,-
 
     layerMain := "
     (Join`r`n
-           ?  :               w  z
-           a  e  v         h  t  s
-     @<+g  i  o SP  '   m  n  d  r @>+c
-           !  $  u  _   f  l  b  j
+           ?  :                 w  z
+       Esc a  e  v Cr    Tab h  t  s Bs
+    LSh g  i  o SP  '     m  n  d  r  c RShift
+           !  $  u  _     f  l  b  j
     )"
     altGrTap := 'b' 
 
 
     layerAlt := "
     (Join`r`n
-           %  [               ]  +
-           ,  .  /         *  p  x
-     @<+(  )  ;  y  \   =  -  k  " @>+q
-           @  <  >  #   {  }  |  &
+           %  [                 ]  +
+       Esc -  .  / Cr    Tab *  p  x  Bs
+     CL (  )  ;  y  \     =  ,  k  "  q RShift
+           @  <  >  #     {  }  |  &
+    )"
+
+    ; need these for shift-Bs to do Del
+    layerMainSh := "
+    (Join`r`n
+           ^  :                 W  Z
+       Esc A  E  V Cr    Tab H  T  S ~Delete
+    LSh g  I  O SP  `     M  N  D  R  C RShift
+           !  $  U  ~     F  L  B  J
+    )"
+    layerAltSh := "
+    (Join`r`n
+           %  [                 ]  +
+       Esc -  .  / Cr    Tab *  P  X  ~Delete
+    LSh (  )  ;  Y  \     =  ,  K  "  Q RShift
+           @  <  >  #     {  }  |  &
     )"
 
 
@@ -110,39 +124,28 @@ CreateLayers()
     ; dont create layout hotkeys for these
     ; for eg, we will use Win-XX for hotkeys to do actions
     ; we need to do it this way for the Suspend hotkey w. #SuspendExempt
-    dontCreateHotkeys := [MakeKeySC("LWin")]
+    dontCreateHotkeys := [ MakeKeySC("LWin") ]
 
     InitLayout(layers, dontCreateHotkeys)
 
     main := layerDefsById["main"]
     altGr := layerDefsById["syms"]
 
-    if (qwertyMask == qwertyMask_std) {
-        main.AddMappingsFromTo("p", "Backspace", false)
-        main.AddMappingsFromTo("p", "~Delete", true)
-        main.AddMappingsFromTo("'", "Enter", false)
-        main.AddMappingsFromTo("'", "Enter", true)
+    ; Shift-CapsLock for CapsLock still does not work well
+    ; tab would be logical, but too habit breaking
+    main.AddMappingsFromTo("``", "CapsLock", false)
+
+    if (qwertyMask == qwertyMask_wid) {
+        main.AddMappingsFromTo( "h", "Control", false)
+        main.AddMappingsFromTo( "h", "Control", true)
+        altGr.AddMappingsFromTo("h", "Control", false)
+        altGr.AddMappingsFromTo("h", "Control", true)
+
+        main.AddMappingsFromTo( "n", "Alt", false)
+        main.AddMappingsFromTo( "n", "Alt", true)
+        altGr.AddMappingsFromTo("n", "Alt", false)
+        altGr.AddMappingsFromTo("n", "Alt", true)
     }
-    else {
-        main.AddMappingsFromTo("[", "Backspace", false)
-        main.AddMappingsFromTo("[", "~Delete", true)
-
-        main.AddMappingsFromTo("n", "Control", false)
-        main.AddMappingsFromTo("n", "Control", true)
-        altGr.AddMappingsFromTo("n", "Control", false)
-        altGr.AddMappingsFromTo("n", "Control", true)
-
-        main.AddMappingsFromTo( "h", "Alt", false)
-        main.AddMappingsFromTo( "h", "Alt", true)
-        altGr.AddMappingsFromTo("h", "Alt", false)
-        altGr.AddMappingsFromTo("h", "Alt", true)
-    }
-
-    main.AddMappingsFromTo("q", "Esc", false)
-    main.AddMappingsFromTo("q", "+Esc", true)
-    main.AddMappingsFromTo("t", "Tab", false)
-    main.AddMappingsFromTo("t", "+Tab", true)
-
 }
 
 CreateLayers()

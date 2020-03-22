@@ -38,7 +38,7 @@ CreateLayers()
     (Join`r`n
            3           9  
         q w e r t  y u i o p
-        a s d f g  h j k l ; '
+     CL a s d f g  h j k l ; '
             c v    n m ,   
     )"
 
@@ -46,7 +46,7 @@ CreateLayers()
     (Join`r`n
            3           0  
         q w e r t  u i o p [  
-        a s d f g  j k l ; ' Enter
+     CL a s d f g  j k l ; ' Enter
             c v    m , .     
     )"
     ; qwertyMask := qwertyMask_std
@@ -59,14 +59,13 @@ CreateLayers()
     ;  moving CR to mid left col and shifts up is better
     ;  try it instead of Shift on pinkies to the pitfalls they imply
     ; Also, I have placed Enter on V which is easier to access than T
-    ; ps: Cannot map Caps to Shift in this .. ? cf below
 
     ; also add extra M beside L fopr LM (aLMost) since LM is hard
     layerMain := "
     (Join`r`n
               !                 w   
        Esc a  e  v  ``   Tab h  t  s BS
-        g  i  o SP  '     m  n  d  r  c  RShift
+    LSh g  i  o SP  '     m  n  d  r  c RShift
                  u  CR    f  l  m   
     )"
     altGrTap := 'b' 
@@ -75,7 +74,7 @@ CreateLayers()
     (Join`r`n
               ?                 W   
        Esc A  E  V  ~    Tab H  T  S ~Delete
-        G  I  O  "  _     M  N  D  R  C  RShift
+     CL G  I  O  "  _     M  N  D  R  C CL
                  U  CR    F  L  M  
     )"
 
@@ -83,8 +82,8 @@ CreateLayers()
     layerAlt := "
     (Join`r`n
               /                 b   
-       Esc -  .  :  >    Tab j  p  x BS
-        *  {  ;  y  +     =  ,  k  }  q  RShift
+      Esc  -  .  :  >    Tab j  p  x BS
+    LSh *  {  ;  y  +     =  ,  k  }  q RShift
                  (  CR    z  )  0       
     )"
 
@@ -92,7 +91,7 @@ CreateLayers()
     (Join`r`n
               \                 B   
        Esc &  |  0  0    Tab J  P  X ~Delete
-        $  [  %  Y  ^     #  @  K  ]  Q  RShift
+    LSh $  [  %  Y  ^     #  @  K  ]  Q RShift
                  <  CR    Z  >  0    
     )"
 
@@ -134,7 +133,7 @@ CreateLayers()
     ; we need to do it this way for the Suspend hotkey w. #SuspendExempt
     dontCreateHotkeys := [
         MakeKeySC("LWin"), 
-        MakeKeySC("CapsLock"),  ; need to use ahk hotkey def to map CL to Shift
+        ; MakeKeySC("CapsLock"),  ; need to use ahk hotkey def to map CL to Shift
     ]
 
     InitLayout(layers, dontCreateHotkeys)
@@ -142,12 +141,9 @@ CreateLayers()
     main := layerDefsById["main"]
     altGr := layerDefsById["syms"]
 
+    ; Shift-CapsLock for CapsLock still does not work well
+    ; tab would be logical, but too habit breaking
     main.AddMappingsFromTo("``", "CapsLock", false)
-    ; DOES NOT WORK
-    ; main.AddMappingsFromTo( "CapsLock", "LShift", false)
-    ; main.AddMappingsFromTo( "CapsLock", "CapsLock", true) ; shift-CL = CL !
-    ; altGr.AddMappingsFromTo("CapsLock", "LShift", false)
-    ; altGr.AddMappingsFromTo("CapsLock", "LShift", true)
 
     if (qwertyMask == qwertyMask_wid) {
         main.AddMappingsFromTo( "h", "Control", false)
@@ -173,12 +169,4 @@ return
 
 
 #include ../winHotkeys.ahk
-
-; mapping CL in my scripts fails, use this direct AHK method
-; +CapsLock::CapsLock  ;; does not work
-CapsLock::LShift
-
-; will screw alt-tab, ctrl-tab .. and my habit of hitting Tab all the time :-p
-; ^Tab::^Tab            ;; does not work
-; Tab::CapsLock
 
