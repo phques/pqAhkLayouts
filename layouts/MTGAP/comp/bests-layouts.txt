@@ -1,0 +1,81 @@
+
+mtgapUsLs26SpCr4.2b (mtgap syms, missing ones man placed)
+standard
+(was missing %, placed on shift altgr)
+     ? '          w         
+    a e ⏎      h t s         
+  g i o ␣ -  m n d r c     
+    * / u _  f l b       
+
+     ~ `          W         
+    A E        H T S         
+  G I O @ &  M N D R C     
+    $ ^ U #  F L B       
+
+     | {          }         
+    ; . !      q p x         
+  ( : , y \  = v k " )     
+    + < [ ]  z j >        <= maybe move + from there !?
+
+      %        Q P X         
+        Y      V K         
+             Z J   
+
+
+mtgapUsLs26SpCr4.1b (pq mostly man syms)
+standard
+missing: #
+     ? '          w         
+    a e ⏎      h t s         
+  g i o ␣ -  m n d r c     
+    * / u _  f l b        <= reorg */_ ??
+
+     & @          W         
+    A E        H T S         
+  G I O " :  M N D R C     
+    ` ~ U ^  F L B       
+
+     | {          }         
+    ; . [      x p v         
+  < ( ! y ]  q , k ) >     
+    % + z \  = j $       <= swap +\ ??
+
+
+**mtgapLs22Sp3.3pq1bCrSh / mtgapLs22Sp3.3pq1bCrShB
+standard
+
+- This one gets better KLA if I move B from altgr top row to its usual place on bottom
+  (cf bests.txt for reason)
+     !            w         
+    a e v      h t s         
+  g i o ␣ '  m n d r c     
+        u `  f l         
+
+     ?            W         
+    A E V      H T S         
+  G I O _ "  M N D R C     
+        U ~  F L         
+
+     /            b         
+    , . :      j p x         
+  * { ; y +  = - k } q     
+        ( >  z )         
+
+     \            B         
+    & |        J P X         
+  $ [ % Y ^  # @ K ] Q     
+        <    Z >   
+
+
+mtgapLs28Sp3.3bCrSh
+standard
+     ? :          w z       
+    a e v      h t s         
+  g i o ␣ '  m n d r c     
+    ! $ u _  f l b j     
+
+     % [          ] +       
+    , . /      * p x         
+  ( ) ; y \  = - k " q     
+    @ < > #  { } | &     
+                

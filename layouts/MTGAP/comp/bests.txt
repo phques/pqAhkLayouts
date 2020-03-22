@@ -2,20 +2,43 @@ best of my layouts mtap lasalle (that I'm taking interest into)
 tests on KLA, using compound texts alice+jonathan+prince+farm+dragonboy
 
 --------------
+as of 2020-03-21
+
+** std US kbd KLA versions  **
+  (altGr thumb on space, some CR on main)
+
++ including few tests on some code (limited subset)
+mtgapUsLs26SpCr4.2b / mtgapUsLs26SpCr4.1b (Cr on main)
+mtgapUsLs28Sp3.3bCrSh
+mtgapUsLs22Sp3.3pq1bCrSh
+
+
+- This one gets better KLA if I move B from altgr top row to its usual place on bottom
+ It seems to be caused by higher sameHand, which I'm guessing is caused by 
+ right thumb (SP=AltGr) + B access (sameHand)
+ => mtgapUsLs22Sp3.3pq1bCrShB (as in  mtgapUsLs28Sp3.3bCrSh)
+
+- This would be better handled by KLA if it did consider SP home of two thumbs the same
+ way it does for Shifts (which is what I do physically): use opposite hand for SP vs key.
+ Since in reality I do place B on SP, mtgapUsLs22Sp3.3pq1bCrShB represents my layout reality!
+
+--------------
 as of 2020-03-20
 
 ** std US kbd KLA versions  **
   (altGr thumb on space, some CR on main)
 
-including few tests on some code (limited subset)
++ including few tests on some code (limited subset)
 mtgapUsLs26SpCr4.2b / mtgapUsLs26SpCr4.1b (Cr on main)
-mtgapLs28Sp3.3bCrSh
-mtgapLs22Sp3.3pq1bCrSh
+mtgapUsLs28Sp3.3bCrSh
+mtgapUsLs22Sp3.3pq1bCrSh
 
-compound code (same limited subset)
-mtgapLs28Sp3.3bCrSh
++ compound code (same limited subset)
+ (seems difficult to tst code, some code smaples give greatly different results)
+ ??
+mtgapUsLs28Sp3.3bCrSh
 mtgapUsLs26SpCr4.1b / mtgapUsLs26SpCr4.2b (Cr on main)
-mtgapLs22Sp3.3pq1bCrSh
+mtgapUsLs22Sp3.3pq1bCrSh
 
 
 --------------
