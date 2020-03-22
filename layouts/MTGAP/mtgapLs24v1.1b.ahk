@@ -14,7 +14,7 @@ manually modified
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs1.1b"
+global ImgsDir := A_ScriptDir . "\imgs\1.1b"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1

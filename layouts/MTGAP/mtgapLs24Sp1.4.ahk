@@ -12,7 +12,7 @@ space on main
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgssp1.4"
+global ImgsDir := A_ScriptDir . "\imgs\sp1.4"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1

@@ -12,7 +12,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgssp3.3pq2"
+global ImgsDir := A_ScriptDir . "\imgs\sp3.3pq2"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1

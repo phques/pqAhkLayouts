@@ -13,7 +13,7 @@ this is 2.3b implementation
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgssp2.3"
+global ImgsDir := A_ScriptDir . "\imgs\sp2.3"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1

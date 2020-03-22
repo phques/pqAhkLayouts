@@ -21,7 +21,7 @@ swap ml gy (to reduce mid col access)
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgssp1.0-mirr"
+global ImgsDir := A_ScriptDir . "\imgs\sp1.0-mirr"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
