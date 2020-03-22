@@ -1,20 +1,20 @@
 /*
 
 2020-03-20
-lsUs28spv3.3pq1(bCrSh)
+mtgapLs26SpCr4.2b 
 MTGAP ansi angleZ BEAKL
+26 keys
 LaSalle fingering
-22 keys
-
+space & Cr on main, (pq mostly man syms)
 */
 
 ; code only includes
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\sp3.3pq2"
-global ImgWidth := 164
-global ImgHeight := 94
+global ImgsDir := A_ScriptDir . "\imgs\spCr4.2b"
+global ImgWidth := 160
+global ImgHeight := 68
 global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
@@ -34,63 +34,55 @@ CreateLayers()
     ; try both hands a std pos
     qwertyMask_std := "
     (Join`r`n
-           3           9  
-        q w e r t  y u i o p
-     CL a s d f g  h j k l ; '
-            c v    n m ,   
+           3 4         9  
+       q w e r    y u i o p
+    CL a s d f g  h j k l ; ' 
+        z x c v   n m ,   
     )"
 
     qwertyMask_wid := "
     (Join`r`n
-           3           0  
-        q w e r t  u i o p [  
-     CL a s d f g  j k l ; ' Enter
-            c v    m , .     
+           3 4         0  
+       q w e r    u i o p [  
+    CL a s d f g  j k l ; ' Enter
+        z x c v   m , .     
     )"
     ; qwertyMask := qwertyMask_std
     qwertyMask := qwertyMask_wid
 
-
     ;----------------
-    ; b) Swap ,-   <-not used !
-    ; CrSh) According to info found in tests w. KLA, 
-    ;  moving CR to mid left col and shifts up is better
-    ;  try it instead of Shift on pinkies to the pitfalls they imply
-    ; Also, I have placed Enter on V which is easier to access than T
 
-    ; also add extra M beside L fopr LM (aLMost) since LM is hard
     layerMain := "
     (Join`r`n
-              !                 w   
-       Esc a  e  v  ``   Tab h  t  s BS
-    LSh g  i  o SP  '     m  n  d  r  c RShift
-                 u  CR    f  l  m   
+           ?  '                 w
+       Esc a  e Cr       Tab h  t  s Bs
+    LSh g  i  o SP  -     m  n  d  r  c RShift
+           *  /  u  _     f  l  b
     )"
     altGrTap := 'b' 
 
     layerMainSh := "
     (Join`r`n
-              ?                 W   
-       Esc A  E  V  ~    Tab H  T  S ~Delete
-     CL G  I  O  "  _     M  N  D  R  C CL
-                 U  CR    F  L  M  
+           ~ ~``              W
+       Esc A  E Cr     Tab H  T  S ~Delete
+     CL G  I  O  @  &   M  N  D  R  C RShift
+           $  ^  U  #   F  L  B
     )"
-
 
     layerAlt := "
     (Join`r`n
-              /                 b   
-      Esc  -  .  :  >    Tab j  p  x BS
-    LSh *  {  ;  y  +     =  ,  k  }  q RShift
-                 (  CR    z  )  0       
+           |  {               }
+       Esc ;  .  !     Tab q  p  x Bs
+    LSh (  :  ,  y  \   =  v  k  "  ) RShift
+           +  <  [  ]   z  j  >
     )"
 
     layerAltSh := "
     (Join`r`n
-              \                 B   
-       Esc &  |  0  0    Tab J  P  X ~Delete
-    LSh $  [  %  Y  ^     #  @  K  ]  Q RShift
-                 <  CR    Z  >  0    
+           .  .               .
+       Esc .  %  .     Tab Q  P  X ~Delete
+    LSh .  .  .  Y  .   .  V  K  .  . RShift
+           .  .  .  .   Z  J  .
     )"
 
 
@@ -129,10 +121,7 @@ CreateLayers()
     ; dont create layout hotkeys for these
     ; for eg, we will use Win-XX for hotkeys to do actions
     ; we need to do it this way for the Suspend hotkey w. #SuspendExempt
-    dontCreateHotkeys := [
-        MakeKeySC("LWin"), 
-        ; MakeKeySC("CapsLock"),  ; need to use ahk hotkey def to map CL to Shift
-    ]
+    dontCreateHotkeys := [ MakeKeySC("LWin") ]
 
     InitLayout(layers, dontCreateHotkeys)
 
@@ -154,7 +143,6 @@ CreateLayers()
         altGr.AddMappingsFromTo("n", "Alt", false)
         altGr.AddMappingsFromTo("n", "Alt", true)
     }
-
 }
 
 CreateLayers()
@@ -165,6 +153,4 @@ return
 
 ;--- hotkeys, must be at the end -----
 
-
 #include ../winHotkeys.ahk
-

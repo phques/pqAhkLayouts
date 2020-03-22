@@ -1,5 +1,5 @@
 
-mtgapUsLs26SpCr4.2b (mtgap syms, missing ones man placed)
+mtgapUsLs26SpCr4.2b (pq mostly man syms)
 standard
 (was missing %, placed on shift altgr)
      ? '          w         

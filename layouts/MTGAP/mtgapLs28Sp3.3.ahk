@@ -32,8 +32,6 @@ global DoubleAlt := 0
 CreateLayers()
 {
     ; try both hands a std pos
-    ; using dualmode shift on home row pinkies
-    ; this is habt breaking ! so leave dualMode on real shift keys
     qwertyMask_std := "
     (Join`r`n
            3 4         9 0
