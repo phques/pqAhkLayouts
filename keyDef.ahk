@@ -206,7 +206,7 @@ class CKeyDef
         }
     }
 
-    /*static*/
+    ; -static-
     ; check to cancel waiting potential dualMode key Tap
     checkOnDualDn(isMouseClick := false)
     {
@@ -268,7 +268,7 @@ class CKeyDef
 
         values := (isTap ? this.outTapValues : this.outValues)
         if (values) {
-            idx := CKeyDef.IsShiftDown() ? 2 : 1
+            idx := CKeyDef.IsShiftDown(this) ? 2 : 1
             out := values[idx]
         }
         Else {
@@ -280,7 +280,7 @@ class CKeyDef
 
     ; -------
 
-    /*static*/
+    ; *static*
     CreateStdKeydef(key, outStr)
     {
         outValue := new COutput(outStr)
@@ -292,7 +292,7 @@ class CKeyDef
     }
 
     ; outStr should be a modifier !! eg "LShift", "RAlt"
-    /*static*/
+    ; *static*
     CreateDualModifier(key, outStr, outTapStr := 0)
     {
         k1 := CKeyDef.CreateEmptyDualModifier(key)
@@ -304,7 +304,7 @@ class CKeyDef
         return k1
     }
 
-    /*static*/
+    ; *static*
     CreateEmptyDualModifier(key)
     {
         k1 := new CKeyDef(key, false, true, [], [])
@@ -316,7 +316,7 @@ class CKeyDef
         return k1
     }
 
-    /*static*/
+    ; *static*
     CreateLayerAccess(key, layerId, outTapStr := 0)
     {
         ; always isDual, onTap ignored if no outTapValue
@@ -336,12 +336,18 @@ class CKeyDef
 
     ;---
 
-    /*static*/
+    ; *static*
     ; is any of the currently 'down' keys a shift key ?
-    IsShiftDown()
+    IsShiftDown(getValForKey)
     {
         For keysc, keydef in CKeyDef.downKeys {
-            ; OutputDebug "-- +dn " keydef.name
+            ; OutputDebug "-- +dn " keydef.name 
+            ; Don't autoshift ourselves !! ;-)
+            if (getValForKey == keydef || getValForKey.sc == keydef.sc) {
+                OutputDebug " it's me" 
+                continue
+            }
+
             if (keydef.outValues[1] ) {                
                 ; OutputDebug " " keydef.outValues[1].val
                 ; OutputDebug " " GetKeyName(keydef.outValues[1].val)
@@ -359,7 +365,7 @@ class CKeyDef
         return False
     }
 
-    /*static*/
+    ; *static*
     ; returns list of currently down dual mode modifiers (as key strings, ie "LShift")
     ; [dualModDn, dualModUp]
     GetDownDualModifiers(skipShift := false)

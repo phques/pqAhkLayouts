@@ -182,20 +182,6 @@ hookMouse()
 
 ;; action funcs for keydefs, called in CKeyDef.OnKeyDn/Up
 
-; create "{blind}" string for Send
-; prepBlind(keyDef, out)
-; {
-;     ; use {blind+} if we need to output a non-shifted key while shift is down
-;     ; eg Shift+q => ;, need to Send {blind+}{;}
-;     if (CKeyDef.IsShiftDown()) {
-;         if (out.needBlindShift && !InStr(out.mods, "+")) {
-;             return "{blind+}"            
-;         }
-;     }
-
-;     return "{blind}"
-; }
-
 ; keydef onHoldDn action, called to 'send down'  out value of a key
 sendOutValueDn(keydef) 
 { 
@@ -424,15 +410,23 @@ toto()
 {
     layers := [
         {id: "main",
-            qwertyMask: "@b a s d f",
-            map: "@>!b g i e a",  
-            ; mapSh: "Home Delete z Q"
+            qwertyMask: "a s d f ",
+            map:   "g i e a ",  
+            mapSh: "G I E A ",  
+            ; qwertyMask: "a s d f CapsLock",
+            ; map:   "g i e a LShift",  
+            ; mapSh: "G I E A CapsLock",  
         },
     ]
 
     InitLayout(layers, {})
-
     StopOnEscape := true
+
+    main := layerDefsById["main"]
+
+    main.AddMappingsFromTo( "CapsLock", "LShift", false)
+    main.AddMappingsFromTo( "CapsLock", "#", true) ; shift-CL = CL !
+
 }
 
 ; tata()
