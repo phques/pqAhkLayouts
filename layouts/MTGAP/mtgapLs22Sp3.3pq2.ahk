@@ -87,9 +87,9 @@ CreateLayers()
 
     layerAltSh := "
     (Join`r`n
-              \                 B   
+             ~\                 B   
        Esc &  |  0  0    Tab J  P  X ~Delete
-    LSh $  [  %  Y  ^     #  @  K  ]  Q RShift
+    LSh $ ~[  %  Y  ^     #  @  K ~]  Q RShift
                  <  CR    Z  >  0    
     )"
 
