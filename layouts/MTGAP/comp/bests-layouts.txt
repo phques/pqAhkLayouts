@@ -1,5 +1,5 @@
 
-mtgapUsLs26SpCr4.2b (pq mostly man syms)
+mtgapUsLs26SpCr4.2b (mtgap + pq man syms)
 standard
 (was missing %, placed on shift altgr)
      ? '          w         
@@ -22,23 +22,25 @@ standard
              Z J   
 
 
-mtgapUsLs26SpCr4.1b (pq mostly man syms)
+mtgapUsLs26SpCr4.1b          4.1c added extra key for missing #
+(pq mostly man syms)
 standard
-missing: #
-     ? '          w         
-    a e ⏎      h t s         
-  g i o ␣ -  m n d r c     
-    * / u _  f l b        <= reorg */_ ??
+missing: #                       
+     ? '          w              ? '         w /   
+    a e ⏎      h t s            a e ⏎      h t s    
+  g i o ␣ -  m n d r c        g i o ␣ -  m n d r c 
+    * / u _  f l b              * / u _   f l b   
+                            
+     & @          W              & @         W *    
+    A E        H T S            A E         H T S    
+  G I O " :  M N D R C        G I O " :   M N D R C 
+    ` ~ U ^  F L B              ` ~ U ^   F L B   
+                            
+     | {          }              { |         + }    
+    ; . [      x p v          - ; . [       x p v    
+  < ( ! y ]  q , k ) >        < ( ! y ]   q , k ) > 
+    % + z \  = j $              % # z \   = j $  
 
-     & @          W         
-    A E        H T S         
-  G I O " :  M N D R C     
-    ` ~ U ^  F L B       
-
-     | {          }         
-    ; . [      x p v         
-  < ( ! y ]  q , k ) >     
-    % + z \  = j $       <= swap +\ ??
 
 
 **mtgapLs22Sp3.3pq1bCrSh / mtgapLs22Sp3.3pq1bCrShB

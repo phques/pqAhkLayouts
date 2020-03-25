@@ -1,0 +1,65 @@
+4.1c
+     ? '         w /       
+    a e ⏎      h t s         
+  g i o ␣ -  m n d r c     
+    * / u _  f l b       
+
+     & @        W *       
+    A E        H T S         
+  G I O " :  M N D R C     
+    ` ~ U ^  F L B       
+
+     { |        + }        
+  - ; . [      x p v         
+  < ( ! y ]  q , k ) >     
+    % # z \  = j $     
+
+----------
+idea:
+- have é on a key
+- have 2 (3?) accent 'compose' keys (do w. layers)
+ (with oneshot sticky layer / mod .. supports compose !)
+
+french accented chars I want
+ç
+« »
+é è ê ë
+  à â ä
+  ù û
+    î ï
+    ô œ
+
+é + 2-3 keys
+
+é
+ ` ^ "
+ ç
+ « »
+ è ê ë
+ à â ä
+ ù û 
+   î ï
+   ô œ
+
+-move w besides z on altGr 
+-remove dup /* (put \ on shift to replace spot used by w)
+-put é after A E (on Cr) and move Cr to left (Esc can go same spot on altGr)
+-replace [] w. « » (just use [] on qwerty)
+-add ` ^ " accented chars layers access (" replaces TAb, use normal one)
+-.. create 3 french chars layers
+
+ (needs oneshot sticky)
+     ? '        ` ^      
+  ⏎ a e é    " h t s         
+  g i o ␣ -  m n d r c     
+    * / u _  f l b       
+
+     & @        * \         
+  ⏎ A E É      H T S         
+  G I O " :  M N D R C     
+    ` ~ U ^  F L B       
+
+     { |        + }        
+Esc ; . «      x p v         
+  < ( ! y »  q , k ) >     
+    % # z w  = j $ 
