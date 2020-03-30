@@ -133,15 +133,15 @@ CreateLayers()
     main.AddMappingsFromTo("``", "CapsLock", false)
 
     if (qwertyMask == qwertyMask_wid) {
-        main.AddMappingsFromTo( "h", "Control", false)
-        main.AddMappingsFromTo( "h", "Control", true)
-        altGr.AddMappingsFromTo("h", "Control", false)
-        altGr.AddMappingsFromTo("h", "Control", true)
+        main.AddMappingsFromTo( "n", "Control", false)
+        main.AddMappingsFromTo( "n", "Control", true)
+        altGr.AddMappingsFromTo("n", "Control", false)
+        altGr.AddMappingsFromTo("n", "Control", true)
 
-        main.AddMappingsFromTo( "n", "Alt", false)
-        main.AddMappingsFromTo( "n", "Alt", true)
-        altGr.AddMappingsFromTo("n", "Alt", false)
-        altGr.AddMappingsFromTo("n", "Alt", true)
+        main.AddMappingsFromTo( "h", "Alt", false)
+        main.AddMappingsFromTo( "h", "Alt", true)
+        altGr.AddMappingsFromTo("h", "Alt", false)
+        altGr.AddMappingsFromTo("h", "Alt", true)
     }
 }
 
