@@ -7,14 +7,21 @@ how would I design a layout ?
 =
 47 keys          94 syms/chars
 
-with 4 layers, need 24keys = 96syms
+with 4 layers, need 24keys = 96syms 
+(actualyy that matches exactly if we add space and return)
 
 --
 but using numpad, remove 0-9
 so 84 syms/chars
 with 4 layers, need exactly 21keys
 
-oops forgot Space !
+((
+ oops forgot Space / enter! some layouts include them on main keys
+ 84+2 86 ... 86/4 = 21.5
+ so would be missing 2 syms w. 21keys
+ go to 22keys.. 88 syms (also even left/right: 11 + 11)
+))
+
 
 ----
 
@@ -43,3 +50,13 @@ or try exactly 21 (dont use v)
  wer   uio
 asdfg hjkl;
    c  nm
+
+not too crazy about using keys on 1-0 ..
+(potentialy use 'em for Fn keys !)
+
+18 + 2 : 20 ... 80 syms
+miss 6
+
+ wer   uio
+asdfg hjkl;
+   cv nm
