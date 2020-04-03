@@ -1,0 +1,309 @@
+
+punx from allCharsStd (balanced text + pgm)
+,.-"_')(;=:/*!?$>{}[]\+|&<%@#^`~
+
+------
+
+2020-4-01
+mtgapbeakl24-1.0
+
+trying settings I am using for LaSalle, w. beakl
+WHAT ABOUT WEIGHTS ?? vs lasalle
+
+24keys
+01110 01110
+11111 11111
+01111 11110
+
+setkeeppairschars: \n
+set keepBrackets 0
+
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz\n,.-"_')(;=:/*!?>{}[]
+setkeeppairschars: \n
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+set consoleEsc 1
+sethandbias 5
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 18% 22% 0.00% 0.00% 17% 14% 11% 5.0%
+
+    ?  (  !         *  x  "
+ :  )  , \n  >   }  g  v  p  ;
+    /  ]  z  [   {  q  =  j
+
+    o  i  '         w  h  c
+ y  a  e SP  -   m  t  n  s  r
+    .  k  u  _   b  d  l  f
+
+Fitness:       56923958
+Distance:      30627915
+Finger work:   228513
+Inward rolls:  6.06%
+Outward rolls: 2.41%
+Same hand:     32.75%
+Same finger:   1.90%
+Row change:    14.43%
+Home jump:     1.31%
+Ring jump:     0.66%
+To center:     1.15%
+
+
+--------
+
+2020-4-01
+mtgapbeakl24-1.1
+
+setkeeppairschars:
+set keepBrackets 0
+
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz\n,.-"_')(;=:/*!?>{}[]
+setkeeppairschars:
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+set consoleEsc 1
+sethandbias 10
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 18% 22% 0.00% 0.00% 17% 14% 11% 5.0%
+
+    ?  (  !         q  x  "
+ :  )  ,  '  >   *  g  v  p  ;
+    }  ]  /  [   {  =  j  z
+
+    i  o  u         w  h  c
+ y  a  e SP  -   m  t  n  s  r
+    .  k \n  _   b  d  l  f
+
+Fitness:       58399453
+Distance:      33878115
+Finger work:   206763
+Inward rolls:  7.17%
+Outward rolls: 2.10%
+Same hand:     32.69%
+Same finger:   2.12%
+Row change:    13.74%
+Home jump:     0.65%
+Ring jump:     0.85%
+To center:     1.15%
+
+
+------
+2020-4-01
+mtgapbeakl24-1.2
+
+setkeeppairschars: \n
+set keepBrackets 1
+
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz\n,.-"_')(;=:/*!?>{}[]
+setkeeppairschars: \n
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+set consoleEsc 1
+sethandbias 5
+
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 18% 22% 0.00% 0.00% 17% 14% 11% 5.0%
+
+    ?  (  !         q  )  "
+ :  ;  , \n  >   z  g  v  p  x
+    *  /  [  ]   {  }  =  j
+
+    o  i  '         w  h  c
+ y  a  e SP  -   m  t  n  s  r
+    .  k  u  _   b  d  l  f
+
+Fitness:       56968698
+Distance:      30661740
+Finger work:   224553
+Inward rolls:  6.11%
+Outward rolls: 2.38%
+Same hand:     32.75%
+Same finger:   1.93%
+Row change:    14.31%
+Home jump:     1.27%
+Ring jump:     0.66%
+To center:     1.16%
+
+------
+2020-4-01
+mtgapbeakl24-1.3
+
+setkeeppairschars:
+set keepBrackets 1
+
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz\n,.-"_')(;=:/*!?>{}[]
+setkeeppairschars:
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+set consoleEsc 1
+sethandbias 10
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 18% 22% 0.00% 0.00% 17% 14% 11% 5.0%
+
+    :  -  >         q  "  j
+ (  )  ,  x  !   *  g  v  p  ;
+    {  ?  /  [   ]  =  z  }
+
+    i  o  u         w  h  c
+ y  a  e SP  '   m  t  n  s  r
+    .  k \n  _   b  d  l  f
+
+Fitness:       58431063
+Distance:      33876905
+Finger work:   2175633
+Inward rolls:  7.35%
+Outward rolls: 2.08%
+Same hand:     32.83%
+Same finger:   2.13%
+Row change:    13.71%
+Home jump:     0.68%
+Ring jump:     0.88%
+To center:     1.21%
+
+
+--------
+2020-4-02
+mtgapbeakl24-1.4
+
+NEW WEIGHTS
+home row from 0 0 0 to 4 0 4
+
+setkeeppairschars: \n
+set keepBrackets 0
+
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz\n,.-"_')(;=:/*!?>{}[]
+setkeeppairschars: \n
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 0
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+set consoleEsc 1
+sethandbias 5
+
+Hands: 56% 43%
+Fingers: 4.0% 16% 21% 16% 0.00% 0.00% 16% 13% 11% 3.0%
+
+    /  z  ]         *  x  "
+ )  . \n  (  !   }  p  v  k  ;
+    [  ?  :  >   {  q  =  j
+
+    o  u  ,         g  n  l
+ h  e SP  a  '   w  t  s  r  c
+    _  y  i  -   b  d  f  m
+
+Fitness:       58315625
+Distance:      33179342
+Finger work:   1282533
+Inward rolls:  9.99%%
+Outward rolls: 1.39%
+Same hand:     33.61%
+Same finger:   2.05%
+Row change:    14.74%
+Home jump:     2.31%
+Ring jump:     1.68%
+To center:     1.09%
+
+--------
+2020-4-02
+mtgapbeakl24-1.5
+
+home row from 0 0 0 to 4 0 4
+
+setkeeppairschars: \n
+set keepBrackets 1
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz\n,.-"_')(;=:/*!?>{}[]
+setkeeppairschars: \n
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 4
+set consoleEsc 1
+sethandbias 5
+
+Hands: 56% 43%
+Fingers: 4.0% 16% 21% 16% 0.00% 0.00% 16% 13% 11% 3.0%
+
+    /  z  ?         q  x  "
+ )  . \n  (  !   *  p  v  k  ;
+    [  ]  :  >   {  }  =  j
+
+    o  u  ,         g  n  l
+ h  e SP  a  '   w  t  s  r  c
+    _  y  i  -   b  d  f  m
+
+Fitness:       58221130
+Distance:      33194662
+Finger work:   1282533
+Inward rolls:  10.00%
+Outward rolls: 1.39%
+Same hand:     33.61%
+Same finger:   2.06%
+Row change:    14.73%
+Home jump:     2.30%
+Ring jump:     1.68%
+To center:     1.09%

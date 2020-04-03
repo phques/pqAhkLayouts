@@ -54,8 +54,9 @@ asdfg hjkl;
 not too crazy about using keys on 1-0 ..
 (potentialy use 'em for Fn keys !)
 
+
 18 + 2 : 20 ... 80 syms
-miss 6
+miss 6 syms
 
  wer   uio
 asdfg hjkl;
