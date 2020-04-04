@@ -21,11 +21,11 @@ global CenterOnCurrWndMonitor := 1
 global DoubleAlt := 0
 
 
-#include ../../fromPkl/pkl_guiLayers.ahk
-#include ../../layersv2c.ahk
-#include ../punxLayer.ahk
-#include ../extendLayer.ahk
-#include ../numpadLayer.ahk
+#include ../../../fromPkl/pkl_guiLayers.ahk
+#include ../../../layersv2c.ahk
+#include ../../punxLayer.ahk
+#include ../../extendLayer.ahk
+#include ../../numpadLayer.ahk
 
 ; ----
 
@@ -154,4 +154,4 @@ return
 
 ;--- hotkeys, must be at the end -----
 
-#include ../winHotkeys.ahk
+#include ../../winHotkeys.ahk
