@@ -1,4 +1,8 @@
 
+layouts created w. modified MTGAP, 
+based on BEAKL PLLT (pinky less, less thumb)
+
+
 punx from allCharsStd (balanced text + pgm)
 ,.-"_')(;=:/*!?$>{}[]\+|&<%@#^`~
 
