@@ -320,8 +320,17 @@ class CKeyDef
     CreateLayerAccess(key, layerId, outTapStr := 0)
     {
         ; always isDual, onTap ignored if no outTapValue
-        outTapValue := (outTapStr ? new COutput(outTapStr) : 0)
-        k1 := new CKeyDef(key, false, true, [], [outTapValue,outTapValue])
+        
+        if (type(OutTapStr) == "String") {
+            outTapValue := (outTapStr ? new COutput(outTapStr) : 0)
+            outTapValueSh := outTapValue
+        } else { 
+            ; expecting array object of size 2
+            outTapValue := new COutput(outTapStr[1])
+            outTapValueSh := new COutput(outTapStr[2])
+        }
+
+        k1 := new CKeyDef(key, false, true, [], [outTapValue,outTapValueSh])
         
         ; save layerId !
         k1.layerId := layerId
