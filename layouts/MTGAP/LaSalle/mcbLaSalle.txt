@@ -2096,7 +2096,7 @@ To center:     1.45%
 2020-03-31
 ls20SpCr4.4
 
-base : ls20SpCr4.4,  ls26SpCrv4.1
+base : ls20SpCr4.3,  ls26SpCrv4.1
 trying to go for really min keys, dont like 1-0 row that much
 try no \n (not very good otherwise)
 
@@ -2196,7 +2196,7 @@ To outside:    0.00%
 
 --------
 2020-03-31
-ls26SpCrv4.5
+ls27SpCrv4.5
 
 changed ls26SpCrv4.4
 add extra key right hand, same # on both
@@ -2249,3 +2249,166 @@ Home jump:     1.00%
 Ring jump:     1.03%
 To center:     1.26%
 To outside:    0.00%
+
+-----
+2020-04-05
+ls26SpCr4.6
+
+modified 4.2 : set singleKeySameFinger 25
+
+missing: $&%@#^`~
+
+setksize kinesis
+setmask 001100001000001110011100011111111110001111111000000000000000000000000000
+use abcdefghijklmnopqrstuvwxyz \n,.-"_')(;=:/*!?<>{}[]\\+|&$%@
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set numThreads 5
+sethandbias 10
+
+Hands: 54% 45%
+Fingers: 2.0% 14% 18% 21% 0.00% 0.00% 17% 15% 10% 3.0%
+
+       |  {               }
+       y  .  ?         z  p  x
+    (  )  ,  k  \   =  v  ;  "  q
+       +  <  !  [   ]  j  >
+
+       :  '               w
+       a  e \n         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+       *  /  u  _   f  l  b
+
+Fitness:       65761383
+Distance:      36509720
+Finger work:   1385980
+Inward rolls:  6.16%
+Outward rolls: 3.17%
+Same hand:     33.69%
+Same finger:   5.64%
+Row change:    17.11%
+Home jump:     1.06%
+Ring jump:     0.91%
+To center:     1.25%
+To outside:    0.00%
+
+
+------
+2020-04-08
+ls21SpCr4.7
+
+add one spot for thumb  ?
+trying to go for really min keys, dont like 1-0 row that much
+try no \n (not very good otherwise)
+
+0 0 0 0 0 0   0 0 0 0 0 0 
+0 0 1 1 1 0   0 1 1 1 0 0
+0 1 1 1 1 1   1 1 1 1 1 0
+0 0 0 0 1 1   1 1 0 0 0 0
+0 0 0 0 0 0   0 0 0 0 0 0   
+0 0 0 0 0 0   0 0 0 0 0 1 
+(or for two thumbs)
+1 0 0 0 0 0   0 0 0 0 0 1 
+
+
+,.-"_')(;=:/*!?$>{}[]\+|&<%@#^ 
+`~
+
+
+setksize kinesis
+setmask 000000000000001110011100011111111110000011110000000000000000000000000001
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!?<>{}[]\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 18% 21% 0.00% 3.0% 18% 12% 10% 3.0%
+
+       -  .  :         q  y  b
+    (  ;  ,  k  !   z  w  x  "  )
+             /  ?   *  j
+                                   =
+
+       a  e  v         g  n  r
+    p  i  o SP  '   m  t  s  h  c
+             u  _   f  d
+                                   l
+
+Fitness:       55810734
+Distance:      27330410
+Finger work:   9821077
+Inward rolls:  4.65%
+Outward rolls: 2.78%
+Same hand:     34.08%
+Same finger:   5.24%
+Row change:    17.02%
+Home jump:     2.27%
+Ring jump:     1.24%
+To center:     1.29%
+To outside:    0.00%
+
+------
+2020-04-08
+ls21SpCr4.8
+
+use left thumb (chgs anything?) it does !
+miss <>{}[]\\+|&$%@#^
+
+setksize kinesis
+setmask 000000000000001110011100011111111110000011110000000000000000100000000000
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!? <>{}[]\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 18% 21% 0.00% 0.00% 18% 15% 10% 3.0%
+
+       -  .  x         q  w  p
+    (  ;  ,  k  :   =  y  b  "  )
+             z  /   *  j
+ ?
+
+       a  e  v         h  t  s
+    g  i  o SP  _   m  n  r  d  c
+             u  '   f  l
+ !
+
+Fitness:       59217384
+Distance:      27662579
+Finger work:   9852077
+Inward rolls:  6.23%
+Outward rolls: 2.90%
+Same hand:     34.04%
+Same finger:   6.04%
+Row change:    16.47%
+Home jump:     1.01%
+Ring jump:     1.13%
+To center:     1.44%
+To outside:    0.00%
+

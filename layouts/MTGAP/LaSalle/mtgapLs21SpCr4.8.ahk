@@ -1,10 +1,10 @@
 /*
 
-2020-03-20
-ls22spv3.3pq1(bCrSh)
+2020-04-08
+mtgapLs21SpCr4.8
 MTGAP ansi angleZ BEAKL
 LaSalle fingering
-22 keys
+20 keys + thumb (space)
 
 */
 
@@ -12,7 +12,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgssp3.3pq1"
+global ImgsDir := A_ScriptDir . "\imgssp4.8"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -21,11 +21,11 @@ global CenterOnCurrWndMonitor := 1
 global DoubleAlt := 0
 
 
-#include ../../fromPkl/pkl_guiLayers.ahk
-#include ../../layersv2c.ahk
-#include ../punxLayer.ahk
-#include ../extendLayer.ahk
-#include ../numpadLayer.ahk
+#include ../../../fromPkl/pkl_guiLayers.ahk
+#include ../../../layersv2c.ahk
+#include ../../punxLayer.ahk
+#include ../../extendLayer.ahk
+#include ../../numpadLayer.ahk
 
 ; ----
 
@@ -36,61 +36,53 @@ CreateLayers()
     ; this is habt breaking ! so leave dualMode on real shift keys
     qwertyMask_std := "
     (Join`r`n
-           3           9  
-          w e r      u i o
-       @a s d f g  h j k l @;
-            c v    n m     
+        q w e r t  y u i o p
+     CL a s d f g  h j k l ; '
+            c v    n m    
     )"
 
     qwertyMask_wid := "
     (Join`r`n
-           3           0  
-          w e r      i o p   
-       @a s d f g  j k l ; @'
-            c v    m ,       
+        q w e r t  u i o p [  
+     CL a s d f g  j k l ; ' Enter
+            c v    m ,      
     )"
     ; qwertyMask := qwertyMask_std
     qwertyMask := qwertyMask_wid
 
 
     ;----------------
-    ; b) Swap ,-
-    ; CrSh) According to info found in tests w. KLA, 
-    ; moving CR to md left col and shifts up is better
 
     layerMain := "
     (Join`r`n
-              !               w   
-           a  e  v         h  t  s
-     @<+g  i  o SP  '   m  n  d  r @>+c
-                 u  ``  f  l      
+       Esc a  e  v Cr  Tab h  t  s  BS
+    LSh g  i  o SP  _   m  n  r  d  c RShift
+                 u  '   f  l
     )"
-    altGrTap := 'b' 
+    altGrTap := '!' 
 
     layerMainSh := "
     (Join`r`n
-              ?               W   
-           A  E  V         H  T  S
-     @<+G  I  O  _  "   M  N  D  R @>+C
-                 U  ~   F  L     
+       ESC A  E  V CR  TAB H  T  S  ~Delete
+    LSH G  I  O SP  _   M  N  R  D  C RSHIFT
+                 U  '   F  L
     )"
 
 
     layerAlt := "
     (Join`r`n
-              /               b   
-           -  .  :         j  p  x
-     @<+*  {  ;  y  +   =  ,  k  } @>+q
-                 (  >   z  )         
+       Esc -  .  x  Cr Tab q  w  p  BS
+    LSh (  ;  ,  k  :   =  y  b  "  ) RShift
+                 z  /   *  j
     )"
 
     layerAltSh := "
     (Join`r`n
-              \               B   
-           &  |  0         J  P  X
-     @<+$  [  %  Y  ^   #  @  K  ] @>+Q
-                 <  0   Z  >      
+       ESC -  .  X  CR TAB Q  W  P  ~Delete
+    LSH (  ;  ,  K  :   =  Y  B  "  ) RSHIFT
+                 Z  /   *  J
     )"
+    altGrTapSh := '?' 
 
 
     ;----------------
@@ -108,7 +100,7 @@ CreateLayers()
             mapSh: layerMainSh
         },
 
-        {id: "syms", key: "Space",  tap: altGrTap,
+        {id: "syms", key: "Space",  tap: [altGrTap, altGrTapSh],
             qwertyMask: qwertyMask, 
             map: layerAlt, 
             mapSh: layerAltSh, 
@@ -174,4 +166,4 @@ return
 
 ;--- hotkeys, must be at the end -----
 
-#include ../winHotkeys.ahk
+#include ../../winHotkeys.ahk
