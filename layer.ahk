@@ -96,11 +96,7 @@ class CLayer
         {
             f := froms[A_Index]
             t := tos[A_Index]
-
-            ; skip this one if not mapped
-            if (t != NoKeyChar) {
-                this.AddMappingsFromArray([f, t], isShiftedLayer, createKeyDef)
-            }
+            this.AddMappingsFromArray([f, t], isShiftedLayer, createKeyDef)
         }
     }
 
@@ -132,21 +128,25 @@ class CLayer
             from := ApplyAbbrev(from)
             to := ApplyAbbrev(to)
 
-            ; OutputDebug " map " from " -> " to
+            ; skip this one if not mapped
+            if (to != CLayer.NoKeyChar) {
 
-            ; get 'from' keydef that will contain the output
-            if (createKeyDef)
-                fromKeyDef := this.AddKeyDef(CKeyDef.CreateStdKeydef(from, to))
-            else
-                fromKeyDef := this.GetKeydef(from)
+                ; OutputDebug " map " from " -> " to
 
-            ; add mapping
-            if (fromKeyDef) {
-                fromKeyDef.AddMapping(to, isShiftedLayer, false)
-            }
-            else {
-                MsgBox "No keyDef for " from " / " GetKeyName(from)
-                ExitApp
+                ; get 'from' keydef that will contain the output
+                if (createKeyDef)
+                    fromKeyDef := this.AddKeyDef(CKeyDef.CreateStdKeydef(from, to))
+                else
+                    fromKeyDef := this.GetKeydef(from)
+
+                ; add mapping
+                if (fromKeyDef) {
+                    fromKeyDef.AddMapping(to, isShiftedLayer, false)
+                }
+                else {
+                    MsgBox "No keyDef for " from " / " GetKeyName(from)
+                    ExitApp
+                }
             }
         }
     }
