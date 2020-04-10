@@ -1,10 +1,11 @@
 /*
 
 2020-04-08
-mtgapLs21SpCr4.8
+mgtapLs23SpCr4.9
+
 MTGAP ansi angleZ BEAKL
 LaSalle fingering
-20 keys + thumb (space)
+22 keys + thumb (space)
 
 */
 
@@ -12,7 +13,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgssp4.8"
+global ImgsDir := A_ScriptDir . "\imgssp5.0"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -31,57 +32,103 @@ global DoubleAlt := 0
 
 CreateLayers()
 {
-    ; try both hands a std pos
-    ; using dualmode shift on home row pinkies
-    ; this is habt breaking ! so leave dualMode on real shift keys
     qwertyMask_std := "
     (Join`r`n
+        3            9
+       w e r      u i o  
+     a s d f g  h j k l ; 
+         c v    n m    
+    )"
+
+    qwertyMask_wid := "
+    (Join`r`n
+        3            0
+       w e r      i o p    
+     a s d f g  j k l ; '
+         c v    m ,      
+    )"
+
+    qwertyMask_stdEx := "
+    (Join`r`n
+           3            9
         q w e r t  y u i o p
      CL a s d f g  h j k l ; '
             c v    n m    
     )"
 
-    qwertyMask_wid := "
+    qwertyMask_widEx := "
     (Join`r`n
+           3            0
         q w e r t  u i o p [  
      CL a s d f g  j k l ; ' Enter
             c v    m ,      
     )"
+
     ; qwertyMask := qwertyMask_std
+    ; qwertyMaskEx := qwertyMask_stdEx
     qwertyMask := qwertyMask_wid
+    qwertyMaskEx := qwertyMask_widEx
 
 
     ;----------------
 
+    layerMainEx := "
+    (Join`r`n
+              .               .      
+       Esc .  .  . Cr  Tab .  .  .  BS 
+    LSh .  .  .  .  .   .  .  .  .  . RShift
+                 .  .   .  .           
+    )"
+    layerMainExSh := "
+    (Join`r`n
+              .               .      
+       Esc .  .  . Cr  Tab .  .  .  ~Delete 
+     CL .  .  .  .  .   .  .  .  .  . CL
+                 .  .   .  .           
+    )"
+
+    layerMainExWid := "
+    (Join`r`n
+        y     .
+        h     Ctrl
+        n     Alt
+    )"
+
+    ;---------
+
     layerMain := "
     (Join`r`n
-       Esc a  e  v Cr  Tab h  t  s  BS
-    LSh g  i  o SP  _   m  n  r  d  c RShift
-                 u  '   f  l
+            '               w
+         a  e  v         h  t  s
+      g  i  o SP  -   m  n  d  r  c
+               u  _   f  l
     )"
-    altGrTap := '!' 
-    altGrTapSh := '?' 
+    altGrTap := '[' 
+    altGrTapSh := ']'
 
     layerMainSh := "
     (Join`r`n
-       ESC A  E  V CR  TAB H  T  S  ~Delete
-     CL G  I  O SP  _   M  N  R  D  C CL
-                 U  '   F  L
+            ``              W
+         A  E  V         H  T  S
+      G  I  O  @  +   M  N  D  R  C
+               U  ~   F  L
     )"
 
-
+    ; originally miss <>\+|&$%@#^`~
     layerAlt := "
     (Join`r`n
-       Esc -  .  x  Cr Tab q  w  p  BS
-    LSh (  ;  ,  k  :   =  y  b  "  ) RShift
-                 z  /   *  j
+            {               }
+         ;  y  ?         j  p  b
+      (  :  "  .  !   =  ,  k  q  )
+               z  /   *  x
     )"
 
     layerAltSh := "
     (Join`r`n
-       ESC -  .  X  CR TAB Q  W  P  ~Delete
-    LSH (  ;  ,  K  :   =  Y  B  "  ) RSHIFT
-                 Z  /   *  J
+            .               .
+         $  Y  &         J  P  B
+      <  .  %  +  |   #  -  K  Q  >
+               Z  \   ^  X
     )"
 
 
@@ -124,21 +171,21 @@ CreateLayers()
 
     InitLayout(layers, dontCreateHotkeys)
 
+    ; add extra keys like Esc, Tab, Cr ..
     main := layerDefsById["main"]
     altGr := layerDefsById["syms"]
 
-    if (qwertyMask == qwertyMask_std) {
-    }
-    else {
-        main.AddMappingsFromTo("n", "Control", false)
-        main.AddMappingsFromTo("n", "Control", true)
-        altGr.AddMappingsFromTo("n", "Control", false)
-        altGr.AddMappingsFromTo("n", "Control", true)
+    CLayer.NoKeyChar := '.'
+    main.AddMappingsFromTo(qwertyMaskEx, layerMainEx, false)
+    main.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
+    altGr.AddMappingsFromTo(qwertyMaskEx, layerMainEx, false)
+    altGr.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
 
-        main.AddMappingsFromTo( "h", "Alt", false)
-        main.AddMappingsFromTo( "h", "Alt", true)
-        altGr.AddMappingsFromTo("h", "Alt", false)
-        altGr.AddMappingsFromTo("h", "Alt", true)
+    if (qwertyMask == qwertyMask_wid) {
+      main.AddMappings(layerMainExWid, false)
+      main.AddMappings(layerMainExWid, true)
+      altGr.AddMappings(layerMainExWid, false)
+      altGr.AddMappings(layerMainExWid, true)
     }
 
 }

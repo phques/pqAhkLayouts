@@ -2412,3 +2412,127 @@ Ring jump:     1.13%
 To center:     1.44%
 To outside:    0.00%
 
+------
+2020-04-08
+ls23SpCr4.9
+
+re-add two keys on digits row
+use left thumb (chgs anything?) it does !
+
+
+0 0 0 1 0 0   0 0 1 0 0 0 
+0 0 1 1 1 0   0 1 1 1 0 0
+0 1 1 1 1 1   1 1 1 1 1 0
+0 0 0 0 1 1   1 1 0 0 0 0
+0 0 0 0 0 0   0 0 0 0 0 0   
+1 0 0 0 0 0   0 0 0 0 0 0
+(or for two thumbs)
+1 0 0 0 0 0   0 0 0 0 0 1 
+
+miss <>\\+|&$%@#^
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000100000000000
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[] <>\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+
+ nb: swap ] [ 
+ (and add M besides L for LM, ie aLMost)
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 17% 22% 0.00% 0.00% 18% 14% 11% 3.0%
+          {               }
+       ;  y  ?         j  p  b
+    (  :  "  .  !   =  ,  k  q  )
+             z  /   *  x
+ [
+          '               w
+       a  e  v         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+             u  _   f  l
+ ]
+
+Fitness:       58918584
+Distance:      29593089
+Finger work:   1299127
+Inward rolls:  5.10%
+Outward rolls: 3.80%
+Same hand:     33.76%
+Same finger:   5.71%
+Row change:    17.28%
+Home jump:     1.28%
+Ring jump:     1.06%
+To center:     1.37%
+To outside:    0.00%
+
+
+------
+2020-04-08
+ls23SpCr5.0
+
+re-add two keys on digits row
+use right thumb (chgs anything?) it does !
+
+
+0 0 0 1 0 0   0 0 1 0 0 0 
+0 0 1 1 1 0   0 1 1 1 0 0
+0 1 1 1 1 1   1 1 1 1 1 0
+0 0 0 0 1 1   1 1 0 0 0 0
+0 0 0 0 0 0   0 0 0 0 0 0   
+0 0 0 0 0 0   0 0 0 0 0 1
+(or for two thumbs)
+1 0 0 0 0 0   0 0 0 0 0 1 
+
+miss <>\\+|&$%@#^`~
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[] <>\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+
+Hands: 52% 47%
+Fingers: 2.0% 12% 18% 21% 0.00% 3.0% 18% 13% 10% 3.0%
+
+          {               }
+       ;  .  !         j  y  b
+    (  :  ,  -  ?   z  p  x  "  )
+             /  [   ]  q
+                                   *
+          =               v      
+       a  e  k         d  n  r   
+    g  i  o SP  '   f  t  s  h  c
+             u  _   w  m         
+                                   l
+Fitness:       55811378
+Distance:      28723750
+Finger work:   8267571
+Inward rolls:  4.71%
+Outward rolls: 2.54%
+Same hand:     32.43%
+Same finger:   5.29%
+Row change:    16.29%
+Home jump:     1.60%
+Ring jump:     1.08%
+To center:     1.30%
+To outside:    0.00%
+
