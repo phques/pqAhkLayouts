@@ -108,7 +108,7 @@ CreateLayers()
 
     layerMainSh := "
     (Join`r`n
-            ``              W
+           ~``              W
          A  E  V         H  T  S
       G  I  O  @  +   M  N  D  R  C
                U  ~   F  L
