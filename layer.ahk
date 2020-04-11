@@ -8,7 +8,7 @@
 ; holds keydefs for a layer
 class CLayer
 {
-    static NoKeyChar := 0
+    static NoKeyChar := -1
 
     __New(id, key)
     {
