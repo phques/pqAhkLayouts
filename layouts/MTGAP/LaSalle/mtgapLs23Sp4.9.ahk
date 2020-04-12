@@ -1,7 +1,7 @@
 /*
 
 2020-04-08
-mgtapLs23SpCr4.9
+mgtapLs23Sp4.9
 
 MTGAP ansi angleZ BEAKL
 LaSalle fingering

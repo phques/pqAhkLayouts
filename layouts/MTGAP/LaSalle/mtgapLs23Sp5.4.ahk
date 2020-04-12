@@ -1,7 +1,7 @@
 /*
 
 2020-04-08
-mgtapLs23SpCr5.0
+mgtapLs23Sp5.4
 
 MTGAP ansi angleZ BEAKL
 LaSalle fingering
@@ -13,7 +13,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\SpCr5.0"
+global ImgsDir := A_ScriptDir . "\imgs\Sp5.4"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -34,7 +34,7 @@ CreateLayers()
 {
     qwertyMask_std := "
     (Join`r`n
-        3            9
+        3          8  
        w e r      u i o  
      a s d f g  h j k l ; 
          c v    n m    
@@ -42,7 +42,7 @@ CreateLayers()
 
     qwertyMask_wid := "
     (Join`r`n
-        3            0
+        3          9  
        w e r      i o p    
      a s d f g  j k l ; '
          c v    m ,      
@@ -50,7 +50,7 @@ CreateLayers()
 
     qwertyMask_stdEx := "
     (Join`r`n
-           3            9
+           3          8   
         q w e r t  y u i o p
      CL a s d f g  h j k l ; '
             c v    n m    
@@ -58,7 +58,7 @@ CreateLayers()
 
     qwertyMask_widEx := "
     (Join`r`n
-           3            0
+           3          9   
         q w e r t  u i o p [  
      CL a s d f g  j k l ; ' Enter
             c v    m ,      
@@ -98,38 +98,37 @@ CreateLayers()
 
     layerMain := "
     (Join`r`n
-            =               v      
-         a  e  k         d  n  r   
-      g  i  o SP  '   f  t  s  h  c
-               u  _   w  m         
+           '               w
+         a  e  v         h  t  n
+      p  i  o SP  -   m  s  l  r  c
+               u  _   f  d
     )"
-    altGrTap := 'l' 
-    altGrTapSh := '*'   ;; cant do this !
-    altGrTapSh := 'L'
+    altGrTap := 'q' 
+    altGrTapSh := 'Q'
 
     layerMainSh := "
     (Join`r`n
-            *               V      
-         A  E  K         D  N  R   
-      G  I  O  @ ~``  F  T  S  H  C
-               U  ~   W  M         
+           *               W
+         A  E  V         H  T  N
+      P  I  O  @  +   M  S  L  R  C
+               U  $   F  D
     )"
 
     ; originally miss <>\+|&$%@#^`~
     layerAlt := "
     (Join`r`n
-            {               }
-         ;  .  !         j  y  b
-      (  :  ,  -  ?   z  p  x  "  )
-               /  [   ]  q
+           {               }
+         ;  .  ?         z  g  "
+      (  :  ,  k  !   =  y  b  x  )
+               /  [   ]  j
     )"
 
     layerAltSh := "
     (Join`r`n
-            {               }
-         $  &  |         J  Y  B
-      <  :  =  +  #   Z  P  X  %  >
-               \  ^   -  Q
+           ù               ç
+         &  |  ^         Z  G  #
+      <  é  %  K  à   -  Y  B  X  >
+              ~\ ~``  ~  J
     )"
 
 

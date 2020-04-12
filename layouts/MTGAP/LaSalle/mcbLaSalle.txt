@@ -2414,7 +2414,7 @@ To outside:    0.00%
 
 ------
 2020-04-08
-ls23SpCr4.9
+ls23Sp4.9
 
 re-add two keys on digits row
 use left thumb (chgs anything?) it does !
@@ -2478,7 +2478,7 @@ To outside:    0.00%
 
 ------
 2020-04-08
-ls23SpCr5.0
+ls23Sp5.0
 
 re-add two keys on digits row
 use right thumb (chgs anything?) it does !
@@ -2535,4 +2535,430 @@ Home jump:     1.60%
 Ring jump:     1.08%
 To center:     1.30%
 To outside:    0.00%
+
+
+-------
+
+2020-04-11
+ls23Sp5.1
+
+changed thumbs weights (was left=999 right =100, now both 300, greater than any other finger)
+right thumb
+(left thumb gives same result as 4.9)
+
+(or for two thumbs)
+100000 000001 
+100000000001
+
+miss <>\\+|&$%@#^`~
+
+a)
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[] <>\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+sethandbias 5
+set consoleEsc 1
+set numThreads 4
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 17% 22% 0.00% 0.00% 18% 14% 12% 3.0%
+
+          {               }
+       ;  y  !         z  p  b
+    (  :  "  .  /   =  ,  k  x  )
+             [  ]   *  j
+                                   ?
+          '               w
+       a  e  v         h  t  s
+    g  i  o SP  -   m  n  d  r  c
+             u  _   f  l
+                                   q
+Fitness:       60373782
+Distance:      31285805
+Finger work:   1316697
+Inward rolls:  5.10%
+Outward rolls: 3.82%
+Same hand:     33.60%
+Same finger:   5.69%
+Row change:    17.13%
+Home jump:     1.16%
+Ring jump:     1.06%
+To center:     1.35%
+To outside:    0.00%
+
+a2)
+redo same but based on fact that it places q/? on thumb,
+remove _ and add Q, keep pair qQ
+-> and it does give us q Q on thumb ;-)
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+usel qabcdefghijklmnoprstuvw
+useu Qxyz ,.-"')(;=:/*!?{}[]
+setkeeppairschars:qQ
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+sethandbias 5
+set consoleEsc 1
+set numThreads 4
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 21% 0.00% 0.00% 18% 15% 10% 3.0%
+
+          {               }
+       .  y  !         ?  p  x
+    (  ;  "  k  /   z  ,  b  j  )
+             [  ]   *  =
+                                   Q
+          :               w
+       a  e  v         h  t  s
+    g  i  o SP  '   m  n  d  r  c
+             u  -   f  l
+                                   q
+Fitness:       59728572
+Distance:      31080095
+Finger work:   1232390
+Inward rolls:  5.17%
+Outward rolls: 4.00%
+Same hand:     33.81%
+Same finger:   5.35%
+Row change:    17.34%
+Home jump:     0.96%
+Ring jump:     0.91%
+To center:     1.36%
+To outside:    0.00%
+
+
+ similar, z] on thumb
+b) left thumb
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000100000000000
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[] <>\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+sethandbias 5
+set consoleEsc 1
+set numThreads 4
+
+
+
+-------
+
+2020-04-11
+ls23Sp5.2
+
+setup for qQ on thumb 
+NO sameFinger extra weights
+set singleKeySameFinger 0
+
+miss <>\\+|&$%@#^`~
+
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+usel qabcdefghijklmnoprstuvw
+useu Qxyz ,.-"')(;=:/*!?{}[]
+setkeeppairschars:qQ
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+sethandbias 5
+set consoleEsc 1
+set numThreads 4
+
+Hands: 54% 45%
+Fingers: 2.0% 13% 17% 23% 0.00% 0.00% 18% 15% 10% 3.0%
+
+          {               }
+       "  .  !         ?  w  b
+    (  )  ;  y  /   =  ,  k  x  z
+             [  ]   *  j
+                                   Q
+          :               v
+       a  e  p         h  t  s
+    g  i  o SP  -   m  n  r  d  c
+             u  '   f  l
+                                   q
+Fitness:       57960142
+Distance:      30329970
+Finger work:   1218052
+Inward rolls:  5.00%
+Outward rolls: 2.88%
+Same hand:     33.31%
+Same finger:   3.06%
+Row change:    16.46%
+Home jump:     1.13%
+Ring jump:     1.19%
+To center:     1.22%
+To outside:    0.00%
+
+-------
+
+2020-04-11
+ls23Sp5.3
+
+setup for qQ on thumb 
+NO sameFinger extra weights
+except singleKeySameFinger 25
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+usel qabcdefghijklmnoprstuvw
+useu Qxyz ,.-"')(;=:/*!?{}[]
+setkeeppairschars:qQ
+set singleKeySameFinger 25
+set sameHand 30
+set toCenter 60
+set keepBrackets 1
+sethandbias 5
+set consoleEsc 1
+set numThreads 4
+
+Hands: 54% 45%
+Fingers: 2.0% 13% 18% 22% 0.00% 0.00% 19% 15% 10% 3.0%
+
+          {               }
+       ;  .  !         z  w  b
+    ?  :  ,  k  /   =  y  )  "  j
+             [  ]   *  x
+                                   Q
+          (               v
+       a  e  p         h  t  s
+    g  i  o SP  -   m  n  r  d  c
+             u  '   f  l
+                                   q
+Fitness:       58713137
+Distance:      30717690
+Finger work:   1023282
+Inward rolls:  5.92%
+Outward rolls: 2.63%
+Same hand:     33.29%
+Same finger:   6.59%
+Row change:    16.69%
+Home jump:     1.17%
+Ring jump:     1.08%
+To center:     1.27%
+To outside:    0.00%
+
+
+-------
+
+2020-04-11
+ls23Sp5.4
+
+Try low same hand
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[] <>\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 10
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+
+
+Hands: 53% 46%
+Fingers: 2.0% 12% 18% 21% 0.00% 0.00% 18% 15% 11% 3.0%
+
+          {               }
+       ;  .  ?         z  g  "
+    (  :  ,  k  !   =  y  b  x  )
+             /  [   ]  j
+                                   *
+          '               w
+       a  e  v         h  t  n
+    p  i  o SP  -   m  s  l  r  c
+             u  _   f  d
+                                   q
+Fitness:       52556288
+Distance:      29809190
+Finger work:   1052317
+Inward rolls:  6.65%
+Outward rolls: 2.61%
+Same hand:     34.03%
+Same finger:   5.64%
+Row change:    17.27%
+Home jump:     1.37%
+Ring jump:     1.24%
+To center:     1.29%
+To outside:    0.00%
+
+
+-------
+
+2020-04-11
+ls23Sp5.5
+
+even lower samehand 
+(actually, seems like the required handbias 5 is what changes the reults !)
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[] <>\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 5
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+sethandbias 5
+set consoleEsc 1
+set numThreads 4
+
+Hands: 55% 44%
+Fingers: 4.0% 12% 18% 21% 0.00% 0.00% 18% 14% 10% 3.0%
+
+          {               }
+       ;  .  ?         q  y  b
+    (  :  ,  k  !   =  p  x  "  )
+             /  [   ]  j
+                                   *
+          '               w
+       a  e  v         g  n  r
+    l  i  o SP  -   m  t  s  h  c
+             u  _   f  d
+                                   z
+Fitness:       53090853
+Distance:      31072580
+Finger work:   9312971
+Inward rolls:  5.12%
+Outward rolls: 3.04%
+Same hand:     35.63%
+Same finger:   5.46%
+Row change:    17.65%
+Home jump:     1.67%
+Ring jump:     1.94%
+To center:     1.33%
+To outside:    0.00%
+
+-------
+
+2020-04-11
+ls23Sp5.6
+
+even lower samehand 
+no handbias
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[] <>\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 5
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 5
+
+cant reproduce this one ???
+
+Hands: 54% 45%
+Fingers: 3.0% 13% 17% 21% 0.00% 0.00% 18% 15% 10% 3.0%
+
+          {               }
+       .  y  !         z  w  b
+    :  (  "  k  /   =  ,  ;  )  j
+             [  ]   *  x
+                                   ?
+          -               v
+       a  e  p         h  t  s
+    u  o  i SP  _   m  n  r  d  c
+             g  '   f  l
+                                   q
+Fitness:       50683402
+Distance:      28686890
+Finger work:   1135647
+Inward rolls:  4.18%
+Outward rolls: 3.88%
+Same hand:     33.71%
+Same finger:   6.45%
+Row change:    17.82%
+Home jump:     1.38%
+Ring jump:     0.71%
+To center:     1.21%
+To outside:    0.00%
+
+
+-------
+
+2020-04-11
+ls23Sp5.7
+
+thumb weight 250, usually gets k on thumb
+cant reproduce !???
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+use abcdefghijklmnopqrstuvwxyz,.-"_')(;=:/*!?{}[] <>\\+|&$%@#^
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 5
+set toCenter 60
+set keepBrackets 1
+set consoleEsc 1
+set numThreads 5
+
+Hands: 54% 45%
+Fingers: 4.0% 12% 18% 21% 0.00% 1.0% 18% 14% 10% 3.0%
+
+          {               }
+       ;  .  !         q  y  b
+    (  :  ,  -  ?   z  p  x  "  )
+             /  [   ]  j
+                                   *
+          =               w
+       a  e  v         g  n  r
+    l  i  o SP  '   m  t  s  h  c
+             u  _   f  d
+                                   k
+Fitness:       51045878
+Distance:      29925800
+Finger work:   8668178
+Inward rolls:  5.07%
+Outward rolls: 3.02%
+Same hand:     35.37%
+Same finger:   5.25%
+Row change:    17.75%
+Home jump:     1.82%
+Ring jump:     1.94%
+To center:     1.30%
+To outside:    0.00%
+
 
