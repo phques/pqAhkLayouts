@@ -2962,3 +2962,29 @@ To center:     1.30%
 To outside:    0.00%
 
 
+-------
+
+2020-04-13
+ls23SpFr5.8
+
+##!!mgtap doesnt handle accented chars correctly (lloks like multibyte chars !!) grrr #####
+
+try french ! (use data/allCharsFrenchWikipedia)
+Try low same hand
+
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000001
+use e aisnrtoludcmpégbvhf,.'q-y)(xj:èàk?wzê"/ç>#<
+setkeeppairschars:
+set singleKeySameFinger 25
+set sameHand 10
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+

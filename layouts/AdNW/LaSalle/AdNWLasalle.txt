@@ -1,0 +1,201 @@
+--------
+2020-04-11
+based on mtgap lasalle 23 results (+- 5.0 ..)
+
+ ./opt25 -2 englisch.txt -K kwezNew/stdUsLs23azBEAKL19pq1.cfg
+
+8287             550.582 total effort   410.641 positional effort    left right
+   .     w         3.092 same finger rp   0.449 shift same finger top 28.5 17.5
+   e p   htn      66.266 hand alternat.  38.335 shift hand alter. mid 18.2 18.9
+  gouay mslrc      1.783 inward/outward  28.796 inward or outward bot  8.5  6.0
+    i,  fd        20.167 adjacent        30.293 shift adjacent    sum 56.2 43.8
+       b          3.0 16.2 20.0 17.0 --.- --.- 17.0 12.3 11.0  3.5 Sh  1.4  0.9
+
+altgr
+1                250745.532 total effort   1109.883 positional effort    left right
+   #      +        0.400 same finger rp   0.000 shift same finger top 30.1 35.0
+   "k)   !vx      32.200 hand alternat.   0.000 shift hand alter. mid 14.4 17.6
+  %q$'& (-zj?      2.667 inward/outward   7.700 inward or outward bot  1.3  1.6
+    :_  /;         4.100 adjacent         0.000 shift adjacent    sum 45.8 54.2
+       b          0.5 12.1 22.0 11.2 --.- --.- 13.8 30.6  8.5  1.3 Sh  0.0  0.0
+
+--------
+2020-04-11
+based on mtgap lasalle 23 results (+- 5.0 ..)
+no .,  use -'
+
+(note: is using 11 11 for both mid center columns, in mtgap was 12 11)
+(but here it does seem to give better results)
+(actually 12 11 always == 2a, thumb @ 25 or 30)
+
+ ./opt25 -2 englisch.txt -K kwezNew/stdUsLs23azBEAKL19pq2.cfg
+a)
+5887             744.419 total effort   388.958 positional effort    left right
+   -     w         2.200 same finger rp   0.483 shift same finger top 29.2 18.1
+   e y   htn      68.388 hand alternat.  37.402 shift hand alter. mid 17.6 19.5
+  goua' mslrc      1.993 inward/outward  27.472 inward or outward bot  7.8  6.1
+    iq  fd        19.363 adjacent        31.624 shift adjacent    sum 54.8 45.2
+       p          3.1 16.7 19.9 15.1 --.- --.- 17.5 12.7 11.4  3.5 Sh  1.4  0.8
+
+b)
+thumb 25 -> 30 (and we do now get Q on thumb as expected)
+(worst total score, higher same finger)
+(but lower positional)
+(with mid center columns at 11 11)
+
+7                753.225 total effort   353.260 positional effort    left right
+   w     -         3.232 same finger rp   0.456 shift same finger top 17.8 28.7
+   nth   y e      67.179 hand alternat.  38.355 shift hand alter. mid 19.2 22.7
+  crlsm paiog      1.801 inward/outward  27.620 inward or outward bot  6.0  3.9
+    df  'u        19.119 adjacent        30.806 shift adjacent    sum 44.4 55.6
+       q          3.5 11.2 12.5 17.3 --.- --.- 12.6 23.5 16.5  3.1 Sh  0.8  1.4
+
+   -     w  
+ e y    htn  
+goiap  mslrc 
+   u'  fd   
+     q     
+
+*AltGR* 2a)
+4                136585.352 total effort   807.179 positional effort    left right
+   +      #        0.341 same finger rp   0.000 shift same finger top 25.7 38.4
+   "b)   !,.      82.816 hand alternat.   0.000 shift hand alter. mid 15.5 18.8
+  :xzk& (vqj?      2.716 inward/outward  10.143 inward or outward bot  0.9  0.8
+    $_  /;         7.909 adjacent         0.000 shift adjacent    sum 42.0 58.0
+       p          0.5  7.7 21.8 12.0 --.- --.- 16.3 20.6 20.5  0.7 Sh  0.0  0.0
+
+      #       +  
+     .,!    )b"  
+    ?jqv(  &kzx: 
+       ;/   _$   
+
+
+*altgr* 2b)
+709              180337.427 total effort    95.091 positional effort    left right
+   }      {        0.437 same finger rp   0.000 shift same finger top 26.2 39.3
+   "b_   (,.      82.922 hand alternat.   0.000 shift hand alter. mid 15.5 17.9
+  )xzk+ /vj;!      2.819 inward/outward   9.897 inward or outward bot  0.5  0.7
+    :*  =?         7.899 adjacent         0.000 shift adjacent    sum 42.2 57.8
+       q          0.3  7.8 22.4 11.6 --.- --.- 16.2 20.9 20.3  0.4 Sh  0.0  0.0
+
+  {       }  
+ .,(    _b"  
+!;jv/  +kzx) 
+   ?=   *:   
+
+*altgr* 2bb) replaced "_ with [] (place _" on shift of -')
+
+1176             190000.061 total effort    80.276 positional effort    left right
+   {      }        0.403 same finger rp   0.000 shift same finger top 25.7 41.0
+   xb/   +,.      65.927 hand alternat.   0.000 shift hand alter. mid 13.6 19.0
+  (z:k* =vj;?      2.750 inward/outward  19.153 inward or outward bot  0.3  0.4
+    )]  [!        14.718 adjacent         0.000 shift adjacent    sum 39.6 60.4
+       q          0.3  4.4 22.9 11.9 --.- --.- 16.4 22.0 21.3  0.7 Sh  0.0  0.0
+    {           }   
+  . , +       / b x   
+? ; j v =   * k : z ( 
+      ! [    ] )     
+
+2bb) created with mgtap   ,.-"_')(;=:/*!?$>{}[]\+|&<%@#^`~
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000000
+usel jvbxzk,.)(;=:/*!?{}+->
+useu jvbxzk,.)(;=:/*!?{}+->
+setkeeppairschars:jjvvbbxxzz,,..))((;;==:://**!!??{{}}++-->>
+set singleKeySameFinger 25
+set sameHand 10
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+sethandbias 0
+
+        +               >
+     -  b  /         !  ,  k
+  (  )  ;  .  ?   *  v  x  j  z
+           =  {   }  :
+
+trying to reserve spot for SP -> ?? (ie dont put anything below SP)
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000000
+usel jvbxzk ,.)(;=:/*!?{}+>
+useu jvbxzk@,.)(;=:/*!?{}+>
+setkeeppairschars:jjvvbbxxzz,,..))((;;==:://**!!??{{}}++ @>>
+set singleKeySameFinger 25
+set sameHand 10
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+sethandbias 0
+
+          +               >
+       , SP  j         =  .  k
+    /  x  z  v  !   *  b  (  )  ?
+             ;  {   }  :
+
+setksize kinesis
+setmask 000100001000001110011100011111111110000011110000000000000000000000000000
+usel jvbxzk,.)(;=:/*!?{}+>|
+useu jvbxzk,.)(;=:/*!?{}+>|
+setkeeppairschars:jjvvbbxxzz,,..))((;;==:://**!!??{{}}++>>||
+set singleKeySameFinger 25
+set sameHand 10
+set toCenter 60
+set keepBrackets 1
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+sethandbias 0
+
+          |               +
+       x  b  /         !  ,  k
+    z  (  )  .  ?   >  v  ;  j  *
+             =  {   }  :
+
+2a
++ 
+  U-space same finger vs I-space
+  no P tocenter
+-
+  I on bottom row
+  AI IA same finger
+  P on thumb could be dangerous / create errors (need to be carefull)
+
+2b
++
+  IA is nicer (no same finger)
+  I is nicer since it is not on the bottom (vs U)
+-
+  I-space same finger (more common than U)
+  P tocenter
+
+-----------
+2020-04-11
+based on mtgap lasalle 23 results (+- 5.0 ..)
+added one finger (bottom right pinky ! yes, I know .. ;-p )
+
+** same as stdUsLs23azBEAKL19pq2 a) above !
+ (with extra B on low pinky)
+
+./opt26 -2 englisch.txt -K kwezNew/stdUsLs24azBEAKL19pq4.cfg
+
+27               624.114 total effort   418.351 positional effort    left right
+   -     w         2.142 same finger rp   0.693 shift same finger top 28.8 17.8
+   e y   htn      68.755 hand alternat.  36.038 shift hand alter. mid 17.3 19.2
+  goua' mslrc      1.976 inward/outward  27.205 inward or outward bot  7.8  7.3
+    iq  fd  b     18.944 adjacent        30.769 shift adjacent    sum 54.2 45.8
+       p          3.2 16.5 19.6 14.9 --.- --.- 17.3 12.5 11.2  4.8 Sh  1.5  0.8
+
