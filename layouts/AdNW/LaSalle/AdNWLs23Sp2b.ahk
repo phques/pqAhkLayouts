@@ -13,7 +13,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\ls23Sp2b"
+global ImgsDir := A_ScriptDir . "\imgs\Ls23Sp2b"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWndMonitor := 1
@@ -121,13 +121,13 @@ CreateLayers()
     ;       ! [    ] )     
 
     ; created mgtap, chose syms with prog in mind
-    ; re-arranged a bit
+    ; re-arranged manually (eg avoid SP-? same finger !)
     ; -> added, swap := v,
     layerAlt := "
     (Join`r`n
             +               >
-         -  b  /         *  v  k
-      (  )  ;  .  !   ?  ,  x  j  z
+         .  -  /         *  k  b
+      (  )  ;  ,  !   ?  v  x  j  z
                :  {   }  =
     )"
 
@@ -137,8 +137,8 @@ CreateLayers()
     layerAltSh := "
     (Join`r`n
             .               .
-         &  B  \         |  V  K
-      . ~`` ~  <  #   %  >  X  J  Z
+         &  <  \         |  K  B
+      . ~`` ~  >  #   %  V  X  J  Z
               ~[  ^   $ ~]
     )"
 
