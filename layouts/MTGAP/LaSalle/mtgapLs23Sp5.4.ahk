@@ -188,6 +188,11 @@ CreateLayers()
       altGr.AddMappings(layerMainExWid, true)
     }
 
+    main.AddMappingsFromTo("1  2     4  5  6  7  8     0   -   =", 
+                           "F1 F2    F4 F5 F6 F7 F8    F10 F11 F12", false)
+    main.AddMappingsFromTo("1  2     4  5  6  7  8     0   -   =", 
+                           "F1 F2    F4 F5 F6 F7 F8    F10 F11 F12", true)
+
 }
 
 
