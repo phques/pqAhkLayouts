@@ -15,7 +15,8 @@ LaSalle fingering
 global ImgsDir := A_ScriptDir . "\imgs\sp3.3pq2"
 global ImgWidth := 164
 global ImgHeight := 94
-global CenterOnCurrWndMonitor := 1
+global CenterOnCurrWindow := 1
+; global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
 global DoubleAlt := 0
