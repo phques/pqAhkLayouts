@@ -1,7 +1,7 @@
 /*
 
-2020-03-20
-Ls22Sp3.3pq2
+2020-03-20 / 2020-04-24
+Ls22Sp3.3pq2b
 MTGAP ansi angleZ BEAKL
 LaSalle fingering
 22 keys
@@ -12,7 +12,7 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\sp3.3pq2"
+global ImgsDir := A_ScriptDir . "\imgs\sp3.3pq2b"
 global ImgWidth := 164
 global ImgHeight := 94
 global CenterOnCurrWindow := 1
@@ -53,7 +53,7 @@ CreateLayers()
 
 
     ;----------------
-    ; b) Swap ,-   <-not used !
+    ; b) Swap e-sp
     ; CrSh) According to info found in tests w. KLA, 
     ;  moving CR to mid left col and shifts up is better
     ;  try it instead of Shift on pinkies to the pitfalls they imply
@@ -63,8 +63,8 @@ CreateLayers()
     layerMain := "
     (Join`r`n
               !                 w   
-       Esc a  e  v  ``   Tab h  t  s BS
-    LSh g  i  o SP  '     m  n  d  r  c RShift
+       Esc a  SP v  ``   Tab h  t  s BS
+    LSh g  i  o  e  '     m  n  d  r  c RShift
                  u  CR    f  l  m   
     )"
     altGrTap := 'b' 
@@ -72,8 +72,8 @@ CreateLayers()
     layerMainSh := "
     (Join`r`n
               ?                 W   
-       Esc A  E  V  ~    Tab H  T  S ~Delete
-     CL G  I  O  "  _     M  N  D  R  C CL
+       Esc A  "  V  ~    Tab H  T  S ~Delete
+     CL G  I  O  E  _     M  N  D  R  C CL
                  U  CR    F  L  M  
     )"
 
@@ -81,16 +81,16 @@ CreateLayers()
     layerAlt := "
     (Join`r`n
               /                 b   
-      Esc  -  .  :  >    Tab j  p  x BS
-    LSh *  {  ;  y  +     =  ,  k  }  q RShift
+      Esc  -  y  :  >    Tab j  p  x BS
+    LSh *  {  ;  .  +     =  ,  k  }  q RShift
                  (  CR    z  )  0       
     )"
 
     layerAltSh := "
     (Join`r`n
              ~\                 B   
-       Esc &  |  0  0    Tab J  P  X ~Delete
-    LSh $ ~[  %  Y  ^     #  @  K ~]  Q RShift
+       Esc &  Y  0  0    Tab J  P  X ~Delete
+    LSh $ ~[  %  |  ^     #  @  K ~]  Q RShift
                  <  CR    Z  >  0    
     )"
 
