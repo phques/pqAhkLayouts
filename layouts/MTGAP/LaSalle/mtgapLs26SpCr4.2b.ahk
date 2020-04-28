@@ -34,7 +34,7 @@ CreateLayers()
     ; try both hands a std pos
     qwertyMask_std := "
     (Join`r`n
-           3 4         9  
+           3 4       8  
        q w e r    y u i o p
     CL a s d f g  h j k l ; ' 
         z x c v   n m ,   
@@ -42,7 +42,7 @@ CreateLayers()
 
     qwertyMask_wid := "
     (Join`r`n
-           3 4         0  
+           3 4        9  
        q w e r    u i o p [  
     CL a s d f g  j k l ; ' Enter
         z x c v   m , .     
@@ -143,6 +143,12 @@ CreateLayers()
         altGr.AddMappingsFromTo("h", "Alt", false)
         altGr.AddMappingsFromTo("h", "Alt", true)
     }
+
+    main.AddMappingsFromTo("1  2        5  6  7  8     0   -   =", 
+                           "F1 F2       F5 F6 F7 F8    F10 F11 F12", false)
+    main.AddMappingsFromTo("1  2        5  6  7  8     0   -   =", 
+                           "F1 F2       F5 F6 F7 F8    F10 F11 F12", true)
+
 }
 
 CreateLayers()
