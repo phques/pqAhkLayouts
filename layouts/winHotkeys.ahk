@@ -19,6 +19,16 @@ LWin & PgDn::
         DisplayHelpImageSuspendOff()
 return
 
+; same thing as win+pgup: suspend/resume
+ScrollLock::
+    Suspend  "toggle"
+    if (A_IsSuspended)
+        DisplayHelpImageSuspendOn()
+    else 
+        DisplayHelpImageSuspendOff()
+return
+
+
 ; stop script
 LWin & End:: ExitApp
 
