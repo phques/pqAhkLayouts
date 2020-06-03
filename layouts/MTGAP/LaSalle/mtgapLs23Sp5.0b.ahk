@@ -14,9 +14,10 @@ LaSalle fingering
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
 global ImgsDir := A_ScriptDir . "\imgs\Sp5.0b"
-global ImgWidth := 164
-global ImgHeight := 94
-global CenterOnCurrWndMonitor := 1
+global ImgWidth := 160
+global ImgHeight := 68
+global CenterOnCurrWindow := 1
+; global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
 global DoubleAlt := 0
@@ -170,7 +171,7 @@ CreateLayers()
     ; dont create layout hotkeys for these
     ; for eg, we will use Win-XX for hotkeys to do actions
     ; we need to do it this way for the Suspend hotkey w. #SuspendExempt
-    dontCreateHotkeys := [MakeKeySC("LWin")]
+    dontCreateHotkeys := [MakeKeySC("LWin"), MakeKeySC("ScrollLock")]
 
     InitLayout(layers, dontCreateHotkeys)
 
