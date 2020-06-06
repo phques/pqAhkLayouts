@@ -66,47 +66,88 @@ CreateLayers()
 {
   qwertyMask_std := "
   (Join`r`n
-    q w e r       u i o     
+      w e r       u i o     
     a s d f g   h j k l ;  
       z   c v   n m , .     
   )"
 
   qwertyMask_wid := "
   (Join`r`n
-     q w e r        i o p
+       w e r        i o p
      a s d f g    j k l ; '
        z   c v    m , . / 
   )"
 
-  ; qwertyMask := qwertyMask_std
-  qwertyMask := qwertyMask_wid
+  qwertyMask_stdEx := "
+  (Join`r`n
+    q w e r       u i o p    
+ CL a s d f g   h j k l ; CR
+      z   c v   n m , .     
+  )"
+
+  qwertyMask_widEx := "
+  (Join`r`n
+     q w e r        i o p [
+  CL a s d f g    j k l ; ' CR
+       z   c v    m , . / 
+  )"
+
+    ; qwertyMask := qwertyMask_std
+    ; qwertyMaskEx := qwertyMask_stdEx
+    qwertyMask := qwertyMask_wid
+    qwertyMaskEx := qwertyMask_widEx
+
+    ;----------------
+
+  layerMainEx := "
+  (Join`r`n
+    Esc . . .           . . . BS     
+  LSh . . . . .       . . . . . RSh
+        .   . Tab    Cr . . .     
+  )"
+
+  layerMainExSh := "
+  (Join`r`n
+    Esc . . .           . . . ~Delete
+   CL . . . . .       . . . . . CL
+        .   . Tab    Cr . . .     
+  )"
+
+    layerMainExWid := "
+    (Join`r`n
+        y     .
+        h     Ctrl
+        n     Alt
+    )"
+
+    ;---------
 
   layerMain := "
   (Join`r`n
-    Esc i u  o           m d n      
+        i u  o           m d n      
       y e Sp a g       l r t s p  
-        .    , Tab    Cr h c f     
+        .    , .       . h c f     
   )"
   altAccessTap := 'w'
 
   layerMainSh := "
   (Join`r`n
-    Esc I U O            M D N       
+        I U O            M D N       
       Y E " A G        L R T S P  
-        :  ~; Tab     Cr H C F    
+        :  ~; .        . H C F    
   )"
 
 
   layerAlt := "
   (Join`r`n
-    Esc q ' j            v ! #     
-   @<+? ( - ) $        + { = } @>+&   
+        q ' j            v ! #     
+      ? ( - ) $        + { = } &   
         *   / :        z k x b     
   )"
 
   layerAltSh := "
   (Join`r`n
-    Esc Q ~`` J           V |  .       
+        Q ~`` J           V |  .       
       < < _ > ~-       ~ ~[ @ ~] %   
         ^  ~\ .        Z  K X  B     
   )"
@@ -192,24 +233,37 @@ CreateLayers()
   extend := layerDefsById["edit"]
   french := layerDefsById["french"]
 
-  if (qwertyMask == qwertyMask_std) {
-      main.AddMappingsFromTo("p", "Backspace", false)
-      main.AddMappingsFromTo("p", "~Delete", true)
-  }
-  else {
-      main.AddMappingsFromTo("[", "Backspace", false)
-      main.AddMappingsFromTo("[", "~Delete", true)
+    CLayer.NoKeyChar := '.'
+    main.AddMappingsFromTo(qwertyMaskEx, layerMainEx, false)
+    main.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
+    altGr.AddMappingsFromTo(qwertyMaskEx, layerMainEx, false)
+    altGr.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
 
-      main.AddMappingsFromTo( "h", "Control", false)
-      main.AddMappingsFromTo( "h", "Control", true)
-      altGr.AddMappingsFromTo("h", "Control", false)
-      altGr.AddMappingsFromTo("h", "Control", true)
+    if (qwertyMask == qwertyMask_wid) {
+      main.AddMappings(layerMainExWid, false)
+      main.AddMappings(layerMainExWid, true)
+      altGr.AddMappings(layerMainExWid, false)
+      altGr.AddMappings(layerMainExWid, true)
+    }
 
-      main.AddMappingsFromTo( "n", "Alt", false)
-      main.AddMappingsFromTo( "n", "Alt", true)
-      altGr.AddMappingsFromTo("n", "Alt", false)
-      altGr.AddMappingsFromTo("n", "Alt", true)
-  }
+  ; if (qwertyMask == qwertyMask_std) {
+  ;     main.AddMappingsFromTo("p", "Backspace", false)
+  ;     main.AddMappingsFromTo("p", "~Delete", true)
+  ; }
+  ; else {
+  ;     main.AddMappingsFromTo("[", "Backspace", false)
+  ;     main.AddMappingsFromTo("[", "~Delete", true)
+
+  ;     main.AddMappingsFromTo( "h", "Control", false)
+  ;     main.AddMappingsFromTo( "h", "Control", true)
+  ;     altGr.AddMappingsFromTo("h", "Control", false)
+  ;     altGr.AddMappingsFromTo("h", "Control", true)
+
+  ;     main.AddMappingsFromTo( "n", "Alt", false)
+  ;     main.AddMappingsFromTo( "n", "Alt", true)
+  ;     altGr.AddMappingsFromTo("n", "Alt", false)
+  ;     altGr.AddMappingsFromTo("n", "Alt", true)
+  ; }
 
     main.AddMappingsFromTo("1  2  3  4  5  6  7  8  9  0   -   =", 
                            "F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12", false)
