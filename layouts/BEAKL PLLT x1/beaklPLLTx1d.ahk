@@ -82,14 +82,14 @@ CreateLayers()
   (Join`r`n
     q w e r       u i o p    
  CL a s d f g   h j k l ; CR
-      z   c v   n m , .     
+      z x c v   n m , .     
   )"
 
   qwertyMask_widEx := "
   (Join`r`n
      q w e r        i o p [
   CL a s d f g    j k l ; ' CR
-       z   c v    m , . / 
+       z x c v    m , . / 
   )"
 
     ; qwertyMask := qwertyMask_std
@@ -103,14 +103,14 @@ CreateLayers()
   (Join`r`n
     Esc . . .           . . . BS     
   LSh . . . . .       . . . . . RSh
-        .   . Tab    Cr . . .     
+        . / . Tab    Cr . . .     
   )"
 
   layerMainExSh := "
   (Join`r`n
     Esc . . .           . . . ~Delete
    CL . . . . .       . . . . . CL
-        .   . Tab    Cr . . .     
+       . ~/ . Tab    Cr . . .     
   )"
 
     layerMainExWid := "
@@ -265,6 +265,7 @@ CreateLayers()
   ;     altGr.AddMappingsFromTo("n", "Alt", true)
   ; }
 
+  ; put FN keys on the top row (digits)
     main.AddMappingsFromTo("1  2  3  4  5  6  7  8  9  0   -   =", 
                            "F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12", false)
     main.AddMappingsFromTo("1  2  3  4  5  6  7  8  9  0   -   =", 
@@ -320,4 +321,5 @@ return
 
 #include ../winHotkeys.ahk
 
-LWin & Insert::swapSymsAndFrench()
+; LWin-n qwerty swap between symbols and french on altGr
+LWin & sc031::swapSymsAndFrench()
