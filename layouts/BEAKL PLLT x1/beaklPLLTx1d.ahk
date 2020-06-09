@@ -238,12 +238,16 @@ CreateLayers()
     main.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
     altGr.AddMappingsFromTo(qwertyMaskEx, layerMainEx, false)
     altGr.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
+    french.AddMappingsFromTo(qwertyMaskEx, layerMainEx, false)
+    french.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
 
     if (qwertyMask == qwertyMask_wid) {
       main.AddMappings(layerMainExWid, false)
       main.AddMappings(layerMainExWid, true)
       altGr.AddMappings(layerMainExWid, false)
       altGr.AddMappings(layerMainExWid, true)
+      french.AddMappings(layerMainExWid, false)
+      french.AddMappings(layerMainExWid, true)
     }
 
   ; if (qwertyMask == qwertyMask_std) {
