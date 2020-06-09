@@ -156,16 +156,16 @@ CreateLayers()
   if (qwertyMask == qwertyMask_std) {
     layerAltfr := "
     (Join`r`n
-      q w e r t      u i o p       ï î û ô œ    v q j !   
-      a s d f g    h j k l ;       ê é ù à ä  - « ' » x   
-      z x c        n m , .           è ë â    w k ç b
+       q w e r t      u i o p          ï î û ô œ    v q j !   
+    CL a s d f g    h j k l ; CR   LSh ê é ù à ä  - « ' » x RSh
+       z x c        n m , .              è ë â    w k ç b
     )"
   } else  {
     layerAltfr := "
     (Join`r`n
-      q w e r t      i o p [       ï î û ô œ    v q j !   
-      a s d f g    j k l ; '       ê é ù à ä  - « ' » x   
-      z x c        m , . /           è ë â    w k ç b    
+       q w e r t      i o p [          ï î û ô œ    v q j !   
+    CL a s d f g    j k l ; ' CR   LSh ê é ù à ä  - « ' » x RSh
+       z x c        m , . /              è ë â    w k ç b    
     )"
   }
 
@@ -238,32 +238,18 @@ CreateLayers()
     main.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
     altGr.AddMappingsFromTo(qwertyMaskEx, layerMainEx, false)
     altGr.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
+    ; french.AddMappingsFromTo(qwertyMaskEx, layerMainEx, false)
+    ; french.AddMappingsFromTo(qwertyMaskEx, layerMainExSh, true)
 
     if (qwertyMask == qwertyMask_wid) {
       main.AddMappings(layerMainExWid, false)
       main.AddMappings(layerMainExWid, true)
       altGr.AddMappings(layerMainExWid, false)
       altGr.AddMappings(layerMainExWid, true)
+      french.AddMappings(layerMainExWid, false)
+      french.AddMappings(layerMainExWid, true)
     }
 
-  ; if (qwertyMask == qwertyMask_std) {
-  ;     main.AddMappingsFromTo("p", "Backspace", false)
-  ;     main.AddMappingsFromTo("p", "~Delete", true)
-  ; }
-  ; else {
-  ;     main.AddMappingsFromTo("[", "Backspace", false)
-  ;     main.AddMappingsFromTo("[", "~Delete", true)
-
-  ;     main.AddMappingsFromTo( "h", "Control", false)
-  ;     main.AddMappingsFromTo( "h", "Control", true)
-  ;     altGr.AddMappingsFromTo("h", "Control", false)
-  ;     altGr.AddMappingsFromTo("h", "Control", true)
-
-  ;     main.AddMappingsFromTo( "n", "Alt", false)
-  ;     main.AddMappingsFromTo( "n", "Alt", true)
-  ;     altGr.AddMappingsFromTo("n", "Alt", false)
-  ;     altGr.AddMappingsFromTo("n", "Alt", true)
-  ; }
 
   ; put FN keys on the top row (digits)
     main.AddMappingsFromTo("1  2  3  4  5  6  7  8  9  0   -   =", 
