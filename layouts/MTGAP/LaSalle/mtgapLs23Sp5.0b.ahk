@@ -54,7 +54,7 @@ CreateLayers()
            3          8  
         q w e r t  y u i o p
      CL a s d f g  h j k l ; '
-            c v    n m    
+          x c v    n m ,   
     )"
 
     qwertyMask_widEx := "
@@ -62,7 +62,7 @@ CreateLayers()
            3          9  
         q w e r t  u i o p [  
      CL a s d f g  j k l ; ' Enter
-            c v    m ,      
+          x c v    m , .     
     )"
 
     ; qwertyMask := qwertyMask_std
@@ -78,14 +78,14 @@ CreateLayers()
               .               .      
        Esc .  .  . Cr  Tab .  .  .  BS 
     LSh .  .  .  .  .   .  .  .  .  . RShift
-                 .  .   .  .           
+             Tab .  .   .  .  Cr         
     )"
     layerMainExSh := "
     (Join`r`n
               .               .      
        Esc .  .  . Cr  Tab .  .  .  ~Delete 
      CL .  .  .  .  .   .  .  .  .  . CL
-                 .  .   .  .           
+             Tab .  .   .  .  Cr         
     )"
 
     layerMainExWid := "
