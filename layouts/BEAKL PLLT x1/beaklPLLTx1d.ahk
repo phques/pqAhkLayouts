@@ -115,7 +115,7 @@ CreateLayers()
 
     layerMainExWid := "
     (Join`r`n
-        y     .
+        y     !Esc
         h     Ctrl
         n     Alt
     )"
