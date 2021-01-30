@@ -2988,3 +2988,379 @@ set sameFingerI 120
 set consoleEsc 1
 set numThreads 4
 
+-------
+
+2021-01-29
+ls20Sp5.0
+(ooops, repeat of ls20SpCr4.4!)
+
+01110 01110
+11111 11111
+00011 11000
+
+setksize beaklasalle
+setmask 011100111011111111110001111000
+use abcdefghijklmnopqrstuvwxyz ,.-"_')(;=:/*!
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+
+Hands: 54% 45%
+Fingers: 2.0% 13% 18% 22% 0.00% 0.00% 18% 13% 12% 3.0%
+
+    -  .  x         q  p  w
+ (  ;  ,  y  :   =  b  k  j  "
+          z  /   *  )
+
+    a  e  v         h  t  s
+ g  i  o SP  _   m  n  d  r  c
+          u  '   f  l
+
+Fitness:       55978253
+Distance:      26381420
+Finger work:   431688
+Inward rolls:  5.96%
+Outward rolls: 4.04%
+Same hand:     34.23%
+Same finger:   2.22%
+Row change:    15.84%
+Home jump:     1.03%
+Ring jump:     1.08%
+To center:     1.35%
+
+-------------
+
+2021-01-29
+ls20Sp5.1
+
+remove _
+sameFingerM = sameFingerI
+
+    999, 0 ,  0 , >90, 999,  999, 90<,0  , 0 ,  999,
+    90 , 50,  50 , 0 , 110,  100, 0 , 50 , 50,  90,
+    180, 220, 220, 80, 140,  135, 80, 220, 220, 180
+
+01110 01110
+11111 11111
+00011 11000
+
+setksize beaklasalle
+setmask 011100111011111111110001111000
+use abcdefghijklmnopqrstuvwxyz ,.-"')(;=:/*!?
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 120
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+
+!! strange one !!
+(right hand heavy too)
+
+Hands: 48% 51%
+Fingers: 2.0% 13% 17% 17% 0.00% 0.00% 17% 21% 11% 3.0%
+
+    "  .  :         j  w  ,
+ (  ;  '  p  =   /  k  x  -  !
+          q  *   z  )
+
+    a  e  d         h SP  s
+ y  o  i  t  g   m  n  u  r  c
+          f  b   v  l
+
+Fitness:       54961117
+Distance:      27623230
+Finger work:   3316624
+Inward rolls:  6.12%
+Outward rolls: 4.28%
+Same hand:     36.95%
+Same finger:   1.58%
+Row change:    18.45%
+Home jump:     2.42%
+Ring jump:     1.38%
+To center:     3.94%
+
+------------
+
+2021-01-29
+ls20Sp5.2
+
+remove _  (but it still seems to want to place 'too many' symbols on main for my taste !?)
+back to sameFingerM 140
+
+999, 0 ,  0 , 100, 999,  999, 100, 0  , 0 ,  999,
+90 , 50,  50 , 0 ,  90,   85, 0 ,  50 , 50,  90,
+180, 220, 220, 80, 140,  135, 80,  220, 220, 180
+
+
+01110 01110
+11111 11111
+00011 11000
+
+setksize beaklasalle
+setmask 011100111011111111110001111000
+use abcdefghijklmnopqrstuvwxyz ,.-"')(;=:/*!?
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 140
+set sameFingerI 120
+set consoleEsc 1
+set numThreads 4
+
+!! strange one again, bit less than 5.1 !!
+ouch EY same finger main/alt !!
+(right hand heavy)
+
+Hands: 48% 51%
+Fingers: 3.0% 13% 17% 16% 0.00% 0.00% 16% 21% 11% 3.0%
+
+    '  y  :         j  .  ,
+ (  )  "  w  =   z  b  x  -  /
+          ;  *   !  q
+
+    a  e  p         f SP  s
+ u  o  i  t  g   m  n  l  r  c
+          d  k   v  h
+
+Fitness:       55051227
+Distance:      26142550
+Finger work:   3339122
+Inward rolls:  4.92%
+Outward rolls: 4.95%
+Same hand:     36.67%
+Same finger:   2.10%
+Row change:    19.40%
+Home jump:     3.57%
+Ring jump:     1.25%
+To center:     3.40%
+
+
+--------------
+
+2021-01-29
+ls20Sp5.3
+
+similar too many others (but the others have more keys)
+
+remove _ (brings back K on main)
+remove * (brings back ?)
+
+high homeJump (200 vs 100)
+I think homeJump is important with LaSalle, because it tends to
+be a problem with this type of layout
+
+lower 'toMiddle'
+999, 0 ,  0 , 100, 999,  999, 100, 0  , 0 ,  999,
+90 , 50,  50 , 0 , >90,  >85, 0 ,  50 , 50,  90,
+180, 220, 220, 80, 140,  135, 80,  220, 220, 180
+
+
+01110 01110
+11111 11111
+00011 11000
+
+setksize beaklasalle
+setmask 011100111011111111110001111000
+use abcdefghijklmnopqrstuvwxyz ,.-"')(;=:/!? 
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set homeJump 200
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set consoleEsc 1
+set numThreads 4
+
+Hands: 54% 45%
+Fingers: 2.0% 13% 17% 23% 0.00% 0.00% 18% 13% 12% 3.0%
+
+    -  .  x         :  p  w
+ (  )  ;  y  /   =  ,  b  j  "
+          ?  !   z  q
+
+    a  e  v         h  t  s
+ g  i  o SP  k   m  n  d  r  c
+          u  '   f  l
+
+Fitness:       55800803
+Distance:      25722575
+Finger work:   515118
+Inward rolls:  5.13%
+Outward rolls: 4.00%
+Same hand:     33.95%
+Same finger:   2.15%
+Row change:    16.11%
+Home jump:     0.95%
+Ring jump:     0.93%
+To center:     1.99%
+
+
+--------------
+
+2021-01-29
+ls20Sp5.3b
+
+remove _ 
+high homeJump 
+
+setksize beaklasalle
+setmask 011100111011111111110001111000
+use abcdefghijklmnopqrstuvwxyz ,.-"')(;=:/!?
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set homeJump 200
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set consoleEsc 1
+set numThreads 4
+
+** same results as 5.3 ! **
+
+--------------
+
+2021-01-29
+ls21Sp5.4
+
+21keys ! (20 seems to be just a bit too little)
+so compromise, add bottom key under right middle finger
+
+new key brings B
+remove _  => but we DONT get back K on main now :(
+
+
+high homeJump (200 vs 100)
+I think homeJump is important with LaSalle, because it tends to
+be a problem with this type of layout
+
+lower 'toMiddle'
+999, 0 ,  0 , 100, 999,  999, 100, 0  , 0 ,  999,
+90 , 50,  50 , 0 , >90,  >85, 0 ,  50 , 50,  90,
+180, 220, 220, 80, 140,  135, 80,  220, 220, 180
+
+01110 01110
+11111 11111
+00011 11100
+
+setksize beaklasalle
+setmask 011100111011111111110001111100
+use abcdefghijklmnopqrstuvwxyz ,.-"')(;=:/*!?@
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set homeJump 200
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set consoleEsc 1
+set numThreads 4
+
+Hands: 53% 46%
+Fingers: 2.0% 13% 17% 22% 0.00% 0.00% 18% 14% 12% 3.0%
+
+    "  .  ?         z  p  w
+ (  :  ;  y  !   q  ,  k  x  )
+          /  @   =  j  *
+
+    a  e  v         h  t  s
+ g  i  o SP  '   m  n  d  r  c
+          u  -   f  l  b
+
+Fitness:       55716553
+Distance:      27505615
+Finger work:   400593
+Inward rolls:  5.18%
+Outward rolls: 4.00%
+Same hand:     33.46%
+Same finger:   1.99%
+Row change:    15.94%
+Home jump:     0.98%
+Ring jump:     1.06%
+To center:     1.36%
+
+
+-- try to mix 5.3 and 5.4 !
+
+2021-01-29
+ls21Sp5.3_4
+
+- keep B on new key on main (5.4)
+- put K back on main (5.3)
+- do alt layer manually : symbols (ref PLLT1x)
+
+    a  e  v         h  t  s
+ g  i  o SP  k   m  n  d  r  c
+          u  '   f  l  b
+
+    (  ,  ;         :  .  }
+ ?  j  -  )  *   w  {  =  y  !
+          /  q   z  p  x
+
+pllt1x
+    q ' j            v ! #     
+  ? ( - ) $        + { = } &   
+    *   / :        z k x b     
+
+
+?? Maybe P on main iso K (ie PLLT1x again ;-)
+ (P-L was same finger thru layer)
+
+    a  e  v         h  t  s
+ g  i  o SP  p   m  n  d  r  c
+          u  '   f  l  b
+
+    (  ,  ;         :  .  }
+ ?  j  -  )  *   w  {  =  y  !
+          /  q   z  k  x
+
+?? y hidden in consonants cluster ??
+ swap j y (y creates sameFinger with a above though)
+ then swap w j  (w becomes easier, j was taking a good spot)
+ (hehe roll-right jwy)
+
+    a  e  v         h  t  s
+ g  i  o SP  p   m  n  d  r  c
+       _  u  '   f  l  b
+
+    (  .  ;         :  ,  }
+ ?  y  -  )  *   j  {  =  w  !
+       _  /  q   z  k  x
+
+       ^
+.. end up adding X key also, place _ @ there
+   so ls22 now !!
