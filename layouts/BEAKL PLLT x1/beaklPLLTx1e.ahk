@@ -1,5 +1,5 @@
 ﻿/*  http://shenafu.com/smf/index.php?topic=89.msg2409;topicseen#msg2409
-(Den) PLLT x1(d)
+(Den) PLLT x1(e)
 PLLT may be my other radical idea here. 
 "Pinky-Less, Less Thumb" further minimizes pinkies by eliminating the remote corner keys hit 
 by the pinkies. also theoretically thumbs are slower than other fingers, 
@@ -51,7 +51,7 @@ global CenterOnCurrWindow := 1
 global DoubleAlt := 0
 
 global altAccessTapFr := 0
-global altAccessTap := 0
+; global altAccessTap := 0
 global altAccesKey := 0
 
 #include ../../fromPkl/pkl_guiLayers.ahk
@@ -69,14 +69,14 @@ CreateLayers()
   (Join`r`n
       w e r       u i o     
     a s d f g   h j k l ;  
-      z   c v   n m , .     
+      z x c v   n m , .     
   )"
 
   qwertyMask_wid := "
   (Join`r`n
        w e r        i o p
      a s d f g    j k l ; '
-       z   c v    m , . / 
+       z x c v    m , . / 
   )"
 
   ; masks for extra / special chars (Cr, Bs etc)
@@ -101,37 +101,36 @@ CreateLayers()
 
 
   ;---------
-  
+
   ; maip layer definition
   layerMain := "
   (Join`r`n
         i u  o           m d n      
       y e Sp a g       l r t s p  
-        .    , .       . h c f     
+        . .  , .       w h c f     
   )"
-  ; char outpot on SP tap
-  altAccessTap := 'w'
+
 
   layerMainSh := "
   (Join`r`n
         I U O            M D N       
       Y E " A G        L R T S P  
-        :  ~; .        . H C F    
+        : . ~; .       W H C F    
   )"
 
   ; alt / secondary layer
   layerAlt := "
   (Join`r`n
         q ' j            v ! #     
-      ? ( - ) $        + { = } &   
-        *   / :        z k x b     
+      ? ( - ) @        + { = } &   
+        * | / _        z k x b     
   )"
 
   layerAltSh := "
   (Join`r`n
         Q ~`` J           V |  .       
-      < < _ > ~-       ~ ~[ @ ~] %   
-        ^  ~\ .        Z  K X  B     
+      < < _ > ~-       ~ ~[ $ ~] %   
+        ^ . ~\ .       Z  K X  B     
   )"
 
   ;----------------
@@ -139,33 +138,42 @@ CreateLayers()
   ; main layer extra / special chars
   layerMainEx := "
   (Join`r`n
-    Esc . . .           . . . BS     
+    Tab . . .           . . . BS     
   LSh . . . . .       . . . . . RSh
-        . / . Tab    Cr . . .     
+       . CR . .         . . . .     
   )"
 
   layerMainExSh := "
   (Join`r`n
-    Esc . . .           . . . ~Delete
+    Tab . . .           . . . ~Delete
    CL . . . . .       . . . . . CL
-       . ~/ . Tab    Cr . . .     
+       . CR . .       . . . .     
   )"
 
   ; more extra chars for wid mode
-  layerMainExWid1 := "
+  ; layerMainExWid1 := "
+  ; (Join`r`n
+  ;     y     !Esc
+  ;     h     Ctrl
+  ;     n     Alt
+  ; )"
+
+ ; edit !
+ layerMainExWid := "
   (Join`r`n
-      y     !Esc
-      h     Ctrl
-      n     Alt
+    ``           ^z
+      t   y u       ^x    Left Right
+          h               Up    
+    v b   n      ^c ^v    Down   
   )"
- ; copy/past/cut !
- layerMainExWid2 := "
+ ; french layer verion, cannot have ^x (cut) on T, in use
+ layerMainExWidFr := "
   (Join`r`n
-      y     ^c
-      h     ^x
-      n     ^v
+    ``           ^z
+          y u             Left Right
+          h               Up    
+    v b   n      ^c ^v    Down   
   )"
-  layerMainExWid := layerMainExWid2
 
   ; --- French layers ---
 
@@ -186,6 +194,7 @@ CreateLayers()
     )"
   }
 
+  ; need this ! no Z otherwise
   altAccessTapFr := 'z'
 
   if (qwertyMask == qwertyMask_std) {
@@ -218,25 +227,25 @@ CreateLayers()
         mapSh: layerMainSh
       },
 
-      {id: "syms", key: altAccesKey, tap: altAccessTap,
+      {id: "syms", key: altAccesKey, tap: altAccessTapFr, ;; need tap defined here to be accessible on french layer
         qwertyMask: qwertyMask,
         map: layerAlt,
         mapSh: layerAltSh,
       },
 
-      {id: "french", 
+      {id: "french", tap: altAccessTapFr,
         map: layerAltfr,
         mapSh: layerAltfrsh,
       },
 
-      {id: "edit", key: "LAlt", toggle: true,
-        map: extendLayer, 
-      },
+      ; {id: "edit", key: "LAlt", toggle: true,
+      ;   map: extendLayer, 
+      ; },
 
       ; would've liked  to use V here, but it screws up??
-      {id: "numpad", key: "b", toggle: true,
-        map: numpadLayers.thumbOnBwide, 
-      },
+      ; {id: "numpad", key: "b", toggle: true,
+      ;   map: numpadLayers.thumbOnBwide, 
+      ; },
 
   ]
 
@@ -249,7 +258,7 @@ CreateLayers()
 
   main := layerDefsById["main"]
   altGr := layerDefsById["syms"]
-  extend := layerDefsById["edit"]
+  ; extend := layerDefsById["edit"]
   french := layerDefsById["french"]
 
   CLayer.NoKeyChar := '.'
@@ -263,8 +272,8 @@ CreateLayers()
   if (qwertyMask == qwertyMask_wid) {
     main.AddMappings(layerMainExWid, false)
     main.AddMappings(layerMainExWid, true)
-    altGr.AddMappings(layerMainExWid, false)
-    altGr.AddMappings(layerMainExWid, true)
+    ; altGr.AddMappings(layerMainExWid, false)
+    ; altGr.AddMappings(layerMainExWid, true)
     french.AddMappings(layerMainExWid, false)
     french.AddMappings(layerMainExWid, true)
   }
@@ -293,8 +302,8 @@ swapSymsAndFrench()
     
     ; Change the Tap value of alt layer access key
     ; e.g. Space: w <-> Space: z
-    symsAccessKeydef.AddMapping(altAccessTapFr, false, true)
-    symsAccessKeydef.AddMapping(altAccessTapFr, true, true)
+    ; symsAccessKeydef.AddMapping(altAccessTapFr, false, true)
+    ; symsAccessKeydef.AddMapping(altAccessTapFr, true, true)
 
     ; changing the main layer name changes the accessed img file
     mainLayer.id := "mainfr"
@@ -305,8 +314,8 @@ swapSymsAndFrench()
 
     ; Change the Tap value of alt layer access key
     ; e.g. Space: w <-> Space: z
-    symsAccessKeydef.AddMapping(altAccessTap, false, true)
-    symsAccessKeydef.AddMapping(altAccessTap, true, true)
+    ; symsAccessKeydef.AddMapping(altAccessTap, false, true)
+    ; symsAccessKeydef.AddMapping(altAccessTap, true, true)
 
     ; changing the main layer name changes the accessed img file
     mainLayer.id := "main"
