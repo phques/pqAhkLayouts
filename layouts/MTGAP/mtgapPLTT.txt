@@ -419,7 +419,7 @@ To center:     1.16%
 
 --------
 2021-01-30
-mtgapPLLT1.0
+mtgapPLLT2.0
 
 24keys
 trying out PLLT idea with MTGAP (again),
@@ -514,8 +514,9 @@ To center:     3.35%
 
 
 --------
+
 2021-01-30
-mtgapPLLT1.1
+mtgapPLLT2.1
 
 as in latest lasalle's, try removing _ to free up main (no real change)
 bring back \n
@@ -564,7 +565,7 @@ Home jump:     1.52%
 Ring jump:     1.41%
 To center:     3.10%
 
-1.2
+2.2
 bit lower shift costs (just takes longer to take effect ;-)
 remove "[];:> since will be placed manually on shift
 bring back _  
@@ -615,7 +616,7 @@ Ring jump:     1.39%
 To center:     3.08%
 
 
-1.3
+2.3
 
 using allCharsSrcs.txt (doesn't change main)
 keep brckets
@@ -664,7 +665,7 @@ Ring jump:     1.44%
 To center:     3.09%
 
 
-1.4
+2.4
 
 back to std allChars.txt vs allCharsSrcs.txt (didn't change main)
 keep brckets
@@ -716,7 +717,7 @@ Ring jump:     1.39%
 To center:     3.08%
 
 
-1.5
+2.5
 
 higher pinky weight
             999, 50,  50, 100, 999,  999, 100, 50 , 50,  999,
@@ -771,7 +772,7 @@ Ring jump:     1.00%
 To center:     1.13%
 
 
-1.6
+2.6
 
 homeJumpIndex 10 (-90)
 
@@ -829,9 +830,9 @@ To center:     1.04%
 
 -----
 
-1.5b
-manually placed syms
-also moved P to mid index, bring ,. etc.
+2.5b
+moved P to mid index, bring ,. etc.
+manually placed syms / modified alt layer
 
      i  o  u         g  r  h
   y  a  e SP  p   m  t  s  n  c
