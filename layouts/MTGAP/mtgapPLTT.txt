@@ -416,3 +416,335 @@ Home jump:     0.71%
 Ring jump:     0.88%
 To center:     1.16%
 
+
+--------
+2021-01-30
+mtgapPLLT1.0
+
+24keys
+trying out PLLT idea with MTGAP (again),
+using my latest weights and settings (from LaSalle)
+
+999, 50,  50, 100, 999,  999, 100, 50 , 50,  999,
+90 ,  0,  0 ,  0 ,  90,   85, 0 ,   0 ,  0,  90,
+180, 90, 90, 80, 120,  115, 80,  90, 90, 180
+
+also trying out
+higher shiftCost
+    shiftCost =     150;
+    doubleShiftCost=200;
+    // shiftCost =      100;
+    // doubleShiftCost=150;
+
+as in latest lasalle's, try removing _ to free up main (no real change)
+remove \n, can be placed manually somewhere else (?)
+
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz,.-"')(;=:/*!?>{}[]\\+
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set homeJump 200
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set shiftCost 150
+set doubleShiftCost 200
+sethandbias 5
+set numThreads 4
+set consoleEsc 1
+
+Hands: 52% 47%
+Fingers: 2.0% 12% 18% 21% 0.00% 0.00% 17% 14% 11% 5.0%
+
+    ?  (  }         ]  x  "
+ :  ;  ,  )  [   =  g  v  p  j
+    +  >  /  \   {  q  *  z
+
+    i  o  u         w  h  c
+ y  a  e SP  '   m  t  n  s  r
+    .  -  k  !   b  d  l  f
+
+Fitness:       53477274
+Distance:      29791925
+Finger work:   251144
+Inward rolls:  7.10%
+Outward rolls: 2.12%
+Same hand:     32.24%
+Same finger:   1.97%
+Row change:    13.47%
+Home jump:     0.52%
+Ring jump:     0.86%
+To center:     1.07%
+
+interesting, like PLLT1x:
+- SP in middle
+- now have . and , as only syms
+but fitness values are lower (according to MTGAP rules anyways)
+
+Hands: 57% 42%
+Fingers: 4.0% 16% 20% 18% 0.00% 0.00% 17% 11% 12% 3.0%
+
+    /  \  ?         *  x  q
+ !  '  -  (  }   =  v  "  )  :
+    [  >  ;  +   ]  j  z  {
+
+    o  u  p         g  d  n
+ h  e SP  a  y   m  t  s  r  c
+    k  ,  i  .   w  l  f  b
+
+Fitness:       57285013
+Distance:      33283875
+Finger work:   1250578
+Inward rolls:  9.44%
+Outward rolls: 1.40%
+Same hand:     34.58%
+Same finger:   2.72%
+Row change:    14.60%
+Home jump:     1.29%
+Ring jump:     1.39%
+To center:     3.35%
+
+
+--------
+2021-01-30
+mtgapPLLT1.1
+
+as in latest lasalle's, try removing _ to free up main (no real change)
+bring back \n
+try w/o high homejump(does not seem to have an impact, it did in lasalle)
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz,.-"')(;=:/*!?>{}[]+\n
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set shiftCost 150
+set doubleShiftCost 200
+sethandbias 5
+set numThreads 4
+set consoleEsc 1
+
+Hands: 57% 42%
+Fingers: 4.0% 16% 21% 18% 0.00% 0.00% 17% 11% 12% 3.0%
+
+    /  !  >         *  x  q
+ ?  '  -  (  ]   =  k  v  "  )
+    [  :  ;  +   {  j  z  }
+
+    o  u  p         g  d  n
+ h  e SP  a  ,   m  t  s  r  c
+   \n  y  i  .   w  l  f  b
+
+Fitness:       59283240
+Distance:      34063355
+Finger work:   1178050
+Inward rolls:  9.25%
+Outward rolls: 1.52%
+Same hand:     34.83%
+Same finger:   2.66%
+Row change:    14.59%
+Home jump:     1.52%
+Ring jump:     1.41%
+To center:     3.10%
+
+1.2
+bit lower shift costs (just takes longer to take effect ;-)
+remove "[];:> since will be placed manually on shift
+bring back _  
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz,.-')(=/*!?{}+|&%@#_\n
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 0
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set shiftCost 125
+set doubleShiftCost 175
+sethandbias 5
+set numThreads 4
+set consoleEsc 1
+
+,.-"_')(;=:/*!?$>{}[]\+|&<%@#^`~
+
+Hands: 58% 41%
+Fingers: 4.0% 16% 21% 18% 0.00% 0.00% 17% 11% 12% 2.0%
+
+    &  _  @         }  x  q
+ !  '  -  (  +   =  k  v  )  *
+    #  ?  /  %   |  j  z  {
+
+    o  u  p         g  d  n
+ h  e SP  a  ,   m  t  s  r  c
+   \n  y  i  .   w  l  f  b
+
+Fitness:       56392271
+Distance:      33766170
+Finger work:   1173036
+Inward rolls:  9.33%
+Outward rolls: 1.42%
+Same hand:     34.71%
+Same finger:   2.62%
+Row change:    14.47%
+Home jump:     1.52%
+Ring jump:     1.39%
+To center:     3.08%
+
+
+1.3
+
+using allCharsSrcs.txt (doesn't change main)
+keep brckets
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz,.-')(=/*!?{}+|&%@#_\n
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 1
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set shiftCost 125
+set doubleShiftCost 175
+sethandbias 5
+set numThreads 4
+set consoleEsc 1
+
+Hands: 65% 34%
+Fingers: 1.0% 12% 38% 14% 0.00% 0.00% 14% 8.0% 11% 3.0%
+
+    &  _  @         {  }  *
+ '  /  -  (  +   q  )  v  =  x
+    #  ?  !  %   |  k  j  z
+
+    o  u  p         g  d  n
+ h  e SP  a  ,   m  t  s  r  c
+   \n  y  i  .   w  l  f  b
+
+Fitness:       25223550
+Distance:      3357145
+Finger work:   372695
+Inward rolls:  9.28%
+Outward rolls: 1.35%
+Same hand:     34.71%
+Same finger:   2.61%
+Row change:    14.68%
+Home jump:     1.61%
+Ring jump:     1.44%
+To center:     3.09%
+
+
+1.4
+
+back to std allChars.txt vs allCharsSrcs.txt (didn't change main)
+keep brckets
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz,.-')(=/*!?{}+|&%@#_\n
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 1
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set shiftCost 125
+set doubleShiftCost 175
+sethandbias 5
+set numThreads 4
+set consoleEsc 1
+
+std allChars changes syms layer
+keepbrackets not as nice
+
+Hands: 58% 41%
+Fingers: 4.0% 16% 21% 18% 0.00% 0.00% 17% 11% 12% 2.0%
+
+    &  _  @         *  x  q
+ !  '  -  (  +   =  k  v  )  z
+    #  ?  /  %   |  j  {  }
+
+    o  u  p         g  d  n
+ h  e SP  a  ,   m  t  s  r  c
+   \n  y  i  .   w  l  f  b
+
+Fitness:       56447136
+Distance:      33768470
+Finger work:   1172976
+Inward rolls:  9.32%
+Outward rolls: 1.42%
+Same hand:     34.71%
+Same finger:   2.62%
+Row change:    14.47%
+Home jump:     1.52%
+Ring jump:     1.39%
+To center:     3.08%
+
+
+1.5
+
+higher pinky weight
+            999, 50,  50, 100, 999,  999, 100, 50 , 50,  999,
+            100,  0,  0 ,  0 ,  90,   85, 0 ,   0 ,  0, 100,
+            180, 90, 90, 80, 120,  115, 80,  90, 90, 180
+
+(homeJump (PAI, YOU))
+(toOutside (H on pinky !))
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz,.-')(=/*!?{}+|&%@#_\n
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 1
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set shiftCost 125
+set doubleShiftCost 175
+sethandbias 5
+set numThreads 3
+set consoleEsc 1
+
+homeJump
+toOutside
