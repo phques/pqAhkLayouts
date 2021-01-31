@@ -3364,3 +3364,16 @@ pllt1x
        ^
 .. end up adding X key also, place _ @ there
    so ls22 now !!
+
+** ooops, U-P P-U is pretty bad !
+try with original K on main on that spot
+(KU should be less common)
+so swap p-k
+
+    a  e  v         h  t  s
+ g  i  o SP  k   m  n  d  r  c
+          u  '   f  l  b
+
+    (  ,  ;         :  .  }
+ ?  y  -  )  *   j  {  =  w  !
+          /  q   z  p  x

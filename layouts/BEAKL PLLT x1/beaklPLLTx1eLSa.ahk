@@ -1,11 +1,18 @@
-/*
+﻿/*  http://shenafu.com/smf/index.php?topic=89.msg2409;topicseen#msg2409
+(Den) PLLT x1(e)
+PLLT may be my other radical idea here. 
+"Pinky-Less, Less Thumb" further minimizes pinkies by eliminating the remote corner keys hit 
+by the pinkies. also theoretically thumbs are slower than other fingers, 
+so move the most used character (Space) away from thumb. on the other hand,
+ thumbs are detached from other fingers, so they are more flexible for chording. 
+ such that thumbs are more ideal to be utilized as shifts and modifier keys.
 
-2021-01-29
-mtgapLs22Sp5.3-4 (manual remix of ls20v5.3 + ls21v5.4)
+PQ
+kinda fits with what I like, was using Space as Alt layer dual mode key,
+in this it becomes only alt layer key / dualMode W.
 
-MTGAP ansi angleZ BEAKL
-LaSalle fingering
-20+1+1 keys, space on main
+Trying to do a LaSalle version of PLLT1x
+** not very good, original PLLT1x is better ;-)
 
 */
 
@@ -13,33 +20,39 @@ LaSalle fingering
 
 ; Global variables for pkl_guiLayers.ahk / layout image
 ; MUST be declared *before* scripts that use them
-global ImgsDir := A_ScriptDir . "\imgs\xx"
+global ImgsDir := A_ScriptDir . "\imgsxx"
 global ImgWidth := 160
-global ImgHeight := 68
+global ImgHeight := 54
 global CenterOnCurrWindow := 1
 ; global CenterOnCurrWndMonitor := 1
 
 ; for easyDragWindow script
 global DoubleAlt := 0
 
+global altAccessTapFr := 0
+; global altAccessTap := 0
+global altAccesKey := 0
 
-#include ../../../fromPkl/pkl_guiLayers.ahk
-#include ../../../layersv2c.ahk
-#include ../../punxLayer.ahk
-#include ../../extendLayer.ahk
-#include ../../numpadLayer.ahk
+#include ../../fromPkl/pkl_guiLayers.ahk
+#include ../../layersv2c.ahk
+#include ../punxLayer.ahk
+#include ../extendLayer.ahk
+#include ../numpadLayer.ahk
 
 ; ----
 
 CreateLayers()
 {
+  ; masks
 
     qwertyMask_wid := "
     (Join`r`n
-       w e r      i o p    
-     a s d f g  j k l ; '
-       x c v    m , .    
+         w e r        i o p
+       a s d f g    j k l ; '
+         z x c v    m , . / 
     )"
+
+  ; masks for extra / special chars (Cr, Bs etc)
 
     qwertyMask_widEx := "
     (Join`r`n
@@ -48,11 +61,47 @@ CreateLayers()
             c v    m ,       
     )"
 
+    ; qwertyMask := qwertyMask_std
+    ; qwertyMaskEx := qwertyMask_stdEx
     qwertyMask := qwertyMask_wid
     qwertyMaskEx := qwertyMask_widEx
 
 
-    ;----------------
+  ;---------
+
+  ; maip layer definition
+  layerMain := "
+  (Join`r`n
+      e sp o       m t s      
+    y i u  a g   l r d n p  
+      . .  , .   w h c f     
+  )"
+
+
+  layerMainSh := "
+  (Join`r`n
+      E " O       M T S      
+    Y I U A G   L R D N P  
+      . . ~; :  W H C F     
+  )"
+
+  ; alt / secondary layer
+  ; no change for lasalle for now, we'll see
+  layerAlt := "
+  (Join`r`n
+        q ' j            v ! #     
+      ? ( - ) @        + { = } &   
+        * | / _        z k x b     
+  )"
+
+  layerAltSh := "
+  (Join`r`n
+        Q ~`` J           V |  .       
+      < < _ > ~-       ~ ~[ $ ~] %   
+        ^ . ~\ .       Z  K X  B     
+  )"
+
+  ;----------------
 
     ; swap Cr Tab to give left hand a rest
     layerMainEx := "
@@ -68,50 +117,16 @@ CreateLayers()
                  .  .   .  .           
     )"
 
-    layerMainExWid := "
-    (Join`r`n
-        y     !Esc
-        h     Ctrl
-        n     Alt
-    )"
-
-    ;---------
-
-    ; missing syms  
-    ; UP PU is bad, try swapping P-K back to original
-    layerMain := "
-    (Join`r`n
-            a  e  v         h  t  s
-         g  i  o SP  k   m  n  d  r  c
-               _  u  '   f  l  b
-    )"
-
-    layerMainSh := "
-    (Join`r`n
-            A  E  V         H  T  S
-         G  I  O  "  K   M  N  D  R  C
-               @  U  ~`  F  L  B
-    )"
-
-    ; pq-todo replace dup syms with missing ones
-    ; 
-    layerAlt := "
-    (Join`r`n
-            (  .  ;         :  ,  }
-         !  y  -  )  *   j  p  =  w  ?
-               _  /  z   q  {  x
-    )"
-
-    layerAltSh := "
-    (Join`r`n
-            <  .  ;         :  ,  ]
-         !  Y  -  >  *   J  P  =  W  ?
-               @  /  Z   Q  [  X
-    )"
+  ; more extra chars for wid mode
+  ; layerMainExWid1 := "
+  ; (Join`r`n
+  ;     y     !Esc
+  ;     h     Ctrl
+  ;     n     Alt
+  ; )"
 
 
-    ;----------------
-
+  ; -- Setup layers, including Extend layer (for edit keys) --
 
     numpadLayers := NumpadLayerMappings()
 
@@ -174,6 +189,9 @@ CreateLayers()
 }
 
 
+
+;---
+
 CreateLayers()
 DisplayHelpImage()
 
@@ -182,4 +200,5 @@ return
 
 ;--- hotkeys, must be at the end -----
 
-#include ../../winHotkeys.ahk
+#include ../winHotkeys.ahk
+
