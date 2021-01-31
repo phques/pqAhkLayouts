@@ -720,11 +720,12 @@ To center:     3.08%
 
 higher pinky weight
             999, 50,  50, 100, 999,  999, 100, 50 , 50,  999,
-            100,  0,  0 ,  0 ,  90,   85, 0 ,   0 ,  0, 100,
+            110,  0,  0 ,  0 ,  90,   85, 0 ,   0 ,  0, 110,
             180, 90, 90, 80, 120,  115, 80,  90, 90, 180
-
-(homeJump (PAI, YOU))
-(toOutside (H on pinky !))
+just brings back _ on main 
+seems we oscillate between two versions of layouts,
+with _ and y a e SP
+or w/o _ and  h  e SP  a
 
 setksize beakpq
 setmask 011100111011111111110111111110
@@ -746,5 +747,104 @@ sethandbias 5
 set numThreads 3
 set consoleEsc 1
 
-homeJump
-toOutside
+Hands: 54% 45%
+Fingers: 2.0% 12% 18% 23% 0.00% 0.00% 17% 14% 11% 2.0%
+
+    !  /  +         z  x  =
+ (  )  ,  -  %   *  w  v  k  ?
+    {  #  &  @   |  q  j  }
+
+    i  o  u         g  r  h
+ y  a  e SP  '   m  t  s  n  c
+    . \n  p  _   f  d  l  b
+
+Fitness:       57464566
+Distance:      31521845
+Finger work:   356276
+Inward rolls:  6.86%
+Outward rolls: 1.85%
+Same hand:     33.52%
+Same finger:   2.95%
+Row change:    16.09%
+Home jump:     1.44%
+Ring jump:     1.00%
+To center:     1.13%
+
+
+1.6
+
+homeJumpIndex 10 (-90)
+
+setksize beakpq
+setmask 011100111011111111110111111110
+usel abc defghijklmnopqrstuvw
+useu xyz,.-')(=/*!?{}+|&%@#_\n
+setkeeppairschars:
+set keepShiftPairs 0
+set keepBrackets 1
+set singleKeySameFinger 0
+set sameHand 30
+set toCenter 60
+set sameFingerP 180
+set sameFingerR 170
+set sameFingerM 150
+set sameFingerI 140
+set shiftCost 125
+set doubleShiftCost 175
+set homeJumpIndex 10
+sethandbias 10
+set numThreads 3
+set consoleEsc 1
+
+Hands: 45% 54%
+Fingers: 2.0% 11% 14% 19% 0.00% 0.00% 21% 18% 14% 2.0%
+
+    x  )  q         &  /  +
+ ?  k  v  g  *   @  -  ,  (  !
+    j  z  =  |   %  #  {  }
+
+    s  h  w         u  o  i
+ c  r  n  t  m   _ SP  e  a  p
+    l  f  d  b   ' \n  .  y
+
+     +  /  &        q  )  x    
+  !  (  ,  -  @  *  g  v  k  ? 
+     }  {  #  %  |  =  z  j    
+
+     i  o  u        w  h  s    
+  p  a  e  Sp _  m  t  n  r  c 
+     y  .  n  '  b  d  f  l    
+
+Fitness:       60419173
+Distance:      34327495
+Finger work:   613038
+Inward rolls:  7.46%
+Outward rolls: 1.63%
+Same hand:     33.47%
+Same finger:   2.29%
+Row change:    15.84%
+Home jump:     0.82%
+Ring jump:     1.48%
+To center:     1.04%
+
+-----
+
+1.5b
+manually placed syms
+also moved P to mid index, bring ,. etc.
+
+     i  o  u         g  r  h
+  y  a  e SP  p   m  t  s  n  c
+     .  _  , \n   f  d  l  b
+
+     I  O  U         G  R  H
+  Y  A  E  "  P   M  T  S  N  C
+     :  _  ; \n   F  D  L  B
+
+    >  '  !         q  =  x
+ ?  (  -  )  |   +  w  v  k  &
+    *  #  /  @   z  {  j  }
+
+    ^  `            Q  $  X
+    <  -  >      ~  W  V  K  %
+       =  \      Z  [  J  ]
